@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/tokens/shadows.css">
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/components/fig-tokens.css">
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/tokens/typography.css">
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/styles.css">
+<script src="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/_ds_bundle.js"></script>
+<script src="motion.js?v=5" defer></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #F7F6F9; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #FE7300; text-decoration: none; }
+  a:hover { color: #C5299B; }
+  input, select, textarea, button { font: inherit; }
+  @keyframes sjp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes sjp-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+<style>#sjp-small-screen-blocker{display:none}@media (max-width:1023px){#sjp-small-screen-blocker{display:flex}}</style>
+</helmet>
+<div id="sjp-small-screen-blocker" style="position:fixed;inset:0;z-index:9999;background:#330164;color:#FFFFFF;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:36px;text-align:center;font-family:'Montserrat',Arial,sans-serif">
+  <div style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:26px;line-height:1.25;color:#FFFFFF;max-width:420px">This screen is too small</div>
+  <p style="font-size:15px;line-height:1.6;color:#D9C8EC;max-width:420px;margin:0">These designs are made for larger screens and are not yet responsive, so they will not display properly here. Please open this page on a laptop or desktop computer.</p>
+  <div style="width:44px;height:4px;border-radius:999px;background:#FF7300"></div>
+</div>
+<a href="SJP Design Presentation.dc.html" title="Return to design options" style="position:fixed;left:20px;bottom:20px;z-index:99;display:inline-flex;align-items:center;height:44px;max-width:44px;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:999px;box-shadow:0 8px 24px rgba(16,33,47,0.14);color:#330164;text-decoration:none;overflow:hidden;white-space:nowrap;transition:max-width 0.25s ease" style-hover="max-width:280px;color:#330164"><span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;flex:0 0 44px;font-family:'Poppins',Arial,sans-serif">&#8249;</span><span style="font-family:'Montserrat',Arial,sans-serif;font-size:13px;font-weight:600;padding-right:18px">Return to design options</span></a>
+
+<div data-screen-label="Homepage Alt" style="font-family:'Montserrat',Arial,sans-serif;color:#211B27;background:#F7F6F9;width:100%;overflow-x:hidden">
+
+  <div style="background:#1D0B36;color:#D9C8EC;font-size:12px;font-weight:500;overflow:hidden">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px;height:40px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <span style="display:flex;align-items:center;gap:8px;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#FE7300"></span>Bromsgrove, Worcestershire</span>
+      <span style="display:none;flex:1"></span>
+      <span style="color:#B49BD3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Dance · Sing · Perform, classes from babies to adults, all abilities welcome</span>
+      <div style="display:flex;align-items:center;gap:18px;white-space:nowrap">
+        <a href="#instagram" style="color:#D9C8EC">Instagram</a>
+        <span style="width:1px;height:12px;background:rgba(217,200,236,.3)"></span>
+        <a href="#member" style="color:#FFFFFF;font-weight:700;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="7" width="11" height="7" rx="1.8" stroke="#FE7300" stroke-width="1.6"></rect><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.6 0V7" stroke="#FE7300" stroke-width="1.6"></path></svg>Member login</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:sticky;top:14px;z-index:80;display:flex;justify-content:center;padding:14px 24px 0;margin-bottom:-88px;pointer-events:none">
+    <div style="pointer-events:auto;display:flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:999px;padding:8px 8px 8px 22px;box-shadow:0 14px 34px -18px rgba(33,11,60,.35)">
+      <a href="#top" style="display:flex;align-items:center;margin-right:14px"><img src="assets/logo.svg" alt="SJP Theatre Arts" style="height:36px;width:auto;display:block"></a>
+      <span style="width:1px;height:24px;background:#EEE7F4;margin-right:10px"></span>
+      <nav style="display:flex;align-items:center;gap:24px;font-size:14px;font-weight:600;color:#381064;margin-right:16px">
+        <a href="SJP%20Classes%20Alt.dc.html" style="color:#381064">Classes</a>
+        <a href="SJP%20Timetable%20and%20Fees%20Alt.dc.html" style="color:#381064">Timetable &amp; fees</a>
+        <a href="SJP%20About%20Alt.dc.html" style="color:#381064">About</a>
+        <a href="SJP%20Performances%20Alt.dc.html" style="color:#381064">Performances</a>
+        <a href="SJP%20Contact%20Alt.dc.html" style="color:#381064">Contact</a>
+      </nav>
+      <a href="#trial" style="display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 22px;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:14px" style-hover="background:#e56800">Enrol now<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+    </div>
+  </div>
+
+  <section id="top" style="position:relative;padding:150px 0 56px">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(56,16,100,.08) 1px,transparent 1.4px);background-size:24px 24px"></div>
+    <div style="position:absolute;left:-160px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(254,115,0,.10) 0%,rgba(254,115,0,0) 70%)"></div>
+    <div style="position:absolute;right:-180px;top:40px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(197,41,155,.10) 0%,rgba(197,41,155,0) 70%)"></div>
+    <canvas ref="{{ heroCanvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="text-align:center;max-width:860px;margin:0 auto 56px">
+        <div style="display:inline-flex;align-items:center;gap:9px;background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:26px"><svg width="12" height="12" viewBox="0 0 24 24" fill="#FE7300"><path d="M12 0c1 6.5 5.5 11 12 12-6.5 1-11 5.5-12 12-1-6.5-5.5-11-12-12 6.5-1 11-5.5 12-12Z"></path></svg>Bromsgrove · all ages · all abilities</div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:76px;line-height:1.04;letter-spacing:-.025em;color:#381064;margin:0 0 22px;text-wrap:balance">Find their place<br>to <span style="color:#FE7300">shine.</span></h1>
+        <p style="font-size:18px;line-height:1.65;color:#5A5265;margin:0 auto 30px;max-width:560px;text-wrap:pretty">Dance, sing and perform with welcoming, industry-trained teachers. Classes for babies, children and teens of every ability, plus adult ballet and ballroom.</p>
+        <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+          <a href="#trial" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;background:#381064;color:#FFFFFF;font-weight:700;font-size:15px" style-hover="background:#2a0b4d">Enrol now</a>
+          <a href="SJP%20Classes%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;background:#FFFFFF;border:1px solid #E4DCEC;color:#381064;font-weight:700;font-size:15px">Find the right class<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#381064" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" data-stagger>
+        <a href="SJP%20Classes%20Alt.dc.html" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="position:relative;height:250px;border-radius:10px;overflow:hidden;background:#EFE7F7">
+            <img src="assets/new-media/web/IMG_8003.jpg" alt="First Steps class" style="width:100%;height:100%;object-fit:cover;display:block">
+            <span style="position:absolute;left:12px;bottom:12px;background:#FFE9D6;color:#B85400;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Ages 2–4</span>
+          </div>
+          <div style="padding:18px 12px 12px">
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">First steps into the studio</h3>
+            <p style="font-size:14px;line-height:1.6;color:#5A5265;margin:0 0 16px">Parent and toddler sessions, then first solo classes. Music, movement and making friends.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F0EBF5;padding-top:12px">
+              <span style="font-size:12px;font-weight:600;color:#8A8194">First Steps · with Lottie &amp; SJ</span>
+              <span style="width:34px;height:34px;border-radius:50%;background:#F7F6F9;border:1px solid #EAE3F0;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#381064" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </div>
+          </div>
+        </a>
+        <a href="SJP%20Classes%20Alt.dc.html" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="position:relative;height:250px;border-radius:10px;overflow:hidden;background:#EFE7F7">
+            <img src="assets/new-media/web/IMG_0310.jpg" alt="Young students on stage" style="width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block">
+            <span style="position:absolute;left:12px;bottom:12px;background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Ages 4–10</span>
+          </div>
+          <div style="padding:18px 12px 12px">
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">Ballet, tap, jazz &amp; drama</h3>
+            <p style="font-size:14px;line-height:1.6;color:#5A5265;margin:0 0 16px">Graded classes with medals, exams and the Christmas show, at whatever pace suits your child.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F0EBF5;padding-top:12px">
+              <span style="font-size:12px;font-weight:600;color:#8A8194">Children · 8 class styles</span>
+              <span style="width:34px;height:34px;border-radius:50%;background:#F7F6F9;border:1px solid #EAE3F0;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#381064" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </div>
+          </div>
+        </a>
+        <a href="#teens" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="position:relative;height:250px;border-radius:10px;overflow:hidden;background:#EFE7F7">
+            <img src="assets/new-media/web/IMG_8006.jpg" alt="Teen performance" style="width:100%;height:100%;object-fit:cover;display:block">
+            <span style="position:absolute;left:12px;bottom:12px;background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Ages 11–18</span>
+          </div>
+          <div style="padding:18px 12px 12px">
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">Teens: train your way</h3>
+            <p style="font-size:14px;line-height:1.6;color:#5A5265;margin:0 0 16px">Commercial, lyrical, musical theatre and troupe. Once a week or a full training timetable.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F0EBF5;padding-top:12px">
+              <span style="font-size:12px;font-weight:600;color:#8A8194">Teens · recreational or serious</span>
+              <span style="width:34px;height:34px;border-radius:50%;background:#F7F6F9;border:1px solid #EAE3F0;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#381064" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div style="border-top:1px solid #E9E4F0;border-bottom:1px solid #E9E4F0;background:#FFFFFF;padding:16px 0;overflow:hidden">
+    <div style="display:flex;gap:12px;width:max-content;animation:sjp-ticker 36s linear infinite">
+      <div style="display:flex;gap:12px">
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Ballet</span>
+        <span style="background:#FFE9D6;color:#B85400;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Tap</span>
+        <span style="background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Jazz &amp; Commercial</span>
+        <span style="background:#DFF7EC;color:#12855A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Acro &amp; Cheer</span>
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Musical Theatre</span>
+        <span style="background:#FFE9D6;color:#B85400;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Drama</span>
+        <span style="background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Singing</span>
+        <span style="background:#DFF7EC;color:#12855A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Lyrical</span>
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Troupe</span>
+        <span style="background:#FFE9D6;color:#B85400;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">LAMDA</span>
+        <span style="background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Ballroom &amp; Latin</span>
+        <span style="background:#DFF7EC;color:#12855A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Adult Ballet</span>
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Wedding Dance</span>
+      </div>
+      <div style="display:flex;gap:12px" aria-hidden="true">
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Ballet</span>
+        <span style="background:#FFE9D6;color:#B85400;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Tap</span>
+        <span style="background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Jazz &amp; Commercial</span>
+        <span style="background:#DFF7EC;color:#12855A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Acro &amp; Cheer</span>
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Musical Theatre</span>
+        <span style="background:#FFE9D6;color:#B85400;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Drama</span>
+        <span style="background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Singing</span>
+        <span style="background:#DFF7EC;color:#12855A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Lyrical</span>
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Troupe</span>
+        <span style="background:#FFE9D6;color:#B85400;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">LAMDA</span>
+        <span style="background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Ballroom &amp; Latin</span>
+        <span style="background:#DFF7EC;color:#12855A;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Adult Ballet</span>
+        <span style="background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:8px 18px;font-size:13px;font-weight:700;white-space:nowrap">Wedding Dance</span>
+      </div>
+    </div>
+  </div>
+
+  <section style="padding:56px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap">
+      <p style="margin:0;max-width:320px;font-size:13px;line-height:1.6;color:#6B6474"><strong style="color:#381064">Recognised, checked and insured.</strong> Our teaching follows established awarding-body syllabuses and safeguarding practice.</p>
+      <div style="display:flex;align-items:center;gap:44px;flex-wrap:wrap;filter:grayscale(1);opacity:.55">
+        <img src="assets/idta.png" alt="IDTA" style="height:40px;width:auto;display:block">
+        <img src="assets/lamda.png" alt="LAMDA" style="height:34px;width:auto;display:block">
+        <img src="assets/uka.png" alt="UKA Dance" style="height:36px;width:auto;display:block">
+        <img src="assets/adfp.jpg" alt="ADFP" style="height:38px;width:auto;display:block">
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;color:#381064"><span style="color:#FE7300">+</span> About SJP</span>
+          <span style="font-size:13px;color:#8A8194">Professional training, family-school warmth</span>
+        </div>
+        <a href="SJP%20About%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:#381064;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 18px;font-size:13px;font-weight:700" style-hover="background:#2a0b4d">Our story<span style="width:26px;height:26px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#381064" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:stretch">
+        <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:44px 46px;display:flex;flex-direction:column;justify-content:space-between;gap:32px">
+          <div>
+            <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:38px;line-height:1.15;letter-spacing:-.02em;color:#381064;margin:0 0 20px;text-wrap:balance">A school where every child is known by name</h2>
+            <p style="font-size:16px;line-height:1.75;color:#5A5265;margin:0 0 14px">SJP Theatre Arts (formerly Bromsgrove School of Dance) is led by SJ, who trained at Laine Theatre Arts on a personal scholarship from Betty Laine and has performed and choreographed across the Midlands and beyond.</p>
+            <p style="font-size:16px;line-height:1.75;color:#5A5265;margin:0">That professional standard sits inside a school where beginners are genuinely welcome and nobody has to fit a mould to belong here.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #EFE9F4;padding-top:26px">
+            <div style="padding-right:22px">
+              <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#FE7300;margin-bottom:8px" data-count>13</div>
+              <div style="font-size:13px;font-weight:600;color:#5A5265;line-height:1.45">Class styles taught</div>
+            </div>
+            <div style="padding:0 22px;border-left:1px solid #EFE9F4">
+              <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#C5299B;margin-bottom:8px">2–18+</div>
+              <div style="font-size:13px;font-weight:600;color:#5A5265;line-height:1.45">Ages in the studio</div>
+            </div>
+            <div style="padding-left:22px;border-left:1px solid #EFE9F4">
+              <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#381064;margin-bottom:8px" data-count>12</div>
+              <div style="font-size:13px;font-weight:600;color:#5A5265;line-height:1.45">Awarding &amp; safeguarding bodies</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-rows:1fr auto;gap:22px">
+          <div style="border-radius:16px;overflow:hidden;background:#EFE7F7;min-height:280px;position:relative">
+            <img src="assets/web-pic.jpg" alt="SJP class in the studio" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <span style="position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:700">Inside the studio</span>
+          </div>
+          <div style="background:#EFE7F7;border-radius:16px;padding:22px 24px;display:flex;align-items:center;gap:18px">
+            <div style="width:58px;height:58px;border-radius:50%;overflow:hidden;background:#FFFFFF;flex:none"><img src="assets/sj.jpg" alt="SJ, founder and principal" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:#4A4152"><strong style="color:#381064">SJ, founder and principal.</strong> Laine Theatre Arts trained; teaching in Bromsgrove ever since.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="classes" style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;color:#381064"><span style="color:#FE7300">+</span> Popular classes</span>
+          <span style="font-size:13px;color:#8A8194">First steps, big stages and everything between</span>
+        </div>
+        <a href="SJP%20Classes%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:#381064;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 18px;font-size:13px;font-weight:700" style-hover="background:#2a0b4d">All 13 classes<span style="width:26px;height:26px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#381064" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" data-stagger>
+        <sc-for list="{{ classCards }}" as="c" hint-placeholder-count="6">
+          <article style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;display:flex;flex-direction:column" data-lift>
+            <div style="position:relative;height:210px;border-radius:10px;overflow:hidden;background:#EFE7F7">
+              <img src="{{ c.img }}" alt="{{ c.alt }}" style="width:100%;height:100%;object-fit:cover;display:block">
+              <span style="position:absolute;left:12px;top:12px;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700;background:{{ c.tagBg }};color:{{ c.tagFg }}">{{ c.tag }}</span>
+            </div>
+            <div style="padding:18px 12px 12px;display:flex;flex-direction:column;flex:1">
+              <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">{{ c.name }}</h3>
+              <p style="font-size:14px;line-height:1.6;color:#5A5265;margin:0 0 16px;flex:1">{{ c.blurb }}</p>
+              <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F0EBF5;padding-top:12px">
+                <span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#8A8194"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2.5" stroke="#B0A7BC" stroke-width="1.5"></rect><path d="M2 6.5h12M5.5 1.8v2.4m5-2.4v2.4" stroke="#B0A7BC" stroke-width="1.5" stroke-linecap="round"></path></svg>{{ c.meta1 }}</span>
+                <span style="font-size:12px;font-weight:700;color:#C5299B">{{ c.meta2 }}</span>
+                <a href="SJP%20Class%20Detail%20Alt.dc.html" style="width:34px;height:34px;border-radius:50%;background:#FE7300;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showTeenBand }}" hint-placeholder-val="{{ true }}">
+  <section id="teens" style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#2A0B4D;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.25fr 1fr">
+        <div style="position:relative;min-height:480px">
+          <img src="assets/new-media/web/xmas-3.jpg" alt="SJP students on stage" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:.55">
+          <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,11,77,.2) 0%,rgba(42,11,77,.92) 100%)"></div>
+          <div style="position:relative;padding:56px 30px 56px 52px;height:100%;display:flex;flex-direction:column;justify-content:flex-end">
+            <span style="display:inline-flex;align-self:flex-start;background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px">For teenagers</span>
+            <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:46px;line-height:1.08;letter-spacing:-.02em;color:#FFFFFF;margin:0 0 14px">Train your <span style="color:#FF9A3D">way.</span></h2>
+            <p style="font-size:16px;line-height:1.7;color:#D9C8EC;margin:0 0 28px;max-width:460px">Build confidence, sharpen your technique and perform with people who love it as much as you do. Once a week or a full timetable, both are normal here.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="#trial" style="display:inline-flex;align-items:center;height:48px;padding:0 26px;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:14px">Enrol now</a>
+              <a href="SJP%20Classes%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.35);color:#FFFFFF;font-weight:700;font-size:14px">Teen classes<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            </div>
+          </div>
+        </div>
+        <div style="padding:44px 44px 44px 24px;display:flex;flex-direction:column;justify-content:center;gap:10px">
+          <a href="SJP%20Classes%20Alt.dc.html" style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#FFFFFF" style-hover="background:rgba(255,255,255,.1)">
+            <span style="width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:#4A1B7A"><img src="assets/new-media/web/IMG_8007.jpg" alt="Commercial class" style="width:100%;height:100%;object-fit:cover;display:block"></span>
+            <span style="flex:1"><span style="display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF;margin-bottom:2px">Commercial, lyrical &amp; jazz</span><span style="display:block;font-size:12px;color:#B49BD3">High-energy technique and performance</span></span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#FF9A3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a href="SJP%20Classes%20Alt.dc.html" style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#FFFFFF" style-hover="background:rgba(255,255,255,.1)">
+            <span style="width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:#4A1B7A"><img src="assets/new-media/web/IMG_0300.jpg" alt="Troupe performance" style="width:100%;height:100%;object-fit:cover;display:block"></span>
+            <span style="flex:1"><span style="display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF;margin-bottom:2px">Troupe: Notorious, Blaze, Shockwave</span><span style="display:block;font-size:12px;color:#B49BD3">Invitation-only performance teams</span></span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#FF9A3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a href="SJP%20Classes%20Alt.dc.html" style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#FFFFFF" style-hover="background:rgba(255,255,255,.1)">
+            <span style="width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:#4A1B7A"><img src="assets/singing.jpg" alt="Singing lesson" style="width:100%;height:100%;object-fit:cover;display:block"></span>
+            <span style="flex:1"><span style="display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF;margin-bottom:2px">LAMDA, singing &amp; acting</span><span style="display:block;font-size:12px;color:#B49BD3">Exams and one-to-one coaching</span></span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#FF9A3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a href="SJP%20About%20Alt.dc.html" style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#FFFFFF" style-hover="background:rgba(255,255,255,.1)">
+            <span style="width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:#4A1B7A"><img src="assets/new-media/web/IMG_0316.jpg" alt="Stage performance" style="width:100%;height:100%;object-fit:cover;display:block"></span>
+            <span style="flex:1"><span style="display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF;margin-bottom:2px">Vocational &amp; college routes</span><span style="display:block;font-size:12px;color:#B49BD3">For students aiming at the industry</span></span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#FF9A3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="performances" style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;color:#381064"><span style="color:#FE7300">+</span> The SJP experience</span>
+          <span style="font-size:13px;color:#8A8194">Classes, friendships and real audiences</span>
+        </div>
+        <a href="SJP%20Performances%20Alt.dc.html#gallery" style="display:inline-flex;align-items:center;gap:10px;background:#381064;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 18px;font-size:13px;font-weight:700" style-hover="background:#2a0b4d">Gallery<span style="width:26px;height:26px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#381064" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:22px">
+        <div style="position:relative;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px">
+          <div style="position:relative;border-radius:10px;overflow:hidden;height:400px;background:#EFE7F7">
+            <img src="assets/new-media/web/full-cast.jpg" alt="SJP Theatre Arts students on stage" style="width:100%;height:100%;object-fit:cover;display:block">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,11,54,0) 40%,rgba(29,11,54,.7) 100%)"></div>
+            <button type="button" data-pulse="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;background:#FFFFFF;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(255,255,255,.25)" style-hover="background:#FE7300"><svg width="28" height="28" viewBox="0 0 34 34" fill="none"><path d="M12 8.5 25 17l-13 8.5V8.5Z" fill="#381064"></path></svg></button>
+            <div style="position:absolute;left:22px;bottom:20px;right:22px">
+              <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:24px;color:#FFFFFF;margin-bottom:6px">Watch a rehearsal</div>
+              <p style="margin:0;font-size:14px;color:#E4D6F2;max-width:420px">Two minutes inside a normal week at SJP: warm-up, corrections, laughing, and the bit where it clicks.</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="flex:1;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:24px 26px;display:flex;flex-direction:column;justify-content:center">
+            <span style="display:inline-flex;align-self:flex-start;background:#FFE9D6;color:#B85400;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">Every December</span>
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;color:#381064;margin:0 0 8px">The Christmas show</h3>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:#5A5265">Every student who wants a place on stage gets one, from first steps to troupe.</p>
+          </div>
+          <div style="flex:1;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:24px 26px;display:flex;flex-direction:column;justify-content:center">
+            <span style="display:inline-flex;align-self:flex-start;background:#EFE7F7;color:#6A3AA0;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">Through the year</span>
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;color:#381064;margin:0 0 8px">Medals, exams &amp; workshops</h3>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:#5A5265">Awarding-body examinations and workshops with guest choreographers, for students who want them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;color:#381064"><span style="color:#FE7300">+</span> The team</span>
+          <span style="font-size:13px;color:#8A8194">The people your child will actually see</span>
+        </div>
+        <a href="SJP%20About%20Alt.dc.html#teachers" style="display:inline-flex;align-items:center;gap:10px;background:#381064;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 18px;font-size:13px;font-weight:700" style-hover="background:#2a0b4d">Meet everyone<span style="width:26px;height:26px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#381064" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px" data-stagger>
+        <a href="SJP%20About%20Alt.dc.html#teachers" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="position:relative;height:230px;border-radius:10px;overflow:hidden;background:#FE7300"><img src="assets/sj.jpg" alt="SJ, founder and principal" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="padding:16px 12px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:17px;color:#381064">SJ</div><div style="font-size:12px;color:#8A8194;margin-top:2px">Founder &amp; principal · Acro, Ballroom</div></div>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#FE7300" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </a>
+        <a href="SJP%20About%20Alt.dc.html#teachers" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="height:230px;border-radius:10px;background:#C5299B;display:flex;align-items:center;justify-content:center"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:64px;color:#FFFFFF">M</span></div>
+          <div style="padding:16px 12px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:17px;color:#381064">Madi</div><div style="font-size:12px;color:#8A8194;margin-top:2px">Musical Theatre, Drama, Singing</div></div>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#C5299B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </a>
+        <a href="SJP%20About%20Alt.dc.html#teachers" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="height:230px;border-radius:10px;background:#381064;display:flex;align-items:center;justify-content:center"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:64px;color:#FFFFFF">A</span></div>
+          <div style="padding:16px 12px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:17px;color:#381064">Amy</div><div style="font-size:12px;color:#8A8194;margin-top:2px">Second Steps, Jazz &amp; Commercial</div></div>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#381064" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </a>
+        <a href="SJP%20About%20Alt.dc.html#teachers" style="display:block;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px;color:#211B27" data-lift>
+          <div style="height:230px;border-radius:10px;background:#26CC8C;display:flex;align-items:center;justify-content:center"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:64px;color:#FFFFFF">L</span></div>
+          <div style="padding:16px 12px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:17px;color:#381064">Lottie</div><div style="font-size:12px;color:#8A8194;margin-top:2px">Parent &amp; Toddler · first contact</div></div>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="#12855A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </a>
+      </div>
+      <div style="margin-top:22px;background:#EFE7F7;border-radius:16px;padding:18px 24px;display:flex;align-items:center;gap:20px">
+        <div style="flex:none;background:#381064;border-radius:12px;padding:12px 16px"><img src="assets/safeguarding-white.png" alt="Dance School Safeguarding Services" style="height:50px;width:auto;display:block"></div>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#4A4152"><strong style="color:#381064">Safeguarding.</strong> Every teacher is DBS-checked and the school follows an external safeguarding framework. Our full policy is available on request.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px" data-stagger>
+        <figure style="margin:0;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:36px 36px 30px">
+          <svg width="40" height="31" viewBox="0 0 46 36" fill="none" style="display:block;margin-bottom:20px"><path d="M0 36V21C0 9.4 6.2 1.6 18 0l2 6C13.4 7.6 9.6 11.6 9.4 17H19v19H0Zm27 0V21C27 9.4 33.2 1.6 45 0l2 6c-6.6 1.6-10.4 5.6-10.6 11H46v19H27Z" fill="#FE7300"></path></svg>
+          <blockquote style="margin:0 0 24px;font-size:16px;line-height:1.75;color:#3A3243">My daughter has attended from the age of 5, now 13. She would dance here 7 days a week if she could. A unique teacher; you honestly couldn't wish for a better role model. Fun, exciting, relaxed, and every child shines.</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:13px;border-top:1px solid #F0EBF5;padding-top:18px">
+            <span style="width:42px;height:42px;border-radius:50%;background:#FAE6F4;color:#C5299B;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">NA</span>
+            <span><span style="display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#381064">Natasha Archer</span><span style="display:block;font-size:13px;color:#8A8194">Parent</span></span>
+          </figcaption>
+        </figure>
+        <figure style="margin:0;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:36px 36px 30px">
+          <svg width="40" height="31" viewBox="0 0 46 36" fill="none" style="display:block;margin-bottom:20px"><path d="M0 36V21C0 9.4 6.2 1.6 18 0l2 6C13.4 7.6 9.6 11.6 9.4 17H19v19H0Zm27 0V21C27 9.4 33.2 1.6 45 0l2 6c-6.6 1.6-10.4 5.6-10.6 11H46v19H27Z" fill="#C5299B"></path></svg>
+          <blockquote style="margin:0 0 24px;font-size:16px;line-height:1.75;color:#3A3243">Our daughter attends private classes for young people with additional needs. It has been amazing to see the growth in her ability and in her confidence. A safe, nurturing environment, and she is very proud of her certificates.</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:13px;border-top:1px solid #F0EBF5;padding-top:18px">
+            <span style="width:42px;height:42px;border-radius:50%;background:#EFE7F7;color:#381064;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">PC</span>
+            <span><span style="display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#381064">Parent of Caitlin</span><span style="display:block;font-size:13px;color:#8A8194">Private lessons, additional needs</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="trial" style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:52px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:start;position:relative;overflow:hidden">
+        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(254,115,0,.12) 2px,transparent 2.5px);background-size:16px 16px"></div>
+        <div>
+          <span style="display:inline-flex;background:#FFE9D6;color:#B85400;border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px">Join SJP</span>
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:38px;line-height:1.15;letter-spacing:-.02em;color:#381064;margin:0 0 14px">Joining is three steps</h2>
+          <p style="font-size:15px;line-height:1.7;color:#5A5265;margin:0 0 30px">Not sure which class fits? Leave the class blank and we will recommend one.</p>
+          <ol style="list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:0">
+            <li style="display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid #F0EBF5">
+              <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:#FE7300;width:30px;flex:none">01</span>
+              <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;color:#381064;margin-bottom:4px">Tell us about your child</div><p style="margin:0;font-size:14px;line-height:1.6;color:#5A5265">Age, what they are interested in, and whether they have danced before.</p></div>
+            </li>
+            <li style="display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid #F0EBF5">
+              <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:#C5299B;width:30px;flex:none">02</span>
+              <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;color:#381064;margin-bottom:4px">We reply with class options</div><p style="margin:0;font-size:14px;line-height:1.6;color:#5A5265">Lottie will send suitable classes, times and the next available start date.</p></div>
+            </li>
+            <li style="display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid #F0EBF5;border-bottom:1px solid #F0EBF5">
+              <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:#12855A;width:30px;flex:none">03</span>
+              <div><div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;color:#381064;margin-bottom:4px">Enrol online</div><p style="margin:0;font-size:14px;line-height:1.6;color:#5A5265">Register through the member portal and your place is confirmed for the term.</p></div>
+            </li>
+          </ol>
+          <p style="margin:0;font-size:13px;line-height:1.65;color:#8A8194"><strong style="color:#381064">What to wear for a first class:</strong> comfortable clothes they can move in and bare feet or trainers. No uniform needed until you have decided to join.</p>
+        </div>
+        <form style="background:#F7F6F9;border:1px solid #EAE3F0;border-radius:16px;padding:36px">
+          <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:23px;color:#381064;margin:0 0 6px">Enrol now</h3>
+          <p style="margin:0 0 24px;font-size:14px;color:#5A5265">We reply to every enquiry, usually within a few days.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <label style="display:block"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Your name</span><input type="text" placeholder="Parent or carer" style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+            <label style="display:block"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Student's name</span><input type="text" placeholder="Who is the class for?" style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <label style="display:block"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Student's age</span><input type="text" placeholder="e.g. 7" style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+            <label style="display:block"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Experience</span>
+              <select style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+                <option>First ever class</option>
+                <option>Some experience</option>
+                <option>Trained for years</option>
+              </select>
+            </label>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <label style="display:block"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Email</span><input type="email" placeholder="you@example.com" style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+            <label style="display:block"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Phone</span><input type="tel" placeholder="Mobile number" style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+          </div>
+          <label style="display:block;margin-bottom:14px"><span style="display:block;font-size:13px;font-weight:700;color:#381064;margin-bottom:7px">Class of interest <span style="font-weight:400;color:#8A8194">(optional)</span></span>
+            <select style="width:100%;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+              <option>Please recommend a class</option>
+              <option>Parent &amp; Toddler</option>
+              <option>First Steps</option>
+              <option>Second Steps</option>
+              <option>Ballet</option>
+              <option>Jazz &amp; Commercial</option>
+              <option>Tap</option>
+              <option>Acro &amp; Cheer</option>
+              <option>Musical Theatre</option>
+              <option>Drama (private)</option>
+              <option>Singing (private)</option>
+              <option>Troupe (invitation only)</option>
+              <option>Ballroom &amp; Latin</option>
+              <option>Adult Ballet</option>
+            </select>
+          </label>
+          <label style="display:flex;gap:11px;align-items:flex-start;margin-bottom:22px;cursor:pointer">
+            <input type="checkbox" style="width:18px;height:18px;margin:2px 0 0;accent-color:#FE7300;flex:none">
+            <span style="font-size:13px;line-height:1.55;color:#5A5265">I am happy for SJP Theatre Arts to contact me about classes. See our <a href="#privacy" style="color:#C5299B;font-weight:700;text-decoration:underline">privacy notice</a>.</span>
+          </label>
+          <button type="button" style="width:100%;height:52px;border:none;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:16px;cursor:pointer" style-hover="background:#e56800">Send my enquiry</button>
+          <p style="margin:14px 0 0;font-size:12px;line-height:1.55;color:#8A8194;text-align:center">Please don't include medical or safeguarding details here. We collect those securely at registration.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showAdultTeaser }}" hint-placeholder-val="{{ true }}">
+  <section id="adults" style="padding:72px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#EFE7F7;border-radius:16px;padding:38px 44px;display:flex;align-items:center;gap:36px;flex-wrap:wrap">
+        <div style="width:120px;height:120px;border-radius:12px;overflow:hidden;background:#FFFFFF;flex:none"><img src="assets/sj.jpg" alt="SJ, who teaches ballroom, Latin and wedding dance" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="flex:1;min-width:300px">
+          <span style="display:inline-flex;background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Also for grown-ups</span>
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:27px;line-height:1.2;color:#381064;margin:0 0 8px">Adult ballet, ballroom &amp; wedding dance</h2>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#5A5265;max-width:600px">Absolute beginners are the norm, not the exception. Come on your own or with a partner.</p>
+        </div>
+        <a href="SJP%20Classes%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border-radius:999px;background:#381064;color:#FFFFFF;font-weight:700;font-size:14px;white-space:nowrap" style-hover="background:#2a0b4d">Adult classes<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section style="padding:72px 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#2A0B4D;border-radius:16px;padding:64px 60px;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;left:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(254,115,0,.22)"></div>
+        <div style="position:absolute;right:-60px;bottom:-100px;width:280px;height:280px;border-radius:50%;background:rgba(197,41,155,.24)"></div>
+        <div style="position:relative">
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:42px;line-height:1.12;letter-spacing:-.02em;color:#FFFFFF;margin:0 0 12px">Not sure where to begin?</h2>
+          <p style="margin:0 auto 30px;font-size:16px;line-height:1.6;color:#D9C8EC;max-width:520px">Tell us a little about your child and we will recommend a class. No obligation, no pressure.</p>
+          <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+            <a href="#trial" style="display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:15px" style-hover="background:#e56800">Enrol now</a>
+            <a href="SJP%20Timetable%20and%20Fees%20Alt.dc.html" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;border:1px solid rgba(255,255,255,.32);color:#FFFFFF;font-weight:700;font-size:15px">Timetable &amp; fees</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
+  <section id="instagram" style="background:#FFFFFF;border-top:1px solid #E9E4F0;padding:24px 0;overflow:hidden">
+    <div style="display:flex;gap:16px;width:max-content;animation:sjp-marquee 48s linear infinite">
+      <div style="display:flex;gap:16px">
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7;position:relative"><img src="assets/new-media/web/IMG_0305.jpg" alt="SJP students" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.85);backdrop-filter:blur(4px);color:#381064;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700">@sjptheatrearts</span></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_0316.jpg" alt="On stage" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_0318.jpg" alt="Acro handstand" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_8011.jpg" alt="Class photo" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/xmas-2.jpg" alt="Singers" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_0300.jpg" alt="Performance" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/xmas-3.jpg" alt="Group on stage" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      </div>
+      <div style="display:flex;gap:16px" aria-hidden="true">
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7;position:relative"><img src="assets/new-media/web/IMG_0305.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.85);backdrop-filter:blur(4px);color:#381064;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700">@sjptheatrearts</span></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_0316.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_0318.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_8011.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/xmas-2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/IMG_0300.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/new-media/web/xmas-3.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <footer style="background:#FFFFFF;border-top:1px solid #E9E4F0;padding:64px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:44px">
+        <img src="assets/logo.svg" alt="SJP Theatre Arts" style="height:64px;width:auto;display:block">
+        <p style="margin:0;font-size:15px;color:#5A5265">Dance, sing and perform in Bromsgrove.</p>
+        <nav style="display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600;color:#381064;flex-wrap:wrap;justify-content:center">
+          <a href="SJP%20Classes%20Alt.dc.html" style="color:#381064">Classes</a>
+          <a href="SJP%20Timetable%20and%20Fees%20Alt.dc.html" style="color:#381064">Timetable &amp; fees</a>
+          <a href="SJP%20About%20Alt.dc.html" style="color:#381064">About</a>
+          <a href="SJP%20Performances%20Alt.dc.html" style="color:#381064">Performances</a>
+          <a href="SJP%20Contact%20Alt.dc.html" style="color:#381064">Contact</a>
+          <a href="#member" style="color:#FE7300">Member login</a>
+        </nav>
+      </div>
+      <div style="border-top:1px solid #EFE9F4;padding:20px 0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <span style="font-size:12px;color:#8A8194">© SJP Theatre Arts, Bromsgrove, Worcestershire · sjptheatrearts@yahoo.com</span>
+        <a href="#top" style="display:inline-flex;align-items:center;gap:9px;background:#1D0B36;color:#FFFFFF;border-radius:999px;padding:9px 9px 9px 18px;font-size:12px;font-weight:700">Back to top<span style="width:24px;height:24px;border-radius:50%;background:#FE7300;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 13V3m-4 4 4-4 4 4" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showTeenBand&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showAdultTeaser&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    if (this._companionStarted) return;
+    this._companionStarted = true;
+    const canvas = this._heroCanvas && this._heroCanvas.current;
+    if (!canvas) return;
+    const sect = canvas.parentElement, ctx = canvas.getContext("2d");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const resize = () => {
+      const r = sect.getBoundingClientRect();
+      W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    if (window.ResizeObserver) { this._ro = new ResizeObserver(resize); this._ro.observe(sect); }
+    const N = 18, segLen = 19, maxW = 40;
+    this._lenF = 0.55;
+    const pts = [], mouse = { x: null, y: null };
+    for (let i = 0; i < N; i++) pts.push({ x: W * 0.5 - i * segLen, y: H * 0.32, vx: 0, vy: 0 });
+    const s1 = { x: W * 0.5, y: H * 0.3, vx: 0, vy: 0 }, s2 = { x: W * 0.5, y: H * 0.3, vx: 0, vy: 0 };
+    const head = { vx: 0, vy: 0 };
+    sect.addEventListener("pointermove", (e) => {
+      const r = sect.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    });
+    sect.addEventListener("pointerleave", () => { mouse.x = null; mouse.y = null; });
+    const spring = (p, tx, ty, k, d, dt) => {
+      p.vx += (tx - p.x) * k * dt; p.vy += (ty - p.y) * k * dt;
+      const f = Math.max(0, 1 - d * dt); p.vx *= f; p.vy *= f;
+      p.x += p.vx * dt; p.y += p.vy * dt;
+    };
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      const M = Math.max(8, Math.round(N * this._lenF));
+      const L = [], R = [], t0 = this._ct || 0;
+      for (let i = 0; i < M; i++) {
+        const t = i / (M - 1);
+        const a = pts[Math.max(i - 1, 0)], b = pts[Math.min(i + 1, M - 1)];
+        let dx = b.x - a.x, dy = b.y - a.y;
+        const dl = Math.hypot(dx, dy) || 1; dx /= dl; dy /= dl;
+        const px = -dy, py = dx;
+        const und = Math.sin(t * 9.42 - t0 * 2.5) * t * t * 14;
+        const cx = pts[i].x + px * und, cy = pts[i].y + py * und;
+        const w = maxW * Math.min(1, t / 0.22) * Math.pow(1 - t, 0.85) * 0.5 + 0.4;
+        L.push([cx + px * w, cy + py * w]); R.push([cx - px * w, cy - py * w]);
+      }
+      const g = ctx.createLinearGradient(pts[0].x, pts[0].y, pts[M - 1].x, pts[M - 1].y);
+      g.addColorStop(0, "rgba(254,115,0,.55)");
+      g.addColorStop(0.5, "rgba(197,41,155,.42)");
+      g.addColorStop(1, "rgba(106,58,160,.28)");
+      const smooth = (arr) => {
+        for (let i = 1; i < arr.length - 1; i++) {
+          const mx = (arr[i][0] + arr[i + 1][0]) / 2, my = (arr[i][1] + arr[i + 1][1]) / 2;
+          ctx.quadraticCurveTo(arr[i][0], arr[i][1], mx, my);
+        }
+        ctx.lineTo(arr[arr.length - 1][0], arr[arr.length - 1][1]);
+      };
+      ctx.beginPath();
+      ctx.moveTo(L[0][0], L[0][1]);
+      smooth(L);
+      const Rr = R.slice().reverse();
+      ctx.lineTo(Rr[0][0], Rr[0][1]);
+      smooth(Rr);
+      ctx.closePath();
+      ctx.fillStyle = g;
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = "round";
+      ctx.fill(); ctx.stroke();
+    };
+    if (reduced) {
+      for (let i = 0; i < N; i++) { const t = i / (N - 1); pts[i].x = W * 0.72 - t * W * 0.44; pts[i].y = H * 0.24 + Math.sin(t * 3.6) * 60; }
+      draw();
+      return;
+    }
+    let last = performance.now();
+    const loop = (now) => {
+      this._raf = requestAnimationFrame(loop);
+      const dt = Math.min((now - last) / 1000, 0.05); last = now;
+      this._ct = (this._ct || 0) + dt;
+      const T = this._ct;
+      const targetLenF = mouse.x != null ? 1 : 0.55;
+      this._lenF += (targetLenF - this._lenF) * Math.min(1, dt * 2.5);
+      let tx, ty;
+      if (mouse.x != null) { tx = mouse.x; ty = mouse.y; }
+      else { tx = W * 0.5 + Math.sin(T * 0.5) * W * 0.32; ty = H * 0.3 + Math.sin(T * 0.83) * H * 0.16; }
+      spring(s1, tx, ty, 8, 3, dt);
+      spring(s2, s1.x + Math.sin(T) * 60, s1.y + Math.sin(2 * T) * 30, 20, 4, dt);
+      const h = pts[0], ex = s2.x - h.x, ey = s2.y - h.y;
+      head.vx = (head.vx + ex * 0.044) * 0.8; head.vy = (head.vy + ey * 0.044) * 0.8;
+      const dist = Math.hypot(ex, ey), fr = Math.max(0, 1 - Math.max(0, 1 - dist / 40));
+      h.x += head.vx * fr; h.y += head.vy * fr;
+      for (let i = 1; i < N; i++) {
+        const p = pts[i], par = pts[i - 1];
+        let dx = p.x - par.x, dy = p.y - par.y;
+        const dl = Math.hypot(dx, dy) || 1;
+        const gx = par.x + (dx / dl) * segLen, gy = par.y + (dy / dl) * segLen;
+        const t = i / (N - 1), k = 120 * (1 - t * 0.6), dmp = Math.max(0, 1 - 8 * dt);
+        p.vx = (p.vx + (gx - p.x) * k * dt) * dmp; p.vy = (p.vy + (gy - p.y) * k * dt) * dmp;
+        p.x += p.vx * dt; p.y += p.vy * dt;
+      }
+      draw();
+    };
+    this._raf = requestAnimationFrame(loop);
+  }
+  componentWillUnmount() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._ro) this._ro.disconnect();
+  }
+  renderVals() {
+    this._heroCanvas = this._heroCanvas || React.createRef();
+    const pal = {
+      lilac: ["#EFE7F7", "#6A3AA0"],
+      peach: ["#FFE9D6", "#B85400"],
+      pink: ["#FAE6F4", "#9C1F7A"],
+      mint: ["#DFF7EC", "#12855A"],
+    };
+    const cards = [
+      { name: "Ballet", img: "assets/ballet-feet.png", alt: "Pointe work in ballet class", tag: "Ages 4+", c: "lilac", blurb: "Graded technique, posture and musicality. The foundation under every other style we teach.", meta1: "Tuesday", meta2: "Ask us about fees" },
+      { name: "Jazz & Commercial", img: "assets/commercial.jpg", alt: "Commercial dance class", tag: "Ages 4+", c: "peach", blurb: "High-energy choreography and performance skills in a class where individuality is encouraged.", meta1: "Mon & Sat", meta2: "Ask us about fees" },
+      { name: "Tap", img: "assets/tap-class.jpg", alt: "Tap class", tag: "Ages 4+", c: "pink", blurb: "Rhythm, timing and a lot of noise. One of the quickest routes to a first medal or examination.", meta1: "Tue & Sat", meta2: "Ask us about fees" },
+      { name: "Acro & Cheer", img: "assets/acro.jpg", alt: "Acro class", tag: "Ages 4+", c: "mint", blurb: "Strength, flexibility and tumbling taught safely and progressively, with SJ.", meta1: "With SJ", meta2: "Ask us for times" },
+      { name: "Musical Theatre", img: "assets/drama.jpg", alt: "Drama and musical theatre class", tag: "All ages", c: "lilac", blurb: "Acting through song, staging and character work. Open to every age group, taught by Madi.", meta1: "Wednesday", meta2: "Ask us about fees" },
+      { name: "Singing", img: "assets/singing.jpg", alt: "Singing lesson", tag: "1-to-1", c: "peach", blurb: "Private lessons building range, breath and repertoire, towards LAMDA and performance work.", meta1: "Private", meta2: "Ask us about fees" },
+    ];
+    return {
+      heroCanvasRef: this._heroCanvas,
+      classCards: cards.map((c) => ({ ...c, tagBg: pal[c.c][0], tagFg: pal[c.c][1] })),
+      showTeenBand: this.props.showTeenBand ?? true,
+      showAdultTeaser: this.props.showAdultTeaser ?? true,
+      showMarquee: this.props.showMarquee ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

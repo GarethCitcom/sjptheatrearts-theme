@@ -1,0 +1,9 @@
+/* Type scale — exact sizes from the Foundations / Typography section of the .fig. Heading = Poppins, Body/Label/Small = Montserrat. */
+.text-page{font-family:var(--typography-family-heading),sans-serif;font-weight:700;font-size:calc(var(--typography-size-page)*1px);line-height:calc(var(--typography-line-height-page)*1px);color:var(--color-brand-secondary)}
+.text-section{font-family:var(--typography-family-heading),sans-serif;font-weight:700;font-size:calc(var(--typography-size-section)*1px);line-height:calc(var(--typography-line-height-section)*1px);color:var(--color-brand-secondary)}
+.text-card{font-family:var(--typography-family-heading),sans-serif;font-weight:600;font-size:calc(var(--typography-size-card)*1px);line-height:calc(var(--typography-line-height-card)*1px);color:var(--color-brand-secondary)}
+.text-body{font-family:var(--typography-family-body),sans-serif;font-weight:400;font-size:calc(var(--typography-size-body)*1px);line-height:calc(var(--typography-line-height-body)*1px);color:var(--color-text-primary)}
+.text-body-strong{font-family:var(--typography-family-body),sans-serif;font-weight:600;font-size:calc(var(--typography-size-body)*1px);line-height:calc(var(--typography-line-height-body)*1px);color:var(--color-text-primary)}
+.text-supporting{font-family:var(--typography-family-body),sans-serif;font-weight:400;font-size:calc(var(--typography-size-supporting)*1px);line-height:calc(var(--typography-line-height-supporting)*1px);color:var(--color-text-muted)}
+.text-label{font-family:var(--typography-family-body),sans-serif;font-weight:600;font-size:calc(var(--typography-size-label)*1px);line-height:calc(var(--typography-line-height-label)*1px);color:var(--color-text-primary)}
+.text-small{font-family:var(--typography-family-body),sans-serif;font-weight:400;font-size:calc(var(--typography-size-small)*1px);line-height:calc(var(--typography-line-height-small)*1px);color:var(--color-text-muted)}

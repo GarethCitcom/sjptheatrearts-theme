@@ -1,0 +1,7 @@
+node_modules/
+vendor/composer/
+*.zip
+advanced-custom-fields-pro/
+.wp-env.json.override
+wp-content/
+.DS_Store

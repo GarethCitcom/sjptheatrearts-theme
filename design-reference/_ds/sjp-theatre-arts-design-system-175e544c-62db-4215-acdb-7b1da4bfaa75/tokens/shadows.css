@@ -1,0 +1,5 @@
+/* Elevation. Raised = the exact popup shadow from the .fig (rgba(16,33,47,0.1)); Small is an inferred lighter step in the same hue — no explicit "small" value shipped in the source. */
+:root{
+  --shadow-small: 0 2px 8px rgba(16,33,47,0.08);
+  --shadow-raised: 0 8px 24px rgba(16,33,47,0.1);
+}
