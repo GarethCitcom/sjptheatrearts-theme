@@ -1,0 +1,132 @@
+{
+    "key": "group_sjpta_teacher_list",
+    "title": "Teacher list",
+    "fields": [
+        {
+            "key": "field_sjpta_tl_label",
+            "label": "Section label",
+            "name": "label",
+            "type": "text",
+            "required": 0,
+            "default_value": "Meet the teachers"
+        },
+        {
+            "key": "field_sjpta_tl_note",
+            "label": "Section note",
+            "name": "note",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_tl_link_label",
+            "label": "Button label",
+            "name": "link_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_tl_link_url",
+            "label": "Button link",
+            "name": "link_url",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_tl_photo",
+            "label": "Team photograph",
+            "name": "photo",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_tl_photo_caption",
+            "label": "Photograph caption",
+            "name": "photo_caption",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_tl_people",
+            "label": "Teachers",
+            "name": "people",
+            "type": "repeater",
+            "instructions": "The circle takes its letter from the name automatically.",
+            "required": 0,
+            "min": 0,
+            "max": 12,
+            "layout": "block",
+            "button_label": "Add teacher",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_tl_name",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_tl_person_photo",
+                    "label": "Portrait",
+                    "name": "photo",
+                    "type": "image",
+                    "return_format": "id",
+                    "preview_size": "thumbnail",
+                    "instructions": "Leave empty and a coloured initial stands in until a photograph is available.",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_tl_role",
+                    "label": "What they teach",
+                    "name": "role",
+                    "type": "textarea",
+                    "rows": 2,
+                    "new_lines": "",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_tl_tone",
+                    "label": "Tone",
+                    "name": "tone",
+                    "type": "select",
+                    "required": 0,
+                    "default_value": "orange",
+                    "choices": {
+                        "orange": "Orange",
+                        "magenta": "Magenta",
+                        "purple": "Purple",
+                        "green": "Green"
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_tl_footnote",
+            "label": "Note under the list",
+            "name": "footnote",
+            "type": "textarea",
+            "instructions": "For anything still being gathered, such as photographs or full qualifications. Hidden when empty.",
+            "rows": 3,
+            "new_lines": "",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/teacher-list"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

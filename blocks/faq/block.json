@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/faq",
+	"title": "SJP FAQ",
+	"category": "theme",
+	"icon": "editor-help",
+	"description": "Questions and answers as native accordions, beside an intro column.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	]
+}

@@ -1,24 +1,27 @@
 {
-    "idx": 0,
-    "view": "form",
+    "idx": 15,
+    "view": "done",
     "answers": {
         "baby-yoga": {
             "desc": "Gentle stretching, movement and songs for babies with a parent or carer. A calm first step into the studio.",
             "tags": [
                 "Babies",
                 "Come with a parent or carer",
-                "Fitness",
-                "Beginners welcome"
+                "Beginners welcome",
+                "Singing",
+                "Fitness"
             ],
             "tagOther": {
                 "age": "",
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Monday"
+            ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "Lottie"
             ],
             "teacherOther": "",
             "level": "No experience needed",
@@ -38,7 +41,7 @@
                 },
                 {
                     "title": "Wind-down",
-                    "text": "Low lights and a calm finish, so everyone leaves more relaxed than they arrived."
+                    "text": "A calm finish so everyone leaves more relaxed than they arrived."
                 }
             ],
             "lead": "A natural next step into Parent & Toddler once they are on their feet.",
@@ -54,7 +57,7 @@
                 "note": "There is nothing to buy and no uniform. Come as you are."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "parent-toddler": {
             "desc": "Songs, props and simple movement with a grown-up alongside. Usually the first taste of class children get.",
@@ -62,21 +65,25 @@
                 "Up to 4",
                 "Come with a parent or carer",
                 "Dance",
-                "Beginners welcome"
+                "Beginners welcome",
+                "Singing",
+                "Drama and acting"
             ],
             "tagOther": {
                 "age": "",
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Monday"
+            ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "Lottie"
             ],
             "teacherOther": "",
             "level": "No experience needed",
-            "who": "Toddlers up to 4 with a parent, grandparent or carer joining in alongside them. For most families it is the first taste of a class, so it is built around play rather than performance.\n\nSome children join in from the first song; others watch from a lap for a few weeks. Both are completely normal.",
+            "who": "Toddlers up to 2 and a half year with a parent, grandparent or carer joining in alongside them. For most families it is their first taste of a class, so it is built around play rather than performance.\n\nSome children join in from the first song; others watch from a lap for a few weeks. Both are completely normal.",
             "steps": [
                 {
                     "title": "A hello song",
@@ -108,28 +115,31 @@
                 "note": "No uniform at this age. Come as you are."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "first-steps": {
             "desc": "The first class children take on their own. Rhythm, listening, balance and a lot of pretending to be animals.",
             "tags": [
                 "Ages 2 to 4",
                 "Dance",
-                "Beginners welcome"
+                "Beginners welcome",
+                "Drama and acting"
             ],
             "tagOther": {
                 "age": "",
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Saturday"
+            ],
             "dayTimes": [],
             "teachers": [
                 "SJ"
             ],
             "teacherOther": "",
             "level": "No experience needed",
-            "who": "Children aged 2 to 4 taking their very first class on their own. The class is small, the room is friendly and the teacher's job in the first weeks is simply to make it somewhere they want to come back to.\n\nNo experience is expected. If they can walk, they can start.",
+            "who": "Children aged 2 to 4 taking their very first class on their own. The class is small, the room is friendly and the teacher's job in the first weeks is simply to make it somewhere they want to come back to.\n\nNo experience is expected.",
             "steps": [
                 {
                     "title": "A warm-up song they know",
@@ -145,44 +155,49 @@
                 },
                 {
                     "title": "A story dance to finish",
-                    "text": "A short dance that tells a story, with a lot of pretending to be animals."
+                    "text": "A short dance that tells a story, with a lot of creative exercises."
                 }
             ],
-            "lead": "Second Steps when they are ready, usually around their fourth birthday.",
-            "leadTags": [],
+            "lead": "Second Steps when they start reception age.",
+            "leadTags": [
+                "Medals"
+            ],
             "leadOther": "",
             "wear": {
                 "items": [
                     "Anything they can move in",
                     "Hair tied back",
-                    "Bare feet",
+                    "Bare feet or ballet shoes",
                     "A named water bottle"
                 ],
                 "note": "No uniform is needed for the first class. Anything they can move in is fine."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "second-steps": {
             "desc": "The bridge between play and technique. Children start learning proper positions and their first real routines.",
             "tags": [
                 "Ages 4 and over",
                 "Dance",
-                "Beginners welcome"
+                "Beginners welcome",
+                "Drama and acting"
             ],
             "tagOther": {
                 "age": "",
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Saturday"
+            ],
             "dayTimes": [],
             "teachers": [
                 "SJ"
             ],
             "teacherOther": "",
             "level": "No experience needed",
-            "who": "Children aged around 4 and over who have grown out of First Steps, or are starting a little later. It is the bridge between play and proper technique.\n\nChildren still play, but they also start to learn real positions, real names for steps and their first short routines.",
+            "who": "Children from reception and including school year 1. It is the bridge between play and understanding and applying dance technique.\n\nChildren still play, but they also start to learn real positions, real names for steps and their first short routines.",
             "steps": [
                 {
                     "title": "Warm-up and stretch",
@@ -197,8 +212,8 @@
                     "text": "A short dance built up week by week."
                 },
                 {
-                    "title": "A game to finish",
-                    "text": "Because they are four, and games are the point."
+                    "title": "A performance to finish",
+                    "text": "A small show and tell for the parents to see what was learn during the lesson time."
                 }
             ],
             "lead": "Ballet, Tap or Jazz & Commercial, and a first medal for those who want one.",
@@ -208,21 +223,22 @@
             "leadOther": "",
             "wear": {
                 "items": [
-                    "Anything they can move in",
+                    "Anything they can move in (no denim, skirts or tights)",
                     "Hair tied back",
-                    "Bare feet",
+                    "Bare feet or trainers",
                     "A named water bottle"
                 ],
                 "note": "No uniform is needed for the first class. Anything they can move in is fine."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "ballet": {
             "desc": "Graded technique, posture and musicality. It is the foundation under every other style we teach, and it shows.",
             "tags": [
                 "Ages 4 and over",
-                "Dance"
+                "Dance",
+                "Beginners welcome"
             ],
             "tagOther": {
                 "age": "",
@@ -230,11 +246,13 @@
                 "extra": ""
             },
             "days": [
-                "Tuesday"
+                "Tuesday",
+                "Thursday"
             ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "SJ",
+                "Madi"
             ],
             "teacherOther": "",
             "level": "Beginners to graded levels",
@@ -246,7 +264,7 @@
                 },
                 {
                     "title": "Centre work",
-                    "text": "Positions, balance and port de bras away from the barre."
+                    "text": "Positions, port de bras and centre practise away from the barre."
                 },
                 {
                     "title": "Travelling steps",
@@ -275,7 +293,7 @@
                 "note": "No uniform is needed for the first class. Anything they can move in is fine."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "jazz-commercial": {
             "desc": "High-energy choreography, musicality and stage presence, in a class where individuality is encouraged rather than smoothed out.",
@@ -296,8 +314,7 @@
             "dayTimes": [],
             "teachers": [
                 "SJ",
-                "Madi",
-                "Amy"
+                "Madi"
             ],
             "teacherOther": "",
             "level": "Beginner to advanced",
@@ -322,10 +339,10 @@
             ],
             "lead": "Students who want to be assessed can take graded examinations and medals through our awarding bodies. Some students are invited into one of the three performing troupes. Everyone, whatever their level, gets a place in the annual show.",
             "leadTags": [
-                "Graded examinations",
                 "Troupe selection",
                 "Annual Christmas show",
-                "Vocational preparation"
+                "Vocational preparation",
+                "Medals"
             ],
             "leadOther": "",
             "wear": {
@@ -338,7 +355,7 @@
                 "note": "No uniform is needed for the first class. Anything they can move in is fine."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "tap": {
             "desc": "Rhythm, timing and a lot of noise. One of the quickest routes to a first medal or graded examination.",
@@ -351,10 +368,14 @@
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Tuesday",
+                "Saturday"
+            ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "SJ",
+                "Madi"
             ],
             "teacherOther": "",
             "level": "Beginners to graded levels",
@@ -381,7 +402,8 @@
             "leadTags": [
                 "Graded examinations",
                 "Medals",
-                "Annual Christmas show"
+                "Annual Christmas show",
+                "Vocational preparation"
             ],
             "leadOther": "",
             "wear": {
@@ -394,24 +416,29 @@
                 "note": "No uniform is needed for the first class. Anything they can move in is fine."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "acro-cheer": {
             "desc": "Strength, flexibility and tumbling taught in a safe progression. Nobody is pushed past what their body is ready for.",
             "tags": [
                 "Ages 4 and over",
                 "Dance",
-                "Fitness"
+                "Fitness",
+                "Beginners welcome"
             ],
             "tagOther": {
                 "age": "",
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Monday",
+                "Tuesday"
+            ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "SJ",
+                "Amy"
             ],
             "teacherOther": "",
             "level": "All levels",
@@ -436,21 +463,20 @@
             ],
             "lead": "Badges and awards as skills are signed off, and some of the most spectacular moments in the show.",
             "leadTags": [
-                "Medals",
                 "Annual Christmas show"
             ],
             "leadOther": "",
             "wear": {
                 "items": [
                     "Leggings or shorts and a fitted top",
-                    "Bare feet",
+                    "Trainers",
                     "Hair tied back off the face",
                     "A named water bottle"
                 ],
                 "note": "No jewellery, for safety. No uniform is needed for the first class."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "musical-theatre": {
             "desc": "Born To Be is a musical theatre company that provides quality training in all things musical theatre; dance, singing and acting, through training, shows and performances. ",
@@ -466,14 +492,16 @@
                 "type": "",
                 "extra": ""
             },
-            "days": [],
+            "days": [
+                "Wednesday"
+            ],
             "dayTimes": [],
             "teachers": [
                 "Madi"
             ],
             "teacherOther": "",
             "level": "All levels",
-            "who": "We guarantee to provide all kinds of exciting opportunities for all students to perform on stage in yearly shows and concerts, make long lasting memories and to be apart of a loving community to explore, be themselves and have fun. With workshops, trips and weekly classes we hope for all students to find joy in musical theatre, whether that be onstage or off stage with opportunities to learn about all backstage jobs including costumes, sound and lighting and stage hands. \n\nMusical theatre is not just about performing, it’s about working as a team, creating characters, script work and so much more and we aim to cover all areas in an engaging and exciting way. ",
+            "who": "Guarantee to provide all kinds of exciting opportunities for all students to perform on stage in yearly shows and concerts, make long lasting memories and to be apart of a loving community to explore, be themselves and have fun. With workshops, trips and weekly classes we hope for all students to find joy in musical theatre, whether that be onstage or off stage with opportunities to learn about all backstage jobs including costumes, sound and lighting and stage hands. \n\nMusical theatre is not just about performing, it’s about working as a team, creating characters, script work and so much more and we aim to cover all areas in an engaging and exciting way. ",
             "steps": [
                 {
                     "title": "Vocal and physical warm-up",
@@ -508,7 +536,7 @@
                 "note": "No uniform is needed for the first class. Anything they can move in is fine."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "drama": {
             "desc": "One-to-one lessons in speech, monologue and audition work, including LAMDA examinations for students who want them.",
@@ -527,7 +555,8 @@
             ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "SJ",
+                "Madi"
             ],
             "teacherOther": "",
             "level": "All levels",
@@ -565,7 +594,7 @@
                 "note": "Just bring the current piece and a water bottle."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "singing": {
             "desc": "Private lessons building range, breath and repertoire, working towards performances and graded examinations.",
@@ -584,7 +613,8 @@
             ],
             "dayTimes": [],
             "teachers": [
-                "Madi"
+                "Madi",
+                "SJ"
             ],
             "teacherOther": "",
             "level": "All levels",
@@ -623,10 +653,10 @@
                 "note": "Bring water and, if you have one, the song you would love to sing."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "troupes": {
-            "desc": "Notorious, Blaze and Shockwave rehearse for professional performances and external events. Places are offered by invitation.",
+            "desc": "Notorious and Shockwave rehearse for professional performances and external events. Places are offered by invitation.",
             "tags": [
                 "Ages 8 and over",
                 "Dance",
@@ -643,11 +673,12 @@
             ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "SJ",
+                "Madi"
             ],
             "teacherOther": "",
             "level": "Invited students",
-            "who": "Dedicated students aged 8 and over who are invited to join Notorious, Blaze or Shockwave. Troupes rehearse to a professional standard and represent the school at external events.\n\nPlaces are offered by invitation from class teachers, based on commitment as much as ability.",
+            "who": "Dedicated students aged 8 and over who are invited to join Notorious or Shockwave. Troupes rehearse to a professional standard and represent the school at external events.\n\nPlaces are offered by invitation from class teachers, based on commitment as much as ability.",
             "steps": [
                 {
                     "title": "Professional warm-up",
@@ -681,10 +712,10 @@
                 "note": ""
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "ballroom-latin": {
-            "desc": "Waltz, quickstep, cha cha and jive, taught by SJ. Come as a pair or on your own; we will partner you up.",
+            "desc": "Waltz, quickstep, cha cha,  jive and more, taught by SJ. Come as a pair or on your own; we will partner you up.",
             "tags": [
                 "Adults (18 and over)",
                 "Dance",
@@ -731,14 +762,14 @@
             "wear": {
                 "items": [
                     "Comfortable clothes you can move in",
-                    "Smooth-soled shoes, not trainers",
+                    "Latin shoes, not trainers",
                     "No special kit to start",
                     ""
                 ],
                 "note": "Dance shoes can come later, once you are hooked."
             },
             "removed": false,
-            "done": false
+            "done": true
         },
         "adult-ballet": {
             "desc": "For people who danced as a child and stopped, and for people who never got the chance. No leotard required.",
@@ -793,7 +824,7 @@
                 ],
                 "note": ""
             },
-            "removed": false,
+            "removed": true,
             "done": false
         },
         "wedding-dance": {
@@ -814,7 +845,8 @@
             ],
             "dayTimes": [],
             "teachers": [
-                "SJ"
+                "SJ",
+                "Madi"
             ],
             "teacherOther": "",
             "level": "No experience needed",
@@ -850,11 +882,76 @@
                 "note": "Bring your song, even if you have three candidates."
             },
             "removed": false,
-            "done": false
+            "done": true
+        },
+        "custom-1786292058413": {
+            "name": "Adult Jazz Class",
+            "desc": "For people who danced as a child and stopped, and for people who have never got the chance. ",
+            "tags": [
+                "Adults (18 and over)",
+                "Dance",
+                "Fitness",
+                "Beginners welcome"
+            ],
+            "tagOther": {
+                "age": "",
+                "type": "",
+                "extra": ""
+            },
+            "days": [
+                "Tuesday"
+            ],
+            "dayTimes": {
+                "Tuesday": {
+                    "start": "8:00pm",
+                    "dur": "1Hour"
+                }
+            },
+            "teachers": [
+                "SJ"
+            ],
+            "teacherOther": "",
+            "level": "Complete Beginners",
+            "who": "Adults who have danced as a child and stopped, and adults who never got the chance. The class is sociable, full of fun and taught without judgement. \n\nNo leotard required, no audience, and nobody is made to feel left behind. ",
+            "steps": [
+                {
+                    "title": "Warm - up",
+                    "text": "Gentle stretch & flexibility "
+                },
+                {
+                    "title": "Short Cardio",
+                    "text": "A short cardio sequence taught in the form of a routine"
+                },
+                {
+                    "title": "Teach Routine",
+                    "text": "Each week a new routine gets taught with different levels of ability."
+                },
+                {
+                    "title": "Cool Down",
+                    "text": "A nice relaxing stretch to end the class."
+                }
+            ],
+            "lead": "",
+            "leadTags": [],
+            "leadOther": "",
+            "wear": {
+                "items": [
+                    "Fitness clothing",
+                    "Trainers",
+                    "Water Bottle",
+                    ""
+                ],
+                "note": ""
+            },
+            "removed": false,
+            "done": true
         }
     },
     "extra": "",
-    "customIds": [],
-    "sent": false,
-    "updatedAt": "2026-08-07T12:42:27+00:00"
+    "customIds": [
+        "custom-1786292058413"
+    ],
+    "sent": true,
+    "updatedAt": "2026-08-09T16:24:08+00:00",
+    "sentAt": "2026-08-09T16:23:07+00:00"
 }

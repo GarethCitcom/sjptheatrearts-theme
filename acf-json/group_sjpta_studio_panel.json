@@ -1,0 +1,21 @@
+{
+    "key": "group_sjpta_studio_panel",
+    "title": "Studio and message",
+    "fields": [
+        { "key": "field_sjpta_sp_photo", "label": "Studio photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "medium", "required": 0 },
+        { "key": "field_sjpta_sp_name", "label": "Studio name", "name": "name", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sp_maps_label", "label": "Maps button", "name": "maps_label", "type": "text", "required": 0, "default_value": "Open in maps" },
+        { "key": "field_sjpta_sp_maps_url", "label": "Maps link", "name": "maps_url", "type": "url", "instructions": "Leave empty until the address is confirmed; the button then does not appear.", "required": 0 },
+        { "key": "field_sjpta_sp_note", "label": "Note under the facts", "name": "note", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_sp_form_heading", "label": "Form heading", "name": "form_heading", "type": "text", "required": 0, "default_value": "Send us a message" },
+        { "key": "field_sjpta_sp_form_text", "label": "Form intro", "name": "form_text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_sp_submit", "label": "Button label", "name": "submit_label", "type": "text", "required": 0, "default_value": "Send message" },
+        { "key": "field_sjpta_sp_footnote", "label": "Note under the button", "name": "footnote", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sp_footnote_label", "label": "Note link label", "name": "footnote_label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sp_footnote_url", "label": "Note link", "name": "footnote_url", "type": "text", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/studio-panel" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true,
+    "description": "The address, parking, step-free access and waiting area come from SJP settings, so they are written once and show their to-confirm state until they are filled in.",
+    "show_in_rest": 0
+}

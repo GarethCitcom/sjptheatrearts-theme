@@ -1,0 +1,86 @@
+/* Photo strip above the footer. */
+
+.sjpta-strip {
+	background: var(--wp--preset--color--surface);
+	border-top: 1px solid var(--wp--custom--color--section-rule);
+	padding: 24px 0;
+	overflow: hidden;
+}
+
+.sjpta-strip__link {
+	display: block;
+	text-decoration: none;
+}
+
+.sjpta-strip__track {
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	width: max-content;
+	animation: sjpta-marquee 48s linear infinite;
+}
+
+.sjpta-strip__run {
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.sjpta-strip__tile {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	border-radius: var(--wp--custom--radius--small);
+	overflow: hidden;
+	background: var(--wp--custom--color--badge-purple-bg);
+	flex: none;
+}
+
+.sjpta-strip__tile img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.sjpta-strip__handle {
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--wp--preset--color--brand-purple);
+	border-radius: 8px;
+	padding: 5px 10px;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 700;
+}
+
+@keyframes sjpta-marquee {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+/*
+ * WCAG 2.2 wants motion over five seconds to be pausable, and the strip is a
+ * link — so it must also stop while focused, not only on hover.
+ */
+.sjpta-strip:hover .sjpta-strip__track,
+.sjpta-strip:focus-within .sjpta-strip__track {
+	animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-strip__track {
+		animation: none;
+	}
+}
+
+@media (max-width: 782px) {
+	.sjpta-strip__tile {
+		width: 150px;
+		height: 150px;
+	}
+}

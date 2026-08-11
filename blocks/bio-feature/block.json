@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/bio-feature",
+	"title": "SJP bio feature",
+	"category": "theme",
+	"icon": "admin-users",
+	"description": "A photo collage beside a person's story, with outlined pills for what they have done.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives",
+		"sjpta-collage"
+	]
+}

@@ -1,0 +1,26 @@
+{
+    "key": "group_sjpta_dark_feature",
+    "title": "Dark feature",
+    "fields": [
+        { "key": "field_sjpta_df_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0 },
+        { "key": "field_sjpta_df_heading", "label": "Heading", "name": "heading", "type": "text", "required": 1 },
+        { "key": "field_sjpta_df_text", "label": "Text", "name": "text", "type": "textarea", "rows": 4, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_df_points", "label": "Tick list", "name": "points", "type": "repeater", "required": 0, "min": 0, "max": 6, "layout": "table", "button_label": "Add line", "sub_fields": [
+            { "key": "field_sjpta_df_point_text", "label": "Text", "name": "text", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_df_cta_label", "label": "Button label", "name": "cta_label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_df_cta_url", "label": "Button link", "name": "cta_url", "type": "text", "instructions": "Leave empty to link to the Performances page.", "required": 0 },
+        { "key": "field_sjpta_df_photos", "label": "Photographs", "name": "photos", "type": "repeater", "instructions": "The first one spans the full width. Three works best.", "required": 0, "min": 0, "max": 5, "layout": "table", "button_label": "Add photograph", "sub_fields": [
+            { "key": "field_sjpta_df_photo", "label": "Photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 }
+        ] }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/dark-feature" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

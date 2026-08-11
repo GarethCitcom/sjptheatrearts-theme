@@ -1,0 +1,288 @@
+{
+    "key": "group_sjpta_site_settings",
+    "title": "SJP site settings",
+    "fields": [
+        {
+            "key": "field_sjpta_tab_contact",
+            "label": "Contact",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "placement": "top"
+        },
+        {
+            "key": "field_sjpta_contact_email",
+            "label": "Contact email",
+            "name": "contact_email",
+            "type": "email",
+            "instructions": "The public enquiry address shown in the footer and on the Contact page.",
+            "required": 0,
+            "default_value": "sjptheatrearts@yahoo.com"
+        },
+        {
+            "key": "field_sjpta_instagram_url",
+            "label": "Instagram URL",
+            "name": "instagram_url",
+            "type": "url",
+            "instructions": "Linked from the utility bar, footer and Contact page.",
+            "required": 0,
+            "default_value": "https://www.instagram.com/sjp_theatre_arts/"
+        },
+        {
+            "key": "field_sjpta_portal_url",
+            "label": "Member portal URL",
+            "name": "portal_url",
+            "type": "url",
+            "instructions": "Where \"Member login\" points. This is the existing booking portal, not part of this site.",
+            "required": 0,
+            "default_value": "https://book.sjptheatrearts.co.uk/"
+        },
+        {
+            "key": "field_sjpta_footer_tagline",
+            "label": "Footer tagline",
+            "name": "footer_tagline",
+            "type": "text",
+            "instructions": "The short line under the logo in the footer.",
+            "required": 0,
+            "default_value": "Dance, sing and perform in Bromsgrove."
+        },
+        {
+            "key": "field_sjpta_tab_location",
+            "label": "Location",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "placement": "top"
+        },
+        {
+            "key": "field_sjpta_locality",
+            "label": "Locality",
+            "name": "locality",
+            "type": "text",
+            "instructions": "Shown in the utility bar and footer.",
+            "required": 0,
+            "default_value": "Bromsgrove, Worcestershire"
+        },
+        {
+            "key": "field_sjpta_strapline",
+            "label": "Utility bar strapline",
+            "name": "strapline",
+            "type": "text",
+            "instructions": "The centred line in the dark bar at the very top of every page.",
+            "required": 0,
+            "default_value": "Dance · Sing · Perform, classes from babies to adults, all abilities welcome"
+        },
+        {
+            "key": "field_sjpta_full_address",
+            "label": "Full address",
+            "name": "full_address",
+            "type": "textarea",
+            "instructions": "Leave empty until confirmed. While empty, the site shows its \"To confirm before launch\" state rather than an invented address.",
+            "required": 0,
+            "rows": 4,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_parking",
+            "label": "Parking",
+            "name": "parking",
+            "type": "textarea",
+            "instructions": "Leave empty until confirmed.",
+            "required": 0,
+            "rows": 3,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_step_free",
+            "label": "Step-free access",
+            "name": "step_free_access",
+            "type": "textarea",
+            "instructions": "Leave empty until confirmed.",
+            "required": 0,
+            "rows": 3,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_waiting_area",
+            "label": "Waiting area",
+            "name": "waiting_area",
+            "type": "textarea",
+            "instructions": "Leave empty until confirmed.",
+            "required": 0,
+            "rows": 3,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_watch_first",
+            "label": "Watching a first class",
+            "name": "watch_first",
+            "type": "textarea",
+            "rows": 3,
+            "instructions": "Shown on every class page. This is a promise to parents, so leave it empty until you are sure it is what you offer; the card disappears when empty.",
+            "required": 0,
+            "default_value": "Parents are welcome to sit in on the first class. Just say so when you get in touch."
+        },
+        {
+            "key": "field_sjpta_tab_born_to_be",
+            "label": "Born To Be",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "placement": "top"
+        },
+        {
+            "key": "field_sjpta_btb_enquiry_email",
+            "label": "Born To Be enquiry email",
+            "name": "btb_enquiry_email",
+            "type": "email",
+            "instructions": "Madison's address. Enquiries from the Born To Be page go here instead of the main contact email. Leave empty and they fall back to the main contact email, so nothing is ever lost.",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_btb_instagram_url",
+            "label": "Born To Be Instagram URL",
+            "name": "btb_instagram_url",
+            "type": "url",
+            "instructions": "Used on the Born To Be page only: the utility bar, the gallery link and the social card all read this one field.",
+            "required": 0,
+            "default_value": "https://www.instagram.com/born.to.be4/"
+        },
+        {
+            "key": "field_sjpta_btb_facebook_url",
+            "label": "Born To Be Facebook URL",
+            "name": "btb_facebook_url",
+            "type": "url",
+            "instructions": "Linked from the social card at the foot of the Born To Be page.",
+            "required": 0,
+            "default_value": "https://www.facebook.com/p/Born-To-Be-61585014057919/"
+        },
+        {
+            "key": "field_sjpta_st_class_enquiry_email",
+            "label": "Class enquiry email",
+            "name": "class_enquiry_email",
+            "type": "email",
+            "instructions": "Where enrolment and class enquiries go. The site says these reach Lottie, so this should be her address. Leave empty and they fall back to the contact email rather than going nowhere.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_st_class_enquiry_name",
+            "label": "Who answers class enquiries",
+            "name": "class_enquiry_name",
+            "type": "text",
+            "instructions": "Named in the confirmation a parent sees after sending. Leave empty and it says \"we\" instead of a name.",
+            "required": 0,
+            "default_value": "Lottie"
+        },
+        {
+            "key": "field_sjpta_st_tab_footer",
+            "label": "Footer",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_sjpta_st_facebook_url",
+            "label": "Facebook URL",
+            "name": "facebook_url",
+            "type": "url",
+            "instructions": "Leave empty and no Facebook button appears.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_st_tiktok_url",
+            "label": "TikTok URL",
+            "name": "tiktok_url",
+            "type": "url",
+            "instructions": "Leave empty and no TikTok button appears.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_st_newsletter_action",
+            "label": "Newsletter sign-up address",
+            "name": "newsletter_action",
+            "type": "url",
+            "instructions": "The form address your mailing tool gives you for an embedded sign-up form (Mailchimp, Brevo, MailerLite and the rest all provide one). Until this is filled in, the footer shows a link to the Contact page instead of an address field, so nobody's email is collected with nowhere to go.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_st_newsletter_field",
+            "label": "Newsletter email field name",
+            "name": "newsletter_field",
+            "type": "text",
+            "instructions": "The name your mailing tool expects for the email box. Mailchimp uses EMAIL, which is the default; check your provider's embed code if sign-ups do not arrive.",
+            "required": 0,
+            "default_value": "EMAIL"
+        },
+        {
+            "key": "field_sjpta_st_legal_links",
+            "label": "Legal links",
+            "name": "legal_links",
+            "type": "repeater",
+            "instructions": "The small print row at the very bottom. Add these once the pages exist; the row is hidden while this is empty rather than showing links that go nowhere.",
+            "required": 0,
+            "min": 0,
+            "max": 6,
+            "layout": "table",
+            "button_label": "Add link",
+            "sub_fields": [
+                { "key": "field_sjpta_st_legal_label", "label": "Label", "name": "label", "type": "text", "required": 0 },
+                { "key": "field_sjpta_st_legal_url", "label": "Link", "name": "url", "type": "text", "required": 0 }
+            ]
+        },
+        {
+            "key": "field_sjpta_st_footer_note",
+            "label": "Copyright note",
+            "name": "footer_note",
+            "type": "text",
+            "instructions": "Follows the year and site name at the foot of every page.",
+            "required": 0,
+            "default_value": "Formerly Bromsgrove School of Dance."
+        },
+        {
+            "key": "field_sjpta_st_tab_timetable",
+            "label": "Timetable",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_sjpta_st_tempo_base_url",
+            "label": "Member portal address",
+            "name": "tempo_base_url",
+            "type": "url",
+            "instructions": "Where the weekly timetable is read from. Only change this if the member portal moves to a different address.",
+            "required": 0,
+            "default_value": "https://book.sjptheatrearts.co.uk"
+        },
+        {
+            "key": "field_sjpta_st_tempo_cache_minutes",
+            "label": "Refresh the timetable every",
+            "name": "tempo_cache_minutes",
+            "type": "number",
+            "instructions": "Minutes between checks for changes. 15 is plenty; the timetable is also kept and shown if the portal is ever unreachable.",
+            "required": 0,
+            "default_value": 15,
+            "min": 1,
+            "max": 1440,
+            "append": "minutes"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "sjpta-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Facts that appear in the site chrome. Anything awaiting client confirmation is left empty on purpose so the front end shows an honest placeholder.",
+    "show_in_rest": 0
+}

@@ -1,0 +1,85 @@
+{
+    "key": "group_sjpta_accreditation",
+    "title": "Accreditation row",
+    "fields": [
+        {
+            "key": "field_sjpta_acc_panel",
+            "label": "Set in a panel",
+            "name": "panel",
+            "type": "true_false",
+            "instructions": "On for pages where this row closes a run of bordered panels, such as About. Off on the homepage, where it runs bare across the background.",
+            "required": 0,
+            "default_value": 0,
+            "ui": 1
+        },
+        {
+            "key": "field_sjpta_acc_strong",
+            "label": "Opening phrase",
+            "name": "intro_strong",
+            "type": "text",
+            "instructions": "Shown in bold plum at the start of the line.",
+            "required": 0,
+            "default_value": "Recognised, checked and insured."
+        },
+        {
+            "key": "field_sjpta_acc_intro",
+            "label": "Reassurance line",
+            "name": "intro",
+            "type": "textarea",
+            "rows": 2,
+            "new_lines": "",
+            "required": 0,
+            "default_value": "Our teaching follows established awarding-body syllabuses and safeguarding practice."
+        },
+        {
+            "key": "field_sjpta_acc_logos",
+            "label": "Marks",
+            "name": "logos",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add mark",
+            "required": 0,
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_acc_logo_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "id",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "instructions": "Include the body's name in the alt text — it is meaningful, not decorative.",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_acc_logo_height",
+                    "label": "Height (px)",
+                    "name": "height",
+                    "type": "number",
+                    "instructions": "Optical sizing, so differently proportioned marks look even. 34–40 in the design.",
+                    "default_value": 38,
+                    "min": 16,
+                    "max": 80,
+                    "required": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/accreditation"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

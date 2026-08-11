@@ -1,0 +1,151 @@
+/* What it costs: four tinted cards, then two lists. */
+
+.sjpta-fees {
+	padding: var(--wp--preset--spacing--70) 0 0;
+}
+
+.sjpta-fees__cards {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--wp--preset--spacing--50);
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+/*
+ * The card takes its background from the shared tone map, so a new tone is one
+ * class rather than a colour pair copied in here.
+ */
+.sjpta-feecard {
+	background: var(--tone-bg);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 28px 26px;
+	transition: transform var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+.sjpta-feecard:hover {
+	transform: translateY(-6px);
+}
+
+.sjpta-feecard__icon {
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+	background: var(--tone-solid);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 18px;
+}
+
+.sjpta-feecard__title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	margin: 0 0 6px;
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-feecard__value {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--card-lg);
+	color: var(--tone-fg);
+	margin: 0 0 8px;
+}
+
+/*
+ * A fee nobody has confirmed keeps the magenta placeholder tone rather than the
+ * card's own, because it means the same thing here as everywhere else on the
+ * site: this is not filled in yet.
+ */
+.sjpta-feecard__value.sjpta-toconfirm {
+	color: var(--wp--preset--color--magenta);
+}
+
+.sjpta-feecard__text {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.6;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+/* ---------- The two lists ---------- */
+
+.sjpta-fees__lists {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.sjpta-feelist {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 32px 30px;
+}
+
+.sjpta-feelist__title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-lg);
+	margin: 0 0 16px;
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-feelist__items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.55;
+	color: var(--wp--preset--color--text-body);
+}
+
+.sjpta-feelist__items li {
+	display: flex;
+	gap: 11px;
+	align-items: flex-start;
+}
+
+.sjpta-feelist__tick {
+	flex: none;
+	margin-top: 3px;
+	display: flex;
+}
+
+.sjpta-feelist__dot {
+	color: var(--sjpta-accent-text);
+	font-weight: 700;
+	flex: none;
+}
+
+.sjpta-feelist__items strong {
+	color: var(--wp--preset--color--brand-purple);
+}
+
+@media (max-width: 1023px) {
+	.sjpta-fees__cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-fees__cards,
+	.sjpta-fees__lists {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-feecard {
+		transition: none;
+	}
+
+	.sjpta-feecard:hover {
+		transform: none;
+	}
+}

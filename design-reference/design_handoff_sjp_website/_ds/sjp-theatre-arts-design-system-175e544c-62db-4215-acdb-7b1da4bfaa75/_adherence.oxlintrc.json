@@ -1,0 +1,278 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/button/**",
+              "components/status-badge/**",
+              "ui_kits/studio-manager/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Poppins|Montserrat))/i]",
+        "message": "Font not provided by the design system. Available: Poppins, Montserrat."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:className|style|label|size|style2|state|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: className, style, label, size, style2, state."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:compact|mobile)$/]",
+        "message": "<Button> size must be one of 'compact' | 'mobile'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='style2'] > Literal[value!=/^(?:primary|secondary|outline)$/]",
+        "message": "<Button> style2 must be one of 'primary' | 'secondary' | 'outline'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='state'] > Literal[value!=/^(?:default|focus|disabled)$/]",
+        "message": "<Button> state must be one of 'default' | 'focus' | 'disabled'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatusBadge'] > JSXAttribute > JSXIdentifier[name!=/^(?:className|style|severity|text1|text2|key|ref|className|style|children)$/]",
+        "message": "<StatusBadge> doesn't accept that prop. Declared props: className, style, severity, text1, text2."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatusBadge'] > JSXAttribute[name.name='severity'] > Literal[value!=/^(?:success|warning|danger|info|neutral)$/]",
+        "message": "<StatusBadge> severity must be one of 'success' | 'warning' | 'danger' | 'info' | 'neutral'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Button": {
+        "replaces": []
+      },
+      "StatusBadge": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--brand-magenta-600",
+      "--brand-orange-50",
+      "--brand-orange-500",
+      "--brand-purple-50",
+      "--brand-purple-800",
+      "--color-bg-brand-subtle",
+      "--color-bg-page",
+      "--color-bg-subtle",
+      "--color-bg-surface",
+      "--color-border-default",
+      "--color-border-strong",
+      "--color-brand-accent",
+      "--color-brand-focus",
+      "--color-brand-primary",
+      "--color-brand-secondary",
+      "--color-icon-default",
+      "--color-status-danger-bg",
+      "--color-status-danger-fg",
+      "--color-status-info-bg",
+      "--color-status-info-fg",
+      "--color-status-neutral-bg",
+      "--color-status-neutral-fg",
+      "--color-status-success-bg",
+      "--color-status-success-fg",
+      "--color-status-warning-bg",
+      "--color-status-warning-fg",
+      "--color-text-brand",
+      "--color-text-inverse",
+      "--color-text-muted",
+      "--color-text-primary",
+      "--neutral-black",
+      "--neutral-gray-100",
+      "--neutral-gray-200",
+      "--neutral-gray-500",
+      "--neutral-gray-700",
+      "--neutral-white",
+      "--neutral-zinc-700",
+      "--radius-full",
+      "--radius-large",
+      "--radius-medium",
+      "--radius-small",
+      "--shadow-raised",
+      "--shadow-small",
+      "--size-control-min",
+      "--size-control-primary",
+      "--size-icon-large",
+      "--size-icon-medium",
+      "--size-icon-small",
+      "--spacing-12",
+      "--spacing-16",
+      "--spacing-20",
+      "--spacing-24",
+      "--spacing-32",
+      "--spacing-4",
+      "--spacing-40",
+      "--spacing-48",
+      "--spacing-64",
+      "--spacing-8",
+      "--status-amber-50",
+      "--status-amber-800",
+      "--status-blue-50",
+      "--status-blue-700",
+      "--status-green-50",
+      "--status-green-700",
+      "--status-red-50",
+      "--status-red-700",
+      "--typography-family-body",
+      "--typography-family-heading",
+      "--typography-line-height-body",
+      "--typography-line-height-card",
+      "--typography-line-height-label",
+      "--typography-line-height-page",
+      "--typography-line-height-section",
+      "--typography-line-height-small",
+      "--typography-line-height-supporting",
+      "--typography-size-body",
+      "--typography-size-card",
+      "--typography-size-label",
+      "--typography-size-page",
+      "--typography-size-section",
+      "--typography-size-small",
+      "--typography-size-supporting",
+      "--vocabulary-activity-plural",
+      "--vocabulary-activity-singular",
+      "--vocabulary-credit",
+      "--vocabulary-participant-plural",
+      "--vocabulary-participant-singular",
+      "--vocabulary-teacher-plural",
+      "--vocabulary-teacher-singular",
+      "--vocabulary-term",
+      "--vocabulary-venue"
+    ],
+    "tokenKinds": {
+      "--shadow-small": "shadow",
+      "--shadow-raised": "shadow",
+      "--brand-magenta-600": "color",
+      "--brand-orange-500": "color",
+      "--brand-orange-50": "color",
+      "--brand-purple-50": "color",
+      "--brand-purple-800": "color",
+      "--color-bg-brand-subtle": "color",
+      "--color-bg-page": "color",
+      "--color-bg-subtle": "color",
+      "--color-bg-surface": "color",
+      "--color-border-default": "color",
+      "--color-border-strong": "color",
+      "--color-brand-accent": "color",
+      "--color-brand-focus": "color",
+      "--color-brand-primary": "color",
+      "--color-brand-secondary": "color",
+      "--color-icon-default": "color",
+      "--color-status-danger-bg": "color",
+      "--color-status-danger-fg": "color",
+      "--color-status-info-bg": "color",
+      "--color-status-info-fg": "color",
+      "--color-status-neutral-bg": "color",
+      "--color-status-neutral-fg": "color",
+      "--color-status-success-bg": "color",
+      "--color-status-success-fg": "color",
+      "--color-status-warning-bg": "color",
+      "--color-status-warning-fg": "color",
+      "--color-text-brand": "color",
+      "--color-text-inverse": "color",
+      "--color-text-muted": "color",
+      "--color-text-primary": "color",
+      "--neutral-black": "color",
+      "--neutral-gray-100": "color",
+      "--neutral-gray-200": "color",
+      "--neutral-gray-500": "color",
+      "--neutral-gray-700": "color",
+      "--neutral-white": "color",
+      "--neutral-zinc-700": "color",
+      "--radius-full": "radius",
+      "--radius-large": "radius",
+      "--radius-medium": "radius",
+      "--radius-small": "radius",
+      "--size-control-min": "spacing",
+      "--size-control-primary": "spacing",
+      "--size-icon-large": "spacing",
+      "--size-icon-medium": "spacing",
+      "--size-icon-small": "spacing",
+      "--spacing-12": "spacing",
+      "--spacing-16": "spacing",
+      "--spacing-20": "spacing",
+      "--spacing-24": "spacing",
+      "--spacing-32": "spacing",
+      "--spacing-40": "spacing",
+      "--spacing-48": "spacing",
+      "--spacing-4": "spacing",
+      "--spacing-64": "spacing",
+      "--spacing-8": "spacing",
+      "--status-amber-50": "color",
+      "--status-amber-800": "color",
+      "--status-blue-50": "color",
+      "--status-blue-700": "color",
+      "--status-green-50": "color",
+      "--status-green-700": "color",
+      "--status-red-50": "color",
+      "--status-red-700": "color",
+      "--typography-family-body": "font",
+      "--typography-family-heading": "font",
+      "--typography-line-height-body": "font",
+      "--typography-line-height-card": "font",
+      "--typography-line-height-label": "font",
+      "--typography-line-height-page": "font",
+      "--typography-line-height-section": "font",
+      "--typography-line-height-small": "font",
+      "--typography-line-height-supporting": "font",
+      "--typography-size-body": "spacing",
+      "--typography-size-card": "spacing",
+      "--typography-size-label": "spacing",
+      "--typography-size-page": "spacing",
+      "--typography-size-section": "spacing",
+      "--typography-size-small": "spacing",
+      "--typography-size-supporting": "spacing",
+      "--vocabulary-activity-plural": "other",
+      "--vocabulary-activity-singular": "other",
+      "--vocabulary-credit": "other",
+      "--vocabulary-participant-plural": "other",
+      "--vocabulary-participant-singular": "other",
+      "--vocabulary-teacher-plural": "other",
+      "--vocabulary-teacher-singular": "other",
+      "--vocabulary-term": "other",
+      "--vocabulary-venue": "other"
+    },
+    "fontFamilies": [
+      "Montserrat",
+      "Poppins"
+    ]
+  }
+}

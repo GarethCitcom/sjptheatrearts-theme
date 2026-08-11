@@ -1,0 +1,27 @@
+/* Related classes. */
+
+.sjpta-related {
+	padding: var(--wp--preset--spacing--80) 0 var(--wp--preset--spacing--80);
+}
+
+.sjpta-related__grid {
+	min-width: 0;
+}
+
+.sjpta-related__cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--wp--preset--spacing--40);
+}
+
+@media (max-width: 1023px) {
+	.sjpta-related__cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-related__cards {
+		grid-template-columns: 1fr;
+	}
+}

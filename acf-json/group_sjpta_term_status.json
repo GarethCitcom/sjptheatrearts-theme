@@ -1,0 +1,18 @@
+{
+    "key": "group_sjpta_term_status",
+    "title": "Term status",
+    "fields": [
+        { "key": "field_sjpta_ts_new_students", "label": "New students", "name": "new_students", "type": "text", "instructions": "Whether someone can join partway through a term. The term dates and half term beside it come from the member portal automatically.", "required": 0, "default_value": "Can start mid-term" },
+        { "key": "field_sjpta_ts_cta_label", "label": "Button label", "name": "cta_label", "type": "text", "required": 0, "default_value": "Ask for the current sheet" },
+        { "key": "field_sjpta_ts_cta_url", "label": "Button link", "name": "cta_url", "type": "url", "instructions": "Leave empty to use the Join page.", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/term-status" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

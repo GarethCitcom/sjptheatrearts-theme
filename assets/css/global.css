@@ -1,0 +1,262 @@
+/*
+ * Global essentials only. Everything visual belongs in theme.json or a
+ * per-block stylesheet; this file exists for the handful of rules neither can
+ * express. Keep it small -- it loads on every page.
+ */
+
+/*
+ * The design prototypes are authored on `* { box-sizing: border-box }` and
+ * their measurements assume it. WordPress does not set it globally, so without
+ * this any element combining a percentage width with padding overflows.
+ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/*
+ * WordPress gives every top-level block a `margin-block-start` of the global
+ * block gap. Between the header and <main> that opened a page-coloured strip
+ * directly under the purple utility bar. Each region here owns its own vertical
+ * spacing, so the gap between them should be nothing.
+ */
+.wp-site-blocks > * {
+	margin-block-start: 0;
+}
+
+/* Visually hidden, still announced. Block themes do not ship this. */
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+/*
+ * Core's block-template skip link, restyled. The skip link must become visible
+ * when focused, or it helps nobody.
+ */
+.skip-link:focus {
+	clip-path: none;
+	height: auto;
+	width: auto;
+	margin: 0;
+	overflow: visible;
+	top: 8px;
+	left: 8px;
+	z-index: 100000;
+	display: block;
+	padding: 14px 22px;
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--brand-purple);
+	border-radius: var(--wp--custom--radius--pill);
+	box-shadow: var(--wp--preset--shadow--nav);
+	font-size: var(--wp--preset--font-size--card-body);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+/*
+ * Focus. The design calls for a visible plum ring offset from the element edge.
+ * :focus-visible keeps it off mouse clicks; the :focus fallback is scoped away
+ * from browsers that support it so it never double-draws.
+ */
+:focus-visible {
+	outline: var(--wp--custom--focus--width) solid var(--wp--custom--focus--color);
+	outline-offset: var(--wp--custom--focus--offset);
+	border-radius: 2px;
+}
+
+/*
+ * An outline follows the element's own border-radius, so a link with square
+ * corners gets a square ring. The 2px above suits body-copy links but drew a
+ * hard rectangle around the nav links, which sit in a fully rounded bar.
+ *
+ * These are the controls that read as rounded, so their focus ring is rounded
+ * to match. Set only while focused: none of them has a visible background at
+ * rest, so the radius would otherwise have nothing to round.
+ */
+/* Keeps blocks/site-header/style.css's 8px, which this file would otherwise undo. */
+.sjpta-pill__link:focus-visible,
+.sjpta-pill__logo:focus-visible {
+	border-radius: 8px;
+}
+
+.sjpta-menu__link:focus-visible,
+.sjpta-crumbs__link:focus-visible,
+.sjpta-utility__link:focus-visible,
+.sjpta-utility__member:focus-visible,
+.sjpta-footer__collinks a:focus-visible,
+.sjpta-footer__contact a:focus-visible,
+.sjpta-footer__small a:focus-visible {
+	border-radius: var(--wp--custom--radius--small);
+}
+
+/* Anything already pill-shaped keeps its shape exactly. */
+.sjpta-btn:focus-visible,
+.sjpta-daypill:focus-visible,
+.sjpta-badge:focus-visible,
+.sjpta-footer__social a:focus-visible,
+.sjpta-footer__top-link:focus-visible {
+	border-radius: var(--wp--custom--radius--pill);
+}
+
+/* Dark surfaces need a light ring to stay visible. */
+.sjpta-utility :focus-visible,
+.sjpta-menu__panel :focus-visible,
+.sjpta-cta__panel :focus-visible,
+.sjpta-footer__top-link:focus-visible {
+	outline-color: var(--wp--preset--color--surface);
+}
+
+/* In-page anchors, per the design. Suppressed for reduced-motion users. */
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+/*
+ * The sticky nav would otherwise cover the target of an in-page anchor.
+ */
+:target {
+	scroll-margin-top: 110px;
+}
+
+/*
+ * Reveal on scroll.
+ *
+ * `.sjpta-reveal` is only ever added by motion.js, never authored into the
+ * markup. That is the whole safety mechanism: with no JavaScript the class is
+ * never applied, so nothing is ever hidden.
+ */
+/*
+ * The rise uses the independent `translate` property, not `transform`.
+ *
+ * These selectors are necessarily more specific than a component's own
+ * `:hover`, so writing the rise as `transform` meant `transform: none` on the
+ * revealed state beat `.sjpta-card:hover { transform: translateY(-6px) }` and
+ * silently killed the card lift — on the front end only, since the editor never
+ * runs motion.js and so never has these classes. `translate` and `transform`
+ * are separate properties and compose, so reveal and hover no longer compete.
+ */
+.sjpta-reveal,
+.sjpta-reveal [data-stagger] > * {
+	opacity: 0;
+	translate: 0 28px;
+
+	/*
+	 * `transform` is in this list even though reveal never animates it: this
+	 * declaration out-specifies a component's own `transition` (e.g.
+	 * `.sjpta-card { transition: transform 0.32s }`), and a transition property
+	 * is all-or-nothing per element. Omitting transform here left the card's
+	 * hover lift with no transition at all — it snapped instead of gliding.
+	 */
+	transition: opacity var(--wp--custom--motion--reveal) var(--wp--custom--motion--easing),
+		translate var(--wp--custom--motion--reveal) var(--wp--custom--motion--easing),
+		transform var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+/*
+ * `.sjpta-reveal` carries both the hidden state and the transition, so it must
+ * stay on the element after revealing — removing it strips the transition and
+ * the element pops instead of fading.
+ */
+.sjpta-reveal.is-revealed,
+.sjpta-reveal [data-stagger] > .is-revealed {
+	opacity: 1;
+	translate: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-reveal,
+	.sjpta-reveal [data-stagger] > * {
+		opacity: 1;
+		translate: none;
+		transition: none;
+	}
+}
+
+/*
+ * Shared section bar: "+ Label · note · [Pill button →]".
+ *
+ * Used by About, The SJP experience and The team, so it lives here rather than
+ * in one block's stylesheet where the other two would not load it.
+ */
+.sjpta-sectionbar {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 14px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--50);
+	margin-bottom: 26px;
+	flex-wrap: wrap;
+}
+
+.sjpta-sectionbar__text {
+	display: flex;
+	align-items: baseline;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.sjpta-sectionbar__label {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: 19px;
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-sectionbar__note {
+	font-size: var(--wp--preset--font-size--fine-print);
+	color: var(--wp--custom--color--text-muted);
+}
+
+/* Small plum pill button with a white circular icon. */
+.sjpta-pillbtn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	background: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--surface);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 0 8px 0 18px;
+	min-height: 44px;
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 700;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.sjpta-pillbtn:hover {
+	background: var(--wp--preset--color--deep-purple);
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-pillbtn__icon {
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--surface);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 26px;
+}
+
+/* Images never overflow their column, and never carry surprise dimensions. */
+img,
+svg,
+video {
+	max-width: 100%;
+	height: auto;
+}

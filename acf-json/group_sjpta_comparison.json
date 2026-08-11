@@ -1,0 +1,32 @@
+{
+    "key": "group_sjpta_comparison",
+    "title": "Comparison",
+    "fields": [
+        { "key": "field_sjpta_cp_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0 },
+        { "key": "field_sjpta_cp_heading", "label": "Heading", "name": "heading", "type": "text", "required": 1 },
+        { "key": "field_sjpta_cp_intro", "label": "Intro", "name": "intro", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_cp_cards", "label": "Cards", "name": "cards", "type": "repeater", "instructions": "Two cards read best side by side.", "required": 0, "min": 0, "max": 2, "layout": "block", "button_label": "Add card", "sub_fields": [
+            { "key": "field_sjpta_cp_card_mark", "label": "Brand mark", "name": "mark", "type": "select", "required": 0, "choices": { "none": "None", "sjp": "The SJP logo", "image": "An uploaded image" }, "default_value": "none", "return_format": "value", "allow_null": 0, "ui": 0 },
+            { "key": "field_sjpta_cp_card_logo", "label": "Mark image", "name": "logo", "type": "image", "instructions": "Used only when the brand mark is set to an uploaded image.", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 },
+            { "key": "field_sjpta_cp_card_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+            { "key": "field_sjpta_cp_card_text", "label": "Summary", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+            { "key": "field_sjpta_cp_card_rows", "label": "Facts", "name": "rows", "type": "repeater", "required": 0, "min": 0, "max": 8, "layout": "table", "button_label": "Add fact", "sub_fields": [
+                { "key": "field_sjpta_cp_row_label", "label": "Label", "name": "label", "type": "text", "required": 0 },
+                { "key": "field_sjpta_cp_row_value", "label": "Value", "name": "value", "type": "text", "required": 0 }
+            ] },
+            { "key": "field_sjpta_cp_card_link_label", "label": "Link label", "name": "link_label", "type": "text", "required": 0 },
+            { "key": "field_sjpta_cp_card_link_url", "label": "Link", "name": "link_url", "type": "text", "instructions": "A full URL, or an anchor on this page such as #classes.", "required": 0 },
+            { "key": "field_sjpta_cp_card_emphasis", "label": "Emphasise this card", "name": "emphasis", "type": "true_false", "instructions": "Draws the accent ring around it. Use it on the card this page is about.", "required": 0, "default_value": 0, "ui": 1 }
+        ] },
+        { "key": "field_sjpta_cp_footnote", "label": "Footnote", "name": "footnote", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/comparison" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

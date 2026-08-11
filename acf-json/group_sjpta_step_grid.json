@@ -1,0 +1,161 @@
+{
+    "key": "group_sjpta_step_grid",
+    "title": "Step grid",
+    "fields": [
+        {
+            "key": "field_sjpta_sg_eyebrow",
+            "label": "Eyebrow",
+            "name": "eyebrow",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_sg_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "text",
+            "required": 1
+        },
+        {
+            "key": "field_sjpta_sg_note",
+            "label": "Note",
+            "name": "note",
+            "type": "text",
+            "instructions": "The short line to the right of the heading.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_sg_steps",
+            "label": "Steps",
+            "name": "steps",
+            "type": "repeater",
+            "instructions": "Numbered automatically, in this order.",
+            "required": 0,
+            "min": 0,
+            "max": 9,
+            "layout": "block",
+            "button_label": "Add step",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_sg_step_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_sg_step_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "new_lines": "",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_sg_step_invert",
+                    "label": "Purple card",
+                    "name": "invert",
+                    "type": "true_false",
+                    "instructions": "Use on the step the others build towards.",
+                    "required": 0,
+                    "default_value": 0,
+                    "ui": 1
+                },
+                {
+                    "key": "field_sjpta_sg_step_tone",
+                    "label": "Tone",
+                    "name": "tone",
+                    "type": "select",
+                    "instructions": "Tints the card. Leave as None for the plain white card.",
+                    "required": 0,
+                    "default_value": "",
+                    "choices": {
+                        "": "None",
+                        "orange": "Orange",
+                        "magenta": "Magenta",
+                        "purple": "Purple",
+                        "green": "Green"
+                    }
+                },
+                {
+                    "key": "field_sjpta_sg_step_note",
+                    "label": "Closing line",
+                    "name": "note",
+                    "type": "text",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_sg_footer_heading",
+            "label": "Footer heading",
+            "name": "footer_heading",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_sg_footer_text",
+            "label": "Footer text",
+            "name": "footer_text",
+            "type": "textarea",
+            "rows": 3,
+            "new_lines": "",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_sg_pills",
+            "label": "Footer pills",
+            "name": "pills",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 8,
+            "layout": "table",
+            "button_label": "Add pill",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_sg_pill_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_sg_pill_tone",
+                    "label": "Colour",
+                    "name": "tone",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "red": "Red",
+                        "plum": "Purple",
+                        "amber": "Amber",
+                        "mint": "Mint"
+                    },
+                    "default_value": "red",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/step-grid"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

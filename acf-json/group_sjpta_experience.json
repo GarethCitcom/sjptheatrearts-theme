@@ -1,0 +1,47 @@
+{
+    "key": "group_sjpta_experience",
+    "title": "The SJP experience",
+    "fields": [
+        { "key": "field_sjpta_exp_label", "label": "Section label", "name": "label", "type": "text", "required": 0, "default_value": "The SJP experience" },
+        { "key": "field_sjpta_exp_note", "label": "Label note", "name": "label_note", "type": "text", "required": 0, "default_value": "Classes, friendships and real audiences" },
+        { "key": "field_sjpta_exp_link_label", "label": "Link label", "name": "link_label", "type": "text", "required": 0, "default_value": "Gallery" },
+        { "key": "field_sjpta_exp_link_url", "label": "Link", "name": "link_url", "type": "url", "instructions": "Leave empty to link to the Performances page.", "required": 0, "default_value": "" },
+        { "key": "field_sjpta_exp_poster", "label": "Feature image", "name": "poster", "type": "image", "return_format": "id", "preview_size": "medium", "library": "all", "required": 0 },
+        { "key": "field_sjpta_exp_video_title", "label": "Feature title", "name": "video_title", "type": "text", "required": 0, "default_value": "Watch a rehearsal" },
+        { "key": "field_sjpta_exp_video_text", "label": "Feature text", "name": "video_text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        {
+            "key": "field_sjpta_exp_video_url",
+            "label": "Video link",
+            "name": "video_url",
+            "type": "url",
+            "instructions": "Leave empty until a video exists. While empty the play button is hidden, because a play button with nothing behind it promises something the page cannot deliver. The performance videos are still to be compressed.",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_exp_cards",
+            "label": "Supporting cards",
+            "name": "cards",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add card",
+            "max": 4,
+            "required": 0,
+            "sub_fields": [
+                { "key": "field_sjpta_exp_card_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0 },
+                { "key": "field_sjpta_exp_card_tone", "label": "Eyebrow colour", "name": "tone", "type": "select", "choices": { "orange": "Orange", "purple": "Purple", "magenta": "Magenta", "green": "Green" }, "default_value": "orange", "return_format": "value", "required": 0 },
+                { "key": "field_sjpta_exp_card_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+                { "key": "field_sjpta_exp_card_text", "label": "Text", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+            ]
+        }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/experience" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

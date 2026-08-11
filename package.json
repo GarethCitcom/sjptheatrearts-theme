@@ -1,0 +1,20 @@
+{
+	"name": "sjptheatrearts-theme",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Review tooling for the SJP Theatre Arts block theme. The theme itself has no build step.",
+	"scripts": {
+		"shots": "node tools/shots.mjs",
+		"shots:install": "playwright install chromium",
+		"audit": "node tools/audit.mjs",
+		"contrast": "node tools/contrast.mjs",
+		"media": "node tools/prepare-media.mjs",
+		"css": "node tools/build-css.mjs"
+	},
+	"devDependencies": {
+		"clean-css": "^5.3.3",
+		"lighthouse": "^13.4.1",
+		"playwright": "^1.49.0",
+		"sharp": "^0.35.3"
+	}
+}

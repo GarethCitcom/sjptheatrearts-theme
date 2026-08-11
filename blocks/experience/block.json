@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/experience",
+	"title": "SJP experience",
+	"category": "theme",
+	"icon": "video-alt3",
+	"description": "The rehearsal video slot alongside the Christmas show and medals cards.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	]
+}

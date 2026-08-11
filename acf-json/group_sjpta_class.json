@@ -1,0 +1,61 @@
+{
+    "key": "group_sjpta_class",
+    "title": "Class details",
+    "fields": [
+        { "key": "field_sjpta_cl_tab_summary", "label": "Summary", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_sjpta_cl_blurb", "label": "Short description", "name": "blurb", "type": "textarea", "instructions": "One or two sentences. Used on the class card and under the heading on the class page.", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_cl_tags", "label": "Pills", "name": "tags", "type": "repeater", "instructions": "The short labels above the heading, for example \"Ages 4 and over\", \"Dance\", \"Beginners welcome\".", "required": 0, "min": 0, "max": 6, "layout": "table", "button_label": "Add pill", "sub_fields": [
+            { "key": "field_sjpta_cl_tag_text", "label": "Text", "name": "text", "type": "text", "required": 0 }
+        ] },
+
+        { "key": "field_sjpta_cl_tab_facts", "label": "Facts", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_sjpta_cl_days", "label": "Days", "name": "days", "type": "repeater", "instructions": "Leave empty and the class page shows its \"ask us\" state rather than an invented day.", "required": 0, "min": 0, "max": 7, "layout": "table", "button_label": "Add day", "sub_fields": [
+            { "key": "field_sjpta_cl_day_text", "label": "Day", "name": "text", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_times", "label": "Times", "name": "times", "type": "repeater", "instructions": "Leave empty until confirmed. The page then says \"Ask us for times\" rather than guessing.", "required": 0, "min": 0, "max": 12, "layout": "table", "button_label": "Add time", "sub_fields": [
+            { "key": "field_sjpta_cl_time_text", "label": "Time", "name": "text", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_times_note", "label": "Instead of the times", "name": "times_note", "type": "text", "instructions": "Only used when Times above is empty. Write what should appear in its place, for example \"See timetable\". Leave blank and the page says \"Ask us for times\".", "placeholder": "Ask us for times", "required": 0, "conditional_logic": 0 },
+        { "key": "field_sjpta_cl_teachers", "label": "Teachers", "name": "teachers", "type": "repeater", "required": 0, "min": 0, "max": 8, "layout": "table", "button_label": "Add teacher", "sub_fields": [
+            { "key": "field_sjpta_cl_teacher_name", "label": "Name", "name": "name", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_level", "label": "Level", "name": "level", "type": "text", "instructions": "For example \"Beginner to advanced\".", "required": 0 },
+        { "key": "field_sjpta_cl_fees", "label": "Fees", "name": "fees", "type": "text", "instructions": "Leave empty until confirmed. The page then says \"Ask us about fees\".", "required": 0 },
+
+        { "key": "field_sjpta_cl_tab_detail", "label": "The class", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_sjpta_cl_who", "label": "Who it is for", "name": "who", "type": "textarea", "instructions": "Leave a blank line between paragraphs.", "rows": 8, "new_lines": "wpautop", "required": 0 },
+        { "key": "field_sjpta_cl_steps", "label": "What happens in a class", "name": "steps", "type": "repeater", "instructions": "Numbered automatically, in this order.", "required": 0, "min": 0, "max": 8, "layout": "block", "button_label": "Add step", "sub_fields": [
+            { "key": "field_sjpta_cl_step_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+            { "key": "field_sjpta_cl_step_text", "label": "Text", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_lead", "label": "Where it can lead", "name": "lead", "type": "textarea", "rows": 5, "new_lines": "wpautop", "required": 0 },
+        { "key": "field_sjpta_cl_lead_tags", "label": "Where it can lead, pills", "name": "lead_tags", "type": "repeater", "required": 0, "min": 0, "max": 8, "layout": "table", "button_label": "Add pill", "sub_fields": [
+            { "key": "field_sjpta_cl_lead_tag_text", "label": "Text", "name": "text", "type": "text", "required": 0 }
+        ] },
+
+        { "key": "field_sjpta_cl_tab_practical", "label": "Practical", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_sjpta_cl_wear_items", "label": "What to wear", "name": "wear_items", "type": "repeater", "required": 0, "min": 0, "max": 10, "layout": "table", "button_label": "Add item", "sub_fields": [
+            { "key": "field_sjpta_cl_wear_text", "label": "Item", "name": "text", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_wear_note", "label": "What to wear, note", "name": "wear_note", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_cl_gallery", "label": "Extra photographs", "name": "gallery", "type": "repeater", "instructions": "The small photographs under the main one. Three works best. The main photograph is the featured image.", "required": 0, "min": 0, "max": 6, "layout": "table", "button_label": "Add photograph", "sub_fields": [
+            { "key": "field_sjpta_cl_gallery_photo", "label": "Photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_caption", "label": "Photograph caption", "name": "caption", "type": "text", "instructions": "The pill over the main photograph, for example \"Saturday class, in the studio\".", "required": 0 },
+
+        { "key": "field_sjpta_cl_tab_source", "label": "Source", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_sjpta_cl_timetable_names", "label": "Timetable names", "name": "timetable_names", "type": "repeater", "instructions": "Names this class goes by on the member portal, so its timetable rows link here. The portal names sessions by level or year group (\"Grade 3 Ballet\", \"Jazz (Yr4-Yr6)\") while this page is the discipline, so one class usually has several. A name that matches this page's title exactly does not need adding.", "required": 0, "min": 0, "max": 12, "layout": "table", "button_label": "Add timetable name", "sub_fields": [
+            { "key": "field_sjpta_cl_timetable_name", "label": "Name on the portal", "name": "name", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_cl_source_key", "label": "Import key", "name": "source_key", "type": "text", "instructions": "Set by the class importer so a re-import can find this class again. Do not edit.", "required": 0, "readonly": 1 }
+    ],
+    "location": [ [ { "param": "post_type", "operator": "==", "value": "sjp-class" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

@@ -1,0 +1,64 @@
+{
+    "key": "group_sjpta_class_grid",
+    "title": "Class list",
+    "fields": [
+        {
+            "key": "field_sjpta_cg_label",
+            "label": "Section label",
+            "name": "label",
+            "type": "text",
+            "required": 0,
+            "default_value": "All classes",
+            "instructions": "Names this section for screen readers and search engines. Not shown on the page."
+        },
+        {
+            "key": "field_sjpta_cg_cta_label",
+            "label": "Button label",
+            "name": "cta_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_cg_cta_url",
+            "label": "Button link",
+            "name": "cta_url",
+            "type": "text",
+            "instructions": "Leave empty to link to the Join page.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_cg_help_title",
+            "label": "Help card heading",
+            "name": "help_title",
+            "type": "text",
+            "instructions": "The tinted card at the end of the grid. Leave empty to hide it.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_cg_help_text",
+            "label": "Help card text",
+            "name": "help_text",
+            "type": "textarea",
+            "rows": 4,
+            "new_lines": "",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/class-grid"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

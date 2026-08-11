@@ -1,0 +1,623 @@
+/*
+ * Site header: utility bar, floating pill nav, mobile overlay.
+ *
+ * Breakpoint: the desktop prototypes are 1440px and the mobile set is 390px.
+ * The pill's contents stop fitting at about 1000px, so the swap to the mobile
+ * bar happens at 1024px -- the same width the prototypes' own review blocker
+ * used, which is a reasonable read of the designer's intent.
+ */
+
+/* ---------- Utility bar ---------- */
+
+.sjpta-utility {
+	background: var(--wp--preset--color--darkest-purple);
+	color: var(--wp--custom--color--text-on-purple);
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 500;
+	overflow: hidden;
+}
+
+.sjpta-utility__inner {
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 0 var(--wp--preset--spacing--60);
+	min-height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.sjpta-utility__locality {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	white-space: nowrap;
+}
+
+.sjpta-utility__dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--sjpta-accent);
+	flex: 0 0 6px;
+}
+
+.sjpta-utility__strapline {
+	color: var(--wp--custom--color--text-on-purple-dim);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sjpta-utility__links {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	white-space: nowrap;
+}
+
+/*
+ * 24px minimum, per WCAG 2.2 AA (2.5.8), the same rule applied to the footer
+ * link lists. These are two links sitting alone at the end of a bar, not links
+ * inside a sentence, so the inline exemption does not cover them and 12px text
+ * was a 20px target. The bar is 40px tall, so the taller hit area costs nothing.
+ */
+.sjpta-utility__link,
+.sjpta-utility__member {
+	color: var(--wp--custom--color--text-on-purple);
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	min-height: 24px;
+	gap: 6px;
+}
+
+.sjpta-utility__member {
+	color: var(--wp--preset--color--surface);
+	font-weight: 700;
+}
+
+.sjpta-utility__link:hover,
+.sjpta-utility__member:hover {
+	text-decoration: underline;
+}
+
+.sjpta-utility__divider {
+	width: 1px;
+	height: 12px;
+	background: rgba(217, 200, 236, 0.3);
+}
+
+/* ---------- Floating pill nav ---------- */
+
+/*
+ * Sticky lives on the <header> element, not on the inner wrapper.
+ *
+ * position: sticky only moves an element within its own containing block, and
+ * the inner wrapper's parent is only as tall as the header itself — so sticking
+ * it there let the whole bar scroll away. The <header> is a child of
+ * .wp-site-blocks, which spans the document, so it can travel the full page.
+ *
+ * top: -40px lets the 40px utility bar scroll out of view while the pill comes
+ * to rest 14px from the top, matching the design's `top: 14px`.
+ */
+.sjpta-site-header {
+	position: sticky;
+	top: -40px;
+	z-index: 80;
+}
+
+.sjpta-navwrap {
+	display: flex;
+	justify-content: center;
+	padding: 14px var(--wp--preset--spacing--50) 0;
+
+	/*
+	 * The wrapper spans the viewport but must not swallow clicks either side of
+	 * the pill, which would make the hero's buttons unclickable.
+	 */
+	pointer-events: none;
+}
+
+/* On the homepage the nav overlaps the hero, per the design. */
+body.home .sjpta-site-header {
+	margin-bottom: -88px;
+}
+
+/*
+ * Inner pages do the same, so the hero's tint and dot grid run up behind the
+ * floating nav.
+ *
+ * Without it the nav sits in a band of plain page background above the hero, and
+ * the point where the tint starts reads as a white gap across the page. The
+ * design's own prototype has that seam; it looks like a mistake, so it is fixed
+ * here rather than reproduced.
+ *
+ * `:has()` because the header is a sibling of <main>, so there is no way to
+ * select it from the hero itself. Keyed on a shared marker class rather than on
+ * one block's name: the class page has its own hero and was missed by the
+ * original selector, and the six inner pages still to build would have been too.
+ * A new hero opts in by adding .sjpta-underlap and the matching top padding.
+ */
+body:has(.sjpta-underlap) .sjpta-site-header {
+	margin-bottom: calc(var(--sjpta-nav-band) * -1);
+}
+
+/*
+ * The height of the band the pill floats in: 14px of padding plus the pill. The
+ * hero adds the same value back as top padding, so its content lands where the
+ * design puts it while its background starts higher.
+ *
+ * Declared on :root, not on the header, because the hero is a sibling of the
+ * header rather than a descendant and custom properties only inherit downwards.
+ */
+:root {
+	--sjpta-nav-band: 84px;
+}
+
+@media (max-width: 782px) {
+	:root {
+		--sjpta-nav-band: 72px;
+	}
+}
+
+.sjpta-pill {
+	pointer-events: auto;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 8px 12px 8px 22px;
+	box-shadow: var(--wp--preset--shadow--nav);
+	max-width: 100%;
+}
+
+/* Radius as on .sjpta-pill__link, and repeated in global.css for the same reason. */
+.sjpta-pill__logo {
+	display: flex;
+	align-items: center;
+	margin-right: 14px;
+	flex: 0 0 auto;
+	border-radius: 8px;
+}
+
+.sjpta-pill__logo img {
+	height: 36px;
+	width: auto;
+	display: block;
+}
+
+.sjpta-pill__divider {
+	width: 1px;
+	height: 24px;
+	background: var(--wp--custom--color--nav-divider);
+	margin-right: 10px;
+	flex: 0 0 1px;
+}
+
+.sjpta-pill__nav {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--50);
+	margin-right: var(--wp--preset--spacing--30);
+}
+
+.sjpta-pill__link {
+	color: var(--wp--preset--color--brand-purple);
+	font-size: var(--wp--preset--font-size--card-body);
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+
+	/*
+	 * Nothing to round at rest, since the link has no background: this shapes the
+	 * focus ring, which follows the element's own radius. global.css repeats the
+	 * value on :focus-visible because that file prints after this one and its
+	 * 2px default for body-copy links would otherwise win the tie.
+	 */
+	border-radius: 8px;
+
+	/*
+	 * The design's links are 14px text in a 60px bar. Padding lifts the hit area
+	 * to the 44px minimum without changing the visual rhythm.
+	 */
+	padding: 14px 0;
+}
+
+.sjpta-pill__link:hover {
+	color: var(--wp--preset--color--magenta);
+}
+
+/*
+ * Current page. Follows the accent, which is exactly what the designs show:
+ * orange-text on SJP pages, Born To Be red on the Born To Be page.
+ */
+.sjpta-pill__link.is-current {
+	color: var(--sjpta-accent-text);
+}
+
+/* ---------- Mobile menu ---------- */
+
+.sjpta-menu {
+	display: none;
+}
+
+.sjpta-menu__toggle {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 1px solid var(--wp--custom--color--card-border);
+	background: var(--wp--preset--color--surface);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	cursor: pointer;
+	list-style: none;
+}
+
+/* Hide the native disclosure triangle. */
+.sjpta-menu__toggle::-webkit-details-marker {
+	display: none;
+}
+
+.sjpta-menu__toggle::marker {
+	content: "";
+}
+
+.sjpta-menu__bars {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.sjpta-menu__bars span {
+	width: 16px;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--wp--preset--color--brand-purple);
+	display: block;
+}
+
+/*
+ * Open state: the summary lifts out of the pill and sits over the overlay as
+ * the design's circular X. Because it is still the <details> summary, clicking
+ * or pressing Enter on it closes the menu natively -- no script involved.
+ *
+ * Coordinates match the design's close button: the panel's 12px padding plus
+ * the head pill's 7px padding puts it 19px from the top and right.
+ */
+.sjpta-menu[open] .sjpta-menu__toggle {
+	position: fixed;
+	top: 19px;
+	right: 19px;
+	z-index: 91;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.sjpta-menu__x {
+	display: none;
+}
+
+.sjpta-menu[open] .sjpta-menu__bars {
+	display: none;
+}
+
+.sjpta-menu[open] .sjpta-menu__x {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Announce the control by what it will do, not by what opened it. */
+.sjpta-menu__label--close {
+	display: none;
+}
+
+.sjpta-menu[open] .sjpta-menu__label--open {
+	display: none;
+}
+
+.sjpta-menu[open] .sjpta-menu__label--close {
+	display: inline;
+}
+
+.sjpta-menu__panel {
+	position: fixed;
+	inset: 0;
+	z-index: 90;
+	background: var(--wp--preset--color--darkest-purple);
+	background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.4px);
+	background-size: 22px 22px;
+	padding: 12px 30px 34px;
+	display: flex;
+	flex-direction: column;
+
+	/*
+	 * Clip horizontally. The decorative blobs below sit at right: -90px and
+	 * left: -70px, which made the panel 90px wider than its client box and gave
+	 * it a horizontal scrollbar. Scrolling it slid the head pill sideways while
+	 * the close button -- being position: fixed -- stayed put, so the X drifted
+	 * out of alignment. The design clips these circles; so do we.
+	 */
+	overflow-x: hidden;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	isolation: isolate;
+}
+
+/*
+ * The two decorative circles from the design.
+ *
+ * They live on a dedicated clipped layer rather than on the panel itself. The
+ * circles bleed 90px past the panel edge by design; hung directly off the panel
+ * that overflow made the panel a scrollable box, which slid the head pill under
+ * the fixed close button. Clipped content does not propagate to an ancestor's
+ * scrollable overflow, so this layer keeps the panel exactly its own size.
+ */
+.sjpta-menu__decor {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	z-index: -1;
+	pointer-events: none;
+}
+
+.sjpta-menu__decor::before,
+.sjpta-menu__decor::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+}
+
+.sjpta-menu__decor::before {
+	right: -90px;
+	top: -90px;
+	width: 280px;
+	height: 280px;
+	background: rgba(197, 41, 155, 0.22);
+}
+
+.sjpta-menu__decor::after {
+	left: -70px;
+	bottom: -90px;
+	width: 240px;
+	height: 240px;
+	background: rgba(254, 115, 0, 0.18);
+}
+
+.sjpta-menu__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 7px 7px 7px 16px;
+	margin: 0 -18px;
+
+	/*
+	 * The close control is the summary, positioned over this pill rather than
+	 * inside it, so hold the design's 58px height explicitly.
+	 */
+	min-height: 58px;
+}
+
+.sjpta-menu__logo {
+	height: 32px;
+	width: auto;
+	display: block;
+}
+
+.sjpta-menu__nav {
+	display: flex;
+	flex-direction: column;
+	padding-top: 36px;
+}
+
+.sjpta-menu__link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 60px;
+	color: var(--wp--preset--color--surface);
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+
+	/*
+	 * Fixed 25px, as the design specifies. Not a fluid token: this overlay only
+	 * ever renders below 1024px, so it has no desktop size to scale between.
+	 */
+	font-size: 25px;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sjpta-menu__num {
+	font-family: var(--wp--preset--font-family--montserrat);
+	font-size: var(--wp--preset--font-size--fine-print);
+	color: var(--wp--custom--color--orange-light);
+	font-weight: 700;
+	margin-right: 14px;
+}
+
+.sjpta-menu__link--member {
+	color: var(--wp--custom--color--text-on-purple);
+	font-size: 19px;
+	border-bottom: 0;
+}
+
+.sjpta-menu__link--member span {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.sjpta-menu__foot {
+	margin-top: auto;
+	padding-top: var(--wp--preset--spacing--60);
+}
+
+/*
+ * Scoped to the foot for weight, for the same reason as .sjpta-pill__cta: this
+ * stylesheet prints before primitives.css, so display, min-height and font-size
+ * were all losing to .sjpta-btn and the button rendered at the 44px default
+ * instead of the design's 52px. It carries more weight now that it is the only
+ * call to action on a phone.
+ */
+.sjpta-menu__foot .sjpta-menu__cta {
+	display: flex;
+	width: 100%;
+	min-height: var(--wp--custom--control--hero);
+	font-size: 15px;
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.sjpta-menu__meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: var(--wp--preset--font-size--meta);
+	color: var(--wp--custom--color--text-on-purple-dim);
+}
+
+.sjpta-menu__meta a {
+	color: var(--wp--custom--color--text-on-purple);
+	font-weight: 700;
+	text-decoration: none;
+	display: inline-flex;
+	min-height: 44px;
+	align-items: center;
+}
+
+/* ---------- Condensing behaviour (progressive enhancement) ---------- */
+
+.sjpta-pill {
+	transition: padding 0.24s var(--wp--custom--motion--easing), box-shadow 0.24s var(--wp--custom--motion--easing);
+}
+
+.sjpta-header.is-stuck .sjpta-pill {
+	padding-top: 4px;
+	padding-bottom: 4px;
+	box-shadow: var(--wp--preset--shadow--header-stuck);
+}
+
+.sjpta-header.is-stuck .sjpta-pill__logo img {
+	height: 30px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-pill {
+		transition: none;
+	}
+}
+
+/* ---------- Breakpoint ---------- */
+
+@media (max-width: 1023px) {
+	.sjpta-utility {
+		display: none;
+	}
+
+	/* No utility bar below 1024px, so there is nothing to scroll out of view. */
+	.sjpta-site-header {
+		top: 0;
+	}
+
+	.sjpta-navwrap {
+		padding: 12px 12px 0;
+	}
+
+	body.home .sjpta-site-header {
+		margin-bottom: 0;
+	}
+
+	.sjpta-pill {
+		width: 100%;
+		justify-content: space-between;
+		padding: 7px 7px 7px 16px;
+	}
+
+	/*
+	 * The call to action goes with them. Below 1024px the bar is logo, button and
+	 * hamburger competing for one line, and the same button already sits at the
+	 * foot of the menu with the same label and destination, so nothing is lost by
+	 * dropping it here: it is one tap away instead of none, and the bar reads as
+	 * a bar rather than a row of controls.
+	 */
+	.sjpta-pill__divider,
+	.sjpta-pill__nav {
+		display: none;
+	}
+
+	/*
+	 * Scoped to .sjpta-pill purely for weight. The call to action carries
+	 * .sjpta-btn, whose own display sits in primitives.css, and this stylesheet
+	 * prints before that one, so a bare .sjpta-pill__cta rule loses the tie and
+	 * the button stays on screen. See the note in assets/css/primitives.css.
+	 */
+	.sjpta-pill .sjpta-pill__cta {
+		display: none;
+	}
+
+	.sjpta-pill__logo {
+		margin-right: 0;
+	}
+
+	.sjpta-pill__logo img {
+		height: 32px;
+	}
+
+	.sjpta-menu {
+		display: block;
+		flex: 0 0 auto;
+	}
+
+	.sjpta-header.is-stuck .sjpta-pill__logo img {
+		height: 28px;
+	}
+}
+
+/*
+ * The 390px design sets these at 25px, which is comfortable there but starts to
+ * wrap on the narrowest phones still in use (320-360px).
+ */
+@media (max-width: 399px) {
+	.sjpta-menu__link {
+		font-size: 21px;
+		min-height: 54px;
+	}
+
+	.sjpta-menu__link--member {
+		font-size: 17px;
+	}
+
+	.sjpta-menu__num {
+		margin-right: 10px;
+	}
+
+	.sjpta-menu__panel {
+		padding-left: 22px;
+		padding-right: 22px;
+	}
+}
+
+/*
+ * Stop the page scrolling behind the overlay. :has() is supported by every
+ * browser this theme targets; where it is not, the overlay still works and the
+ * page simply remains scrollable underneath.
+ */
+@media (max-width: 1023px) {
+	body:has(.sjpta-menu[open]) {
+		overflow: hidden;
+	}
+}

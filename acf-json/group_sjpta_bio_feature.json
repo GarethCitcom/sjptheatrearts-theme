@@ -1,0 +1,134 @@
+{
+    "key": "group_sjpta_bio_feature",
+    "title": "Bio feature",
+    "fields": [
+        {
+            "key": "field_sjpta_bf_layout",
+            "label": "Layout",
+            "name": "layout",
+            "type": "select",
+            "instructions": "Overlapping collage, or two photographs stacked in a panel beside a card.",
+            "required": 0,
+            "default_value": "collage",
+            "choices": {
+                "collage": "Overlapping collage",
+                "stacked": "Stacked in a panel"
+            }
+        },
+        {
+            "key": "field_sjpta_bf_eyebrow",
+            "label": "Eyebrow",
+            "name": "eyebrow",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_bf_heading",
+            "label": "Name",
+            "name": "heading",
+            "type": "text",
+            "required": 1
+        },
+        {
+            "key": "field_sjpta_bf_body",
+            "label": "Story",
+            "name": "body",
+            "type": "textarea",
+            "instructions": "Leave a blank line between paragraphs.",
+            "rows": 8,
+            "new_lines": "wpautop",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_bf_pills",
+            "label": "Pills",
+            "name": "pills",
+            "type": "repeater",
+            "instructions": "Short facts, for example \"13 years an SJP student\".",
+            "required": 0,
+            "min": 0,
+            "max": 6,
+            "layout": "table",
+            "button_label": "Add pill",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_bf_pill_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_bf_photo_main",
+            "label": "Large photograph",
+            "name": "photo_main",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_bf_photo_inset",
+            "label": "Small photograph",
+            "name": "photo_inset",
+            "type": "image",
+            "instructions": "Overlaps the bottom-right corner of the large one.",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_bf_photo_caption",
+            "label": "Photo caption",
+            "name": "photo_caption",
+            "type": "text",
+            "instructions": "Names who is in the main photograph. Stacked layout only.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_bf_byline_initials",
+            "label": "Byline initials",
+            "name": "byline_initials",
+            "type": "text",
+            "instructions": "One or two letters for the circle beside the byline.",
+            "required": 0,
+            "maxlength": 3
+        },
+        {
+            "key": "field_sjpta_bf_byline_name",
+            "label": "Byline name",
+            "name": "byline_name",
+            "type": "text",
+            "instructions": "Leave empty and no byline appears.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_bf_byline_role",
+            "label": "Byline role",
+            "name": "byline_role",
+            "type": "text",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/bio-feature"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

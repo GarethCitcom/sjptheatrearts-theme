@@ -1,0 +1,367 @@
+/*
+ * Shared primitives.
+ *
+ * These classes are applied by helpers in inc/blocks.php and by many blocks, so
+ * they cannot live inside any one block's stylesheet. They used to: `.sjpta-accent`
+ * sat in the hero, `.sjpta-badge` in the age cards, `.sjpta-btn--plum` and
+ * `--outline` in the hero, `--ghost` in the CTA band. Those blocks all happen to
+ * render on the homepage, which hid the coupling. Any page that did not use them
+ * would have shipped unstyled accent phrases, badges and buttons.
+ *
+ * Loaded by every block via `"style": [ "file:./style.css", "sjpta-primitives" ]`
+ * in its block.json, so per-block loading still applies: a page only gets this
+ * file if it renders at least one of our blocks.
+ *
+ * ORDER MATTERS, and it is not the order you would assume. The two entries in
+ * that array are siblings, not dependencies, so WordPress prints them in the
+ * order listed: a block's own stylesheet first, this file after. Most block
+ * stylesheets are small enough that WordPress inlines them further down the
+ * head, which puts them after this file and hides the problem; the larger ones
+ * stay as linked files and print before it.
+ *
+ * The consequence: a block rule that overrides a primitive **at the same
+ * specificity may silently lose**. `.sjpta-pill__cta { display: none }` did
+ * exactly that, beaten by `.sjpta-btn { display: inline-flex }`, which is why
+ * the mobile header kept showing a button that was meant to be hidden.
+ *
+ * So when overriding anything defined here, give the block rule more weight
+ * (scope it to a parent, as blocks/site-header/style.css does) rather than
+ * relying on source order. Reordering the block.json arrays globally would fix
+ * this at the root, but it flips every equal-specificity collision on the site
+ * at once and is not a change to make casually.
+ */
+
+/* ---------- Accent roles ---------- */
+
+/*
+ * Role names, not brand names. Defaults alias the SJP tokens, so nothing renders
+ * differently until a page opts in. A page sets these once (see
+ * assets/css/accent-born-to-be.css) and every block below follows, which means a
+ * block moved to an SJP page correctly renders orange again.
+ */
+:root {
+	--sjpta-accent: var(--wp--preset--color--brand-orange);
+	--sjpta-accent-rgb: 254 115 0;
+	--sjpta-accent-hover: var(--wp--custom--color--orange-hover);
+	--sjpta-accent-text: var(--wp--custom--color--orange-text);
+	--sjpta-accent-light: var(--wp--custom--color--orange-light);
+	--sjpta-accent-2: var(--wp--preset--color--magenta);
+
+	/*
+	 * The third colour in the decorative rotation used by dot rows and pills.
+	 * Never a text colour, so it is not held to the 4.5:1 floor.
+	 */
+	--sjpta-accent-3: var(--wp--custom--color--orange-light);
+}
+
+/* The accented phrase inside a heading, set by sjpta_highlight_words(). */
+.sjpta-accent {
+	color: var(--sjpta-accent);
+}
+
+/* ---------- Section furniture ---------- */
+
+/*
+ * The two rules every section repeats: the centred container and the uppercase
+ * accent line above a heading. Held once here rather than once per block
+ * stylesheet, which on a twelve-section page was about 4KB of identical
+ * declarations.
+ *
+ * Blocks keep their own BEM class alongside for anything they need to vary.
+ *
+ * Section headings are deliberately NOT shared. The homepage sets them at 46px
+ * and the inner pages at 40px, so a single class would be wrong on one or the
+ * other; each block names the step it wants.
+ */
+.sjpta-inner {
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 0 var(--wp--preset--spacing--60);
+}
+
+.sjpta-eyebrow {
+	display: block;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--sjpta-accent-text);
+	margin-bottom: 12px;
+}
+
+/* ---------- Awaiting confirmation ---------- */
+
+/*
+ * The one look for a fact nobody has confirmed yet: fees, times, the address,
+ * response times. Magenta, per the Contact design, so an unfilled field is
+ * visibly different from a filled one rather than quietly reading as fact.
+ *
+ * Never hard-code the words into a template. The field stays empty, the template
+ * renders this, and the client filling the field makes it disappear.
+ */
+.sjpta-toconfirm {
+	color: var(--wp--preset--color--magenta);
+	font-weight: 700;
+}
+
+/* ---------- Breadcrumb ---------- */
+
+/*
+ * Shared: every inner-page hero and every class page renders one, and they are
+ * different blocks. Kept here rather than in whichever block happened to need it
+ * first.
+ */
+.sjpta-crumbs {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 5px 14px;
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 600;
+	color: var(--wp--custom--color--text-muted);
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+/*
+ * 24px, not the theme's usual 44px floor: the design's breadcrumb pill is 29px
+ * tall in total, so a 44px target cannot exist inside it without redrawing the
+ * component. 24x24 is the WCAG 2.2 AA minimum (2.5.8) and this clears it.
+ */
+.sjpta-crumbs__link {
+	display: inline-flex;
+	align-items: center;
+	min-height: 24px;
+	color: var(--wp--custom--color--text-muted);
+	text-decoration: none;
+}
+
+.sjpta-crumbs__link:hover {
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-crumbs__sep {
+	color: var(--wp--custom--color--card-border);
+}
+
+.sjpta-crumbs__current {
+	color: var(--wp--preset--color--brand-purple);
+	font-weight: 700;
+}
+
+/* ---------- Buttons ---------- */
+
+.sjpta-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 9px;
+	min-height: var(--wp--custom--control--min);
+	padding: 0 22px;
+	border-radius: var(--wp--custom--radius--pill);
+	font-size: var(--wp--preset--font-size--card-body);
+	font-weight: 700;
+	text-decoration: none;
+	white-space: nowrap;
+	border: 0;
+	cursor: pointer;
+}
+
+/*
+ * White on the accent is a signed-off contrast exception on both brands: 2.74:1
+ * for SJP orange, 3.82:1 for Born To Be red. See CLAUDE.md.
+ */
+.sjpta-btn--primary {
+	background: var(--sjpta-accent);
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-btn--primary:hover {
+	background: var(--sjpta-accent-hover);
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-btn--plum {
+	background: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-btn--plum:hover {
+	background: var(--wp--preset--color--deep-purple);
+	color: var(--wp--preset--color--surface);
+}
+
+/* Solid white on a dark band, where the accent would be too loud. */
+.sjpta-btn--white {
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--brand-purple);
+	padding: 0 24px;
+}
+
+.sjpta-btn--white:hover {
+	background: var(--wp--custom--color--badge-purple-bg);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-btn--outline {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--bt-input-border);
+	color: var(--wp--preset--color--brand-purple);
+	padding: 0 26px;
+}
+
+.sjpta-btn--outline:hover {
+	border-color: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-btn--ghost {
+	background: transparent;
+	color: var(--wp--preset--color--surface);
+	border: 1px solid rgba(255, 255, 255, 0.32);
+	padding: 0 28px;
+}
+
+.sjpta-btn--ghost:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.55);
+	color: var(--wp--preset--color--surface);
+}
+
+/* ---------- Badges ---------- */
+
+.sjpta-badge {
+	display: inline-flex;
+	align-items: center;
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 6px 13px;
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.sjpta-badge--purple {
+	background: var(--wp--custom--color--badge-purple-bg);
+	color: var(--wp--custom--color--badge-purple-fg);
+}
+
+.sjpta-badge--orange {
+	background: var(--wp--custom--color--badge-orange-bg);
+	color: var(--wp--custom--color--badge-orange-fg);
+}
+
+.sjpta-badge--magenta {
+	background: var(--wp--custom--color--badge-magenta-bg);
+	color: var(--wp--custom--color--badge-magenta-fg);
+}
+
+.sjpta-badge--green {
+	background: var(--wp--custom--color--badge-green-bg);
+	color: var(--wp--custom--color--badge-green-fg);
+}
+
+/*
+ * The photo collage lives in assets/css/collage.css, registered as
+ * `sjpta-collage`. Only the page hero and the bio feature draw one, so two
+ * kilobytes of it on all nine pages was rent nobody was paying for.
+ */
+
+/* ---------- Tone map ---------- */
+
+/*
+ * The four tinted surfaces used by discipline cards, step cards, meta pills and
+ * icon tiles. Declared as three custom properties per tone so no block writes a
+ * hex: --tone-bg for the surface, --tone-fg for body text on it, --tone-solid
+ * for an icon circle or badge that needs white text.
+ */
+.sjpta-tone--red {
+	--tone-bg: var(--wp--custom--color--tint-red);
+	--tone-fg: var(--wp--custom--color--tint-red-fg);
+	--tone-solid: var(--wp--custom--color--bt-red);
+}
+
+.sjpta-tone--plum {
+	--tone-bg: var(--wp--custom--color--tint-lilac);
+	--tone-fg: var(--wp--custom--color--tint-lilac-fg);
+	--tone-solid: var(--wp--custom--color--bt-violet);
+}
+
+.sjpta-tone--amber {
+	--tone-bg: var(--wp--custom--color--tint-peach);
+	--tone-fg: var(--wp--custom--color--tint-peach-fg);
+	--tone-solid: var(--wp--preset--color--brand-orange);
+}
+
+.sjpta-tone--mint {
+	--tone-bg: var(--wp--custom--color--tint-mint);
+	--tone-fg: var(--wp--custom--color--tint-mint-fg);
+	--tone-solid: var(--wp--custom--color--badge-green-fg);
+}
+
+/*
+ * A second family, on the badge pairs rather than the Born To Be pastels.
+ *
+ * The four above are the soft tints that page uses. Timetable & fees draws its
+ * fee cards in the badge colours instead, which are stronger and already carry a
+ * checked foreground for each background, so they are named after the badges
+ * they come from rather than invented as new tints.
+ */
+.sjpta-tone--orange {
+	--tone-bg: var(--wp--custom--color--badge-orange-bg);
+	--tone-fg: var(--wp--custom--color--badge-orange-fg);
+	--tone-solid: var(--wp--preset--color--brand-orange);
+}
+
+.sjpta-tone--magenta {
+	--tone-bg: var(--wp--custom--color--badge-magenta-bg);
+	--tone-fg: var(--wp--custom--color--badge-magenta-fg);
+	--tone-solid: var(--wp--preset--color--magenta);
+}
+
+.sjpta-tone--purple {
+	--tone-bg: var(--wp--custom--color--badge-purple-bg);
+	--tone-fg: var(--wp--custom--color--badge-purple-fg);
+	--tone-solid: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-tone--green {
+	--tone-bg: var(--wp--custom--color--badge-green-bg);
+	--tone-fg: var(--wp--custom--color--badge-green-fg);
+	--tone-solid: var(--wp--custom--color--success-green);
+}
+
+/*
+ * Filter pill.
+ *
+ * Shared: the timetable filters days with it and the gallery filters categories
+ * with it. It lived in the timetable stylesheet first, which loads only on the
+ * timetable page, so the gallery pills rendered as bare links on Performances.
+ */
+.sjpta-daypill {
+	display: inline-flex;
+	align-items: center;
+	min-height: 38px;
+	padding: 0 15px;
+	border-radius: var(--wp--custom--radius--pill);
+	border: 1px solid var(--wp--custom--color--card-border);
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--brand-purple);
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.sjpta-daypill:hover {
+	border-color: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-daypill.is-current {
+	background: var(--wp--preset--color--brand-purple);
+	border-color: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--surface);
+	font-weight: 700;
+}

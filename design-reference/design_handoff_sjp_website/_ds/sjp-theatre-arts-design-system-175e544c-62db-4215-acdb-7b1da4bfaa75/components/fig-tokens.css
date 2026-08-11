@@ -1,0 +1,94 @@
+/* Generated from Figma Variables. First mode = :root default.
+   FLOAT tokens are unitless — multiply by 1px in calc() where a length is needed. */
+
+:root {
+  --brand-magenta-600: rgb(197,41,155); /* @kind color */
+  --brand-orange-500: rgb(255,115,0); /* @kind color */
+  --brand-orange-50: rgb(255,244,235); /* @kind color */
+  --brand-purple-50: rgb(245,239,250); /* @kind color */
+  --brand-purple-800: rgb(51,1,100); /* @kind color */
+  --color-bg-brand-subtle: var(--brand-orange-50); /* @kind color */
+  --color-bg-page: var(--neutral-white); /* @kind color */
+  --color-bg-subtle: var(--neutral-gray-100); /* @kind color */
+  --color-bg-surface: var(--neutral-white); /* @kind color */
+  --color-border-default: var(--neutral-gray-200); /* @kind color */
+  --color-border-strong: var(--neutral-gray-500); /* @kind color */
+  --color-brand-accent: var(--brand-magenta-600); /* @kind color */
+  --color-brand-focus: var(--brand-orange-500); /* @kind color */
+  --color-brand-primary: var(--brand-orange-500); /* @kind color */
+  --color-brand-secondary: var(--brand-purple-800); /* @kind color */
+  --color-icon-default: var(--neutral-zinc-700); /* @kind color */
+  --color-status-danger-bg: var(--status-red-50); /* @kind color */
+  --color-status-danger-fg: var(--status-red-700); /* @kind color */
+  --color-status-info-bg: var(--status-blue-50); /* @kind color */
+  --color-status-info-fg: var(--status-blue-700); /* @kind color */
+  --color-status-neutral-bg: var(--neutral-gray-100); /* @kind color */
+  --color-status-neutral-fg: var(--neutral-gray-700); /* @kind color */
+  --color-status-success-bg: var(--status-green-50); /* @kind color */
+  --color-status-success-fg: var(--status-green-700); /* @kind color */
+  --color-status-warning-bg: var(--status-amber-50); /* @kind color */
+  --color-status-warning-fg: var(--status-amber-800); /* @kind color */
+  --color-text-brand: var(--brand-purple-800); /* @kind color */
+  --color-text-inverse: var(--neutral-white); /* @kind color */
+  --color-text-muted: var(--neutral-gray-500); /* @kind color */
+  --color-text-primary: var(--neutral-zinc-700); /* @kind color */
+  --neutral-black: rgb(0,0,0); /* @kind color */
+  --neutral-gray-100: rgb(241,243,245); /* @kind color */
+  --neutral-gray-200: rgb(229,231,235); /* @kind color */
+  --neutral-gray-500: rgb(107,114,128); /* @kind color */
+  --neutral-gray-700: rgb(75,85,99); /* @kind color */
+  --neutral-white: rgb(255,255,255); /* @kind color */
+  --neutral-zinc-700: rgb(63,63,70); /* @kind color */
+  --radius-full: 999;
+  --radius-large: 16;
+  --radius-medium: 12;
+  --radius-small: 8;
+  --size-control-min: 44;
+  --size-control-primary: 48;
+  --size-icon-large: 24;
+  --size-icon-medium: 20;
+  --size-icon-small: 16;
+  --spacing-12: 12;
+  --spacing-16: 16;
+  --spacing-20: 20;
+  --spacing-24: 24;
+  --spacing-32: 32;
+  --spacing-40: 40;
+  --spacing-48: 48;
+  --spacing-4: 4;
+  --spacing-64: 64;
+  --spacing-8: 8;
+  --status-amber-50: rgb(255,245,214); /* @kind color */
+  --status-amber-800: rgb(138,90,0); /* @kind color */
+  --status-blue-50: rgb(234,242,255); /* @kind color */
+  --status-blue-700: rgb(29,78,216); /* @kind color */
+  --status-green-50: rgb(232,247,239); /* @kind color */
+  --status-green-700: rgb(22,121,79); /* @kind color */
+  --status-red-50: rgb(254,236,235); /* @kind color */
+  --status-red-700: rgb(180,35,24); /* @kind color */
+  --typography-family-body: "Montserrat"; /* @kind font */
+  --typography-family-heading: "Poppins"; /* @kind font */
+  --typography-line-height-body: 24;
+  --typography-line-height-card: 24;
+  --typography-line-height-label: 20;
+  --typography-line-height-page: 36;
+  --typography-line-height-section: 28;
+  --typography-line-height-small: 16;
+  --typography-line-height-supporting: 19;
+  --typography-size-body: 16;
+  --typography-size-card: 16;
+  --typography-size-label: 14;
+  --typography-size-page: 28;
+  --typography-size-section: 20;
+  --typography-size-small: 12;
+  --typography-size-supporting: 13;
+  --vocabulary-activity-plural: "classes"; /* @kind other */
+  --vocabulary-activity-singular: "class"; /* @kind other */
+  --vocabulary-credit: "credit"; /* @kind other */
+  --vocabulary-participant-plural: "students"; /* @kind other */
+  --vocabulary-participant-singular: "student"; /* @kind other */
+  --vocabulary-teacher-plural: "teachers"; /* @kind other */
+  --vocabulary-teacher-singular: "teacher"; /* @kind other */
+  --vocabulary-term: "term"; /* @kind other */
+  --vocabulary-venue: "studio"; /* @kind other */
+}

@@ -1,0 +1,251 @@
+/* Page hero: the top of an inner page. */
+
+/*
+ * The nav band is added back as padding, because site-header pulls the header
+ * up by the same amount so the hero's tint runs behind the floating pill. The
+ * 84px fallback matters: this stylesheet can load on a page whose header did not
+ * set the variable, and without it the breadcrumb would sit under the nav.
+ */
+.sjpta-pagehero {
+	position: relative;
+	padding: calc(var(--sjpta-nav-band, 84px) + var(--wp--preset--spacing--70)) 0 var(--wp--preset--spacing--70);
+	overflow: hidden;
+}
+
+/*
+ * Dot grid and two soft glows, in one pseudo-element pair rather than the
+ * design's three absolutely positioned divs. Purely decorative, so it stays out
+ * of the DOM.
+ *
+ * The glows are 500px and 560px circles hung off the top edge, so on any hero
+ * shorter than about 500px the section's overflow:hidden cuts them mid-gradient
+ * and leaves a hard horizontal line where the tint stops. Inner pages are
+ * exactly that short: the About hero is 409px. See the fade below.
+ */
+.sjpta-pagehero__decor {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background-image: radial-gradient(rgba(56, 16, 100, 0.08) 1px, transparent 1.4px);
+	background-size: 24px 24px;
+}
+
+/*
+ * The fade that hides that edge: an opaque wash of the page background over the
+ * bottom of the section, covering the clipped glows and the last rows of the dot
+ * grid so the decoration dissolves instead of stopping.
+ *
+ * Deliberately a painted gradient rather than a mask on the decor layer. Masking
+ * reads better in source, but it forces the whole full-width decoration into an
+ * offscreen compositing pass on every paint, which cost Born To Be about five
+ * Lighthouse performance points on a throttled mobile CPU (90 against 97). This
+ * paints like any other background and costs nothing measurable.
+ *
+ * Safe because the hero has no background of its own: it sits directly on the
+ * body, so this gradient ends on exactly the colour already behind it. The
+ * content is position:relative and so stacks above this.
+ */
+.sjpta-pagehero::after {
+	content: "";
+	position: absolute;
+	inset: auto 0 0;
+	height: 45%;
+	pointer-events: none;
+	background: linear-gradient(to bottom, transparent, var(--wp--preset--color--page-background));
+}
+
+.sjpta-pagehero__decor::before,
+.sjpta-pagehero__decor::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+}
+
+.sjpta-pagehero__decor::before {
+	left: -180px;
+	top: -140px;
+	width: 500px;
+	height: 500px;
+	background: radial-gradient(circle, rgb(var(--sjpta-accent-rgb) / 12%) 0%, rgb(var(--sjpta-accent-rgb) / 0%) 70%);
+}
+
+.sjpta-pagehero__decor::after {
+	right: -200px;
+	top: -60px;
+	width: 560px;
+	height: 560px;
+	background: radial-gradient(circle, color-mix(in srgb, var(--sjpta-accent-3) 20%, transparent) 0%, transparent 70%);
+}
+
+/*
+ * Container sizing comes from the shared .sjpta-inner; this adds the split.
+ *
+ * 56px, not the section-sized 80px: the left column has to stay wide enough to
+ * hold three reassurance points on one row, as the design does.
+ */
+/*
+ * z-index, because the fade above is a ::after and so is generated as the last
+ * child of the section: without it the wash paints over the heading and intro.
+ * 1 is enough; the header sits at 80 and above, in its own stacking context.
+ */
+.sjpta-pagehero__inner {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	grid-template-columns: 1.02fr 0.98fr;
+	gap: var(--wp--preset--spacing--70);
+	align-items: center;
+}
+
+/*
+ * A centred hero ends on its intro, so the intro's own bottom margin and the
+ * section's bottom padding stack into dead space before whatever follows.
+ */
+.sjpta-pagehero--centred {
+	padding-bottom: var(--wp--preset--spacing--50);
+}
+
+.sjpta-pagehero--centred .sjpta-pagehero__intro:last-child {
+	margin-bottom: 0;
+}
+
+.sjpta-pagehero--centred .sjpta-pagehero__inner {
+	grid-template-columns: 1fr;
+	max-width: 900px;
+	text-align: center;
+}
+
+.sjpta-pagehero--centred .sjpta-pagehero__actions,
+.sjpta-pagehero--centred .sjpta-pagehero__points {
+	justify-content: center;
+}
+
+.sjpta-pagehero--centred .sjpta-pagehero__intro {
+	margin-inline: auto;
+}
+
+/* ---------- Copy ---------- */
+
+.sjpta-pagehero__logo {
+	display: block;
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.sjpta-pagehero__logo img {
+	height: 132px;
+	width: auto;
+	display: block;
+}
+
+.sjpta-pagehero--centred .sjpta-pagehero__logo img {
+	margin-inline: auto;
+}
+
+.sjpta-pagehero__eyebrow {
+	margin-bottom: 14px;
+}
+
+.sjpta-pagehero__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--page-title);
+	line-height: 1.05;
+	letter-spacing: -0.025em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 18px;
+	max-width: 560px;
+	text-wrap: balance;
+}
+
+.sjpta-pagehero--centred .sjpta-pagehero__heading {
+	max-width: none;
+}
+
+.sjpta-pagehero__intro {
+	font-size: var(--wp--preset--font-size--intro);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 var(--wp--preset--spacing--40);
+	max-width: 520px;
+	text-wrap: pretty;
+}
+
+.sjpta-pagehero__actions {
+	display: flex;
+	gap: var(--wp--preset--spacing--20);
+	flex-wrap: wrap;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.sjpta-pagehero__btn {
+	min-height: var(--wp--custom--control--hero);
+	padding: 0 28px;
+	font-size: var(--wp--preset--font-size--body);
+}
+
+/* ---------- Reassurance points ---------- */
+
+.sjpta-pagehero__points {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--40);
+	flex-wrap: wrap;
+	font-size: var(--wp--preset--font-size--fine-print);
+	color: var(--wp--preset--color--text-secondary);
+}
+
+.sjpta-pagehero__point {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.sjpta-pagehero__dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--sjpta-accent);
+	flex: none;
+}
+
+.sjpta-pagehero__point--soft .sjpta-pagehero__dot {
+	background: var(--sjpta-accent-3);
+}
+
+.sjpta-pagehero__point--deep .sjpta-pagehero__dot {
+	background: var(--sjpta-accent-2);
+}
+
+/* ---------- Media ---------- */
+
+.sjpta-pagehero__media {
+	min-width: 0;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-pagehero__inner {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--70);
+	}
+
+	.sjpta-pagehero__heading {
+		max-width: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-pagehero__logo img {
+		height: 96px;
+	}
+
+	.sjpta-pagehero__btn {
+		width: 100%;
+	}
+
+	.sjpta-pagehero__points {
+		gap: 10px var(--wp--preset--spacing--30);
+	}
+}

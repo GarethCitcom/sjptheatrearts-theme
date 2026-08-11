@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sjptheatrearts/site-header",
+	"title": "SJP site header",
+	"category": "theme",
+	"icon": "menu",
+	"description": "Utility bar, floating pill navigation and the mobile menu overlay. Renders on the server and works without JavaScript.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"html": false,
+		"reusable": false,
+		"inserter": false,
+		"align": false,
+		"customClassName": false
+	},
+	"attributes": {
+		"variant": {
+			"type": "string",
+			"default": ""
+		},
+		"strapline": {
+			"type": "string",
+			"default": ""
+		},
+		"ctaLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"ctaUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"instagramUrl": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	],
+	"render": "file:./render.php"
+}

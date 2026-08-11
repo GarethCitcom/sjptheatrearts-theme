@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/tokens/fonts.css">
+<style>
+  body { margin:0; background:#F7F6F9; }
+  a { color:#330164; }
+  a:hover { color:#FF7300; }
+</style>
+</helmet>
+<div style="min-height:100vh;font-family:'Montserrat',Arial,sans-serif;color:#3F3F46;padding:40px 20px 80px">
+  <div style="max-width:760px;margin:0 auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px">
+      <img src="assets/logo.svg" alt="SJP Theatre Arts" style="height:40px">
+      <span style="font-size:12px;font-weight:700;color:#12855A;background:#DFF7EC;border-radius:999px;padding:7px 14px">Saves as you go</span>
+    </div>
+
+    <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+      <h1 style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:28px;line-height:1.2;color:#330164;margin:0 0 10px">Tell us about your classes</h1>
+      <p style="font-size:15px;line-height:1.65;margin:0 0 24px">Each class gets its own page on the new website. We have written everything for you already; just read it, change anything that is wrong, and press the orange button. You can close this page and come back later.</p>
+
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:18px 22px;margin-bottom:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px">
+          <span style="font-size:13px;font-weight:700;color:#381064">Class {{ num }} of {{ total }}</span>
+          <select value="{{ idx }}" onChange="{{ onJump }}" style="height:44px;border-radius:10px;border:1px solid #E1D9E9;background:#F7F6F9;padding:0 10px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;max-width:320px">
+            <sc-for list="{{ jumpList }}" as="j" hint-placeholder-count="3">
+              <option value="{{ j.i }}">{{ j.label }}</option>
+            </sc-for>
+          </select>
+        </div>
+        <div style="height:8px;border-radius:999px;background:#EFE7F7;overflow:hidden"><div style="height:100%;border-radius:999px;background:#FE7300;width:{{ pct }}%"></div></div>
+        <button type="button" onClick="{{ onAddClass }}" style="margin-top:12px;width:100%;height:46px;border-radius:12px;border:1.5px dashed #C9B8DD;background:#FFFFFF;color:#6A3AA0;font-weight:700;font-size:14px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif" style-hover="border-color:#6A3AA0">+ Add a class we have missed</button>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:30px 28px">
+        <div style="display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:2px solid #FE7300">
+          <sc-if value="{{ curIsCustom }}" hint-placeholder-val="{{ false }}">
+            <input type="text" value="{{ vName }}" onChange="{{ onName }}" placeholder="Name of the new class" style="flex:1;box-sizing:border-box;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:19px;color:#330164;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+          </sc-if>
+          <sc-if value="{{ curNotCustom }}" hint-placeholder-val="{{ true }}">
+            <h2 style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:23px;color:#330164;margin:0;flex:1">{{ curName }}</h2>
+          </sc-if>
+          <sc-if value="{{ notRemoved }}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{ onRemove }}" style="height:40px;padding:0 16px;border-radius:999px;border:1px solid #EAC7C7;background:#FFFFFF;color:#B3413F;font-size:12px;font-weight:700;cursor:pointer;font-family:'Montserrat',Arial,sans-serif;flex:none">Remove this class</button>
+          </sc-if>
+        </div>
+        <sc-if value="{{ curHint }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:13px;color:#8A8194;margin:10px 0 0">{{ curHint }}</p>
+        </sc-if>
+        <sc-if value="{{ curRemoved }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FBEAEA;border-radius:12px;padding:20px 22px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#8A3230">This class will not appear on the website. Changed your mind?</p>
+            <button type="button" onClick="{{ onRestore }}" style="height:44px;padding:0 18px;border-radius:999px;border:none;background:#381064;color:#FFFFFF;font-size:13px;font-weight:700;cursor:pointer;font-family:'Montserrat',Arial,sans-serif;flex:none">Put it back</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notRemoved }}" hint-placeholder-val="{{ true }}">
+
+        <div style="margin-top:24px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">How we introduce this class</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:8px">The first line people read on the class page, and the line under the class on the classes page. One or two sentences.</div>
+          <textarea rows="3" value="{{ vDesc }}" onChange="{{ onDesc }}" style="width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:12px 14px;font-size:15px;line-height:1.55;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea>
+          <div style="font-size:12px;color:#A099A9;margin-top:6px">{{ descGuide }}</div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Tick everything that applies</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:6px">These appear as little labels on the class page.</div>
+          <sc-for list="{{ tagGroups }}" as="g" hint-placeholder-count="3">
+            <div style="margin-top:14px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A8194;margin-bottom:4px">{{ g.label }}</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 16px">
+                <sc-for list="{{ g.options }}" as="o" hint-placeholder-count="4">
+                  <label style="display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer;font-size:14px;color:#3F3F46"><input type="checkbox" checked="{{ o.active }}" onChange="{{ o.on }}" style="width:20px;height:20px;accent-color:#FE7300;flex:none;margin:0">{{ o.label }}</label>
+                </sc-for>
+              </div>
+              <label style="display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:#8A8194">Something else?<input type="text" value="{{ g.otherVal }}" onChange="{{ g.onOther }}" placeholder="Write your own here; separate with commas to add more than one" style="flex:1;box-sizing:border-box;height:40px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Which days does it run?</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 16px;margin-top:6px">
+            <sc-for list="{{ dayOpts }}" as="o" hint-placeholder-count="8">
+              <label style="display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer;font-size:14px;color:#3F3F46"><input type="checkbox" checked="{{ o.active }}" onChange="{{ o.on }}" style="width:20px;height:20px;accent-color:#FE7300;flex:none;margin:0">{{ o.label }}</label>
+            </sc-for>
+          </div>
+          <sc-if value="{{ hasDayRows }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#F7F6F9;border:1px solid #EAE3F0;border-radius:12px;padding:14px 16px;margin-top:10px;display:flex;flex-direction:column;gap:10px">
+              <div style="font-size:12px;color:#8A8194">Now the time for each day, and how long the class lasts.</div>
+              <sc-for list="{{ dayRows }}" as="d" hint-placeholder-count="2">
+                <div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:12px;align-items:center">
+                  <span style="font-size:14px;font-weight:700;color:#381064">{{ d.day }}</span>
+                  <input type="text" value="{{ d.start }}" onChange="{{ d.onStart }}" placeholder="Starts at, e.g. 4:30pm" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+                  <input type="text" value="{{ d.dur }}" onChange="{{ d.onDur }}" placeholder="How long, e.g. 45 minutes" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isArranged }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:13px;color:#8A8194;margin:10px 0 0">Arranged individually: no fixed times needed.</p>
+          </sc-if>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Who teaches it?</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 16px;margin-top:6px">
+            <sc-for list="{{ teacherOpts }}" as="o" hint-placeholder-count="4">
+              <label style="display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer;font-size:14px;color:#3F3F46"><input type="checkbox" checked="{{ o.active }}" onChange="{{ o.on }}" style="width:20px;height:20px;accent-color:#FE7300;flex:none;margin:0">{{ o.label }}</label>
+            </sc-for>
+          </div>
+          <label style="display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:#8A8194">Someone else?<input type="text" value="{{ vTeacherOther }}" onChange="{{ onTeacherOther }}" placeholder="Their name; separate with commas for more than one" style="flex:1;box-sizing:border-box;height:40px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+        </div>
+
+        <label style="display:block;margin-top:26px"><span style="display:block;font-size:15px;font-weight:700;color:#381064;margin-bottom:8px">What level is it for?</span><input type="text" value="{{ vLevel }}" onChange="{{ onLevel }}" placeholder="e.g. complete beginners to Grade 5" style="width:100%;box-sizing:border-box;height:48px;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 14px;font-size:15px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Who is it for?</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:8px">This fills the "Who it is for" section of the class page. We have written it for you; edit or add anything you like. Two short paragraphs is perfect.</div>
+          <textarea rows="7" value="{{ vWho }}" onChange="{{ onWho }}" style="width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:12px 14px;font-size:15px;line-height:1.55;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea>
+          <div style="font-size:12px;color:#A099A9;margin-top:6px">{{ whoGuide }}</div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">What happens in a class?</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:10px">Four parts, in order. Each has a short name and a sentence underneath, exactly as it will appear on the page.</div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex;gap:12px;align-items:flex-start">
+                <span style="width:34px;height:34px;border-radius:50%;background:#EFE7F7;color:#6A3AA0;font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:4px">{{ s.n }}</span>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                  <input type="text" value="{{ s.title }}" onChange="{{ s.onTitle }}" placeholder="Short name, e.g. Warm-up" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;font-weight:700;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+                  <textarea rows="2" value="{{ s.text }}" onChange="{{ s.onText }}" placeholder="One sentence about what happens" style="box-sizing:border-box;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:10px 12px;font-size:14px;line-height:1.5;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Where can it lead? <span style="font-weight:600;color:#8A8194">(optional)</span></div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:8px">A short paragraph, then tick anything students can work towards. Leave blank if it does not apply.</div>
+          <textarea rows="3" value="{{ vLead }}" onChange="{{ onLead }}" style="width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:12px 14px;font-size:15px;line-height:1.55;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea>
+          <div style="font-size:12px;color:#A099A9;margin-top:6px">{{ leadGuide }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin-top:8px">
+            <sc-for list="{{ leadOpts }}" as="o" hint-placeholder-count="6">
+              <label style="display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer;font-size:14px;color:#3F3F46"><input type="checkbox" checked="{{ o.active }}" onChange="{{ o.on }}" style="width:20px;height:20px;accent-color:#FE7300;flex:none;margin:0">{{ o.label }}</label>
+            </sc-for>
+          </div>
+          <label style="display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:#8A8194">Something else?<input type="text" value="{{ vLeadOther }}" onChange="{{ onLeadOther }}" placeholder="Write your own here; separate with commas to add more than one" style="flex:1;box-sizing:border-box;height:40px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">What should they wear?</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:10px">Shown as a short list on the page, with a note underneath. Leave a line blank to drop it.</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ wearItems }}" as="w" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="color:#FE7300;font-weight:700;font-size:18px;flex:none">·</span>
+                <input type="text" value="{{ w.val }}" onChange="{{ w.on }}" style="flex:1;box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+              </div>
+            </sc-for>
+          </div>
+          <label style="display:block;margin-top:10px"><span style="display:block;font-size:12px;color:#8A8194;margin-bottom:6px">Note underneath the list (e.g. what is fine for the first class)</span><textarea rows="2" value="{{ vWearNote }}" onChange="{{ onWearNote }}" style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:10px 12px;font-size:14px;line-height:1.5;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea></label>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">What does it cost, and where does it run?</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:10px">These sit at the top of the class page and on the fees page, so people stop asking you in messages.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;color:#8A8194">Price</span><input type="text" value="{{ vPrice }}" onChange="{{ onPrice }}" placeholder="e.g. £6.50 a class, or £65 a term" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+            <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;color:#8A8194">Where it runs</span><input type="text" value="{{ vWhere }}" onChange="{{ onWhere }}" placeholder="e.g. In the studio, Bromsgrove" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:6px;margin-top:12px"><span style="font-size:12px;color:#8A8194">Who should enquiries about this class go to?</span><input type="text" value="{{ vContact }}" onChange="{{ onContact }}" placeholder="e.g. SJ" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></label>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Three classes that go well with this one</div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:10px">Shown at the bottom of the class page, so people find their next class instead of leaving. We have suggested some; change them if you disagree.</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ relatedRows }}" as="r" hint-placeholder-count="3">
+              <div style="display:grid;grid-template-columns:34px 1fr 1.6fr;gap:10px;align-items:center">
+                <span style="width:34px;height:34px;border-radius:50%;background:#EFE7F7;color:#6A3AA0;font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">{{ r.n }}</span>
+                <input type="text" value="{{ r.name }}" onChange="{{ r.onName }}" placeholder="Class name" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;font-weight:700;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+                <input type="text" value="{{ r.why }}" onChange="{{ r.onWhy }}" placeholder="One line on why it goes with this class" style="box-sizing:border-box;height:44px;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:0 12px;font-size:14px;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)">
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:15px;font-weight:700;color:#381064;margin-bottom:4px">Photographs <span style="font-weight:600;color:#8A8194">(optional)</span></div>
+          <div style="font-size:12px;color:#8A8194;margin-bottom:8px">Each class page uses one large photograph and three small ones. Tell us which photographs show this class, or say what you would like us to take.</div>
+          <textarea rows="2" value="{{ vPhotoNote }}" onChange="{{ onPhotoNote }}" placeholder="e.g. Use the Saturday class photos from the show folder. We need a new one of the younger group." style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #E1D9E9;background:#FFFFFF;padding:10px 12px;font-size:14px;line-height:1.5;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea>
+        </div>
+
+        </sc-if>
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:22px;border-top:1px solid #F0EBF5">
+          <button type="button" onClick="{{ onBack }}" style="height:52px;padding:0 24px;border-radius:999px;border:1.5px solid #E4DCEC;background:#FFFFFF;color:#381064;font-weight:700;font-size:15px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif;visibility:{{ backVis }}">‹ Back</button>
+          <button type="button" onClick="{{ onNext }}" style="height:52px;padding:0 28px;border-radius:999px;border:none;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:15px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif" style-hover="background:#e56800">{{ nextLabel }}</button>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#8A8194;text-align:center;margin:16px 0 0">If a class no longer runs, press "Remove this class" and it will be left off the website.</p>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:28px;line-height:1.2;color:#330164;margin:0 0 10px">You are nearly done</h1>
+      <p style="font-size:15px;line-height:1.65;margin:0 0 24px">Here is everything you have checked. Press a class name to go back to it, or press send and we will do the rest.</p>
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 22px;margin-bottom:18px">
+        <sc-for list="{{ summary }}" as="s" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid #F0EBF5">
+            <span style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#381064"><span style="width:22px;height:22px;border-radius:50%;background:{{ s.tickBg }};color:#FFFFFF;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ s.tick }}</span>{{ s.name }}</span>
+            <button type="button" onClick="{{ s.on }}" style="height:36px;padding:0 14px;border-radius:999px;border:1px solid #E4DCEC;background:#FFFFFF;color:#381064;font-size:12px;font-weight:700;cursor:pointer;font-family:'Montserrat',Arial,sans-serif">Check again</button>
+          </div>
+        </sc-for>
+      </div>
+      <button type="button" onClick="{{ onAddClass }}" style="width:100%;height:46px;border-radius:12px;border:1.5px dashed #C9B8DD;background:#FFFFFF;color:#6A3AA0;font-weight:700;font-size:14px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif;margin-bottom:18px" style-hover="border-color:#6A3AA0">+ Add a class we have missed</button>
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:24px 22px;margin-bottom:18px">
+        <div style="font-size:14px;font-weight:700;color:#381064;margin-bottom:8px">Have we missed a class, or is there anything else to say?</div>
+        <textarea rows="3" value="{{ vExtra }}" onChange="{{ onExtra }}" placeholder="Write it here, in your own words" style="width:100%;box-sizing:border-box;border-radius:10px;border:1px solid #E1D9E9;background:#FFFFFF;padding:12px 14px;font-size:15px;line-height:1.5;color:#211B27;font-family:'Montserrat',Arial,sans-serif;outline:none;resize:vertical" style-focus="border-color:#381064;box-shadow:0 0 0 3px rgba(254,115,0,.3)"></textarea>
+      </div>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{ onSend }}" style="width:100%;height:56px;border-radius:999px;border:none;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:16px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif" style-hover="background:#e56800">Send my answers</button>
+      </sc-if>
+      <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#DFF7EC;border-radius:16px;padding:24px;text-align:center">
+          <div style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:20px;color:#12855A;margin-bottom:6px">Thank you, all sent</div>
+          <p style="margin:0;font-size:14px;color:#3F7A62">We have everything we need. We will be in touch if anything is unclear.</p>
+        </div>
+      </sc-if>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+        <button type="button" onClick="{{ onBackToForm }}" style="height:44px;padding:0 18px;border-radius:999px;border:1.5px solid #E4DCEC;background:#FFFFFF;color:#381064;font-weight:700;font-size:13px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif">‹ Back to the classes</button>
+        <button type="button" onClick="{{ onDownload }}" style="height:44px;padding:0 14px;border-radius:999px;border:none;background:none;color:#8A8194;font-size:12px;cursor:pointer;font-family:'Montserrat',Arial,sans-serif;text-decoration:underline">Download answers (for CitCom)</button>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.TAG_GROUPS = [
+      { key:"age", label:"How old are they?", opts:["Babies","Up to 4","Ages 2 to 4","Ages 4 and over","Ages 6 and over","Ages 8 and over","Ages 11 to 18","Adults (18 and over)","All ages"] },
+      { key:"type", label:"What kind of class is it?", opts:["Dance","Singing","Drama and acting","Fitness"] },
+      { key:"extra", label:"Anything else that applies?", opts:["Beginners welcome","Come with a parent or carer","Private one-to-one","Invitation only"] }
+    ];
+    this.DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday","Arranged individually"];
+    this.TEACHERS = ["SJ","Madi","Amy","Lottie"];
+    this.LEADS = ["Graded examinations","Medals","Troupe selection","Annual Christmas show","LAMDA examinations","Vocational preparation"];
+    const WEAR_NOTE = "No uniform is needed for the first class. Anything they can move in is fine.";
+    this.CLASSES = [
+      { id:"baby-yoga", name:"Baby Yoga", hint:"New for September. Please check the start date is mentioned.",
+        desc:"Gentle stretching, movement and songs for babies with a parent or carer. A calm first step into the studio.",
+        tags:["Babies","Come with a parent or carer","Fitness","Beginners welcome"], days:[], dayTimes:{}, teachers:["SJ"], level:"No experience needed",
+        who:"Babies from birth until they are confidently walking, with a parent, grandparent or carer on the mat beside them. It is as much for the grown-up as the baby: an hour of calm, songs and other adults to talk to.\n\nNo experience of yoga is needed, and everything is guided step by step. Starting this September.",
+        steps:[{title:"Settling in",text:"Mats out, shoes off and a hello song while everyone arrives and gets comfortable."},{title:"Gentle stretches",text:"Guided stretches and movements for your baby, always at their pace, never forced."},{title:"Songs and play",text:"Action songs, tickles and tummy time that build strength and bonding."},{title:"Wind-down",text:"Low lights and a calm finish, so everyone leaves more relaxed than they arrived."}],
+        lead:"A natural next step into Parent & Toddler once they are on their feet.", leadTags:[],
+        wear:{items:["Comfortable clothes for you both","Bare feet or grippy socks","A blanket for your baby",""], note:"There is nothing to buy and no uniform. Come as you are."} },
+      { id:"parent-toddler", name:"Parent & Toddler",
+        desc:"Songs, props and simple movement with a grown-up alongside. Usually the first taste of class children get.",
+        tags:["Up to 4","Come with a parent or carer","Dance","Beginners welcome"], days:[], dayTimes:{}, teachers:["SJ"], level:"No experience needed",
+        who:"Toddlers up to 4 with a parent, grandparent or carer joining in alongside them. For most families it is the first taste of a class, so it is built around play rather than performance.\n\nSome children join in from the first song; others watch from a lap for a few weeks. Both are completely normal.",
+        steps:[{title:"A hello song",text:"The same song every week, so even the youngest know the class has started."},{title:"Action songs and rhymes",text:"Marching, clapping and simple movement that builds rhythm and listening."},{title:"Props out",text:"Scarves, pom-poms and shakers. This is most children's favourite part."},{title:"A goodbye song and a sticker",text:"A calm finish and a sticker on the way out. The sticker matters."}],
+        lead:"Most children move up to First Steps when they are ready to try a class on their own.", leadTags:[],
+        wear:{items:["Anything they can move in","Bare feet or soft shoes","A named water bottle",""], note:"No uniform at this age. Come as you are."} },
+      { id:"first-steps", name:"First Steps",
+        desc:"The first class children take on their own. Rhythm, listening, balance and a lot of pretending to be animals.",
+        tags:["Ages 2 to 4","Dance","Beginners welcome"], days:[], dayTimes:{}, teachers:["SJ"], level:"No experience needed",
+        who:"Children aged 2 to 4 taking their very first class on their own. The class is small, the room is friendly and the teacher's job in the first weeks is simply to make it somewhere they want to come back to.\n\nNo experience is expected. If they can walk, they can start.",
+        steps:[{title:"A warm-up song they know",text:"Familiar songs to shake off the shyness and get bodies moving."},{title:"Rhythm and listening games",text:"Clapping, stopping, starting and counting, disguised as games."},{title:"Balance, jumps and simple steps",text:"First real dance steps, one at a time, with lots of repetition."},{title:"A story dance to finish",text:"A short dance that tells a story, with a lot of pretending to be animals."}],
+        lead:"Second Steps when they are ready, usually around their fourth birthday.", leadTags:[],
+        wear:{items:["Anything they can move in","Hair tied back","Bare feet","A named water bottle"], note:WEAR_NOTE} },
+      { id:"second-steps", name:"Second Steps",
+        desc:"The bridge between play and technique. Children start learning proper positions and their first real routines.",
+        tags:["Ages 4 and over","Dance","Beginners welcome"], days:[], dayTimes:{}, teachers:["SJ"], level:"No experience needed",
+        who:"Children aged around 4 and over who have grown out of First Steps, or are starting a little later. It is the bridge between play and proper technique.\n\nChildren still play, but they also start to learn real positions, real names for steps and their first short routines.",
+        steps:[{title:"Warm-up and stretch",text:"A proper warm-up, taught as a routine they will come to know by heart."},{title:"First positions",text:"Real technique in small doses: positions, posture and pointed toes."},{title:"A routine to music",text:"A short dance built up week by week."},{title:"A game to finish",text:"Because they are four, and games are the point."}],
+        lead:"Ballet, Tap or Jazz & Commercial, and a first medal for those who want one.", leadTags:["Medals"],
+        wear:{items:["Anything they can move in","Hair tied back","Bare feet","A named water bottle"], note:WEAR_NOTE} },
+      { id:"ballet", name:"Ballet",
+        desc:"Graded technique, posture and musicality. It is the foundation under every other style we teach, and it shows.",
+        tags:["Ages 4 and over","Dance"], days:["Tuesday"], dayTimes:{}, teachers:["SJ"], level:"Beginners to graded levels",
+        who:"Children aged 4 and over. Ballet is the foundation we recommend under every other style: it builds the posture, strength and musicality that every other class draws on.\n\nClasses are graded, so children work with others at their level and progress at a pace that suits them.",
+        steps:[{title:"Barre work",text:"Warm-up and technique at the barre, building strength and placement."},{title:"Centre work",text:"Positions, balance and port de bras away from the barre."},{title:"Travelling steps",text:"Steps and turns across the floor, broken down and repeated until they land."},{title:"A short dance",text:"Putting the technique into a real piece of choreography to finish."}],
+        lead:"Graded examinations and medals through our awarding bodies, and a place in the Christmas show. For older students, ballet underpins vocational applications.", leadTags:["Graded examinations","Medals","Annual Christmas show","Vocational preparation"],
+        wear:{items:["Leotard and ballet skirt or shorts","Ballet shoes once settled","Hair tied back, in a bun for exams","A named water bottle"], note:WEAR_NOTE} },
+      { id:"jazz-commercial", name:"Jazz & Commercial",
+        desc:"High-energy choreography, musicality and stage presence, in a class where individuality is encouraged rather than smoothed out.",
+        tags:["Ages 4 and over","Dance","Beginners welcome"], days:["Monday","Saturday"], dayTimes:{}, teachers:["SJ","Madi","Amy"], level:"Beginner to advanced",
+        who:"Anyone from four upwards who wants to move to music they recognise. Younger children work on coordination, counting and confidence in front of a room. Older students go further into technique, control and the kind of performance quality that reads from the back of a theatre.\n\nYou do not need any previous training. Roughly half the students in a beginner class have never danced before, and the class is taught with that in mind.",
+        steps:[{title:"Warm-up and conditioning",text:"Ten minutes of mobility and strength work so bodies are ready and injuries stay rare."},{title:"Technique across the floor",text:"Turns, jumps, isolations and travelling steps, broken down and repeated until they land."},{title:"Routine of the term",text:"A piece built up week by week, often the one they will perform at the Christmas show."},{title:"Performance practice",text:"Running it full out, in groups, in front of each other. This is where the nerves go."}],
+        lead:"Students who want to be assessed can take graded examinations and medals through our awarding bodies. Some students are invited into one of the three performing troupes. Everyone, whatever their level, gets a place in the annual show.", leadTags:["Graded examinations","Troupe selection","Annual Christmas show","Vocational preparation"],
+        wear:{items:["Leggings or shorts and a fitted top","Trainers or jazz shoes","Hair tied back","A water bottle with their name on it"], note:WEAR_NOTE} },
+      { id:"tap", name:"Tap",
+        desc:"Rhythm, timing and a lot of noise. One of the quickest routes to a first medal or graded examination.",
+        tags:["Ages 4 and over","Dance"], days:[], dayTimes:{}, teachers:["SJ"], level:"Beginners to graded levels",
+        who:"Children aged 4 and over. Tap suits children who love rhythm and noise, and it gives quick wins: most students can make a real sound pattern in their first class.\n\nNo experience is needed, and it pairs well with Ballet or Jazz & Commercial.",
+        steps:[{title:"Warming up the feet",text:"Basic sounds and ankle work to switch the feet on."},{title:"New sounds and steps",text:"One new step at a time, slowly, then up to speed."},{title:"Combinations across the floor",text:"Joining steps into travelling patterns and rhythms."},{title:"A routine everyone knows",text:"A class favourite to finish loud and together."}],
+        lead:"One of the quickest routes to a first medal or graded examination, and a place in the show.", leadTags:["Graded examinations","Medals","Annual Christmas show"],
+        wear:{items:["Comfortable clothes they can move in","Tap shoes once settled; trainers to start","Hair tied back","A named water bottle"], note:WEAR_NOTE} },
+      { id:"acro-cheer", name:"Acro & Cheer",
+        desc:"Strength, flexibility and tumbling taught in a safe progression. Nobody is pushed past what their body is ready for.",
+        tags:["Ages 4 and over","Dance","Fitness"], days:[], dayTimes:{}, teachers:["SJ"], level:"All levels",
+        who:"Children aged 4 and over who love being upside down. Acro builds strength and flexibility; cheer adds lifts, balances and teamwork.\n\nEverything is taught in a safe progression on mats, and nobody is pushed past what their body is ready for.",
+        steps:[{title:"A thorough warm-up",text:"Strength and flexibility work that makes the rest of the class safe."},{title:"Skill progressions",text:"Rolls, cartwheels and walkovers, each broken into safe stages on mats."},{title:"Group balances",text:"Partner and group work, building trust as much as technique."},{title:"Putting it together",text:"Skills joined into short sequences and cheer routines."}],
+        lead:"Badges and awards as skills are signed off, and some of the most spectacular moments in the show.", leadTags:["Medals","Annual Christmas show"],
+        wear:{items:["Leggings or shorts and a fitted top","Bare feet","Hair tied back off the face","A named water bottle"], note:"No jewellery, for safety. No uniform is needed for the first class."} },
+      { id:"musical-theatre", name:"Musical Theatre",
+        desc:"Acting through song, staging and character work. Open to every age group.",
+        tags:["All ages","Dance","Singing","Drama and acting"], days:[], dayTimes:{}, teachers:["Madi"], level:"All levels",
+        who:"Anyone who loves musicals. The class mixes singing, acting and movement, so it suits performers who do not want to choose just one.\n\nIt is open to every age group, and casts across ages: younger and older students often share numbers, which is half the fun.",
+        steps:[{title:"Vocal and physical warm-up",text:"Voices and bodies switched on together."},{title:"A number from a show",text:"Learning the song: melody, harmonies and words."},{title:"Staging and character",text:"Who you are, where you stand and what the number is about."},{title:"Run it like a performance",text:"Full out, with entrances and exits, as if the audience were in."}],
+        lead:"Featured roles in the Christmas show, and LAMDA work for students who want a qualification to aim at.", leadTags:["Annual Christmas show","LAMDA examinations"],
+        wear:{items:["Comfortable clothes they can move and sing in","Trainers or jazz shoes","A named water bottle",""], note:WEAR_NOTE} },
+      { id:"drama", name:"Drama (private lessons)",
+        desc:"One-to-one lessons in speech, monologue and audition work, including LAMDA examinations for students who want them.",
+        tags:["Ages 6 and over","Drama and acting","Private one-to-one"], days:["Arranged individually"], dayTimes:{}, teachers:["SJ"], level:"All levels",
+        who:"Students aged 6 and over who want one-to-one coaching in speech, monologue and audition work. Some come for confidence, some for LAMDA examinations, some for both.\n\nLessons are private, so the pace and the material are chosen around one student.",
+        steps:[{title:"Voice and diction warm-up",text:"Breath, articulation and projection exercises."},{title:"The current piece",text:"Detailed work on a monologue, poem or scene."},{title:"Perform and refine",text:"Perform it through, then polish with honest, kind feedback."},{title:"Practice for the week",text:"Clear, small things to work on before the next lesson."}],
+        lead:"LAMDA examinations, festival entries and audition preparation.", leadTags:["LAMDA examinations"],
+        wear:{items:["No special clothing needed","","",""], note:"Just bring the current piece and a water bottle."} },
+      { id:"singing", name:"Singing (private lessons)",
+        desc:"Private lessons building range, breath and repertoire, working towards performances and graded examinations.",
+        tags:["All ages","Singing","Private one-to-one"], days:["Arranged individually"], dayTimes:{}, teachers:["Madi"], level:"All levels",
+        who:"Singers of any age, from a first lesson to exam and audition preparation. Lessons are one-to-one, so the songs and the pace are chosen around the student.\n\nBeginners are welcome; so are experienced singers who want to fix a specific habit or prepare for something particular.",
+        steps:[{title:"Breathing and warm-up",text:"Breath support and gentle vocal exercises to start."},{title:"Technique",text:"Range, tone and control, worked through the current song."},{title:"Sing it through",text:"Perform the song with coaching, section by section."},{title:"What to practise",text:"A clear plan for the week, kept realistic."}],
+        lead:"Graded examinations, show solos and audition preparation.", leadTags:["Graded examinations","Annual Christmas show"],
+        wear:{items:["No special clothing needed","","",""], note:"Bring water and, if you have one, the song you would love to sing."} },
+      { id:"troupes", name:"Performing Troupes: Notorious, Blaze and Shockwave", hint:"Please check the rehearsal days for each troupe, and how invitations work.",
+        desc:"Notorious, Blaze and Shockwave rehearse for professional performances and external events. Places are offered by invitation.",
+        tags:["Ages 8 and over","Dance","Invitation only"], days:["Tuesday","Thursday"], dayTimes:{}, teachers:["SJ"], level:"Invited students",
+        who:"Dedicated students aged 8 and over who are invited to join Notorious, Blaze or Shockwave. Troupes rehearse to a professional standard and represent the school at external events.\n\nPlaces are offered by invitation from class teachers, based on commitment as much as ability.",
+        steps:[{title:"Professional warm-up",text:"A disciplined warm-up, the same standard we would expect at a booking."},{title:"Drilling the routines",text:"Current pieces run and corrected in detail."},{title:"Formations and timing",text:"Cleaning: spacing, lines and synchronisation."},{title:"Full run-throughs",text:"Complete runs with notes, performance-ready."}],
+        lead:"Professional bookings and public events. Past bookings have included Alton Towers Scarefest.", leadTags:["Vocational preparation"],
+        wear:{items:["Team kit, confirmed when a place is offered","Clean trainers kept for indoor use","Hair as agreed for the current pieces","A named water bottle"], note:""} },
+      { id:"ballroom-latin", name:"Ballroom & Latin",
+        desc:"Waltz, quickstep, cha cha and jive, taught by SJ. Come as a pair or on your own; we will partner you up.",
+        tags:["Adults (18 and over)","Dance","Beginners welcome"], days:["Arranged individually"], dayTimes:{}, teachers:["SJ"], level:"Complete beginners welcome",
+        who:"Adults who want to learn to dance properly, from complete beginners to returners. Waltz, quickstep, cha cha and jive, taught by SJ.\n\nCome as a pair or on your own; we will partner you up. Absolute beginners are the norm, not the exception.",
+        steps:[{title:"Warm-up and posture",text:"Standing well is half of ballroom. We start there."},{title:"A figure in the current style",text:"One new figure, broken down without a partner first."},{title:"Dance it with a partner",text:"Putting the figure together, swapping partners if you wish."},{title:"Put it to music",text:"Dancing the full sequence to music to finish."}],
+        lead:"Medal tests for those who want them, and social dancing you can actually use.", leadTags:["Medals"],
+        wear:{items:["Comfortable clothes you can move in","Smooth-soled shoes, not trainers","No special kit to start",""], note:"Dance shoes can come later, once you are hooked."} },
+      { id:"adult-ballet", name:"Adult Ballet",
+        desc:"For people who danced as a child and stopped, and for people who never got the chance. No leotard required.",
+        tags:["Adults (18 and over)","Dance","Beginners welcome"], days:[], dayTimes:{}, teachers:["SJ"], level:"Complete beginners welcome",
+        who:"Adults who danced as a child and stopped, and adults who never got the chance. The class is unhurried, sociable and taught without judgement.\n\nNo leotard required, no audience, and nobody is made to feel behind.",
+        steps:[{title:"A gentle barre",text:"Classic barre work at an adult-friendly pace."},{title:"Technique at your pace",text:"Positions and placement, revisited properly."},{title:"Centre and travelling",text:"Short combinations away from the barre."},{title:"Stretch and unwind",text:"A proper stretch to finish. Most people's favourite part."}],
+        lead:"Entirely optional exams for those who want a goal, and the annual show for those who fancy it.", leadTags:["Graded examinations","Annual Christmas show"],
+        wear:{items:["Anything comfortable you can move in","Socks, bare feet or ballet shoes","No leotard required",""], note:""} },
+      { id:"wedding-dance", name:"Wedding Dance",
+        desc:"Your first dance, choreographed for you and taught privately at your pace. No experience needed.",
+        tags:["Adults (18 and over)","Dance","Private one-to-one","Beginners welcome"], days:["Arranged individually"], dayTimes:{}, teachers:["SJ"], level:"No experience needed",
+        who:"Couples preparing for their first dance. Whether you want a gentle sway with confidence or full choreography, lessons are private and built around your song.\n\nNo experience needed. Best booked a few months ahead of the wedding, so nothing is rushed.",
+        steps:[{title:"Your song and ideas",text:"A chat about the song, the venue, the outfits and what you want it to feel like."},{title:"The basic hold and steps",text:"Simple foundations you can rely on under pressure."},{title:"Build the routine",text:"Your dance built section by section, at your pace."},{title:"Polish until it feels easy",text:"Repetition until nerves have nothing to grab onto."}],
+        lead:"", leadTags:[],
+        wear:{items:["Comfortable clothes","Shoes similar to your wedding shoes for later lessons","",""], note:"Bring your song, even if you have three candidates."} }
+    ];
+    const REL = {
+      "baby-yoga":[["Parent & Toddler","Where most babies go next, once they are walking"],["First Steps","Their first class on their own, from around two"],["",""]],
+      "parent-toddler":[["First Steps","The first class they take on their own"],["Second Steps","Once they are four and ready for real steps"],["",""]],
+      "first-steps":[["Second Steps","The step up, from around four"],["Ballet","The technique underneath everything else"],["Tap","Rhythm and noise, and quick early wins"]],
+      "second-steps":[["Ballet","The foundation under every other style"],["Tap","Quick wins and a first medal"],["Jazz & Commercial","Music they recognise, and their first routines"]],
+      "ballet":[["Tap","A complete contrast, and it sharpens timing"],["Jazz & Commercial","Where ballet technique starts to show"],["Acro & Cheer","Strength and flexibility that support ballet lines"]],
+      "jazz-commercial":[["Ballet","The technique underneath everything else. Most commercial students take it alongside"],["Acro & Cheer","Tricks and flexibility that give routines their standout moments"],["Troupe","Performance and event work for students invited to join Notorious, Blaze or Shockwave"]],
+      "tap":[["Ballet","Posture and placement that make tap cleaner"],["Jazz & Commercial","A different energy, the same musicality"],["Second Steps","Where most young tappers start"]],
+      "acro-cheer":[["Jazz & Commercial","Where acro tricks end up being used"],["Ballet","Strength, control and safe landings"],["Troupe","Acro skills feature in a lot of troupe work"]],
+      "musical-theatre":[["Singing","One-to-one work on the voice behind the numbers"],["Drama","Script, character and audition work in detail"],["Jazz & Commercial","The dance side of musical theatre"]],
+      "drama":[["Musical Theatre","Acting put to music, in a group"],["Singing","The other half of most auditions"],["",""]],
+      "singing":[["Musical Theatre","Where the songs get staged"],["Drama","Speech and character work, one to one"],["",""]],
+      "troupes":[["Jazz & Commercial","The class most troupe members come from"],["Acro & Cheer","Skills that feature in troupe routines"],["Ballet","The technique that keeps troupe work clean"]],
+      "ballroom-latin":[["Wedding Dance","Private lessons built around one song"],["Adult Ballet","Another adult class, unhurried and sociable"],["",""]],
+      "adult-ballet":[["Ballroom & Latin","Partner dancing for adults, beginners welcome"],["Wedding Dance","If there is a first dance coming up"],["",""]],
+      "wedding-dance":[["Ballroom & Latin","Carry on after the wedding, socially"],["Adult Ballet","If you catch the bug"],["",""]]
+    };
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem("sjp-class-info-form-v2") || "{}"); } catch (e) {}
+    const answers = {};
+    this.CLASSES.forEach(c => {
+      const rel = (REL[c.id] || [["",""],["",""],["",""]]).map(r => ({ name:r[0], why:r[1] }));
+      const base = { desc:c.desc, tags:[...c.tags], tagOther:{age:"",type:"",extra:""}, days:[...c.days], dayTimes:{...c.dayTimes}, teachers:[...c.teachers], teacherOther:"", level:c.level, who:c.who, steps:c.steps.map(s=>({...s})), lead:c.lead, leadTags:[...c.leadTags], leadOther:"", wear:{items:[...c.wear.items], note:c.wear.note}, price:"", where:"In the studio, Bromsgrove", contact:(c.teachers[0] || ""), photoNote:"", related:rel, removed:false, done:false };
+      answers[c.id] = Object.assign(base, (saved.answers || {})[c.id] || {});
+    });
+    this.blank = () => ({ name:"", desc:"", tags:[], tagOther:{age:"",type:"",extra:""}, days:[], dayTimes:{}, teachers:[], teacherOther:"", level:"", who:"", steps:[{title:"",text:""},{title:"",text:""},{title:"",text:""},{title:"",text:""}], lead:"", leadTags:[], leadOther:"", wear:{items:["","","",""], note:""}, price:"", where:"In the studio, Bromsgrove", contact:"", photoNote:"", related:[{name:"",why:""},{name:"",why:""},{name:"",why:""}], removed:false, done:false });
+    (saved.customIds || []).forEach(id => { answers[id] = Object.assign(this.blank(), (saved.answers || {})[id] || {}); });
+    this.state = { idx: saved.idx || 0, view: saved.view || "form", answers, extra: saved.extra || "", sent: false, customIds: saved.customIds || [] };
+  }
+  list() { return [...this.CLASSES, ...this.state.customIds.map(id => ({ id, custom: true, name: this.state.answers[id].name }))]; }
+  save(patch) {
+    this.setState(patch, () => {
+      try { localStorage.setItem("sjp-class-info-form-v2", JSON.stringify({ idx:this.state.idx, view:this.state.view, answers:this.state.answers, extra:this.state.extra, customIds:this.state.customIds })); } catch (e) {}
+    });
+  }
+  setF(field, value) {
+    const id = this.list()[this.state.idx].id;
+    this.save({ answers: { ...this.state.answers, [id]: { ...this.state.answers[id], [field]: value } } });
+  }
+  toggle(field, val) {
+    const a = this.state.answers[this.list()[this.state.idx].id];
+    this.setF(field, a[field].includes(val) ? a[field].filter(x => x !== val) : [...a[field], val]);
+  }
+  renderVals() {
+    const st = this.state, L = this.list(), cls = L[st.idx], a = st.answers[cls.id];
+    const doneCount = L.filter(c => st.answers[c.id].done).length;
+    const realDays = a.days.filter(d => d !== "Arranged individually");
+    const wc = (s) => ((s || "").match(/\S+/g) || []).length;
+    const guide = (s, lo, hi) => {
+      const n = wc(s);
+      if (n === 0) return "Nothing written yet. Aim for " + lo + " to " + hi + " words.";
+      if (n < lo) return n + " words so far. A little short, aim for " + lo + " to " + hi + ".";
+      if (n > hi) return n + " words. Longer than we need, but we can trim it.";
+      return n + " words. That is about right.";
+    };
+    return {
+      descGuide: guide(a.desc, 18, 32),
+      whoGuide: guide(a.who, 70, 140),
+      leadGuide: guide(a.lead, 20, 60),
+      vPrice: a.price, onPrice: (e) => this.setF("price", e.target.value),
+      vWhere: a.where, onWhere: (e) => this.setF("where", e.target.value),
+      vContact: a.contact, onContact: (e) => this.setF("contact", e.target.value),
+      vPhotoNote: a.photoNote, onPhotoNote: (e) => this.setF("photoNote", e.target.value),
+      relatedRows: (a.related || []).map((r, i) => ({
+        n: i + 1, name: r.name, why: r.why,
+        onName: (e) => { const rel = (a.related || []).map(x => ({ ...x })); rel[i].name = e.target.value; this.setF("related", rel); },
+        onWhy: (e) => { const rel = (a.related || []).map(x => ({ ...x })); rel[i].why = e.target.value; this.setF("related", rel); }
+      })),
+      isForm: st.view === "form", isDone: st.view === "done", notSent: !st.sent, isSent: st.sent,
+      num: st.idx + 1, total: L.length, pct: Math.round((doneCount / L.length) * 100), idx: st.idx,
+      curIsCustom: !!cls.custom, curNotCustom: !cls.custom,
+      curRemoved: !!a.removed, notRemoved: !a.removed,
+      vName: a.name || "", onName: (e) => this.setF("name", e.target.value),
+      onRemove: () => this.setF("removed", true),
+      onRestore: () => this.setF("removed", false),
+      onAddClass: () => { const id = "custom-" + Date.now(); this.save({ answers: { ...st.answers, [id]: this.blank() }, customIds: [...st.customIds, id], idx: L.length, view: "form" }); window.scrollTo(0, 0); },
+      jumpList: L.map((c, i) => ({ i, label: (st.answers[c.id].removed ? "✗ " : st.answers[c.id].done ? "✓ " : "") + (c.name || "New class") })),
+      onJump: (e) => this.save({ idx: Number(e.target.value) }),
+      curName: cls.name || "New class", curHint: cls.hint || "",
+      vDesc: a.desc, onDesc: (e) => this.setF("desc", e.target.value),
+      vLevel: a.level, onLevel: (e) => this.setF("level", e.target.value),
+      vWho: a.who, onWho: (e) => this.setF("who", e.target.value),
+      vLead: a.lead, onLead: (e) => this.setF("lead", e.target.value),
+      tagGroups: this.TAG_GROUPS.map(g => ({
+        label: g.label,
+        options: g.opts.map(t => ({ label: t, active: a.tags.includes(t), on: () => this.toggle("tags", t) })),
+        otherVal: a.tagOther[g.key] || "",
+        onOther: (e) => this.setF("tagOther", { ...a.tagOther, [g.key]: e.target.value })
+      })),
+      dayOpts: this.DAYS.map(d => ({ label: d, active: a.days.includes(d), on: () => this.toggle("days", d) })),
+      hasDayRows: realDays.length > 0,
+      isArranged: a.days.includes("Arranged individually") && realDays.length === 0,
+      dayRows: realDays.map(day => {
+        const t = a.dayTimes[day] || { start: "", dur: "" };
+        const set = (key) => (e) => this.setF("dayTimes", { ...a.dayTimes, [day]: { ...t, [key]: e.target.value } });
+        return { day, start: t.start, dur: t.dur, onStart: set("start"), onDur: set("dur") };
+      }),
+      teacherOpts: this.TEACHERS.map(t => ({ label: t, active: a.teachers.includes(t), on: () => this.toggle("teachers", t) })),
+      vTeacherOther: a.teacherOther, onTeacherOther: (e) => this.setF("teacherOther", e.target.value),
+      steps: a.steps.map((s, i) => ({
+        n: i + 1, title: s.title, text: s.text,
+        onTitle: (e) => { const steps = a.steps.map(x=>({...x})); steps[i].title = e.target.value; this.setF("steps", steps); },
+        onText: (e) => { const steps = a.steps.map(x=>({...x})); steps[i].text = e.target.value; this.setF("steps", steps); }
+      })),
+      leadOpts: this.LEADS.map(t => ({ label: t, active: a.leadTags.includes(t), on: () => this.toggle("leadTags", t) })),
+      vLeadOther: a.leadOther, onLeadOther: (e) => this.setF("leadOther", e.target.value),
+      wearItems: a.wear.items.map((val, i) => ({ val, on: (e) => { const items = [...a.wear.items]; items[i] = e.target.value; this.setF("wear", { ...a.wear, items }); } })),
+      vWearNote: a.wear.note, onWearNote: (e) => this.setF("wear", { ...a.wear, note: e.target.value }),
+      backVis: st.idx === 0 ? "hidden" : "visible",
+      onBack: () => { this.save({ idx: Math.max(0, st.idx - 1) }); window.scrollTo(0, 0); },
+      nextLabel: st.idx === L.length - 1 ? "This looks right, finish" : "This looks right, next class",
+      onNext: () => {
+        const answers = { ...st.answers, [cls.id]: { ...a, done: true } };
+        if (st.idx === L.length - 1) this.save({ answers, view: "done" });
+        else this.save({ answers, idx: st.idx + 1 });
+        window.scrollTo(0, 0);
+      },
+      summary: L.map((c, i) => ({ name: c.name || "New class", tick: st.answers[c.id].removed ? "✗" : st.answers[c.id].done ? "✓" : "·", tickBg: st.answers[c.id].removed ? "#B3413F" : st.answers[c.id].done ? "#26CC8C" : "#C9C0D3", on: () => { this.save({ view: "form", idx: i }); window.scrollTo(0, 0); } })),
+      vExtra: st.extra, onExtra: (e) => this.save({ extra: e.target.value }),
+      onSend: () => this.save({ sent: true }),
+      onBackToForm: () => { this.save({ view: "form" }); window.scrollTo(0, 0); },
+      onDownload: () => {
+        const blob = new Blob([JSON.stringify({ answers: this.state.answers, extra: this.state.extra }, null, 2)], { type: "application/json" });
+        const u = URL.createObjectURL(blob); const el = document.createElement("a");
+        el.href = u; el.download = "sjp-class-answers.json"; el.click(); URL.revokeObjectURL(u);
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

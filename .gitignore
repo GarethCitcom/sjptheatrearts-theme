@@ -1,7 +1,15 @@
+# Dependencies (dev tooling only -- the theme itself ships no build artefacts)
 node_modules/
-vendor/composer/
-*.zip
-advanced-custom-fields-pro/
-.wp-env.json.override
-wp-content/
+/vendor/
+
+# Phase-review screenshots
+/build/
+
+# OS / editor
 .DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+
+# Note: acf-json/ is deliberately NOT ignored -- ACF field groups version in git.

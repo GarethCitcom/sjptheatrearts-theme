@@ -1,0 +1,22 @@
+{
+    "key": "group_sjpta_assurance",
+    "title": "Inclusion and safeguarding",
+    "fields": [
+        { "key": "field_sjpta_as_left_eyebrow", "label": "Left badge", "name": "left_eyebrow", "type": "text", "required": 0, "default_value": "Inclusion" },
+        { "key": "field_sjpta_as_left_heading", "label": "Left heading", "name": "left_heading", "type": "text", "required": 0 },
+        { "key": "field_sjpta_as_left_body", "label": "Left text", "name": "left_body", "type": "textarea", "instructions": "Leave a blank line between paragraphs.", "rows": 7, "new_lines": "wpautop", "required": 0 },
+        { "key": "field_sjpta_as_quote", "label": "Quote", "name": "quote", "type": "textarea", "instructions": "A parent's own words. Never write one on their behalf.", "rows": 4, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_as_quote_source", "label": "Quote attribution", "name": "quote_source", "type": "text", "required": 0 },
+        { "key": "field_sjpta_as_quote_detail", "label": "Quote context", "name": "quote_detail", "type": "text", "required": 0 },
+        { "key": "field_sjpta_as_right_eyebrow", "label": "Right badge", "name": "right_eyebrow", "type": "text", "required": 0, "default_value": "Safeguarding" },
+        { "key": "field_sjpta_as_right_heading", "label": "Right heading", "name": "right_heading", "type": "text", "required": 0 },
+        { "key": "field_sjpta_as_points", "label": "Safeguarding points", "name": "points", "type": "repeater", "instructions": "These are promises about children's safety. Only add what is actually true today.", "required": 0, "min": 0, "max": 8, "layout": "block", "button_label": "Add point", "sub_fields": [
+            { "key": "field_sjpta_as_point_strong", "label": "The promise", "name": "strong", "type": "text", "required": 0 },
+            { "key": "field_sjpta_as_point_text", "label": "The rest", "name": "text", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_as_mark", "label": "Safeguarding mark", "name": "mark", "type": "image", "return_format": "id", "preview_size": "thumbnail", "required": 0 },
+        { "key": "field_sjpta_as_mark_text", "label": "Policy note", "name": "mark_text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/assurance" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

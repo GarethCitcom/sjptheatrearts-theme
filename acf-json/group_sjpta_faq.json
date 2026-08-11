@@ -1,0 +1,113 @@
+{
+    "key": "group_sjpta_faq",
+    "title": "FAQ",
+    "fields": [
+        {
+            "key": "field_sjpta_fq_layout",
+            "label": "Layout",
+            "name": "layout",
+            "type": "select",
+            "instructions": "Heading beside the questions, or a section bar above a single narrow column.",
+            "required": 0,
+            "default_value": "split",
+            "choices": {
+                "split": "Heading beside the questions",
+                "bar": "Section bar above"
+            }
+        },
+        {
+            "key": "field_sjpta_fq_eyebrow",
+            "label": "Eyebrow",
+            "name": "eyebrow",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fq_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "text",
+            "required": 1
+        },
+        {
+            "key": "field_sjpta_fq_intro",
+            "label": "Intro",
+            "name": "intro",
+            "type": "textarea",
+            "rows": 3,
+            "new_lines": "",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fq_link_label",
+            "label": "Link label",
+            "name": "link_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fq_link_url",
+            "label": "Link",
+            "name": "link_url",
+            "type": "text",
+            "instructions": "A full URL, or an anchor on this page such as #enquire.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fq_items",
+            "label": "Questions",
+            "name": "items",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 12,
+            "layout": "block",
+            "button_label": "Add question",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_fq_question",
+                    "label": "Question",
+                    "name": "question",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fq_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "type": "textarea",
+                    "rows": 5,
+                    "new_lines": "",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fq_open",
+                    "label": "Open by default",
+                    "name": "open",
+                    "type": "true_false",
+                    "instructions": "Usually only the first one.",
+                    "required": 0,
+                    "default_value": 0,
+                    "ui": 1
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/faq"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

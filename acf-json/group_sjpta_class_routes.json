@@ -1,0 +1,10 @@
+{
+    "key": "group_sjpta_class_routes",
+    "title": "Age routes",
+    "fields": [
+        { "key": "field_sjpta_cr_label", "label": "Section label", "name": "label", "type": "text", "required": 0, "default_value": "Start with an age route" },
+        { "key": "field_sjpta_cr_note", "label": "Note", "name": "note", "type": "text", "instructions": "The line beside the label. The class counts are worked out from the classes themselves and cannot be typed in.", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/class-routes" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

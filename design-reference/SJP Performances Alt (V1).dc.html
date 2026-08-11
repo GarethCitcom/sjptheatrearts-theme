@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/styles.css">
+<script src="_ds/sjp-theatre-arts-design-system-175e544c-62db-4215-acdb-7b1da4bfaa75/_ds_bundle.js"></script>
+<script src="motion.js?v=5" defer></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #F7F6F9; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #FE7300; text-decoration: none; }
+  a:hover { color: #C5299B; }
+  input, select, textarea, button { font: inherit; }
+  @keyframes sjp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+<style>#sjp-small-screen-blocker{display:none}@media (max-width:1023px){#sjp-small-screen-blocker{display:flex}}</style>
+</helmet>
+<div id="sjp-small-screen-blocker" style="position:fixed;inset:0;z-index:9999;background:#330164;color:#FFFFFF;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:36px;text-align:center;font-family:'Montserrat',Arial,sans-serif">
+  <div style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:26px;line-height:1.25;color:#FFFFFF;max-width:420px">This screen is too small</div>
+  <p style="font-size:15px;line-height:1.6;color:#D9C8EC;max-width:420px;margin:0">These designs are made for larger screens and are not yet responsive, so they will not display properly here. Please open this page on a laptop or desktop computer.</p>
+  <div style="width:44px;height:4px;border-radius:999px;background:#FF7300"></div>
+</div>
+<a href="SJP Design Presentation.dc.html" title="Return to design options" style="position:fixed;left:20px;bottom:20px;z-index:99;display:inline-flex;align-items:center;height:44px;max-width:44px;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:999px;box-shadow:0 8px 24px rgba(16,33,47,0.14);color:#330164;text-decoration:none;overflow:hidden;white-space:nowrap;transition:max-width 0.25s ease" style-hover="max-width:280px;color:#330164"><span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;flex:0 0 44px;font-family:'Poppins',Arial,sans-serif">&#8249;</span><span style="font-family:'Montserrat',Arial,sans-serif;font-size:13px;font-weight:600;padding-right:18px">Return to design options</span></a>
+
+<div data-screen-label="Performances Alt" style="font-family:'Montserrat',Arial,sans-serif;color:#211B27;background:#F7F6F9;width:100%;overflow-x:hidden">
+
+  <div style="background:#1D0B36;color:#D9C8EC;font-size:12px;font-weight:500;overflow:hidden">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px;height:40px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <span style="display:flex;align-items:center;gap:8px;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#FE7300"></span>Bromsgrove, Worcestershire</span>
+      <span style="color:#B49BD3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Dance · Sing · Perform, classes for ages 2 to adult, all abilities welcome</span>
+      <div style="display:flex;align-items:center;gap:18px;white-space:nowrap">
+        <a href="#gallery" style="color:#D9C8EC">Instagram</a>
+        <span style="width:1px;height:12px;background:rgba(217,200,236,.3)"></span>
+        <a href="#member" style="color:#FFFFFF;font-weight:700;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="7" width="11" height="7" rx="1.8" stroke="#FE7300" stroke-width="1.6"></rect><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.6 0V7" stroke="#FE7300" stroke-width="1.6"></path></svg>Member login</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:sticky;top:14px;z-index:80;display:flex;justify-content:center;padding:14px 24px 0;pointer-events:none">
+    <div style="pointer-events:auto;display:flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:999px;padding:8px 8px 8px 22px;box-shadow:0 14px 34px -18px rgba(33,11,60,.35)">
+      <a href="SJP%20Homepage%20Alt.dc.html" style="display:flex;align-items:center;margin-right:14px"><img src="assets/logo.svg" alt="SJP Theatre Arts" style="height:36px;width:auto;display:block"></a>
+      <span style="width:1px;height:24px;background:#EEE7F4;margin-right:10px"></span>
+      <nav style="display:flex;align-items:center;gap:24px;font-size:14px;font-weight:600;color:#381064;margin-right:16px">
+        <a href="SJP%20Classes%20Alt.dc.html" style="color:#381064">Classes</a>
+        <a href="SJP%20Timetable%20and%20Fees%20Alt.dc.html" style="color:#381064">Timetable &amp; fees</a>
+        <a href="SJP%20About%20Alt.dc.html" style="color:#381064">About</a>
+        <a href="SJP%20Performances%20Alt.dc.html" style="color:#FE7300">Performances</a>
+        <a href="SJP%20Contact%20Alt.dc.html" style="color:#381064">Contact</a>
+      </nav>
+      <a href="SJP%20Join%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 22px;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:14px" style-hover="background:#e56800">Book a free trial<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+    </div>
+  </div>
+
+  <section id="top" style="position:relative;padding:64px 0 48px;overflow:hidden">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(56,16,100,.08) 1px,transparent 1.4px);background-size:24px 24px"></div>
+    <div style="position:absolute;left:-160px;top:-160px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(197,41,155,.10) 0%,rgba(197,41,155,0) 70%)"></div>
+    <div style="position:absolute;right:-180px;top:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(254,115,0,.10) 0%,rgba(254,115,0,0) 70%)"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:0 32px;text-align:center">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #EAE3F0;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:600;color:#8A8194;margin-bottom:22px"><a href="SJP%20Homepage%20Alt.dc.html" style="color:#8A8194">Home</a><span style="color:#C9C0D3">›</span><span style="color:#381064;font-weight:700">Performances</span></div>
+      <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:56px;line-height:1.06;letter-spacing:-.025em;color:#381064;margin:0 auto 16px;max-width:820px">Nobody sits out <span style="color:#FE7300">the show.</span></h1>
+      <p style="font-size:17px;line-height:1.65;color:#5A5265;margin:0 auto;max-width:620px;text-wrap:pretty">Every student who wants to perform gets a place. Here is what a year at SJP actually looks like on stage.</p>
+    </div>
+  </section>
+
+  <section style="padding:0 0 8px">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#2A0B4D;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.1fr 1fr">
+        <div style="padding:52px;display:flex;flex-direction:column;justify-content:center">
+          <span style="display:inline-flex;align-items:center;gap:9px;background:#FFE9D6;color:#B85400;border-radius:999px;padding:7px 15px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px;align-self:flex-start"><span style="width:7px;height:7px;border-radius:50%;background:#FE7300"></span>Next on stage</span>
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-.02em;color:#FFFFFF;margin:0 0 14px">The annual Christmas show</h2>
+          <p style="font-size:15px;line-height:1.7;color:#D9C8EC;margin:0 0 26px;max-width:500px">Two nights, a full theatre and every class in the school on stage. Rehearsals run inside normal lesson time from the autumn term, so no extra evenings are needed.</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;max-width:500px">
+            <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px">
+              <div style="font-size:11px;color:#B49BD3;margin-bottom:5px">Dates</div>
+              <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FF9A3D">To confirm</div>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px">
+              <div style="font-size:11px;color:#B49BD3;margin-bottom:5px">Venue</div>
+              <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FF9A3D">To confirm</div>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px">
+              <div style="font-size:11px;color:#B49BD3;margin-bottom:5px">Who performs</div>
+              <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF">Every class</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="SJP%20Contact%20Alt.dc.html" style="display:inline-flex;align-items:center;height:48px;padding:0 26px;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:14px" style-hover="background:#e56800">Ask about tickets</a>
+            <a href="SJP%20Join%20Alt.dc.html" style="display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.35);color:#FFFFFF;font-weight:700;font-size:14px">Join in time for it<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          </div>
+        </div>
+        <div style="position:relative;min-height:440px;background:#4A1B7A"><img src="assets/perf-1.jpg" alt="SJP students performing at the annual show" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:64px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 20px;display:flex;align-items:baseline;gap:14px;margin-bottom:26px">
+        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;color:#381064"><span style="color:#FE7300">+</span> Through the year</span>
+        <span style="font-size:13px;color:#8A8194">More than one night in December</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" data-stagger>
+        <article style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px" data-lift>
+          <div style="position:relative;height:200px;border-radius:10px;overflow:hidden;background:#EFE7F7"><img src="assets/troupe.jpg" alt="Troupe performing at an external event" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:12px;top:12px;background:#FAE6F4;color:#9C1F7A;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Troupes</span></div>
+          <div style="padding:18px 12px 12px">
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">Competitions and events</h3>
+            <p style="margin:0;font-size:14px;line-height:1.65;color:#5A5265">Notorious, Blaze and Shockwave compete and perform outside the school. Past bookings have included Alton Towers Scarefest and Worcester Wolves basketball events.</p>
+          </div>
+        </article>
+        <article style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px" data-lift>
+          <div style="position:relative;height:200px;border-radius:10px;overflow:hidden;background:#EFE7F7"><img src="assets/gallery-6.jpg" alt="Summer school workshop" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:12px;top:12px;background:#FFE9D6;color:#B85400;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Holidays</span></div>
+          <div style="padding:18px 12px 12px">
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">Summer and Easter schools</h3>
+            <p style="margin:0;font-size:14px;line-height:1.65;color:#5A5265">Multi-day workshops with guest choreographers, open to students from other schools as well as our own. Dates are announced each term.</p>
+          </div>
+        </article>
+        <article style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px" data-lift>
+          <div style="position:relative;height:200px;border-radius:10px;overflow:hidden;background:#EFE7F7"><img src="assets/singers.jpg" alt="Students at an examination showcase" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:12px;top:12px;background:#DFF7EC;color:#12855A;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Assessments</span></div>
+          <div style="padding:18px 12px 12px">
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin:0 0 8px;color:#381064">Medal and exam days</h3>
+            <p style="margin:0;font-size:14px;line-height:1.65;color:#5A5265">A visiting examiner comes to the studio. For many younger students this is the first time they dance for someone who is not their teacher.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:64px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:10px">
+        <div style="position:relative;border-radius:10px;overflow:hidden;height:480px;background:#2A0B4D">
+          <img src="assets/group-shot.jpg" alt="SJP Theatre Arts full company on stage" style="width:100%;height:100%;object-fit:cover;display:block;opacity:.7">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,11,54,.1) 0%,rgba(29,11,54,.78) 100%)"></div>
+          <button type="button" data-pulse="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;background:#FFFFFF;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 14px rgba(255,255,255,.24)" style-hover="background:#FE7300"><svg width="30" height="30" viewBox="0 0 34 34" fill="none"><path d="M12 8.5 25 17l-13 8.5V8.5Z" fill="#381064"></path></svg></button>
+          <div style="position:absolute;left:32px;bottom:28px;right:32px">
+            <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:27px;color:#FFFFFF;line-height:1.2;margin-bottom:8px">Show night, from the wings</div>
+            <p style="margin:0;font-size:15px;color:#E4D6F2;max-width:520px">Three minutes of the annual show: the queue at the side of the stage, the count-in, and 40 students hitting the first eight at once.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" style="padding:64px 0 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#FFFFFF;border:1px solid #EAE3F0;border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px;flex-wrap:wrap">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;color:#381064"><span style="color:#FE7300">+</span> Gallery</span>
+          <span style="font-size:13px;color:#8A8194">Real students, real nights</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" style="height:38px;padding:0 15px;border-radius:999px;border:none;background:#381064;color:#FFFFFF;font-size:13px;font-weight:700;cursor:pointer">All</button>
+          <button type="button" style="height:38px;padding:0 15px;border-radius:999px;border:1px solid #EAE3F0;background:#FFFFFF;color:#381064;font-size:13px;font-weight:600;cursor:pointer" style-hover="border-color:#381064">On stage</button>
+          <button type="button" style="height:38px;padding:0 15px;border-radius:999px;border:1px solid #EAE3F0;background:#FFFFFF;color:#381064;font-size:13px;font-weight:600;cursor:pointer" style-hover="border-color:#381064">In class</button>
+          <button type="button" style="height:38px;padding:0 15px;border-radius:999px;border:1px solid #EAE3F0;background:#FFFFFF;color:#381064;font-size:13px;font-weight:600;cursor:pointer" style-hover="border-color:#381064">Troupes</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:16px" data-stagger>
+        <figure style="margin:0;grid-column:span 2;grid-row:span 2;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/perf-2.jpg" alt="Students performing a group routine at the annual show" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Group routine, annual show</figcaption>
+        </figure>
+        <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/acro-handstand.jpg" alt="Acro student holding a handstand" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">Acro conditioning</figcaption>
+        </figure>
+        <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/kid-tap.jpg" alt="Young student in a tap class" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">First tap medal</figcaption>
+        </figure>
+        <figure style="margin:0;grid-column:span 2;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/perf-3.jpg" alt="Troupe performing at an external event" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Troupe, external booking</figcaption>
+        </figure>
+        <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/gallery-1.jpg" alt="Early years class in the studio" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">First Steps, Monday</figcaption>
+        </figure>
+        <figure style="margin:0;grid-row:span 2;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/teen-solo.jpg" alt="Teen student performing a solo" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">Senior solo</figcaption>
+        </figure>
+        <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/ballet-barre.jpg" alt="Ballet students working at the barre" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">Barre work</figcaption>
+        </figure>
+        <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/singing.jpg" alt="Singing student in a private lesson" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">Singing lesson</figcaption>
+        </figure>
+        <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/gallery-2.jpg" alt="Students together after a class" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700">After class</figcaption>
+        </figure>
+        <figure style="margin:0;grid-column:span 2;position:relative;border-radius:12px;overflow:hidden;background:#EFE7F7;border:1px solid #EAE3F0" data-lift>
+          <img src="assets/commercial.jpg" alt="Commercial dance class mid routine" style="width:100%;height:100%;object-fit:cover;display:block">
+          <figcaption style="position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#381064;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700">Commercial, Saturday morning</figcaption>
+        </figure>
+      </div>
+      <p style="margin:22px 0 0;font-size:13px;line-height:1.6;color:#8A8194;max-width:640px">Photographs are published only where a family has given consent. If you would like an image of your child removed, email us and we will take it down.</p>
+    </div>
+  </section>
+
+  <section style="padding:72px 0">
+    <div style="max-width:1320px;margin:0 auto;padding:0 32px">
+      <div style="background:#2A0B4D;border-radius:16px;padding:56px 60px;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;left:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(254,115,0,.22)"></div>
+        <div style="position:absolute;right:-60px;bottom:-100px;width:280px;height:280px;border-radius:50%;background:rgba(197,41,155,.24)"></div>
+        <div style="position:relative">
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:38px;line-height:1.12;letter-spacing:-.02em;color:#FFFFFF;margin:0 0 12px">Be in the next one</h2>
+          <p style="margin:0 auto 28px;font-size:16px;line-height:1.6;color:#D9C8EC;max-width:560px">Students who join in the autumn term are usually on stage by December. Start with a free trial class.</p>
+          <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+            <a href="SJP%20Join%20Alt.dc.html" style="display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:999px;background:#FE7300;color:#FFFFFF;font-weight:700;font-size:15px" style-hover="background:#e56800">Book a free trial</a>
+            <a href="SJP%20Classes%20Alt.dc.html" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;border:1px solid rgba(255,255,255,.32);color:#FFFFFF;font-weight:700;font-size:15px">Browse classes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#FFFFFF;border-top:1px solid #E9E4F0;padding:24px 0;overflow:hidden">
+    <div style="display:flex;gap:16px;width:max-content;animation:sjp-marquee 48s linear infinite">
+      <div style="display:flex;gap:16px">
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7;position:relative"><img src="assets/gallery-1.jpg" alt="SJP students" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.85);backdrop-filter:blur(4px);color:#381064;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700">@sjptheatrearts</span></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/perf-1.jpg" alt="On stage" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/acro-handstand.jpg" alt="Acro handstand" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/gallery-2.jpg" alt="Class photo" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/singers.jpg" alt="Singers" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/perf-2.jpg" alt="Performance" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/group-shot.jpg" alt="Group on stage" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      </div>
+      <div style="display:flex;gap:16px" aria-hidden="true">
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7;position:relative"><img src="assets/gallery-1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.85);backdrop-filter:blur(4px);color:#381064;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700">@sjptheatrearts</span></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/perf-1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/acro-handstand.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/gallery-2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/singers.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/perf-2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="width:200px;height:200px;border-radius:12px;overflow:hidden;background:#EFE7F7"><img src="assets/group-shot.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SJPAltFooter" hint-size="100%,360px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

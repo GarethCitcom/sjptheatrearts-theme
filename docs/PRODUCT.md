@@ -65,7 +65,7 @@ Confirmed class facts include:
 - Acro Cheer is taught by SJ.
 - Drama is for ages six and over as private lessons; teachers SJ and Madi.
 - Tap runs Tuesday and Saturday.
-- Troupe runs Tuesday and Thursday for Notorious, Blaze, and Shockwave; invitation only.
+- Troupe runs Tuesday and Thursday for Notorious and Shockwave; invitation only.
 - Singing is offered as private lessons and includes Madi as a teacher.
 - First Steps lists SJ as teacher unless the school confirms otherwise.
 - Second Steps includes Amy and excludes Katie.

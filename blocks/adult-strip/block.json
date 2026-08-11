@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/adult-strip",
+	"title": "SJP adult strip",
+	"category": "theme",
+	"icon": "heart",
+	"description": "Pastel strip pointing adults at ballet, ballroom and wedding dance.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	]
+}

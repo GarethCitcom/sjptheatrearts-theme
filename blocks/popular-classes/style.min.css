@@ -1,0 +1,1 @@
+.sjpta-popular{padding:var(--wp--preset--spacing--80) 0 0}.sjpta-popular__grid{min-width:0}.sjpta-popular__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--wp--preset--spacing--40)}@media (max-width:1023px){.sjpta-popular__cards{grid-template-columns:repeat(2,1fr)}}@media (max-width:640px){.sjpta-popular__cards{grid-template-columns:1fr}}

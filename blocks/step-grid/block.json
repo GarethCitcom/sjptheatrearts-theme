@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/step-grid",
+	"title": "SJP step grid",
+	"category": "theme",
+	"icon": "editor-ol",
+	"description": "A numbered grid of steps inside a white panel, with an optional footer note and pills.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	]
+}

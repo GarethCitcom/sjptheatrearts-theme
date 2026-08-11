@@ -1,0 +1,151 @@
+/* Gallery mosaic. */
+
+.sjpta-mosaic {
+	padding: var(--wp--preset--spacing--80) 0 0;
+}
+
+.sjpta-mosaic__head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--60);
+	margin-bottom: var(--wp--preset--spacing--40);
+	flex-wrap: wrap;
+}
+
+.sjpta-mosaic__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-md);
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0;
+	text-wrap: balance;
+}
+
+.sjpta-mosaic__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: var(--wp--custom--control--min);
+	font-size: var(--wp--preset--font-size--card-body);
+	font-weight: 700;
+	color: var(--sjpta-accent-text);
+	text-decoration: none;
+}
+
+.sjpta-mosaic__link:hover {
+	text-decoration: underline;
+}
+
+.sjpta-mosaic__grid {
+	min-width: 0;
+}
+
+.sjpta-mosaic__tiles {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: 210px;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.sjpta-mosaic__tile {
+	margin: 0;
+	border-radius: 18px;
+	overflow: hidden;
+	background: var(--wp--custom--color--badge-purple-bg);
+}
+
+/*
+ * The tile's whole area is the link, so the target is the photograph itself
+ * rather than a hotspot inside it.
+ */
+.sjpta-mosaic__tile .sjpta-gallery__link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.sjpta-mosaic__tile img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: scale var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+/* A quiet zoom, so it is obvious the photograph does something when clicked. */
+.sjpta-mosaic__tile .sjpta-gallery__link:hover img,
+.sjpta-mosaic__tile .sjpta-gallery__link:focus-visible img {
+	scale: 1.04;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-mosaic__tile img {
+		transition: none;
+	}
+
+	.sjpta-mosaic__tile .sjpta-gallery__link:hover img,
+	.sjpta-mosaic__tile .sjpta-gallery__link:focus-visible img {
+		scale: none;
+	}
+}
+
+.sjpta-mosaic__tile--wide {
+	grid-column: span 2;
+}
+
+.sjpta-mosaic__tile--tall {
+	grid-row: span 2;
+}
+
+.sjpta-mosaic__tile--large {
+	grid-column: span 2;
+	grid-row: span 2;
+}
+
+.sjpta-mosaic__note {
+	margin: 18px 0 0;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.6;
+	color: var(--wp--custom--color--text-muted);
+}
+
+@media (max-width: 1023px) {
+	.sjpta-mosaic__tiles {
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: 180px;
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-mosaic__tiles {
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-rows: 150px;
+	}
+
+	/*
+	 * On two columns a "large" tile would fill the whole width twice over, so it
+	 * keeps its double height but drops back to a single column.
+	 */
+	.sjpta-mosaic__tile--large {
+		grid-column: span 1;
+	}
+}
+
+/*
+ * Bar layout (Performances): the heading moves into a section bar and the
+ * category pills sit beside it. The pill styling is the timetable's, which is
+ * loaded globally, so it is not repeated here.
+ */
+.sjpta-mosaic--bar .sjpta-mosaic__bar {
+	flex-wrap: wrap;
+}
+
+.sjpta-mosaic__filters {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}

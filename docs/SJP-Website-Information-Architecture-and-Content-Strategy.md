@@ -15,7 +15,7 @@ The new website should help a parent answer five questions, in this order:
 4. Is the school safe, welcoming and credible?
 5. What exactly do I do next?
 
-The current site contains most of the right proof—professional teaching experience, an inclusive ethos, examinations, performances, testimonials and a wide class range—but the information is spread across “About”, “Members”, “Classes”, “Timetable”, “News” and the external booking journey. New families should not have to understand the school’s internal structure before they can find a suitable class.
+The current site contains most of the right proof, professional teaching experience, an inclusive ethos, examinations, performances, testimonials and a wide class range, but the information is spread across “About”, “Members”, “Classes”, “Timetable”, “News” and the external booking journey. New families should not have to understand the school’s internal structure before they can find a suitable class.
 
 The redesign should therefore be organised around **finding a class and joining SJP**, with the booking portal treated as the final step rather than the starting point.
 
@@ -99,7 +99,7 @@ These audiences should be supported without dominating the first-time family jou
 3. **About SJP**
 4. **Performances**
 5. **Contact**
-6. **Find a Class** — primary button
+6. **Find a Class**, primary button
 
 Utility navigation:
 
@@ -316,7 +316,7 @@ Sample copy:
 
 ## Timetable & Fees
 
-The timetable must be readable on a phone and available as structured webpage content—not only an image or PDF.
+The timetable must be readable on a phone and available as structured webpage content, not only an image or PDF.
 
 Include:
 
@@ -364,7 +364,7 @@ Never ask for safeguarding or medical detail in an open marketing form. Collect 
 
 Confirmation message:
 
-> Thanks—your enquiry is with the SJP team. We’ll reply within **[confirmed response time]** with the best class options and the next available start date.
+> Thanks, your enquiry is with the SJP team. We’ll reply within **[confirmed response time]** with the best class options and the next available start date.
 
 ## About SJP
 
@@ -503,7 +503,7 @@ Accessibility note: orange should not be used for small text on white. Use deep 
 
 ### Homepage
 
-- **Hero:** `Website.jpeg` — energetic, authentic studio environment with good depth
+- **Hero:** `Website.jpeg`, energetic, authentic studio environment with good depth
 - **Supporting class/lifestyle:** `Web-Pic.jpeg` and `Website-pix.jpeg`
 - **Performance proof:** `WhatsApp-Image-2021-10-28-at-21.30.04.jpeg`
 - **Large-show moment:** `SJP-Group-Shot.jpg`
@@ -512,7 +512,7 @@ Accessibility note: orange should not be used for small text on white. Use deep 
 
 ### Teen-focused content
 
-- `IMG_3369-scaled.jpg` — strong solo stage moment
+- `IMG_3369-scaled.jpg`, strong solo stage moment
 - `Commercial-pic-website.jpeg`
 - `WhatsApp-Image-2021-10-28-at-21.30.17.jpeg`
 - `S26.jpg`
@@ -720,4 +720,4 @@ The site should never make a family hunt for the practical details while trying 
 
 Every major page should end by answering:
 
-> **Is this right for us—and what do we do next?**
+> **Is this right for us, and what do we do next?**

@@ -1,0 +1,429 @@
+/*
+ * The enquiry form.
+ *
+ * Registered as `sjpta-form` and referenced from every block that calls
+ * sjpta_enquiry_form(): the enquiry panel today, a class page, the Join page in
+ * phase 7. It lived inside the enquiry panel's stylesheet at first, which meant
+ * the form on a class page rendered as unstyled inputs with the honeypot in plain
+ * sight. A shared component cannot live in one block's stylesheet.
+ */
+
+.sjpta-form__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 10px;
+}
+
+.sjpta-form__intro {
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 var(--wp--preset--spacing--40);
+	text-wrap: pretty;
+}
+
+/*
+ * Rows, not one grid with per-field widths.
+ *
+ * The class page's second row is a narrow age box beside two full-width ones
+ * (0.6fr 1fr 1fr), which a single two-column grid cannot express. Rows also let
+ * the Join form in phase 7 describe its own arrangement without a third form.
+ */
+.sjpta-form__row {
+	display: grid;
+	gap: var(--sjpta-form-gap);
+	margin-bottom: var(--sjpta-form-gap);
+
+	/*
+	 * Fields keep their own height rather than stretching to the tallest in the
+	 * row, so a field carrying an error message grows downwards on its own and
+	 * the inputs beside it stay where they were.
+	 */
+	align-items: start;
+}
+
+.sjpta-form {
+	--sjpta-form-gap: 18px;
+	--sjpta-form-label-gap: 8px;
+}
+
+.sjpta-form__row--1 {
+	grid-template-columns: 1fr;
+}
+
+.sjpta-form__row--2 {
+	grid-template-columns: 1fr 1fr;
+}
+
+.sjpta-form__row--3 {
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* An age needs one or two characters; an email address needs all it can get. */
+.sjpta-form__row--age {
+	grid-template-columns: 0.6fr 1fr 1fr;
+}
+
+.sjpta-form__field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sjpta-form-label-gap);
+	min-width: 0;
+}
+
+.sjpta-form__label {
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 700;
+	color: var(--wp--preset--color--brand-purple);
+}
+
+/*
+ * Optional is marked, not required. Nearly every field here is optional, so
+ * flagging the exceptions would put an asterisk on almost everything and tell a
+ * parent nothing.
+ */
+.sjpta-form__optional {
+	font-weight: 500;
+	color: var(--wp--custom--color--text-muted);
+}
+
+.sjpta-form__input {
+	width: 100%;
+	min-height: 48px;
+	border: 1px solid var(--wp--custom--color--bt-input-border);
+	border-radius: var(--wp--custom--radius--small);
+	padding: 0 14px;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--card-body);
+	color: var(--wp--preset--color--text-body);
+	background: var(--wp--preset--color--surface);
+}
+
+textarea.sjpta-form__input {
+	padding: 12px 14px;
+	line-height: 1.6;
+	resize: vertical;
+}
+
+.sjpta-form__input:focus {
+	outline: none;
+	border-color: var(--sjpta-accent);
+	box-shadow: 0 0 0 3px rgb(var(--sjpta-accent-rgb) / 18%);
+}
+
+/*
+ * No :focus-visible rule here: global.css already puts the plum ring on
+ * everything focusable, and it sits on top of the accent border above, so a
+ * keyboard user gets both.
+ */
+
+/* ---------- Errors ---------- */
+
+.sjpta-form__errors {
+	border: 1px solid var(--wp--custom--color--bt-card-border);
+	background: var(--wp--custom--color--tint-red);
+	border-radius: var(--wp--custom--radius--small);
+	padding: 16px 18px;
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.sjpta-form__errorhead {
+	margin: 0 0 8px;
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--card-body);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-form__errors ul {
+	margin: 0;
+	padding-left: 18px;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.6;
+	color: var(--wp--custom--color--tint-red-fg);
+}
+
+.sjpta-form__errors a {
+	color: inherit;
+}
+
+/* A sentence, never colour alone: the message says what to do about it. */
+.sjpta-form__error {
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.5;
+	color: var(--wp--custom--color--bt-pill-red-fg);
+}
+
+.sjpta-form__field.has-error .sjpta-form__input {
+	border-color: var(--wp--custom--color--bt-pill-red-fg);
+}
+
+/* ---------- Honeypot ---------- */
+
+/*
+ * Off screen rather than display:none. Some bots skip hidden inputs, and a
+ * clipped field is still "there" to anything parsing the DOM, while being
+ * unreachable by pointer, keyboard or screen reader.
+ */
+.sjpta-form__hp {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* ---------- Submit and small print ---------- */
+
+.sjpta-form__submit {
+	width: 100%;
+	min-height: var(--wp--custom--control--hero);
+	font-size: var(--wp--preset--font-size--body);
+}
+
+.sjpta-form__consent {
+	margin: 14px 0 0;
+	font-size: var(--wp--preset--font-size--meta);
+	line-height: 1.6;
+	color: var(--wp--custom--color--text-muted);
+}
+
+/* ---------- Sent ---------- */
+
+.sjpta-form__sent {
+	text-align: center;
+	padding: var(--wp--preset--spacing--30) 0;
+}
+
+.sjpta-form__senticon {
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: var(--wp--custom--color--tint-red);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto var(--wp--preset--spacing--30);
+}
+
+.sjpta-form__senthead {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 10px;
+}
+
+.sjpta-form__senttext {
+	margin: 0 auto;
+	max-width: 380px;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+/* ---------- The class page's variant ---------- */
+
+/*
+ * A class page already knows which class it is, so the design states it and
+ * offers a way out, rather than asking a question whose answer is on the screen.
+ */
+.sjpta-form--class {
+	--sjpta-form-gap: 14px;
+	--sjpta-form-label-gap: 7px;
+}
+
+.sjpta-form--class .sjpta-form__input {
+	border-radius: var(--wp--custom--radius--image);
+}
+
+.sjpta-form__chosen {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--20);
+	background: var(--wp--preset--color--page-background);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--small);
+	padding: 14px 18px;
+	margin-bottom: 16px;
+}
+
+.sjpta-form__chosenlabel {
+	display: block;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	color: var(--wp--custom--color--text-muted);
+	margin-bottom: 2px;
+}
+
+.sjpta-form__chosenvalue {
+	display: block;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--body);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+/*
+ * The design draws this in #FE7300, which is 2.7:1 on the panel behind it. The
+ * signed-off orange waiver covers the filled Enrol button, not small orange
+ * text, so this follows the standing rule and uses the accent's text tone.
+ */
+.sjpta-form__change {
+	display: inline-flex;
+	align-items: center;
+	min-height: 24px;
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 700;
+	color: var(--sjpta-accent-text);
+	white-space: nowrap;
+
+	/*
+	 * No underline, as the design draws it. It is a standalone control at the end
+	 * of a row rather than a link inside a block of prose, so colour is not the
+	 * only thing telling it apart: position and weight do that too.
+	 */
+	text-decoration: none;
+}
+
+.sjpta-form__change:hover {
+	text-decoration: underline;
+}
+
+/* ---------- Consent checkbox ---------- */
+
+.sjpta-form__check {
+	display: flex;
+	align-items: flex-start;
+	gap: 11px;
+	margin-bottom: 20px;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.55;
+	color: var(--wp--preset--color--text-secondary);
+	cursor: pointer;
+}
+
+/*
+ * 18px is the design's box. The label is the target as well, and it runs the
+ * width of the form, so the pair clears the 24px minimum comfortably even
+ * though the box alone does not.
+ */
+.sjpta-form__check input {
+	width: 18px;
+	height: 18px;
+	margin: 2px 0 0;
+	accent-color: var(--sjpta-accent);
+	flex: none;
+}
+
+.sjpta-form__check a {
+	color: var(--wp--preset--color--magenta);
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+	/*
+	 * One field per row. Two narrow columns is not enough for an email address
+	 * to be readable while it is being typed.
+	 */
+	.sjpta-form__row {
+		grid-template-columns: 1fr;
+	}
+
+	/*
+	 * The chosen class and its Change link stop sharing a line: at 390px the
+	 * class name is the longer of the two and was being squeezed to two words
+	 * per line beside a link that needed none of the room.
+	 */
+	.sjpta-form__chosen {
+		align-items: flex-start;
+	}
+}
+
+/* ---------- Field groups and pills ---------- */
+
+/*
+ * The Join form is long enough to need signposting. A real heading, so anyone
+ * moving through the page by heading meets the same two groups a sighted person
+ * sees.
+ */
+.sjpta-form__group {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--wp--custom--color--text-muted);
+	margin: var(--wp--preset--spacing--30) 0 12px;
+}
+
+.sjpta-form__group:first-child {
+	margin-top: 0;
+}
+
+/* A fieldset carrying a group of pills, stripped of its browser chrome. */
+fieldset.sjpta-form__field {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+}
+
+.sjpta-form__pills {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.sjpta-form__pill {
+	position: relative;
+	display: inline-flex;
+}
+
+/*
+ * The input is clipped rather than display:none. A hidden input is removed from
+ * the tab order and from the accessibility tree, which would leave these pills
+ * unusable by keyboard and silent to a screen reader.
+ */
+.sjpta-form__pill input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.sjpta-form__pill span {
+	display: inline-flex;
+	align-items: center;
+	min-height: 40px;
+	padding: 0 16px;
+	border-radius: var(--wp--custom--radius--pill);
+	border: 1px solid var(--wp--custom--color--bt-input-border);
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--brand-purple);
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.sjpta-form__pill:hover span {
+	border-color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-form__pill input:checked + span {
+	background: var(--wp--preset--color--brand-purple);
+	border-color: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--surface);
+	font-weight: 700;
+}
+
+/* The focus ring is drawn on the pill, since the input itself is invisible. */
+.sjpta-form__pill input:focus-visible + span {
+	outline: var(--wp--custom--focus--width) solid var(--wp--custom--focus--color);
+	outline-offset: var(--wp--custom--focus--offset);
+}

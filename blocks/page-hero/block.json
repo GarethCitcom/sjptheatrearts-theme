@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/page-hero",
+	"title": "SJP page hero",
+	"category": "theme",
+	"icon": "cover-image",
+	"description": "Inner-page hero: breadcrumb, heading, intro, two buttons, and either a photo collage or centred copy.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives",
+		"sjpta-collage"
+	]
+}

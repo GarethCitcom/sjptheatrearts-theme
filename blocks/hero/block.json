@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/hero",
+	"title": "SJP hero",
+	"category": "theme",
+	"icon": "cover-image",
+	"description": "Homepage hero: eyebrow, headline, intro, two actions, and the layered background with the ribbon.",
+	"textdomain": "sjptheatrearts",
+	"keywords": [
+		"hero",
+		"homepage"
+	],
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	]
+}

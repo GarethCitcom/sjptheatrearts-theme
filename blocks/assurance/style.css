@@ -1,0 +1,198 @@
+/* Inclusion and safeguarding, two panels of equal weight. */
+
+.sjpta-assure {
+	padding: var(--wp--preset--spacing--60) 0 0;
+}
+
+/*
+ * Both panels run to the same depth. They carry different amounts of copy, so
+ * `align-items: start` left one finishing well above the other and the pair read
+ * as two unrelated cards rather than as one statement in two halves.
+ */
+.sjpta-assure__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--50);
+	align-items: stretch;
+}
+
+.sjpta-assure__panel {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 34px 34px 36px;
+
+	/*
+	 * A column so the closing element of each panel, the quote on one side and
+	 * the policy note on the other, can be pushed to the foot. Stretched to a
+	 * shared height, they would otherwise float wherever their own copy ended.
+	 */
+	display: flex;
+	flex-direction: column;
+}
+
+/*
+ * A pill only as wide as its word. The panel became a flex column so its last
+ * element could be pushed to the foot, and a column stretches its children to
+ * full width by default, which turned both badges into full-width bars.
+ */
+.sjpta-assure__badge {
+	align-self: flex-start;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	margin-bottom: 14px;
+}
+
+.sjpta-assure__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-sm);
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 16px;
+	text-wrap: balance;
+}
+
+.sjpta-assure__body {
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.75;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+.sjpta-assure__body p {
+	margin: 0 0 14px;
+}
+
+.sjpta-assure__body p:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------- The quote ---------- */
+
+/*
+ * `auto` rather than a fixed top margin, so the quote sits at the foot of a
+ * panel stretched to match its neighbour. The gap above it comes from the
+ * body's own bottom margin and this rule's padding, which is why the two can
+ * never collapse into each other when the copy is long.
+ */
+.sjpta-assure__quote {
+	margin: auto 0 0;
+	border-top: 1px solid var(--wp--custom--color--inner-divider);
+	padding-top: var(--wp--preset--spacing--30);
+}
+
+.sjpta-assure__body {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.sjpta-assure__mark {
+	display: block;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: 34px;
+	line-height: 1;
+	color: var(--wp--preset--color--magenta);
+	margin-bottom: 6px;
+}
+
+.sjpta-assure__quote blockquote {
+	margin: 0 0 10px;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.7;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+.sjpta-assure__quote figcaption {
+	font-size: var(--wp--preset--font-size--meta);
+	color: var(--wp--custom--color--text-muted);
+}
+
+.sjpta-assure__quote figcaption strong {
+	color: var(--wp--preset--color--brand-purple);
+}
+
+/* ---------- The safeguarding points ---------- */
+
+.sjpta-assure__points {
+	list-style: none;
+
+	/* The bottom margin is the gap above the policy note, which sits at the foot. */
+	margin: 0 0 var(--wp--preset--spacing--40);
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sjpta-assure__points li {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.6;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+.sjpta-assure__points strong {
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-assure__tick {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: var(--wp--custom--color--badge-green-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	margin-top: 1px;
+}
+
+/* ---------- The policy note ---------- */
+
+/* Same again: pushed to the foot, with the points' bottom margin as the gap. */
+.sjpta-assure__policy {
+	margin-top: auto;
+	background: var(--wp--preset--color--deep-purple);
+	border-radius: var(--wp--custom--radius--small);
+	padding: 18px 20px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.sjpta-assure__policymark {
+	width: 54px;
+	flex: none;
+	display: flex;
+}
+
+.sjpta-assure__policymark img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.sjpta-assure__policy p {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.6;
+	color: var(--wp--custom--color--text-on-purple);
+	text-wrap: pretty;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-assure__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.sjpta-assure__panel {
+		padding: 28px 24px 30px;
+	}
+}

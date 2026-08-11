@@ -1,0 +1,20 @@
+{
+    "key": "group_sjpta_show_feature",
+    "title": "Show feature",
+    "fields": [
+        { "key": "field_sjpta_sf_eyebrow", "label": "Badge", "name": "eyebrow", "type": "text", "required": 0, "default_value": "Next on stage" },
+        { "key": "field_sjpta_sf_heading", "label": "Heading", "name": "heading", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sf_body", "label": "Text", "name": "body", "type": "textarea", "rows": 4, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_sf_facts", "label": "Facts", "name": "facts", "type": "repeater", "instructions": "Leave a value empty and it shows \"To confirm\" rather than a guess.", "required": 0, "min": 0, "max": 4, "layout": "table", "button_label": "Add fact", "sub_fields": [
+            { "key": "field_sjpta_sf_fact_label", "label": "Label", "name": "label", "type": "text", "required": 0 },
+            { "key": "field_sjpta_sf_fact_value", "label": "Value", "name": "value", "type": "text", "required": 0 }
+        ] },
+        { "key": "field_sjpta_sf_cta_label", "label": "First button label", "name": "cta_label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sf_cta_url", "label": "First button link", "name": "cta_url", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sf_alt_label", "label": "Second button label", "name": "alt_label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sf_alt_url", "label": "Second button link", "name": "alt_url", "type": "text", "required": 0 },
+        { "key": "field_sjpta_sf_photo", "label": "Photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "medium", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/show-feature" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

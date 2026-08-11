@@ -1,0 +1,156 @@
+/* The class filter bar. */
+
+.sjpta-filterbar {
+	padding: var(--wp--preset--spacing--30) 0 0;
+}
+
+.sjpta-filters {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 14px 20px;
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--40);
+	flex-wrap: wrap;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.sjpta-filters__group,
+.sjpta-filters__select {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+}
+
+.sjpta-filters__legend {
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 700;
+	color: var(--wp--custom--color--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	white-space: nowrap;
+}
+
+.sjpta-filters__chips {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+/*
+ * The age filter is links, not buttons: each one is a real URL, so it can be
+ * shared and indexed, and it works with no JavaScript and no form submission.
+ */
+.sjpta-chip {
+	display: inline-flex;
+	align-items: center;
+	min-height: var(--wp--custom--control--min);
+	padding: 0 16px;
+	border-radius: var(--wp--custom--radius--pill);
+	border: 1px solid var(--wp--custom--color--card-border);
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--brand-purple);
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.sjpta-chip:hover {
+	border-color: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-chip.is-on {
+	background: var(--wp--preset--color--brand-purple);
+	border-color: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--surface);
+	font-weight: 700;
+}
+
+.sjpta-filters__select select {
+	min-height: var(--wp--custom--control--min);
+	border-radius: var(--wp--custom--radius--pill);
+	border: 1px solid var(--wp--custom--color--card-border);
+	background: var(--wp--preset--color--surface);
+	padding: 0 14px;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--fine-print);
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-filters__go {
+	min-height: var(--wp--custom--control--min);
+	padding: 0 18px;
+	border-radius: var(--wp--custom--radius--pill);
+	border: 1px solid var(--wp--custom--color--card-border);
+	background: var(--wp--preset--color--page-background);
+	color: var(--wp--preset--color--brand-purple);
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.sjpta-filters__go:hover {
+	border-color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-filters__count {
+	margin: 0 0 0 auto;
+	font-size: var(--wp--preset--font-size--fine-print);
+	color: var(--wp--preset--color--text-secondary);
+	white-space: nowrap;
+}
+
+.sjpta-filters__clear {
+	margin-left: 10px;
+	color: var(--wp--custom--color--orange-text);
+	font-weight: 700;
+}
+
+
+/* A divider between the age chips and the two menus, as the design shows. */
+.sjpta-filters__divider {
+	width: 1px;
+	height: 28px;
+	background: var(--wp--custom--color--inner-divider);
+}
+
+/* Once the script is running the Apply button is redundant. */
+.sjpta-filters.is-live .sjpta-filters__go {
+	display: none;
+}
+
+.sjpta-filters__count strong {
+	color: var(--wp--preset--color--brand-purple);
+}
+
+@media (max-width: 1023px) {
+	.sjpta-filters__count {
+		margin-left: 0;
+	}
+
+	.sjpta-filters__divider {
+		display: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-filters {
+		gap: var(--wp--preset--spacing--20);
+	}
+
+	.sjpta-filters__group,
+	.sjpta-filters__select {
+		width: 100%;
+		flex-wrap: wrap;
+	}
+
+	.sjpta-filters__select select,
+	.sjpta-filters__go {
+		width: 100%;
+	}
+}

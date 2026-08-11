@@ -1,0 +1,112 @@
+{
+    "key": "group_sjpta_age_cards",
+    "title": "Age route cards",
+    "fields": [
+        {
+            "key": "field_sjpta_ac_heading",
+            "label": "Section heading",
+            "name": "heading",
+            "type": "text",
+            "instructions": "Optional. Leave empty to keep the desktop design look - the heading is still read out to screen readers so the page outline stays correct.",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_ac_cards",
+            "label": "Cards",
+            "name": "cards",
+            "type": "repeater",
+            "instructions": "Three cards in the approved design. Adding more will wrap to a new row.",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add card",
+            "min": 0,
+            "max": 6,
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_ac_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "id",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "instructions": "Landscape. Shown at 250px tall, cropped to fill.",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ac_badge",
+                    "label": "Age badge",
+                    "name": "badge",
+                    "type": "text",
+                    "required": 0,
+                    "default_value": ""
+                },
+                {
+                    "key": "field_sjpta_ac_badge_style",
+                    "label": "Badge colour",
+                    "name": "badge_style",
+                    "type": "select",
+                    "choices": {
+                        "orange": "Orange",
+                        "magenta": "Magenta",
+                        "purple": "Purple",
+                        "green": "Green"
+                    },
+                    "default_value": "purple",
+                    "return_format": "value",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ac_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ac_text",
+                    "label": "Description",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "new_lines": "",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ac_meta",
+                    "label": "Footer note",
+                    "name": "meta",
+                    "type": "text",
+                    "instructions": "Small grey line at the bottom of the card.",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ac_url",
+                    "label": "Link",
+                    "name": "url",
+                    "type": "url",
+                    "instructions": "Leave empty to link to the Classes page.",
+                    "required": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/age-cards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

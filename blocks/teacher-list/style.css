@@ -1,0 +1,164 @@
+/* The teaching team: photograph beside a list. */
+
+.sjpta-teachers {
+	padding: var(--wp--preset--spacing--60) 0 0;
+}
+
+/*
+ * The photograph runs the full height of the list beside it, note included, so
+ * the two columns finish level. `align-items: start` left it stopping short and
+ * the photograph read as an undersized thumbnail against a taller column.
+ */
+.sjpta-teachers__grid {
+	display: grid;
+
+	/* 60/40: the photograph is the thing worth looking at, the list is scanned. */
+	grid-template-columns: 60fr 40fr;
+	gap: var(--wp--preset--spacing--50);
+	align-items: stretch;
+}
+
+.sjpta-teachers__media {
+	display: flex;
+}
+
+.sjpta-teachers__photo {
+	position: relative;
+	border-radius: var(--wp--custom--radius--card);
+	overflow: hidden;
+	background: var(--wp--custom--color--badge-purple-bg);
+	width: 100%;
+	min-height: 320px;
+}
+
+.sjpta-teachers__photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.sjpta-teachers__caption {
+	position: absolute;
+	left: 14px;
+	bottom: 14px;
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(4px);
+	color: var(--wp--preset--color--brand-purple);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 6px 13px;
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 700;
+}
+
+.sjpta-teachers__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.sjpta-teachers__person {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--small);
+	padding: 16px 18px;
+}
+
+/*
+ * Portrait and initial share a footprint, so a row does not change shape the
+ * day a photograph replaces a letter.
+ */
+.sjpta-teachers__face,
+.sjpta-teachers__initial {
+	width: 56px;
+	height: 56px;
+	border-radius: var(--wp--custom--radius--small);
+	flex: none;
+	overflow: hidden;
+}
+
+/*
+ * Cropped towards the top. Centring a portrait in a 56px square puts the frame
+ * around whatever happens to be in the middle of the photograph, which for a
+ * full-length shot is somebody's waist.
+ */
+.sjpta-teachers__face img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 25%;
+	display: block;
+}
+
+.sjpta-teachers__initial {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--card-lg);
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-teachers__initial--orange {
+	background: var(--wp--preset--color--brand-orange);
+}
+
+.sjpta-teachers__initial--magenta {
+	background: var(--wp--preset--color--magenta);
+}
+
+.sjpta-teachers__initial--purple {
+	background: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-teachers__initial--green {
+	background: var(--wp--custom--color--badge-green-fg);
+}
+
+.sjpta-teachers__name {
+	display: block;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-body);
+	color: var(--wp--preset--color--brand-purple);
+	margin-bottom: 2px;
+}
+
+.sjpta-teachers__role {
+	display: block;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.55;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+/*
+ * The honest note about what is still missing. Tinted rather than bordered, so
+ * it reads as a message about the list rather than as another teacher in it.
+ */
+.sjpta-teachers__footnote {
+	background: var(--wp--custom--color--badge-magenta-bg);
+	border-radius: var(--wp--custom--radius--small);
+	padding: 14px 18px;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.6;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-teachers__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.sjpta-teachers__photo {
+		min-height: 260px;
+	}
+}
