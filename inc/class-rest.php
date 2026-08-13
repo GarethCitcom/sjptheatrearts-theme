@@ -2,7 +2,10 @@
 /**
  * The REST endpoint behind the class filters.
  *
- * `GET /wp-json/sjptheatrearts/v1/classes?age=&style=&day=`
+ * `GET /wp-json/sjptheatrearts/v1/classes?age=&style=&day=&tag=`
+ *
+ * Every filter is a multi-select and travels as a comma-separated list of
+ * slugs; sjpta_filter_values() is the one parser.
  *
  * Returns the same markup the page renders on a full load, produced by the same
  * function, so a filtered view can never drift from a first load.
@@ -38,21 +41,10 @@ function sjpta_register_class_route(): void {
 			 */
 			'permission_callback' => '__return_true',
 			'args'                => array(
-				'age'   => array(
-					'type'              => 'string',
-					'default'           => '',
-					'sanitize_callback' => 'sanitize_key',
-				),
-				'style' => array(
-					'type'              => 'string',
-					'default'           => '',
-					'sanitize_callback' => 'sanitize_key',
-				),
-				'day'   => array(
-					'type'              => 'string',
-					'default'           => '',
-					'sanitize_callback' => 'sanitize_text_field',
-				),
+				'age'   => array( 'default' => '' ),
+				'style' => array( 'default' => '' ),
+				'day'   => array( 'default' => '' ),
+				'tag'   => array( 'default' => '' ),
 				'help'  => array(
 					'type'    => 'object',
 					'default' => array(),
@@ -73,9 +65,10 @@ add_action( 'rest_api_init', 'sjpta_register_class_route' );
  */
 function sjpta_rest_classes( WP_REST_Request $request ): WP_REST_Response {
 	$filters = array(
-		'age'   => (string) $request->get_param( 'age' ),
-		'style' => (string) $request->get_param( 'style' ),
-		'day'   => (string) $request->get_param( 'day' ),
+		'age'   => sjpta_filter_values( $request->get_param( 'age' ) ),
+		'style' => sjpta_filter_values( $request->get_param( 'style' ) ),
+		'day'   => sjpta_filter_values( $request->get_param( 'day' ) ),
+		'tag'   => sjpta_filter_values( $request->get_param( 'tag' ) ),
 	);
 
 	$posts = sjpta_query_classes( $filters )['posts'];

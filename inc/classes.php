@@ -182,35 +182,97 @@ function sjpta_class_count( string $taxonomy = '', string $term = '' ): int {
 }
 
 /**
+ * Normalise one filter's raw URL value into a list of slugs.
+ *
+ * Every filter is a multi-select, and a filtered URL carries it in one of two
+ * shapes: the no-script form submits its checkboxes as an array
+ * (`tag[]=a&tag[]=b`), while the script writes the shorter comma form
+ * (`tag=a,b`) into the address bar. Both mean the same thing here.
+ *
+ * @param mixed $raw The raw query value.
+ *
+ * @return array<int,string>
+ */
+function sjpta_filter_values( $raw ): array {
+	$values = is_array( $raw ) ? $raw : explode( ',', (string) $raw );
+	$clean  = array();
+
+	foreach ( $values as $value ) {
+		$value = sanitize_key( (string) $value );
+
+		if ( '' !== $value && ! in_array( $value, $clean, true ) ) {
+			$clean[] = $value;
+		}
+	}
+
+	return $clean;
+}
+
+/**
  * Read the filter state from the URL.
  *
  * One reader, used by the filter bar, the list and the REST endpoint, so the
  * count in the bar can never disagree with the cards below it.
  *
- * @return array<string,string>
+ * @return array<string,array<int,string>>
  */
 function sjpta_class_filters(): array {
-	// phpcs:disable WordPress.Security.NonceVerification.Recommended -- reading public filter state from the URL, not acting on it.
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- reading public filter state from the URL, not acting on it; sjpta_filter_values() runs sanitize_key() on every value.
 	return array(
-		'age'   => isset( $_GET['age'] ) ? sanitize_key( wp_unslash( $_GET['age'] ) ) : '',
-		'style' => isset( $_GET['style'] ) ? sanitize_key( wp_unslash( $_GET['style'] ) ) : '',
-		'day'   => isset( $_GET['day'] ) ? sanitize_text_field( wp_unslash( $_GET['day'] ) ) : '',
+		'age'   => sjpta_filter_values( isset( $_GET['age'] ) ? wp_unslash( $_GET['age'] ) : '' ),
+		'style' => sjpta_filter_values( isset( $_GET['style'] ) ? wp_unslash( $_GET['style'] ) : '' ),
+		'day'   => sjpta_filter_values( isset( $_GET['day'] ) ? wp_unslash( $_GET['day'] ) : '' ),
+		'tag'   => sjpta_filter_values( isset( $_GET['tag'] ) ? wp_unslash( $_GET['tag'] ) : '' ),
 	);
-	// phpcs:enable WordPress.Security.NonceVerification.Recommended
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 }
 
 /**
- * The classes matching a set of filters, and every day any class runs on.
+ * Read a class's repeater rows as slug => label, for filter matching.
  *
- * Day is matched in PHP rather than in SQL. Days live in an ACF repeater, so
- * matching them in the query would mean a meta query per row index against a
- * serialised key. Fifteen classes do not justify that; revisit it at hundreds.
+ * @param int    $post_id The class.
+ * @param string $field   Repeater field name.
+ * @param int    $skip    Leading rows to ignore.
  *
- * @param array<string,string> $filters age, style and day.
+ * @return array<string,string>
+ */
+function sjpta_class_filter_terms( int $post_id, string $field, int $skip = 0 ): array {
+	$rows  = sjpta_get_field( $field, $post_id );
+	$terms = array();
+
+	foreach ( array_slice( is_array( $rows ) ? $rows : array(), $skip ) as $row ) {
+		$value = trim( (string) ( $row['text'] ?? '' ) );
+
+		if ( '' !== $value ) {
+			$terms[ sanitize_title( $value ) ] = $value;
+		}
+	}
+
+	return $terms;
+}
+
+/**
+ * The classes matching a set of filters, plus every day and tag any class carries.
  *
- * @return array{posts:array<int,WP_Post>,days:array<int,string>}
+ * Each filter is a list, and every ticked value must hold: `day=monday,tuesday`
+ * means classes that run on Monday and on Tuesday, and the filters combine as
+ * "and" too. Days and tags are matched in PHP rather than in SQL: they live in
+ * ACF repeaters, so matching them in the query would mean a meta query per row
+ * index against a serialised key. Fifteen classes do not justify that; revisit
+ * it at hundreds.
+ *
+ * @param array<string,array<int,string>> $filters age, style, day and tag slugs.
+ *
+ * @return array{posts:array<int,WP_Post>,days:array<string,string>,tags:array<string,string>}
  */
 function sjpta_query_classes( array $filters ): array {
+	$filters += array(
+		'age'   => array(),
+		'style' => array(),
+		'day'   => array(),
+		'tag'   => array(),
+	);
+
 	$tax = array();
 
 	if ( ! empty( $filters['age'] ) ) {
@@ -218,6 +280,7 @@ function sjpta_query_classes( array $filters ): array {
 			'taxonomy' => 'age-group',
 			'field'    => 'slug',
 			'terms'    => $filters['age'],
+			'operator' => 'AND',
 		);
 	}
 
@@ -226,6 +289,7 @@ function sjpta_query_classes( array $filters ): array {
 			'taxonomy' => 'discipline',
 			'field'    => 'slug',
 			'terms'    => $filters['style'],
+			'operator' => 'AND',
 		);
 	}
 
@@ -246,32 +310,51 @@ function sjpta_query_classes( array $filters ): array {
 	$query = new WP_Query( $args );
 	$posts = array();
 	$days  = array();
+	$tags  = array();
 
 	foreach ( $query->posts as $post ) {
-		$rows = sjpta_get_field( 'days', $post->ID );
-		$list = array();
+		$post_days = sjpta_class_filter_terms( $post->ID, 'days' );
 
-		foreach ( is_array( $rows ) ? $rows : array() as $row ) {
-			$value = trim( (string) ( $row['text'] ?? '' ) );
+		// The first tag row is the age badge the card shows over the
+		// photograph, not a tag, so it never becomes a filter.
+		$post_tags = sjpta_class_filter_terms( $post->ID, 'tags', 1 );
 
-			if ( '' !== $value ) {
-				$list[]         = $value;
-				$days[ $value ] = true;
-			}
+		$days += $post_days;
+		$tags += $post_tags;
+
+		if ( array_diff( $filters['day'], array_keys( $post_days ) ) ) {
+			continue;
 		}
 
-		if ( ! empty( $filters['day'] ) && ! in_array( $filters['day'], $list, true ) ) {
+		if ( array_diff( $filters['tag'], array_keys( $post_tags ) ) ) {
 			continue;
 		}
 
 		$posts[] = $post;
 	}
 
-	ksort( $days );
+	natcasesort( $tags );
+
+	// Days read as a week, not as an alphabet; anything that is not a weekday
+	// ("Arranged individually") sits after them.
+	$week = array( 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' );
+
+	uksort(
+		$days,
+		static function ( string $a, string $b ) use ( $week ): int {
+			$pos_a = array_search( $a, $week, true );
+			$pos_b = array_search( $b, $week, true );
+			$pos_a = false === $pos_a ? PHP_INT_MAX : $pos_a;
+			$pos_b = false === $pos_b ? PHP_INT_MAX : $pos_b;
+
+			return $pos_a === $pos_b ? strcmp( $a, $b ) : $pos_a <=> $pos_b;
+		}
+	);
 
 	return array(
 		'posts' => $posts,
-		'days'  => array_keys( $days ),
+		'days'  => $days,
+		'tags'  => $tags,
 	);
 }
 

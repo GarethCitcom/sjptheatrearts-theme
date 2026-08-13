@@ -648,8 +648,10 @@ Every link resolves to something real:
 - The four age groups link to the **filtered** class list (`?age=…#all`) rather
   than the design's flat link to the whole list, using `sjpta_age_routes()` so a
   new age group appears without editing the footer.
-- "Private lessons" has no page; the timetable is where they are explained, so
-  that is where it points.
+- "Private lessons" has no page; it points at the class list filtered to the
+  one-to-one tag (`?tag=private-one-to-one#all`), which lists the classes
+  taught that way (Gaz, phase 9). It pointed at the timetable before the list
+  could filter by tag.
 - The About column's anchors (`#teachers`, `#safeguarding`, `#exams`, `#gallery`)
   need those sections to carry matching ids when phase 6 builds those pages.
 - Legal links are an editable repeater, **hidden while empty**, because none of

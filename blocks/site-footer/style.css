@@ -220,6 +220,18 @@
 	display: flex;
 }
 
+/* The booking system's mark, under the contact details. */
+.sjpta-footer__tempo {
+	display: inline-block;
+	margin-top: 22px;
+}
+
+.sjpta-footer__tempo img {
+	display: block;
+	width: 148px;
+	height: auto;
+}
+
 /* ---------- Small print ---------- */
 
 .sjpta-footer__bottom {

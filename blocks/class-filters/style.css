@@ -2,6 +2,10 @@
 
 .sjpta-filterbar {
 	padding: var(--wp--preset--spacing--30) 0 0;
+
+	/* The open menus float over the card grid in the section below. */
+	position: relative;
+	z-index: 5;
 }
 
 .sjpta-filters {
@@ -16,8 +20,7 @@
 	margin-bottom: var(--wp--preset--spacing--40);
 }
 
-.sjpta-filters__group,
-.sjpta-filters__select {
+.sjpta-filters__field {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -33,52 +36,107 @@
 	white-space: nowrap;
 }
 
-.sjpta-filters__chips {
-	display: flex;
-	gap: 8px;
-	flex-wrap: wrap;
+/*
+ * Each filter is a native <details> holding real checkboxes: it opens, ticks
+ * and submits with no JavaScript, and every part of it is drawn here rather
+ * than by the browser, which no <select> allows cross-browser.
+ */
+.sjpta-filters__menu {
+	position: relative;
 }
 
-/*
- * The age filter is links, not buttons: each one is a real URL, so it can be
- * shared and indexed, and it works with no JavaScript and no form submission.
- */
-.sjpta-chip {
-	display: inline-flex;
+.sjpta-filters__summary {
+	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
 	min-height: var(--wp--custom--control--min);
+	min-width: 150px;
 	padding: 0 16px;
-	border-radius: var(--wp--custom--radius--pill);
 	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--pill);
 	background: var(--wp--preset--color--surface);
 	color: var(--wp--preset--color--brand-purple);
 	font-size: var(--wp--preset--font-size--fine-print);
 	font-weight: 600;
-	text-decoration: none;
+	cursor: pointer;
+	list-style: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.sjpta-filters__summary::-webkit-details-marker {
+	display: none;
+}
+
+.sjpta-filters__summary:hover,
+.sjpta-filters__menu[open] .sjpta-filters__summary {
+	border-color: var(--wp--preset--color--brand-purple);
+}
+
+/* What is ticked, in the summary's own words; long lists get an ellipsis. */
+.sjpta-filters__value {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 17em;
+}
+
+.sjpta-filters__chevron {
+	flex: none;
+	width: 10px;
+	height: 7px;
+	clip-path: polygon(0 0, 100% 0, 50% 100%);
+	background: var(--wp--preset--color--brand-purple);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.sjpta-filters__chevron {
+		transition: transform 0.2s ease;
+	}
+}
+
+.sjpta-filters__menu[open] .sjpta-filters__chevron {
+	transform: rotate(180deg);
+}
+
+.sjpta-filters__panel {
+	position: absolute;
+	top: calc(100% + 6px);
+	left: 0;
+	z-index: 30;
+	min-width: 230px;
+	margin: 0;
+	padding: 6px;
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--small);
+	background: var(--wp--preset--color--surface);
+	box-shadow: var(--wp--custom--shadow--nav);
+}
+
+.sjpta-filters__option {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-height: var(--wp--custom--control--min);
+	padding: 0 12px;
+	border-radius: 8px;
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 600;
+	color: var(--wp--preset--color--brand-purple);
+	cursor: pointer;
 	white-space: nowrap;
 }
 
-.sjpta-chip:hover {
-	border-color: var(--wp--preset--color--brand-purple);
-	color: var(--wp--preset--color--brand-purple);
+.sjpta-filters__option:hover {
+	background: var(--wp--preset--color--page-background);
 }
 
-.sjpta-chip.is-on {
-	background: var(--wp--preset--color--brand-purple);
-	border-color: var(--wp--preset--color--brand-purple);
-	color: var(--wp--preset--color--surface);
-	font-weight: 700;
-}
-
-.sjpta-filters__select select {
-	min-height: var(--wp--custom--control--min);
-	border-radius: var(--wp--custom--radius--pill);
-	border: 1px solid var(--wp--custom--color--card-border);
-	background: var(--wp--preset--color--surface);
-	padding: 0 14px;
-	font-family: inherit;
-	font-size: var(--wp--preset--font-size--fine-print);
-	color: var(--wp--preset--color--brand-purple);
+.sjpta-filters__option input {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	accent-color: var(--wp--preset--color--brand-purple);
 }
 
 .sjpta-filters__go {
@@ -111,14 +169,6 @@
 	font-weight: 700;
 }
 
-
-/* A divider between the age chips and the two menus, as the design shows. */
-.sjpta-filters__divider {
-	width: 1px;
-	height: 28px;
-	background: var(--wp--custom--color--inner-divider);
-}
-
 /* Once the script is running the Apply button is redundant. */
 .sjpta-filters.is-live .sjpta-filters__go {
 	display: none;
@@ -132,10 +182,6 @@
 	.sjpta-filters__count {
 		margin-left: 0;
 	}
-
-	.sjpta-filters__divider {
-		display: none;
-	}
 }
 
 @media (max-width: 640px) {
@@ -143,13 +189,26 @@
 		gap: var(--wp--preset--spacing--20);
 	}
 
-	.sjpta-filters__group,
-	.sjpta-filters__select {
+	.sjpta-filters__field {
 		width: 100%;
 		flex-wrap: wrap;
 	}
 
-	.sjpta-filters__select select,
+	.sjpta-filters__menu {
+		width: 100%;
+	}
+
+	/*
+	 * The menus open in flow on small screens, growing the bar, rather than
+	 * as an overlay that would fight the thumb and the viewport edge.
+	 */
+	.sjpta-filters__panel {
+		position: static;
+		min-width: 0;
+		margin-top: 6px;
+		box-shadow: none;
+	}
+
 	.sjpta-filters__go {
 		width: 100%;
 	}

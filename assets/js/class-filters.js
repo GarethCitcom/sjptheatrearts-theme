@@ -1,10 +1,10 @@
 /**
  * Filter the class list in place.
  *
- * Enhancement only. The bar is a working GET form and the chips are real links,
- * so with this script blocked, failed or disabled every filter still works by
- * reloading. This intercepts that, fetches the same markup from the REST route,
- * and swaps the grid without a reload.
+ * Enhancement only. The bar is a working GET form and the age-route cards are
+ * real links, so with this script blocked, failed or disabled every filter still
+ * works by reloading. This intercepts that, fetches the same markup from the
+ * REST route, and swaps the grid without a reload.
  *
  * The URL is kept in step with history.pushState, so a filtered view is still
  * something a parent can bookmark, share, or reach with the back button.
@@ -62,17 +62,61 @@
 		};
 	}() );
 
-	/** The current state of every filter. */
-	function state() {
-		var age = form.querySelector( '[data-filter-input="age"]' );
-		var style = form.querySelector( '[data-filter="style"]' );
-		var day = form.querySelector( '[data-filter="day"]' );
+	var FILTERS = [ 'age', 'style', 'day', 'tag' ];
 
-		return {
-			age: age ? age.value : '',
-			style: style ? style.value : '',
-			day: day ? day.value : '',
-		};
+	/** The ticked values of one filter. */
+	function checked( name ) {
+		return Array.prototype.map.call(
+			form.querySelectorAll( '[data-filter="' + name + '"]:checked' ),
+			function ( box ) {
+				return box.value;
+			}
+		);
+	}
+
+	/**
+	 * The current state of every filter, each as a comma-separated list.
+	 *
+	 * The comma form is what goes into the address bar and the endpoint; the
+	 * checkboxes themselves submit as arrays on the no-script path, and the
+	 * server reads both.
+	 */
+	function state() {
+		var filters = {};
+
+		FILTERS.forEach( function ( name ) {
+			filters[ name ] = checked( name ).join( ',' );
+		} );
+
+		return filters;
+	}
+
+	/** Rewrite a menu's summary to say what is ticked, or its resting label. */
+	function relabel( name ) {
+		var menu = form.querySelector( '[data-filter-menu="' + name + '"]' );
+		var label = menu ? menu.querySelector( '[data-menu-label]' ) : null;
+
+		if ( ! label ) {
+			return;
+		}
+
+		var names = Array.prototype.map.call(
+			form.querySelectorAll( '[data-filter="' + name + '"]:checked' ),
+			function ( box ) {
+				return box.getAttribute( 'data-label' ) || box.value;
+			}
+		);
+
+		label.textContent = names.length ? names.join( ', ' ) : label.getAttribute( 'data-empty' );
+	}
+
+	/** Tick exactly the given values in one filter's menu. */
+	function setFilter( name, values ) {
+		form.querySelectorAll( '[data-filter="' + name + '"]' ).forEach( function ( box ) {
+			box.checked = -1 !== values.indexOf( box.value );
+		} );
+
+		relabel( name );
 	}
 
 	/** Build a query string from the filters that are actually set. */
@@ -114,8 +158,20 @@
 
 	var request = 0;
 
+	/** The Clear link only earns its place while something is ticked. */
+	function toggleClear( filters ) {
+		var link = form.querySelector( '[data-filter-clear]' );
+
+		if ( link ) {
+			link.hidden = ! FILTERS.some( function ( name ) {
+				return '' !== filters[ name ];
+			} );
+		}
+	}
+
 	/** Fetch and swap. */
 	function apply( filters, push, scrollToList ) {
+		toggleClear( filters );
 		var mine = ++request;
 		var query = queryFrom( filters );
 		var url = endpoint + ( query ? '?' + query : '' );
@@ -175,41 +231,28 @@
 		counter.setAttribute( 'data-shown', shown.split( /\s{2,}|\n/ )[ 0 ] || '' );
 	}
 
-	/** Reflect the chosen age in the chips and the hidden input. */
-	function setAge( value ) {
-		var input = form.querySelector( '[data-filter-input="age"]' );
-
-		if ( input ) {
-			input.value = value;
-		}
-
-		form.querySelectorAll( '[data-filter="age"]' ).forEach( function ( chip ) {
-			var on = chip.getAttribute( 'data-value' ) === value;
-
-			chip.classList.toggle( 'is-on', on );
-
-			if ( on ) {
-				chip.setAttribute( 'aria-current', 'true' );
-			} else {
-				chip.removeAttribute( 'aria-current' );
-			}
-		} );
-	}
-
 	/*
 	 * Listening on the document, not the form: the age-route cards further up the
 	 * page carry the same data-filter hooks and mean the same thing, so a route
-	 * card filters in place rather than reloading.
+	 * card filters in place rather than reloading. Anchors only, so the checkbox
+	 * menus in the form (handled by the change listener) are left alone.
 	 */
 	document.addEventListener( 'click', function ( event ) {
-		var chip = event.target.closest( '[data-filter="age"]' );
+		var chip = event.target.closest( 'a[data-filter="age"]' );
 		var clear = event.target.closest( '[data-filter-clear]' );
+
+		// An open menu closes when the visitor clicks anywhere outside it.
+		form.querySelectorAll( '[data-filter-menu][open]' ).forEach( function ( menu ) {
+			if ( ! menu.contains( event.target ) ) {
+				menu.open = false;
+			}
+		} );
 
 		if ( clear ) {
 			event.preventDefault();
-			setAge( '' );
-			form.querySelector( '[data-filter="style"]' ).value = '';
-			form.querySelector( '[data-filter="day"]' ).value = '';
+			FILTERS.forEach( function ( name ) {
+				setFilter( name, [] );
+			} );
 			apply( state(), true );
 			return;
 		}
@@ -224,7 +267,7 @@
 		}
 
 		event.preventDefault();
-		setAge( chip.getAttribute( 'data-value' ) );
+		setFilter( 'age', [ chip.getAttribute( 'data-value' ) ] );
 
 		/*
 		 * A route card sits well above the list, so without this the page would
@@ -235,8 +278,24 @@
 		apply( state(), true, scroll );
 	} );
 
+	// Escape closes the menu the visitor is in and puts focus back on it.
+	form.addEventListener( 'keydown', function ( event ) {
+		if ( 'Escape' !== event.key ) {
+			return;
+		}
+
+		var menu = event.target.closest( '[data-filter-menu][open]' );
+
+		if ( menu ) {
+			menu.open = false;
+			menu.querySelector( 'summary' ).focus();
+		}
+	} );
+
+	// The menus stay open on change: picking several in a row is the point.
 	form.addEventListener( 'change', function ( event ) {
-		if ( event.target.matches( '[data-filter="style"], [data-filter="day"]' ) ) {
+		if ( event.target.matches( '[data-filter]' ) ) {
+			relabel( event.target.getAttribute( 'data-filter' ) );
 			apply( state(), true );
 		}
 	} );
@@ -247,28 +306,26 @@
 		apply( state(), true );
 	} );
 
+	/**
+	 * Read one filter from a URL, in either shape it can arrive in: the comma
+	 * form this script writes, or the array form a no-script form submission
+	 * leaves behind.
+	 */
+	function fromParams( params, name ) {
+		var packed = params.get( name );
+		var values = packed ? packed.split( ',' ) : params.getAll( name + '[]' );
+
+		return values.filter( Boolean );
+	}
+
 	// Back and forward move between filtered views rather than leaving the page.
 	window.addEventListener( 'popstate', function () {
 		var params = new URLSearchParams( window.location.search );
-		var filters = {
-			age: params.get( 'age' ) || '',
-			style: params.get( 'style' ) || '',
-			day: params.get( 'day' ) || '',
-		};
 
-		setAge( filters.age );
+		FILTERS.forEach( function ( name ) {
+			setFilter( name, fromParams( params, name ) );
+		} );
 
-		var style = form.querySelector( '[data-filter="style"]' );
-		var day = form.querySelector( '[data-filter="day"]' );
-
-		if ( style ) {
-			style.value = filters.style;
-		}
-
-		if ( day ) {
-			day.value = filters.day;
-		}
-
-		apply( filters, false );
+		apply( state(), false );
 	} );
 }() );

@@ -96,11 +96,12 @@ foreach ( sjpta_age_routes() as $sjpta_slug => $sjpta_route ) {
 }
 
 /*
- * "Private lessons" has no page of its own and the design pointed it at the
- * class list, which says nothing about them. The timetable is where they are
- * explained, so that is where it goes.
+ * "Private lessons" has no page of its own, but the class list now filters by
+ * tag, so it lands on the classes taught one to one (Gaz, phase 9). The slug
+ * is the slugified pill text on those classes; if the client rewords the pill,
+ * this filters to an honest empty list rather than breaking.
  */
-$sjpta_columns[0]['links'][] = array( __( 'Private lessons', 'sjptheatrearts' ), $sjpta_timetable . '#timetable' );
+$sjpta_columns[0]['links'][] = array( __( 'Private lessons', 'sjptheatrearts' ), add_query_arg( 'tag', 'private-one-to-one', $sjpta_classes ) . '#all' );
 $sjpta_columns[0]['links'][] = array( __( 'Timetable & fees', 'sjptheatrearts' ), $sjpta_timetable );
 
 /** Social accounts, each shown only when there is one to link to. */
@@ -262,6 +263,27 @@ $sjpta_legal = is_array( $sjpta_legal ) ? $sjpta_legal : array();
 						</span>
 					</li>
 				</ul>
+
+				<?php
+				/*
+				 * The booking system's own mark, linking to the vendor's site
+				 * (Gaz, phase 9). Their http URL redirects to https, so the
+				 * https form is linked directly. Intrinsic ratio 624.68:202.62,
+				 * so 148px wide is 48px tall.
+				 */
+				$sjpta_tempo = 'https://tempo-book-it.com/';
+				?>
+				<a class="sjpta-footer__tempo" href="<?php echo esc_url( $sjpta_tempo ); ?>"<?php echo sjpta_external_attr( $sjpta_tempo ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attributes from sjpta_external_attr(). ?>>
+					<img
+						src="<?php echo esc_url( SJPTA_URI . '/assets/images/tempo.svg' ); ?>"
+						alt="<?php esc_attr_e( 'Powered by Tempo', 'sjptheatrearts' ); ?>"
+						width="148"
+						height="48"
+						loading="lazy"
+						decoding="async"
+					>
+					<?php echo sjpta_new_tab_note( $sjpta_tempo ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_new_tab_note(). ?>
+				</a>
 			</div>
 		</div>
 
