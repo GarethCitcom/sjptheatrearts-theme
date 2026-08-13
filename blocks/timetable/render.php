@@ -146,16 +146,43 @@ $sjpta_names = array(
 				 * and the design's pills are a way of getting to a day.
 				 */
 				?>
-				<nav class="sjpta-timetable__filter" aria-label="<?php esc_attr_e( 'Filter the timetable by day', 'sjptheatrearts' ); ?>" data-timetable-filter>
-					<a class="sjpta-daypill is-current" href="#timetable-days" data-day="all" aria-current="true">
-						<?php esc_html_e( 'All days', 'sjptheatrearts' ); ?>
+				<?php
+				/*
+				 * The pills are built once and printed twice: a row for desktop
+				 * and a <details> dropdown for phones, where the row wraps to
+				 * three lines. Only one is ever displayed (primitives.css), so
+				 * only one is in the accessibility tree — the same deliberate
+				 * duplication as the header's two nav lists. data-label is what
+				 * the filter script echoes into the dropdown's summary.
+				 */
+				ob_start();
+				?>
+				<a class="sjpta-daypill is-current" href="#timetable-days" data-day="all" data-label="<?php esc_attr_e( 'All days', 'sjptheatrearts' ); ?>" aria-current="true">
+					<?php esc_html_e( 'All days', 'sjptheatrearts' ); ?>
+				</a>
+				<?php foreach ( array_keys( $sjpta_days ) as $sjpta_day ) : ?>
+					<a class="sjpta-daypill" href="#timetable-day-<?php echo esc_attr( (string) $sjpta_day ); ?>" data-day="<?php echo esc_attr( (string) $sjpta_day ); ?>" data-label="<?php echo esc_attr( $sjpta_names[ $sjpta_day ][0] ); ?>">
+						<?php echo esc_html( $sjpta_names[ $sjpta_day ][1] ); ?>
+						<span class="screen-reader-text"><?php echo esc_html( $sjpta_names[ $sjpta_day ][0] ); ?></span>
 					</a>
-					<?php foreach ( array_keys( $sjpta_days ) as $sjpta_day ) : ?>
-						<a class="sjpta-daypill" href="#timetable-day-<?php echo esc_attr( (string) $sjpta_day ); ?>" data-day="<?php echo esc_attr( (string) $sjpta_day ); ?>">
-							<?php echo esc_html( $sjpta_names[ $sjpta_day ][1] ); ?>
-							<span class="screen-reader-text"><?php echo esc_html( $sjpta_names[ $sjpta_day ][0] ); ?></span>
-						</a>
-					<?php endforeach; ?>
+				<?php endforeach; ?>
+				<?php $sjpta_pills = (string) ob_get_clean(); ?>
+				<nav class="sjpta-timetable__filter" aria-label="<?php esc_attr_e( 'Filter the timetable by day', 'sjptheatrearts' ); ?>" data-timetable-filter>
+					<div class="sjpta-filterrow">
+						<?php echo $sjpta_pills; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped where built above. ?>
+					</div>
+
+					<details class="sjpta-filterdrop">
+						<summary class="sjpta-filterdrop__toggle">
+							<span data-filter-label><?php esc_html_e( 'All days', 'sjptheatrearts' ); ?></span>
+							<span class="sjpta-filterdrop__chevron" aria-hidden="true">
+								<?php echo sjpta_icon( 'chevron-down', 14, 'currentColor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?>
+							</span>
+						</summary>
+						<div class="sjpta-filterdrop__panel">
+							<?php echo $sjpta_pills; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped where built above. ?>
+						</div>
+					</details>
 				</nav>
 			<?php endif; ?>
 		</div>

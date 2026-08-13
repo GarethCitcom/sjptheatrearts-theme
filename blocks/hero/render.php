@@ -19,7 +19,7 @@ require_once __DIR__ . '/ribbon.php';
 
 $sjpta_ctx = sjpta_block_context( $block ?? null );
 
-$sjpta_eyebrow   = sjpta_field( 'eyebrow', __( 'Bromsgrove · all ages · all abilities', 'sjptheatrearts' ), $sjpta_ctx );
+$sjpta_eyebrow   = sjpta_field( 'eyebrow', __( 'All ages · all abilities', 'sjptheatrearts' ), $sjpta_ctx );
 $sjpta_heading   = sjpta_field( 'heading', __( "Find their place\nto shine.", 'sjptheatrearts' ), $sjpta_ctx );
 $sjpta_highlight = sjpta_field( 'highlight', __( 'shine.', 'sjptheatrearts' ), $sjpta_ctx );
 $sjpta_intro     = sjpta_field( 'intro', __( 'Dance, sing and perform with welcoming, industry-trained teachers. Classes for babies, children and teens of every ability, plus adult ballet and ballroom.', 'sjptheatrearts' ), $sjpta_ctx );

@@ -180,6 +180,10 @@
 }
 
 @media (max-width: 1023px) {
+	.sjpta-about__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
 	.sjpta-about__grid {
 		grid-template-columns: 1fr;
 	}

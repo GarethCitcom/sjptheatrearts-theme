@@ -64,6 +64,12 @@
 	display: block;
 }
 
+@media (max-width: 1023px) {
+	.sjpta-accred__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+}
+
 @media (max-width: 782px) {
 	.sjpta-accred__inner {
 		justify-content: center;

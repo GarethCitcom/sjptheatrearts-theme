@@ -177,11 +177,23 @@
 }
 
 @media (max-width: 1023px) {
+	.sjpta-exp__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
 	.sjpta-exp__grid {
 		grid-template-columns: 1fr;
 	}
 
 	.sjpta-exp__media {
 		height: 300px;
+	}
+
+	/*
+	 * The caption fills the lower half of the 300px frame at this width, so a
+	 * centred button lands on the title. Raised into the clear area above it.
+	 */
+	.sjpta-exp__play {
+		top: 30%;
 	}
 }

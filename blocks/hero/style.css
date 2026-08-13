@@ -166,8 +166,17 @@
 		--sjpta-hero-bleed: 0px;
 	}
 
+	.sjpta-hero__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
+	/*
+	 * The copy is the hero's only content at this width, so the section's own
+	 * bottom padding is the whole gap to the age cards. The desktop margin
+	 * exists for the band the cards overlap into, which does not happen here.
+	 */
 	.sjpta-hero__copy {
-		margin-bottom: var(--wp--preset--spacing--80);
+		margin-bottom: 0;
 	}
 }
 

@@ -37,7 +37,7 @@ $sjpta_sections = array();
 $sjpta_sections[] = sjpta_seed_block(
 	'sjptheatrearts/hero',
 	array(
-		'eyebrow'         => array( 'Bromsgrove · all ages · all abilities', 'field_sjpta_hero_eyebrow' ),
+		'eyebrow'         => array( 'All ages · all abilities', 'field_sjpta_hero_eyebrow' ),
 		'heading'         => array( "Find their place\nto shine.", 'field_sjpta_hero_heading' ),
 		'highlight'       => array( 'shine.', 'field_sjpta_hero_highlight' ),
 		'intro'           => array( 'Dance, sing and perform with welcoming, industry-trained teachers. Classes for babies, children and teens of every ability, plus adult ballet and ballroom.', 'field_sjpta_hero_intro' ),

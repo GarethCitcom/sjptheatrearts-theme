@@ -123,6 +123,10 @@
 }
 
 @media (max-width: 1023px) {
+	.sjpta-agecards__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
 	.sjpta-agecards__grid {
 		grid-template-columns: repeat(2, 1fr);
 	}

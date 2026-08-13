@@ -20,6 +20,10 @@
 	var days = Array.prototype.slice.call( document.querySelectorAll( '.sjpta-timetable__day' ) );
 	var none = document.querySelector( '[data-timetable-none]' );
 
+	/* The mobile dropdown: closed after a choice, its label echoing it. */
+	var drop = filter.querySelector( '.sjpta-filterdrop' );
+	var dropLabel = filter.querySelector( '[data-filter-label]' );
+
 	if ( ! days.length ) {
 		return;
 	}
@@ -62,6 +66,18 @@
 		}
 	}
 
+	function choose( pill ) {
+		show( pill.getAttribute( 'data-day' ) );
+
+		if ( dropLabel ) {
+			dropLabel.textContent = pill.getAttribute( 'data-label' ) || pill.textContent.trim();
+		}
+
+		if ( drop ) {
+			drop.open = false;
+		}
+	}
+
 	filter.addEventListener( 'click', function ( event ) {
 		var pill = event.target.closest( '[data-day]' );
 
@@ -70,7 +86,7 @@
 		}
 
 		event.preventDefault();
-		show( pill.getAttribute( 'data-day' ) );
+		choose( pill );
 	} );
 
 	/*
@@ -90,6 +106,6 @@
 		}
 
 		event.preventDefault();
-		show( pill.getAttribute( 'data-day' ) );
+		choose( pill );
 	} );
 } )();

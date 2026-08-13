@@ -118,6 +118,16 @@
 		gap: 20px;
 	}
 
+	/*
+	 * One column, both tones (Gaz). Side by side, the copy column is the panel
+	 * minus the media, and the nowrap eyebrow badge overflows it off the
+	 * viewport.
+	 */
+	.sjpta-adults__panel {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
 	.sjpta-adults__copy {
 		min-width: 0;
 	}

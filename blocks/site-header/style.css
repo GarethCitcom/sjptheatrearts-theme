@@ -515,7 +515,36 @@ body:has(.sjpta-underlap) .sjpta-site-header {
 	height: 30px;
 }
 
+/*
+ * The water drop, phones only. At rest the pill floats in the band; once
+ * stuck the band's padding closes and the radius squares off, so the pill
+ * (already full width at this size) melts into an edge-to-edge bar, then
+ * gathers itself back into the drop at the top of the page. On desktop the
+ * pill keeps its shape and simply condenses.
+ */
+@media (max-width: 1023px) {
+	.sjpta-navwrap {
+		transition: padding var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+	}
+
+	.sjpta-pill {
+		transition:
+			padding 0.24s var(--wp--custom--motion--easing),
+			box-shadow 0.24s var(--wp--custom--motion--easing),
+			border-radius var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+	}
+
+	.sjpta-header.is-stuck .sjpta-navwrap {
+		padding: 0;
+	}
+
+	.sjpta-header.is-stuck .sjpta-pill {
+		border-radius: 0;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
+	.sjpta-navwrap,
 	.sjpta-pill {
 		transition: none;
 	}
@@ -524,17 +553,23 @@ body:has(.sjpta-underlap) .sjpta-site-header {
 /* ---------- Breakpoint ---------- */
 
 @media (max-width: 1023px) {
-	.sjpta-utility {
+	/*
+	 * The utility bar stays, per the mobile design, but keeps only what fits a
+	 * phone: the locality and Member login. The sticky offset is inherited from
+	 * the desktop rule, so the 40px bar scrolls away and the pill comes to rest.
+	 */
+	.sjpta-utility__strapline,
+	.sjpta-utility__divider,
+	.sjpta-utility__link {
 		display: none;
 	}
 
-	/* No utility bar below 1024px, so there is nothing to scroll out of view. */
-	.sjpta-site-header {
-		top: 0;
+	.sjpta-utility__inner {
+		padding: 0 var(--wp--preset--spacing--50);
 	}
 
 	.sjpta-navwrap {
-		padding: 12px 12px 0;
+		padding: 12px 8px 0;
 	}
 
 	body.home .sjpta-site-header {

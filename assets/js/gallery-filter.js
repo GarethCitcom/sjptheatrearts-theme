@@ -26,6 +26,10 @@
 	/* Every tile, kept in order, so filtering never loses one permanently. */
 	var all = Array.prototype.slice.call( tiles.children );
 
+	/* The mobile dropdown: closed after a choice, its label echoing it. */
+	var drop = filter.querySelector( '.sjpta-filterdrop' );
+	var dropLabel = filter.querySelector( '[data-filter-label]' );
+
 	filter.setAttribute( 'role', 'group' );
 
 	pills.forEach( function ( pill ) {
@@ -90,6 +94,14 @@
 
 		event.preventDefault();
 		show( pill.getAttribute( 'data-tag' ) );
+
+		if ( dropLabel ) {
+			dropLabel.textContent = pill.getAttribute( 'data-label' ) || pill.textContent.trim();
+		}
+
+		if ( drop ) {
+			drop.open = false;
+		}
 	}
 
 	filter.addEventListener( 'click', handle );

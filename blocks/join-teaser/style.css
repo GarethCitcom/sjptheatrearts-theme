@@ -185,10 +185,28 @@
 }
 
 @media (max-width: 1023px) {
+	.sjpta-join__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
 	.sjpta-join__panel {
 		grid-template-columns: 1fr;
 		gap: 32px;
 		padding: 30px 24px;
+	}
+
+	/*
+	 * The form bleeds to the panel's edges — the margins cancel the panel
+	 * padding above — so it reads as a flush cap on the stacked card. The top
+	 * corners square off where it meets the copy; the bottom ones are clipped
+	 * to the panel's own radius by its overflow: hidden.
+	 */
+	.sjpta-join__cta {
+		margin-left: -24px;
+		margin-right: -24px;
+		margin-bottom: -30px;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
 	}
 }
 

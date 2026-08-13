@@ -97,26 +97,62 @@ if ( '' !== $sjpta_current && ! in_array( $sjpta_current, $sjpta_slugs, true ) )
 					 * into an in-place filter; without it they simply reload.
 					 */
 					?>
+					<?php
+					/*
+					 * The pills are built once and printed twice: a row for
+					 * desktop and a <details> dropdown for phones, where the
+					 * row wraps to three lines. Only one is ever displayed
+					 * (primitives.css), so only one is in the accessibility
+					 * tree — the same deliberate duplication as the header's
+					 * two nav lists. The summary shows the server's idea of
+					 * the current category, so a filtered page reload reads
+					 * correctly with no JavaScript at all.
+					 */
+					$sjpta_current_label = __( 'All', 'sjptheatrearts' );
+
+					ob_start();
+					?>
+					<a class="sjpta-daypill<?php echo '' === $sjpta_current ? ' is-current' : ''; ?>" href="<?php echo esc_url( remove_query_arg( 'gallery' ) ); ?>#gallery" data-tag="all" data-label="<?php esc_attr_e( 'All', 'sjptheatrearts' ); ?>">
+						<?php esc_html_e( 'All', 'sjptheatrearts' ); ?>
+					</a>
+					<?php foreach ( $sjpta_tags as $sjpta_tag ) : ?>
+						<?php
+						$sjpta_name = trim( (string) ( $sjpta_tag['label'] ?? '' ) );
+
+						if ( '' === $sjpta_name ) {
+							continue;
+						}
+
+						$sjpta_slug = sanitize_title( $sjpta_name );
+
+						if ( $sjpta_current === $sjpta_slug ) {
+							$sjpta_current_label = $sjpta_name;
+						}
+						?>
+						<a
+							class="sjpta-daypill<?php echo $sjpta_current === $sjpta_slug ? ' is-current' : ''; ?>"
+							href="<?php echo esc_url( add_query_arg( 'gallery', $sjpta_slug ) ); ?>#gallery"
+							data-tag="<?php echo esc_attr( $sjpta_slug ); ?>"
+							data-label="<?php echo esc_attr( $sjpta_name ); ?>"
+						><?php echo esc_html( $sjpta_name ); ?></a>
+					<?php endforeach; ?>
+					<?php $sjpta_pills = (string) ob_get_clean(); ?>
 					<nav class="sjpta-mosaic__filters" aria-label="<?php esc_attr_e( 'Filter the gallery', 'sjptheatrearts' ); ?>" data-gallery-filter>
-						<a class="sjpta-daypill<?php echo '' === $sjpta_current ? ' is-current' : ''; ?>" href="<?php echo esc_url( remove_query_arg( 'gallery' ) ); ?>#gallery" data-tag="all">
-							<?php esc_html_e( 'All', 'sjptheatrearts' ); ?>
-						</a>
-						<?php foreach ( $sjpta_tags as $sjpta_tag ) : ?>
-							<?php
-							$sjpta_name = trim( (string) ( $sjpta_tag['label'] ?? '' ) );
+						<div class="sjpta-filterrow">
+							<?php echo $sjpta_pills; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped where built above. ?>
+						</div>
 
-							if ( '' === $sjpta_name ) {
-								continue;
-							}
-
-							$sjpta_slug = sanitize_title( $sjpta_name );
-							?>
-							<a
-								class="sjpta-daypill<?php echo $sjpta_current === $sjpta_slug ? ' is-current' : ''; ?>"
-								href="<?php echo esc_url( add_query_arg( 'gallery', $sjpta_slug ) ); ?>#gallery"
-								data-tag="<?php echo esc_attr( $sjpta_slug ); ?>"
-							><?php echo esc_html( $sjpta_name ); ?></a>
-						<?php endforeach; ?>
+						<details class="sjpta-filterdrop">
+							<summary class="sjpta-filterdrop__toggle">
+								<span data-filter-label><?php echo esc_html( $sjpta_current_label ); ?></span>
+								<span class="sjpta-filterdrop__chevron" aria-hidden="true">
+									<?php echo sjpta_icon( 'chevron-down', 14, 'currentColor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?>
+								</span>
+							</summary>
+							<div class="sjpta-filterdrop__panel">
+								<?php echo $sjpta_pills; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped where built above. ?>
+							</div>
+						</details>
 					</nav>
 				<?php endif; ?>
 			</div>

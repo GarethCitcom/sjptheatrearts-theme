@@ -9,7 +9,7 @@
             "type": "text",
             "instructions": "The small uppercase pill above the headline.",
             "required": 0,
-            "default_value": "Bromsgrove · all ages · all abilities"
+            "default_value": "All ages · all abilities"
         },
         {
             "key": "field_sjpta_hero_heading",

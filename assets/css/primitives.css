@@ -79,6 +79,17 @@
 	padding: 0 var(--wp--preset--spacing--60);
 }
 
+/*
+ * Tighter section gutters on mobile (Gaz). Blocks that declare their own
+ * __inner padding instead of this class carry the same override in their own
+ * stylesheet; keep the two values in step.
+ */
+@media (max-width: 1023px) {
+	.sjpta-inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+}
+
 .sjpta-eyebrow {
 	display: block;
 	font-size: var(--wp--preset--font-size--eyebrow);
@@ -364,4 +375,108 @@
 	border-color: var(--wp--preset--color--brand-purple);
 	color: var(--wp--preset--color--surface);
 	font-weight: 700;
+}
+
+/* ---------- Filter pills: desktop row, mobile dropdown ---------- */
+
+/*
+ * The timetable and the gallery both filter with a row of day pills; on a phone
+ * the row wraps to three lines, so below 783px it becomes a dropdown instead.
+ * Both representations are rendered and only one is ever displayed, the same
+ * deliberate duplication as the header's two nav lists, so only one is in the
+ * accessibility tree. The dropdown is a native <details>: it opens, closes and
+ * is keyboard operable with no JavaScript, and the filter scripts only add
+ * closing it after a choice and echoing that choice into the summary label.
+ */
+.sjpta-filterrow {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.sjpta-filterdrop {
+	display: none;
+	position: relative;
+}
+
+.sjpta-filterdrop__toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	min-height: 44px;
+	padding: 0 16px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--brand-purple);
+	font-size: var(--wp--preset--font-size--fine-print);
+	font-weight: 700;
+	cursor: pointer;
+	list-style: none;
+}
+
+.sjpta-filterdrop__toggle::-webkit-details-marker {
+	display: none;
+}
+
+.sjpta-filterdrop__chevron {
+	display: flex;
+	transition: rotate 0.2s var(--wp--custom--motion--easing);
+}
+
+.sjpta-filterdrop[open] .sjpta-filterdrop__chevron {
+	rotate: 180deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-filterdrop__chevron {
+		transition: none;
+	}
+}
+
+.sjpta-filterdrop__panel {
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 0;
+	right: 0;
+	z-index: 30;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 8px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--small);
+	box-shadow: var(--wp--preset--shadow--nav);
+}
+
+/* Menu rows, not pills: full width, left aligned, no crowding. */
+.sjpta-filterdrop__panel .sjpta-daypill {
+	width: 100%;
+	justify-content: flex-start;
+	border: 0;
+	min-height: 44px;
+}
+
+@media (max-width: 782px) {
+	.sjpta-filterrow {
+		display: none;
+	}
+
+	/* flex-grow: both filter navs are flex containers, so the control and its
+	   panel take the bar's full width rather than shrink-wrapping the label. */
+	.sjpta-filterdrop {
+		display: block;
+		flex: 1 1 auto;
+	}
+
+	/*
+	 * The nav takes the section bar's full width so the dropdown reads as a
+	 * control of its own line. Without :has() support it stays content-width,
+	 * which still works.
+	 */
+	nav:has(> .sjpta-filterdrop) {
+		flex: 1 1 100%;
+	}
 }

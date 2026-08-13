@@ -108,6 +108,12 @@
 	color: var(--wp--custom--color--text-muted);
 }
 
+@media (max-width: 1023px) {
+	.sjpta-quotes__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+}
+
 @media (max-width: 782px) {
 	.sjpta-quotes__grid {
 		grid-template-columns: 1fr;

@@ -283,6 +283,10 @@
 }
 
 @media (max-width: 1023px) {
+	.sjpta-footer__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
 	.sjpta-footer__columns {
 		grid-template-columns: 1fr 1fr;
 		gap: var(--wp--preset--spacing--50);

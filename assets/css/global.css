@@ -63,6 +63,21 @@
 }
 
 /*
+ * Tighter content gutters on mobile. The root padding VARIABLES are overridden
+ * rather than padding itself: .has-global-padding reads them for its side
+ * padding, and its .alignfull children read the same pair for the negative
+ * margins that make sections full-bleed. Changing padding alone would leave
+ * the margins at the old value and every full-width section would overflow
+ * the viewport by the difference.
+ */
+@media (max-width: 1023px) {
+	#sjpta-content {
+		--wp--style--root--padding-left: var(--wp--preset--spacing--30);
+		--wp--style--root--padding-right: var(--wp--preset--spacing--30);
+	}
+}
+
+/*
  * Focus. The design calls for a visible plum ring offset from the element edge.
  * :focus-visible keeps it off mouse clicks; the :focus fallback is scoped away
  * from browsers that support it so it never double-draws.
