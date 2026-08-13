@@ -1,0 +1,193 @@
+/*
+ * Video lightbox.
+ *
+ * Only the player itself lives here. The play button that opens it is styled by
+ * whichever block it belongs to, so this file loads on any page with a video
+ * playlist and knows nothing about the page's layout.
+ */
+
+/* The page behind must not scroll while the player is open. */
+html.sjpta-vlb-open,
+html.sjpta-vlb-open body {
+	overflow: hidden;
+}
+
+.sjpta-vlb {
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sjpta-vlb[hidden] {
+	display: none;
+}
+
+.sjpta-vlb__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(29, 11, 54, 0.92);
+	cursor: pointer;
+}
+
+.sjpta-vlb__inner {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
+	width: min(1060px, 100%);
+	max-height: 100vh;
+	padding: 64px var(--wp--preset--spacing--60) 28px;
+}
+
+.sjpta-vlb__stage {
+	width: 100%;
+}
+
+.sjpta-vlb__video {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	max-height: calc(100vh - 260px);
+	border-radius: var(--wp--custom--radius--card);
+	background: #000;
+}
+
+/* ---------- Title and position ---------- */
+
+.sjpta-vlb__meta {
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: center;
+	gap: 6px 14px;
+	text-align: center;
+}
+
+.sjpta-vlb__title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-vlb__position {
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	color: var(--wp--custom--color--text-on-purple-dim);
+}
+
+/* ---------- Thumbnail rail ---------- */
+
+.sjpta-vlb__rail {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 12px;
+	max-width: 100%;
+}
+
+.sjpta-vlb__rail[hidden] {
+	display: none;
+}
+
+.sjpta-vlb__thumb {
+	width: 148px;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	text-align: left;
+}
+
+.sjpta-vlb__thumb-tile {
+	position: relative;
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--wp--custom--radius--image);
+	overflow: hidden;
+	background: linear-gradient(135deg, var(--wp--preset--color--brand-purple), var(--wp--preset--color--deep-purple));
+	border: 2px solid transparent;
+	color: var(--wp--preset--color--surface);
+}
+
+.sjpta-vlb__thumb-tile img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* The play glyph sits over the photograph, dimmed until the tile is wanted. */
+.sjpta-vlb__thumb-tile svg {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 26px;
+	height: 26px;
+	transform: translate(-50%, -50%);
+	filter: drop-shadow(0 1px 6px rgba(29, 11, 54, 0.6));
+	opacity: 0.85;
+}
+
+.sjpta-vlb__thumb:hover .sjpta-vlb__thumb-tile {
+	border-color: var(--wp--preset--color--surface);
+}
+
+.sjpta-vlb__thumb[aria-current="true"] .sjpta-vlb__thumb-tile {
+	border-color: var(--sjpta-accent);
+}
+
+.sjpta-vlb__thumb-label {
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 600;
+	line-height: 1.4;
+	color: var(--wp--custom--color--text-on-purple);
+}
+
+.sjpta-vlb__thumb[aria-current="true"] .sjpta-vlb__thumb-label {
+	color: var(--wp--custom--color--orange-light);
+}
+
+/* ---------- Close ---------- */
+
+.sjpta-vlb__close {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	width: var(--wp--custom--control--min);
+	height: var(--wp--custom--control--min);
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--wp--preset--color--surface);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.sjpta-vlb__close:hover {
+	background: var(--sjpta-accent);
+	border-color: var(--sjpta-accent);
+}
+
+@media (max-width: 640px) {
+	.sjpta-vlb__inner {
+		padding: 64px 10px 20px;
+	}
+
+	.sjpta-vlb__thumb {
+		width: 124px;
+	}
+}

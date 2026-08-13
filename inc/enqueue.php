@@ -180,6 +180,44 @@ function sjpta_register_lightbox(): void {
 add_action( 'init', 'sjpta_register_lightbox', 5 );
 
 /**
+ * Register the video lightbox stylesheet and script.
+ *
+ * Named handles for the same reason as the photo lightbox: the homepage
+ * experience block uses them today, and any block that grows a video playlist
+ * later references the same pair from its block.json rather than shipping a
+ * second player.
+ *
+ * The script is deferred and does nothing until the play button is clicked.
+ * That button is a real link to the first video file, so the page works
+ * without it.
+ *
+ * @return void
+ */
+function sjpta_register_video_lightbox(): void {
+	$css = 'assets/css/video-lightbox.css';
+	$js  = 'assets/js/video-lightbox.js';
+
+	if ( file_exists( SJPTA_DIR . '/' . $css ) ) {
+		wp_register_style( 'sjpta-video-lightbox', SJPTA_URI . '/' . $css, array(), SJPTA_VERSION );
+		wp_style_add_data( 'sjpta-video-lightbox', 'path', SJPTA_DIR . '/' . $css );
+	}
+
+	if ( file_exists( SJPTA_DIR . '/' . $js ) ) {
+		wp_register_script(
+			'sjpta-video-lightbox',
+			SJPTA_URI . '/' . $js,
+			array(),
+			SJPTA_VERSION,
+			array(
+				'strategy'  => 'defer',
+				'in_footer' => true,
+			)
+		);
+	}
+}
+add_action( 'init', 'sjpta_register_video_lightbox', 5 );
+
+/**
  * Register the stylesheets shared by more than one block.
  *
  * The handle sjpta-form styles sjpta_enquiry_form(), and sjpta-class-card styles

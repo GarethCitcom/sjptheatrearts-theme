@@ -20,6 +20,10 @@
 	},
 	"style": [
 		"file:./style.css",
-		"sjpta-primitives"
+		"sjpta-primitives",
+		"sjpta-video-lightbox"
+	],
+	"viewScript": [
+		"sjpta-video-lightbox"
 	]
 }

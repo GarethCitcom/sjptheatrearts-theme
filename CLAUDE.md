@@ -517,6 +517,16 @@ calling `focus()` on a plain div silently does nothing. Focus stayed on the page
 behind and the first Tab walked out of the dialog. Focus the button by its own
 class.
 
+**The video lightbox is the same shape for film.** `assets/js/video-lightbox.js`
+and `assets/css/video-lightbox.css`, registered as `sjpta-video-lightbox` and
+referenced from the experience block's `block.json`. The play button is a real
+link to the first video file; the script intercepts it and opens a pop-up
+player that starts the first video, runs each on into the next when it ends,
+and offers a thumbnail rail to switch. The playlist travels as JSON in the
+button's `data-video-lightbox` attribute, built from the block's `videos`
+repeater (file, title, thumbnail). A block that grows a playlist later
+references the same handles rather than shipping a second player.
+
 **The homepage photo strip is deliberately not a lightbox gallery.** It is a
 decorative marquee: `role="presentation"`, empty alt text, a duplicated run of
 images to make the loop seamless, and the whole strip is one link to Instagram.

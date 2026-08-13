@@ -283,10 +283,9 @@ $sjpta_sections[] = sjpta_seed_raw(
 			'_video_title' => 'field_sjpta_exp_video_title',
 			'video_text'   => 'Two minutes inside a normal week at SJP: warm-up, corrections, laughing, and the bit where it clicks.',
 			'_video_text'  => 'field_sjpta_exp_video_text',
-			// Deliberately empty: the videos are still to be compressed.
-			'video_url'    => '',
-			'_video_url'   => 'field_sjpta_exp_video_url',
 		),
+		// Deliberately empty: the videos are still to be compressed.
+		sjpta_seed_repeater( 'videos', 'field_sjpta_exp_videos', array() ),
 		sjpta_seed_repeater(
 			'cards',
 			'field_sjpta_exp_cards',
