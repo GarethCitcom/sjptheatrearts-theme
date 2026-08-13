@@ -38,6 +38,8 @@
             { "key": "field_sjpta_cl_wear_text", "label": "Item", "name": "text", "type": "text", "required": 0 }
         ] },
         { "key": "field_sjpta_cl_wear_note", "label": "What to wear, note", "name": "wear_note", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_cl_extra_title", "label": "Good to know, heading", "name": "extra_title", "type": "text", "instructions": "The card's heading. Leave blank and it says \"Good to know\".", "placeholder": "Good to know", "required": 0 },
+        { "key": "field_sjpta_cl_extra_text", "label": "Good to know", "name": "extra_text", "type": "textarea", "instructions": "Extra information worth a card of its own, for example a teacher's qualification. Leave a blank line between paragraphs. The card only appears when this is filled in.", "rows": 5, "new_lines": "wpautop", "required": 0 },
         { "key": "field_sjpta_cl_gallery", "label": "Extra photographs", "name": "gallery", "type": "repeater", "instructions": "The small photographs under the main one. Three works best. The main photograph is the featured image.", "required": 0, "min": 0, "max": 6, "layout": "table", "button_label": "Add photograph", "sub_fields": [
             { "key": "field_sjpta_cl_gallery_photo", "label": "Photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 }
         ] },

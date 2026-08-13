@@ -64,6 +64,8 @@ $sjpta_lead     = (string) sjpta_get_field( 'lead', $sjpta_id );
 $sjpta_leadtags = $sjpta_values( sjpta_get_field( 'lead_tags', $sjpta_id ), 'text' );
 $sjpta_wear     = $sjpta_values( sjpta_get_field( 'wear_items', $sjpta_id ), 'text' );
 $sjpta_wearnote = trim( (string) sjpta_get_field( 'wear_note', $sjpta_id ) );
+$sjpta_extra    = trim( (string) sjpta_get_field( 'extra_text', $sjpta_id ) );
+$sjpta_extrahd  = trim( (string) sjpta_get_field( 'extra_title', $sjpta_id ) );
 $sjpta_gallery  = sjpta_get_field( 'gallery', $sjpta_id );
 $sjpta_caption  = trim( (string) sjpta_get_field( 'caption', $sjpta_id ) );
 
@@ -311,6 +313,13 @@ $sjpta_fact = static function ( array $values, string $fallback, string $note = 
 							<?php echo sjpta_icon( 'arrow-right', 14, 'currentColor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?>
 						</a>
 					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ( '' !== $sjpta_extra ) : ?>
+				<div class="sjpta-class__card">
+					<h2 class="sjpta-class__cardtitle"><?php echo esc_html( '' !== $sjpta_extrahd ? $sjpta_extrahd : __( 'Good to know', 'sjptheatrearts' ) ); ?></h2>
+					<div class="sjpta-class__extra"><?php echo wp_kses_post( $sjpta_extra ); ?></div>
 				</div>
 			<?php endif; ?>
 

@@ -465,6 +465,17 @@
 	text-decoration: underline;
 }
 
+.sjpta-class__extra p {
+	margin: 0 0 10px;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+}
+
+.sjpta-class__extra p:last-child {
+	margin-bottom: 0;
+}
+
 .sjpta-class__watchtext {
 	position: relative;
 	margin: 0 0 18px;
