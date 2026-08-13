@@ -295,8 +295,18 @@
 		flex-direction: column;
 	}
 
+	/*
+	 * flex: 1 shares the row above this width. Once the form is a column the
+	 * flex axis is vertical, and its zero basis collapses the field to its
+	 * text height, beating the 56px, so it is switched off here.
+	 */
+	.sjpta-footer__signupinput {
+		flex: none;
+	}
+
+	/* The button keeps its own width; full-bleed orange overwhelms the band. */
 	.sjpta-footer__signupbtn {
-		width: 100%;
+		align-self: flex-start;
 	}
 }
 
