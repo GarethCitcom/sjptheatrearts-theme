@@ -516,6 +516,33 @@ body:has(.sjpta-underlap) .sjpta-site-header {
 }
 
 /*
+ * Hide on scroll down, return on scroll up -- desktop only, which is why the
+ * rule and not the script carries the media query: motion.js toggles the class
+ * at every width and this transform is the whole of "desktop only", so a
+ * window resize needs no re-measuring anywhere.
+ *
+ * -120% rather than -100% because the pill's shadow reaches below the bar's
+ * own box, and a hidden header must take its shadow with it.
+ *
+ * :focus-within brings the bar back for anyone tabbing through the page: the
+ * nav links stay in the tab order while hidden, and focus landing on an
+ * off-screen control would otherwise be invisible.
+ */
+@media (min-width: 1024px) {
+	.sjpta-site-header {
+		transition: transform 0.6s var(--wp--custom--motion--easing);
+	}
+
+	.sjpta-site-header.is-nav-hidden {
+		transform: translateY(-120%);
+	}
+
+	.sjpta-site-header.is-nav-hidden:focus-within {
+		transform: none;
+	}
+}
+
+/*
  * The water drop, phones only. At rest the pill floats in the band; once
  * stuck the band's padding closes and the radius squares off, so the pill
  * (already full width at this size) melts into an edge-to-edge bar, then
@@ -544,6 +571,7 @@ body:has(.sjpta-underlap) .sjpta-site-header {
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.sjpta-site-header,
 	.sjpta-navwrap,
 	.sjpta-pill {
 		transition: none;
