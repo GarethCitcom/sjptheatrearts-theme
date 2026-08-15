@@ -47,63 +47,7 @@
 	background: linear-gradient(180deg, rgba(29, 11, 54, 0) 40%, rgba(29, 11, 54, 0.7) 100%);
 }
 
-.sjpta-exp__play {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 84px;
-	height: 84px;
-	border-radius: 50%;
-	background: var(--wp--preset--color--surface);
-	border: 0;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.25);
-	text-decoration: none;
-}
-
-.sjpta-exp__play:hover {
-	background: var(--wp--preset--color--brand-orange);
-}
-
-.sjpta-exp__play:hover svg path {
-	fill: #fff;
-}
-
-/* The design's 2.6s expanding ring. Pure CSS, so it needs no motion.js. */
-.sjpta-exp__play::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border-radius: 50%;
-	border: 2px solid rgba(255, 255, 255, 0.9);
-	animation: sjpta-pulse 2.6s ease-out infinite;
-}
-
-.sjpta-exp__play:hover::after {
-	animation-play-state: paused;
-}
-
-@keyframes sjpta-pulse {
-	from {
-		transform: scale(1);
-		opacity: 0.9;
-	}
-
-	to {
-		transform: scale(1.6);
-		opacity: 0;
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.sjpta-exp__play::after {
-		animation: none;
-	}
-}
+/* The play button itself is the shared .sjpta-play in primitives.css. */
 
 .sjpta-exp__caption {
 	position: absolute;
@@ -193,7 +137,7 @@
 	 * The caption fills the lower half of the 300px frame at this width, so a
 	 * centred button lands on the title. Raised into the clear area above it.
 	 */
-	.sjpta-exp__play {
+	.sjpta-exp__media .sjpta-play {
 		top: 30%;
 	}
 }

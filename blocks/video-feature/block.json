@@ -9,5 +9,6 @@
 	"textdomain": "sjptheatrearts",
 	"supports": { "align": false, "anchor": true, "html": false, "customClassName": false, "jsx": false },
 	"acf": { "mode": "preview", "renderTemplate": "render.php" },
-	"style": [ "file:./style.css", "sjpta-primitives" ]
+	"style": [ "file:./style.css", "sjpta-primitives", "sjpta-video-lightbox" ],
+	"viewScript": [ "sjpta-video-lightbox" ]
 }

@@ -98,7 +98,7 @@ if ( '' === $sjpta_label && 0 === $sjpta_poster && array() === $sjpta_cards ) {
 
 					<?php if ( array() !== $sjpta_playlist ) : ?>
 						<a
-							class="sjpta-exp__play"
+							class="sjpta-play sjpta-exp__play"
 							href="<?php echo esc_url( $sjpta_playlist[0]['src'] ); ?>"
 							data-pulse
 							data-video-lightbox="<?php echo esc_attr( (string) wp_json_encode( $sjpta_playlist ) ); ?>"

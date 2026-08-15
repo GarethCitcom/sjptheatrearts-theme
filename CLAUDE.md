@@ -530,7 +530,14 @@ player that starts the first video, runs each on into the next when it ends,
 and offers a thumbnail rail to switch. The playlist travels as JSON in the
 button's `data-video-lightbox` attribute, built from the block's `videos`
 repeater (file, title, thumbnail). A block that grows a playlist later
-references the same handles rather than shipping a second player.
+references the same handles rather than shipping a second player. The
+Performances `video-feature` block does exactly that with a one-item playlist:
+the poster stays as designed and the play button opens the same pop-up (the
+rail hides itself for a single video). It used to swap the poster for an inline
+`<video>`, which is what looked like the holder image being replaced. The play
+control itself is the shared `.sjpta-play` in `primitives.css` (size and ring
+are custom properties, 84px on the homepage, 92px on Performances), so a third
+block that needs one adds the class rather than another copy of the CSS.
 
 **The homepage photo strip is deliberately not a lightbox gallery.** It is a
 decorative marquee: `role="presentation"`, empty alt text, a duplicated run of

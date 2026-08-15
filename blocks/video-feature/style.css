@@ -13,8 +13,7 @@
 	min-height: 320px;
 }
 
-.sjpta-video__poster,
-.sjpta-video__player {
+.sjpta-video__poster {
 	width: 100%;
 	height: 100%;
 	max-height: 520px;
@@ -24,8 +23,8 @@
 
 /*
  * The scrim only exists to keep the caption legible over a photograph nobody
- * chose for its contrast. It sits under the video's own controls, and is
- * pointer-transparent so it cannot swallow a click on them.
+ * chose for its contrast. It is pointer-transparent so it cannot swallow a
+ * click on the play button.
  */
 .sjpta-video__scrim {
 	position: absolute;
@@ -72,16 +71,27 @@
 }
 
 /*
- * With a real video the caption would sit over the controls, so it stands down
- * and the film speaks for itself.
+ * The Performances design draws the play button a step larger than the
+ * homepage's: 92px with a 14px ring. The control itself is .sjpta-play.
  */
-.sjpta-video__frame:has(.sjpta-video__player) .sjpta-video__caption,
-.sjpta-video__frame:has(.sjpta-video__player) .sjpta-video__scrim {
-	display: none;
+.sjpta-video__frame .sjpta-play {
+	--sjpta-play-size: 92px;
+	--sjpta-play-ring: 14px;
 }
 
 @media (max-width: 782px) {
 	.sjpta-video__caption {
 		padding: 22px 20px;
+	}
+
+	/*
+	 * The caption takes the lower part of a 320px frame at this width, so a
+	 * centred button lands on the title. Raised into the clear area above it.
+	 */
+	.sjpta-video__frame .sjpta-play {
+		--sjpta-play-size: 74px;
+		--sjpta-play-ring: 12px;
+
+		top: 36%;
 	}
 }

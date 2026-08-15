@@ -241,6 +241,75 @@
 	color: var(--wp--preset--color--surface);
 }
 
+/* ---------- Play button ---------- */
+
+/*
+ * The circular play control over a poster, shared by every block that opens the
+ * video lightbox (experience on the homepage, video-feature on Performances).
+ * The design draws it at 84px on the homepage and 92px on Performances, so the
+ * size and its ring are custom properties a block may override.
+ */
+.sjpta-play {
+	--sjpta-play-size: 84px;
+	--sjpta-play-ring: 12px;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: var(--sjpta-play-size);
+	height: var(--sjpta-play-size);
+	border-radius: 50%;
+	background: var(--wp--preset--color--surface);
+	border: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 0 var(--sjpta-play-ring) rgba(255, 255, 255, 0.25);
+	text-decoration: none;
+}
+
+.sjpta-play:hover {
+	background: var(--sjpta-accent);
+}
+
+.sjpta-play:hover svg path {
+	fill: #fff;
+}
+
+/* The design's 2.6s expanding ring. Pure CSS, so it needs no motion.js. */
+.sjpta-play::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.9);
+	animation: sjpta-pulse 2.6s ease-out infinite;
+}
+
+.sjpta-play:hover::after {
+	animation-play-state: paused;
+}
+
+@keyframes sjpta-pulse {
+	from {
+		transform: scale(1);
+		opacity: 0.9;
+	}
+
+	to {
+		transform: scale(1.6);
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-play::after {
+		animation: none;
+	}
+}
+
 /* ---------- Badges ---------- */
 
 .sjpta-badge {
