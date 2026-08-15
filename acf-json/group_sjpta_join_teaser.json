@@ -23,7 +23,7 @@
         },
         { "key": "field_sjpta_jt_foot_strong", "label": "Footnote heading", "name": "footnote_strong", "type": "text", "required": 0, "default_value": "What to wear for a first class:" },
         { "key": "field_sjpta_jt_foot_text", "label": "Footnote", "name": "footnote_text", "type": "textarea", "rows": 2, "new_lines": "", "required": 0 },
-        { "key": "field_sjpta_jt_panel_title", "label": "Panel title", "name": "panel_title", "type": "text", "required": 0, "default_value": "Enrol now" },
+        { "key": "field_sjpta_jt_panel_title", "label": "Panel title", "name": "panel_title", "type": "text", "required": 0, "default_value": "Enquire now" },
         { "key": "field_sjpta_jt_panel_text", "label": "Panel text", "name": "panel_text", "type": "textarea", "rows": 3, "new_lines": "", "instructions": "Do not promise a response time until one is agreed.", "required": 0 },
         { "key": "field_sjpta_jt_panel_label", "label": "Panel button label", "name": "panel_label", "type": "text", "required": 0, "default_value": "Start your enquiry" },
         { "key": "field_sjpta_jt_panel_url", "label": "Panel button link", "name": "panel_url", "type": "url", "instructions": "Leave empty to link to the Join page.", "required": 0, "default_value": "" }

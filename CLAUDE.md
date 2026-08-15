@@ -315,16 +315,21 @@ Two rules that keep editors working:
 
 ## Enquiry form placement (Gaz, phase 3b)
 
-The homepage carries a **real inline enrolment form**, in the join teaser, a
-duplicate of the form on the Join page, same fields, same handler, same routing.
-A visitor who simply scrolls the homepage can enrol without navigating anywhere.
+The homepage carries a **real inline form**, in the join teaser, using the same
+renderer and handler as every other form on the site. A visitor who simply
+scrolls the homepage can ask without navigating anywhere.
 
-The nav's "Enrol now" button still goes to the **Join page**, not to the inline
-form. Two routes to the same action, deliberately.
-
-Built in phase 7 with the handler; until then the teaser panel links to the Join
-page rather than showing a form that would silently discard an enquiry. Build the
-form once as a block used in both places, never two copies to keep in step.
+**Enquire and enrol are two different things, and every form says which it is**
+(Gaz, 2026-08). The homepage panel and the class pages carry an *enquiry* form
+(type `enquiry`, panel title "Enquire now"), with a "Ready to enrol? Enrol now"
+button under it that goes to the Join page and carries across whatever has been
+typed (`?pf_<field>=` in the URL, read by `sjpta_enquiry_prefill()`; a class
+page passes `pf_class_want`). The Join page carries the *enrolment* form (type
+`enrolment`, button "Send my enrolment") with the reverse under it: "Want to
+talk to us first? Contact us". The nav's "Enrol now" and a class page's hero
+"Enrol now" both go to the Join page; a class page's "Ask a question" scrolls
+to its own enquiry form. Never send someone to a form called one thing to do
+the other.
 
 ## CSS pipeline and the page budget
 
@@ -535,11 +540,56 @@ twice.
 
 ## The enquiry form
 
-One implementation, in `inc/enquiry.php` (storage and handling) and
-`inc/enquiry-form.php` (rendering). Any block calls `sjpta_enquiry_form()` with
-its own recipient, class list, copy and anchor. Born To Be and the class pages
-use it today; the Join page and the homepage join teaser call the same function
-in phase 7. **Never write a second form.**
+One implementation: `inc/enquiry.php` (types, settings, processing, storage,
+email, retention), `inc/enquiry-admin.php` (the Enquiries screens),
+`inc/enquiry-form.php` (rendering), `inc/newsletter.php` (the footer sign-up,
+same plumbing) and `assets/js/enquiry-form.js` (sending without a page load).
+Any block calls `sjpta_enquiry_form()` with its own **type**, class list, copy
+and anchor. Every form on the site goes through it. **Never write a second form.**
+
+**Every form has a type, and the type alone decides who is emailed.** The types
+are `sjpta_enquiry_types()`: `enquiry` (homepage panel, class pages),
+`enrolment` (Join), `contact` (Contact), `born-to-be`, `newsletter` (footer).
+The type travels as a hidden `sjpta_type`; the addresses live under
+**Enquiries → Settings** (`sjpta_enquiry_settings`, one comma-separated list
+per type, plus a "who replies" name and the retention period), resolved on the
+server by `sjpta_enquiry_recipients()`. Nothing about routing is in the page,
+so there is no open-relay field to defend. A type with no address set falls
+back to the SJP settings field it used to read (`class_enquiry_email`,
+`btb_enquiry_email`, `contact_email`) and then to the contact inbox; the
+newsletter falls back to nobody, because a sign-up is a notification, not a
+message. The enquiry panel block names its type in `form_type`; panels saved
+before that field existed still carry the old `recipient` route key, which
+`sjpta_enquiry_type_from_route()` maps, so nothing needs re-saving.
+
+**Two ways in, one path through.** `sjpta_enquiry_process()` validates, stores
+and sends. The script posts the form to `POST /wp-json/sjptheatrearts/v1/enquiry`
+(newsletter: `/newsletter`) and gets `{ok, errors}` back; with scripting off,
+or if the endpoint cannot be reached, the same form POSTs to its own page and
+`sjpta_handle_enquiry()` on `template_redirect` calls the same function, then
+redirects to `?enquiry=sent#anchor`. Both endpoints are public and nonce-free
+on purpose (see below). The thank-you is printed **inside the form in a
+`<template data-sjpta-sent>`** by the same `sjpta_enquiry_sent_markup()` the
+redirect path prints, so the two cannot look different; the script swaps it in,
+scrolls it into view and focuses it. While sending, the form is `is-submitting`:
+button disabled, spinner shown, label "Sending…", `aria-live` status updated.
+Server errors are written under the fields and into the summary exactly as PHP
+renders them. **The script never validates on its own**; the server's answer is
+the only source of truth, so the two paths cannot disagree.
+
+**Storage and the Enquiries screen.** Every submission is a private
+`sjpta-enquiry` post with `_sjpta_type`, `_sjpta_status` (`new` / `done`),
+`_sjpta_sent_to`, `_sjpta_source` (the page it came from) and one `_sjpta_<field>`
+per value. The list filters by form and by status, has "Mark as dealt with"
+row and bulk actions, and the menu shows a count of new ones. **Retention** is a
+setting (default 365 days, 0 keeps forever); `sjpta_enquiry_prune()` runs daily
+on the `sjpta_enquiry_prune` cron and deletes outright, not to trash, because a
+retention period that quietly kept the data another thirty days would break its
+own promise. **"Send test"** on the settings screen mails the type's addresses
+and reports the mail server's actual answer (`wp_mail_failed`): the first thing
+to press when "forms are not working", because it tells email delivery apart
+from everything else. On this dev box it reports "Could not instantiate mail
+function", which is correct: Laragon's web PHP has no mail transport.
 
 **The four designs draw four different forms**, which is what `variant` is for.
 `sjpta_enquiry_layout()` holds one entry per design: which fields appear, how the
@@ -586,35 +636,19 @@ whole row look broken.
 Built in phase 3c rather than phase 7 at Gaz's request, because Born To Be
 enquiries go to Madison rather than SJ.
 
-**Where enquiries go, by type.** A block names a *role*, never an address, and
-`sjpta_enquiry_recipient()` resolves it:
-
-| Route | Used by | Setting |
-| --- | --- | --- |
-| `lottie` | class pages, Join, the homepage panel | `class_enquiry_email` |
-| `madison` | Born To Be | `btb_enquiry_email` |
-| `sjp` | Contact, anything general | `contact_email` |
-
-Every one falls back to the contact email, so an unset address never loses an
-enquiry. **`class_enquiry_email` is empty today**: the site's own copy says Lottie
-answers class enquiries, but nobody has given her address, so those currently
-reach the general inbox. The recipient travels in a hidden field but is **checked
-against the configured addresses before anything is sent**, without that the
-field is an open relay.
-
 **The confirmation names who replies** where the site knows, via
-`sjpta_enquiry_responder()`. Pass the default explicitly when reading that name:
-ACF returns an empty string for an options field nobody has saved, not the
-field's default, so the sentence silently fell back to "we" until it did.
+`sjpta_enquiry_responder( $type )`: the "Who replies" column on the settings
+screen first, then for `enquiry` and `enrolment` the SJP settings name
+(`class_enquiry_name`, default "Lottie"). Pass the default explicitly when
+reading an ACF option: ACF returns an empty string for a field nobody has saved,
+not the field's default, so the sentence silently fell back to "we" until it did.
+The same trap is why `sjpta_enquiry_contact_email()` passes the footer's
+explicit fallback: without it the chain reached `admin_email`, which on this
+install is the booking provider's support desk.
 
-Watch the fallback chain: ACF returns an empty string for an options field nobody
-has saved, not the field's default, so `sjpta_setting()` calls here pass the same
-explicit default the footer uses. Without it the chain reached `admin_email`,
-which on this install is the booking provider's support desk.
-
-**Every enquiry is stored as well as emailed**, as a private `sjpta-enquiry` post
-that is not public, not queryable and not in REST. Email is the part that fails
-quietly; the stored copy means a parent's message is never simply gone.
+**Every submission is stored as well as emailed**, as a private `sjpta-enquiry`
+post that is not public, not queryable and not in REST. Email is the part that
+fails quietly; the stored copy means a parent's message is never simply gone.
 
 **No WordPress nonce, deliberately.** A nonce printed into a page a host caches
 goes stale, and the failure lands on a parent who typed everything correctly.
@@ -659,13 +693,21 @@ Every link resolves to something real:
 - Facebook and TikTok render only when their setting is filled. Never invent a
   social account.
 
-**The newsletter posts straight to the mailing tool** (`newsletter_action`, plus
-`newsletter_field` for the address field's name). Mailchimp, Brevo and MailerLite
-all publish such an endpoint, so the provider owns the list, the double opt-in
-and the unsubscribe, none of which this site should pretend to handle, and it
-works with JavaScript off. **With no endpoint set there is no field at all**,
-only a link to Contact: a box that swallowed an address and did nothing with it
-would be worse than not asking.
+**The newsletter goes through the site, then to the mailing tool**
+(`inc/newsletter.php`). The address is stored under Enquiries as type
+`newsletter`, emailed to whoever the settings screen names (nobody by default),
+and forwarded from the server with `wp_remote_post()` to `newsletter_action`
+using `newsletter_field` as the field name, which is exactly what the tool's own
+embed code posts from a browser. Mailchimp, Brevo and MailerLite all accept it,
+so the provider still owns the list, the double opt-in and the unsubscribe; the
+difference is that the visitor stays on the page and a sign-up the tool refuses
+is not simply lost (the forwarding result is on the stored record). Same
+honeypot and signed timestamp, same script, same no-JS fallback
+(`?newsletter=sent#signup`). **Note that on the dev site this forwards to the
+real Mailchimp list**, so test with addresses you are happy to see there.
+**With no endpoint set there is no field at all**, only a link to Contact: a
+box that swallowed an address and did nothing with it would be worse than not
+asking.
 
 ## The timetable
 

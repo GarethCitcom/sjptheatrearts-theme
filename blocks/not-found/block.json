@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sjptheatrearts/not-found",
+	"title": "SJP not found (404)",
+	"category": "theme",
+	"icon": "warning",
+	"description": "The page shown when a URL does not exist. Big playful 404, a search box and the routes back into the site.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"html": false,
+		"reusable": false,
+		"multiple": false,
+		"align": false,
+		"customClassName": false
+	},
+	"attributes": {
+		"eyebrow": {
+			"type": "string",
+			"default": "Error 404"
+		},
+		"heading": {
+			"type": "string",
+			"default": "This page missed its cue"
+		},
+		"text": {
+			"type": "string",
+			"default": "The page you were after has left the stage. It may have moved, been renamed, or never existed in the first place. Pick a route below and we will get you back in position."
+		},
+		"aside": {
+			"type": "string",
+			"default": "Wrong turn? It happens to the best of us in the studio too."
+		}
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	],
+	"render": "file:./render.php"
+}

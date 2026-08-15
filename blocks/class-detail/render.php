@@ -73,10 +73,18 @@ $sjpta_classes_page = get_page_by_path( 'classes' );
 $sjpta_classes_url  = $sjpta_classes_page ? (string) get_permalink( $sjpta_classes_page ) : home_url( '/classes/' );
 
 $sjpta_timetable = get_page_by_path( 'timetable-and-fees' );
-$sjpta_about     = get_page_by_path( 'about' );
+
+$sjpta_about = get_page_by_path( 'about' );
 
 $sjpta_watch = sjpta_setting( 'watch_first', '' );
 $sjpta_title = get_the_title( $sjpta_id );
+
+/*
+ * Enrolling happens on the Join page. "Enrol now" here goes there with the
+ * class named in the URL, so the enrolment form opens already knowing which
+ * class; the form on this page is for asking, and says so.
+ */
+$sjpta_enrol_url = add_query_arg( 'pf_class_want', $sjpta_title, sjpta_link_or_page( '', 'join' ) ) . '#enquire';
 
 /**
  * A fact, the client's own wording for it, or its honest "ask us" state.
@@ -141,7 +149,9 @@ $sjpta_fact = static function ( array $values, string $fallback, string $note = 
 				<?php endif; ?>
 
 				<div class="sjpta-class__actions">
-					<a class="sjpta-btn sjpta-btn--plum sjpta-class__btn" href="#enquire"><?php esc_html_e( 'Enrol now', 'sjptheatrearts' ); ?></a>
+					<a class="sjpta-btn sjpta-btn--plum sjpta-class__btn" href="<?php echo esc_url( $sjpta_enrol_url ); ?>"><?php esc_html_e( 'Enrol now', 'sjptheatrearts' ); ?></a>
+
+					<a class="sjpta-btn sjpta-btn--outline sjpta-class__btn" href="#enquire"><?php esc_html_e( 'Ask a question', 'sjptheatrearts' ); ?></a>
 
 					<?php if ( $sjpta_timetable ) : ?>
 						<a class="sjpta-btn sjpta-btn--outline sjpta-class__btn" href="<?php echo esc_url( (string) get_permalink( $sjpta_timetable ) ); ?>">
@@ -339,20 +349,20 @@ $sjpta_fact = static function ( array $values, string $fallback, string $note = 
 			<span class="sjpta-class__enquiredecor" aria-hidden="true"></span>
 
 			<div class="sjpta-class__enquirecopy">
-				<span class="sjpta-badge sjpta-badge--orange sjpta-class__eyebrow"><?php esc_html_e( 'Enrol now', 'sjptheatrearts' ); ?></span>
+				<span class="sjpta-badge sjpta-badge--orange sjpta-class__eyebrow"><?php esc_html_e( 'Enquire now', 'sjptheatrearts' ); ?></span>
 
 				<h2 class="sjpta-class__enquiretitle">
 					<?php
 					printf(
 						/* translators: %s: class name. */
-						esc_html__( 'Join %s', 'sjptheatrearts' ),
+						esc_html__( 'Ask about %s', 'sjptheatrearts' ),
 						esc_html( $sjpta_title )
 					);
 					?>
 				</h2>
 
 				<p class="sjpta-class__enquiretext">
-					<?php esc_html_e( 'Your enquiry comes straight to us, and we will confirm a class time and what to bring.', 'sjptheatrearts' ); ?>
+					<?php esc_html_e( 'Your enquiry comes straight to us, and we will come back with class times, what to bring and how to enrol.', 'sjptheatrearts' ); ?>
 				</p>
 
 				<?php
@@ -369,7 +379,7 @@ $sjpta_fact = static function ( array $values, string $fallback, string $note = 
 					<span class="sjpta-class__enquiretick" aria-hidden="true">
 						<?php echo sjpta_icon( 'check', 16, 'var(--wp--custom--color--success-green)' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?>
 					</span>
-					<?php esc_html_e( 'Enrolling takes a few minutes and we will confirm your start date.', 'sjptheatrearts' ); ?>
+					<?php esc_html_e( 'Already decided? Enrolling takes a few minutes and we will confirm your start date.', 'sjptheatrearts' ); ?>
 				</p>
 			</div>
 
@@ -382,21 +392,26 @@ $sjpta_fact = static function ( array $values, string $fallback, string $note = 
 				 */
 				sjpta_enquiry_form(
 					array(
-						'variant'   => 'class',
-						'recipient' => sjpta_enquiry_recipient( 'lottie' ),
-						'route'     => 'lottie',
-						'subject'   => sprintf(
+						'variant' => 'class',
+						'type'    => 'enquiry',
+						'subject' => sprintf(
 							/* translators: %s: class name. */
 							__( 'Enquiry about %s', 'sjptheatrearts' ),
 							$sjpta_title
 						),
-						'chosen'    => array(
+						'chosen'  => array(
 							'value' => $sjpta_title,
 							'url'   => $sjpta_classes_url,
 							'link'  => __( 'Change', 'sjptheatrearts' ),
 						),
-						'submit'    => __( 'Send my enquiry', 'sjptheatrearts' ),
-						'anchor'    => 'enquire',
+						'submit'  => __( 'Send my enquiry', 'sjptheatrearts' ),
+						'anchor'  => 'enquire',
+						'after'   => array(
+							'text'    => __( 'Ready to enrol?', 'sjptheatrearts' ),
+							'label'   => __( 'Enrol now', 'sjptheatrearts' ),
+							'url'     => $sjpta_enrol_url,
+							'prefill' => true,
+						),
 					)
 				);
 				?>

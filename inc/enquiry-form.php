@@ -201,14 +201,68 @@ function sjpta_enquiry_consent_line( string $variant = '' ): string {
 }
 
 /**
+ * The sent state, as markup.
+ *
+ * Used twice: printed in place of the form after a plain POST, and printed
+ * inside a <template> in the form so the script can swap it in without a
+ * round trip. Same markup either way, so the two paths cannot look different.
+ *
+ * @param string $head Heading.
+ * @param string $text Body.
+ *
+ * @return string Escaped markup.
+ */
+function sjpta_enquiry_sent_markup( string $head, string $text ): string {
+	return sprintf(
+		'<div class="sjpta-form__sent" role="status" tabindex="-1"><span class="sjpta-form__senticon" aria-hidden="true">%1$s</span><h3 class="sjpta-form__senthead">%2$s</h3><p class="sjpta-form__senttext">%3$s</p></div>',
+		sjpta_icon( 'check', 22, 'var(--sjpta-accent)' ),
+		esc_html( $head ),
+		esc_html( $text )
+	);
+}
+
+/**
+ * Values to start the form with, from the query string.
+ *
+ * The "Enrol now" button under an enquiry form carries what the visitor has
+ * already typed across to the enrolment form as `pf_<field>` parameters, so
+ * they do not type it twice. Only plain fields are read; the answers to the
+ * choice questions belong to the form that asks them.
+ *
+ * @return array<string,string>
+ */
+function sjpta_enquiry_prefill(): array {
+	$out = array();
+
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended -- reading values to show back in a form, nothing is acted on.
+	foreach ( sjpta_enquiry_fields() as $name => $field ) {
+		if ( ! in_array( $field['type'], array( 'text', 'email', 'tel', 'select' ), true ) ) {
+			continue;
+		}
+
+		if ( isset( $_GET[ 'pf_' . $name ] ) && ! is_array( $_GET[ 'pf_' . $name ] ) ) {
+			$value = sanitize_text_field( wp_unslash( (string) $_GET[ 'pf_' . $name ] ) );
+
+			if ( '' !== $value ) {
+				$out[ $name ] = $value;
+			}
+		}
+	}
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+	return $out;
+}
+
+/**
  * Render the enquiry form, or its sent state.
  *
  * Accepted keys:
  *
  * - `variant`   Layout name, see sjpta_enquiry_layout(). Default `stack`.
- * - `route`     Routing key (`sjp`, `lottie`, `madison`), used to name who replies.
- * - `recipient` Address enquiries go to. Falls back to the site contact email.
- * - `subject`   Names the form in the email subject and the admin list.
+ * - `type`      Form type, see sjpta_enquiry_types(). Decides who is emailed,
+ *               via the Enquiries settings screen, and who the confirmation
+ *               names. Default `contact`.
+ * - `subject`   Names the form in the email and the admin list.
  * - `classes`   Options for the "which class" menu. An empty list hides it.
  * - `chosen`    Class this form is already about: `value`, `url`, `link`. Shown
  *               instead of the menu, and posted as a hidden field.
@@ -219,6 +273,12 @@ function sjpta_enquiry_consent_line( string $variant = '' ): string {
  * - `sent_head` Heading of the sent state.
  * - `sent_text` Body of the sent state.
  * - `anchor`    Section id to return to after sending.
+ * - `after`     A line and a link under the form: `text`, `label`, `url`, and
+ *               `prefill` (bool) to carry the typed values across in the URL.
+ *
+ * `route` and `recipient` are still accepted from older callers: the route is
+ * mapped to a type and the recipient is ignored, because addresses now come
+ * from the settings screen and never from a page.
  *
  * @param array<string,mixed> $args Options, as listed above.
  *
@@ -227,6 +287,7 @@ function sjpta_enquiry_consent_line( string $variant = '' ): string {
 function sjpta_enquiry_form( array $args = array() ): void {
 	$defaults = array(
 		'variant'   => 'stack',
+		'type'      => '',
 		'route'     => '',
 		'recipient' => '',
 		'subject'   => __( 'Website enquiry', 'sjptheatrearts' ),
@@ -239,6 +300,7 @@ function sjpta_enquiry_form( array $args = array() ): void {
 		'sent_head' => __( 'Thank you, that is on its way.', 'sjptheatrearts' ),
 		'sent_text' => __( 'We answer every message ourselves, so it may take a day or two. If it is urgent, please ring us.', 'sjptheatrearts' ),
 		'anchor'    => 'enquire',
+		'after'     => array(),
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -255,6 +317,17 @@ function sjpta_enquiry_form( array $args = array() ): void {
 		}
 	}
 
+	$variant = is_string( $args['variant'] ) ? $args['variant'] : 'stack';
+	$type    = is_string( $args['type'] ) ? sanitize_key( $args['type'] ) : '';
+
+	if ( '' === $type ) {
+		$type = sjpta_enquiry_type_from_route( (string) $args['route'], $variant );
+	}
+
+	if ( ! isset( sjpta_enquiry_types()[ $type ] ) ) {
+		$type = 'contact';
+	}
+
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- reading a redirect flag, not acting on it.
 	$sent = isset( $_GET['enquiry'] ) && 'sent' === $_GET['enquiry'];
 
@@ -264,52 +337,63 @@ function sjpta_enquiry_form( array $args = array() ): void {
 	 * better than "we"; the name comes from a setting, so it can never be a
 	 * guess, and the sentence falls back to "we" when nobody has set one.
 	 */
-	if ( $sent && ! empty( $args['route'] ) ) {
-		$sjpta_who = sjpta_enquiry_responder( (string) $args['route'] );
+	$sjpta_who = sjpta_enquiry_responder( $type );
 
-		if ( '' !== $sjpta_who && $args['sent_text'] === $defaults['sent_text'] ) {
-			$args['sent_text'] = sprintf(
-				/* translators: %s: the name of the person who answers enquiries. */
-				__( '%s answers every enquiry herself, so it may take a day or two. If it is urgent, please ring us.', 'sjptheatrearts' ),
-				$sjpta_who
-			);
-		}
+	if ( '' !== $sjpta_who && $args['sent_text'] === $defaults['sent_text'] ) {
+		$args['sent_text'] = sprintf(
+			/* translators: %s: the name of the person who answers enquiries. */
+			__( '%s answers every enquiry herself, so it may take a day or two. If it is urgent, please ring us.', 'sjptheatrearts' ),
+			$sjpta_who
+		);
 	}
 
+	$sent_markup = sjpta_enquiry_sent_markup( (string) $args['sent_head'], (string) $args['sent_text'] );
+
 	if ( $sent ) {
-		?>
-		<div class="sjpta-form__sent" role="status">
-			<span class="sjpta-form__senticon" aria-hidden="true">
-				<?php echo sjpta_icon( 'check', 22, 'var(--sjpta-accent)' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?>
-			</span>
-			<h3 class="sjpta-form__senthead"><?php echo esc_html( (string) $args['sent_head'] ); ?></h3>
-			<p class="sjpta-form__senttext"><?php echo esc_html( (string) $args['sent_text'] ); ?></p>
-		</div>
-		<?php
+		echo $sent_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_enquiry_sent_markup().
 		return;
 	}
 
-	$variant = is_string( $args['variant'] ) ? $args['variant'] : 'stack';
-	$layout  = sjpta_enquiry_layout( $variant );
-	$fields  = sjpta_enquiry_fields();
-	$chosen  = is_array( $args['chosen'] ) ? $args['chosen'] : array();
+	$layout = sjpta_enquiry_layout( $variant );
+	$fields = sjpta_enquiry_fields();
+	$chosen = is_array( $args['chosen'] ) ? $args['chosen'] : array();
 
 	$errors = isset( $GLOBALS['sjpta_enquiry_errors'] ) && is_array( $GLOBALS['sjpta_enquiry_errors'] )
 		? $GLOBALS['sjpta_enquiry_errors']
 		: array();
 	$values = isset( $GLOBALS['sjpta_enquiry_values'] ) && is_array( $GLOBALS['sjpta_enquiry_values'] )
 		? $GLOBALS['sjpta_enquiry_values']
-		: array();
+		: sjpta_enquiry_prefill();
 
-	$recipient = sanitize_email( (string) $args['recipient'] );
+	/*
+	 * A class carried across from another page may not be on this form's menu
+	 * (the Join page lists a handful of popular classes, not all fifteen), so it
+	 * is added rather than dropped. The handler does not hold the class menu to a
+	 * list, so it posts back exactly as typed.
+	 */
+	$classes = array_values( array_map( 'strval', (array) $args['classes'] ) );
 
-	if ( '' === $recipient || ! in_array( $recipient, sjpta_enquiry_allowed_recipients(), true ) ) {
-		$recipient = sjpta_enquiry_default_recipient();
+	if ( ! empty( $values['class_want'] ) && ! empty( $classes ) && ! in_array( $values['class_want'], $classes, true ) ) {
+		array_unshift( $classes, (string) $values['class_want'] );
 	}
 
+	$args['classes'] = $classes;
+
+	$after = is_array( $args['after'] ) ? $args['after'] : array();
 	$stamp = (string) time();
+
+	wp_enqueue_script( 'sjpta-enquiry-form' );
 	?>
-	<form class="sjpta-form sjpta-form--<?php echo esc_attr( $variant ); ?>" method="post" action="<?php echo esc_url( get_permalink() . '#' . $args['anchor'] ); ?>" novalidate>
+	<form
+		class="sjpta-form sjpta-form--<?php echo esc_attr( $variant ); ?>"
+		method="post"
+		action="<?php echo esc_url( get_permalink() . '#' . $args['anchor'] ); ?>"
+		novalidate
+		data-sjpta-form="enquiry"
+		data-endpoint="<?php echo esc_url( rest_url( SJPTA_ENQUIRY_REST_NS . '/enquiry' ) ); ?>"
+		data-sending="<?php esc_attr_e( 'Sending', 'sjptheatrearts' ); ?>"
+		data-summary="<?php esc_attr_e( 'We could not send that. Please check:', 'sjptheatrearts' ); ?>"
+	>
 
 		<?php if ( '' !== $args['heading'] ) : ?>
 			<h3 class="sjpta-form__heading"><?php echo esc_html( (string) $args['heading'] ); ?></h3>
@@ -564,9 +648,10 @@ function sjpta_enquiry_form( array $args = array() ): void {
 		</div>
 
 		<input type="hidden" name="sjpta_enquiry" value="1">
+		<input type="hidden" name="sjpta_type" value="<?php echo esc_attr( $type ); ?>">
 		<input type="hidden" name="sjpta_anchor" value="<?php echo esc_attr( (string) $args['anchor'] ); ?>">
-		<input type="hidden" name="sjpta_to" value="<?php echo esc_attr( $recipient ); ?>">
 		<input type="hidden" name="sjpta_subject" value="<?php echo esc_attr( (string) $args['subject'] ); ?>">
+		<input type="hidden" name="sjpta_source" value="<?php echo esc_url( (string) get_permalink() ); ?>">
 		<input type="hidden" name="sjpta_t" value="<?php echo esc_attr( $stamp ); ?>">
 		<input type="hidden" name="sjpta_s" value="<?php echo esc_attr( sjpta_enquiry_signature( $stamp ) ); ?>">
 
@@ -585,13 +670,50 @@ function sjpta_enquiry_form( array $args = array() ): void {
 			</label>
 		<?php endif; ?>
 
+		<?php
+		/*
+		 * The button carries its own spinner, hidden until the script sets the
+		 * form to `is-submitting`. The label is a span so the script can swap
+		 * the words without touching the icon, and a screen reader hears
+		 * "Sending" through aria-live on the status line the script updates.
+		 */
+		?>
 		<button class="sjpta-btn sjpta-btn--primary sjpta-form__submit" type="submit">
-			<?php echo esc_html( (string) $args['submit'] ); ?>
+			<span class="sjpta-form__spinner" aria-hidden="true"></span>
+			<span class="sjpta-form__submitlabel"><?php echo esc_html( (string) $args['submit'] ); ?></span>
 		</button>
+		<span class="screen-reader-text sjpta-form__status" role="status" aria-live="polite"></span>
 
 		<?php if ( 'note' === $layout['consent'] && '' !== $args['consent'] ) : ?>
 			<p class="sjpta-form__consent"><?php echo esc_html( (string) $args['consent'] ); ?></p>
 		<?php endif; ?>
+
+		<?php if ( ! empty( $after['url'] ) && ! empty( $after['label'] ) ) : ?>
+			<?php
+			/*
+			 * The other route. Under an enquiry form it is "Ready to enrol?", a
+			 * link to the enrolment form; under the enrolment form it is "Want to
+			 * talk to us first?", a link to Contact. A real link either way, so it
+			 * works with scripting off; with it on, `data-prefill` carries what
+			 * has been typed so far across in the URL.
+			 */
+			?>
+			<p class="sjpta-form__after">
+				<?php if ( ! empty( $after['text'] ) ) : ?>
+					<span class="sjpta-form__aftertext"><?php echo esc_html( (string) $after['text'] ); ?></span>
+				<?php endif; ?>
+				<a
+					class="sjpta-btn sjpta-btn--outline sjpta-form__afterlink"
+					href="<?php echo esc_url( (string) $after['url'] ); ?>"
+					<?php echo ! empty( $after['prefill'] ) ? ' data-prefill' : ''; ?>
+				>
+					<?php echo esc_html( (string) $after['label'] ); ?>
+					<?php echo sjpta_icon( 'arrow-right', 15, 'currentColor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?>
+				</a>
+			</p>
+		<?php endif; ?>
+
+		<template data-sjpta-sent><?php echo $sent_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_enquiry_sent_markup(). ?></template>
 	</form>
 	<?php
 }

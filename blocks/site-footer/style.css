@@ -92,6 +92,55 @@
 	margin: 0;
 }
 
+/*
+ * The form wraps so an error line, or the thank-you the script swaps in, can
+ * take a full row under the field without pushing the button off its line.
+ */
+.sjpta-footer__signupform {
+	flex-wrap: wrap;
+}
+
+.sjpta-footer__signuperror {
+	flex-basis: 100%;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.5;
+	color: var(--wp--custom--color--bt-pill-red-fg);
+}
+
+.sjpta-footer__signupform.has-error .sjpta-footer__signupinput {
+	border-color: var(--wp--custom--color--bt-pill-red-fg);
+}
+
+.sjpta-footer__signupsent {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	min-height: 56px;
+	font-weight: 600;
+	color: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-footer__signuptick {
+	flex: none;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--wp--custom--color--tint-red);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Off screen rather than display:none, so a form-filling bot still sees it. */
+.sjpta-footer__hp {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
 /* ---------- Columns ---------- */
 
 .sjpta-footer__columns {

@@ -6,8 +6,8 @@
  * practical facts. The right column is the enquiry form.
  *
  * The form itself is sjpta_enquiry_form(), shared with every other enquiry point
- * on the site, so there is only ever one to keep working. Each panel names its
- * own recipient: Born To Be reaches Madison, the Join page reaches SJ.
+ * on the site, so there is only ever one to keep working. Each panel names what
+ * kind of form it is; who that kind reaches is set under Enquiries → Settings.
  *
  * @package SJPTheatreArts
  */
@@ -41,13 +41,34 @@ $sjpta_consent   = sjpta_field( 'consent', '', $sjpta_ctx );
 $sjpta_sent_head = sjpta_field( 'sent_heading', '', $sjpta_ctx );
 $sjpta_sent_text = sjpta_field( 'sent_text', '', $sjpta_ctx );
 
+$sjpta_variant = sjpta_field( 'variant', 'stack', $sjpta_ctx );
+
 /*
- * Which mailbox this panel writes to. The value is checked against the addresses
- * the site configures before anything is sent, so a tampered form cannot make
- * WordPress mail a stranger.
+ * What kind of form this is, which is all the handler needs: the addresses for
+ * each kind live on the Enquiries settings screen, never in the page. Panels
+ * saved before the kind was a field still carry the old "recipient" routing
+ * key, which maps onto a kind, so nothing needs re-saving.
  */
-$sjpta_route     = sjpta_field( 'recipient', 'sjp', $sjpta_ctx );
-$sjpta_recipient = sjpta_enquiry_recipient( $sjpta_route );
+$sjpta_type = sjpta_field( 'form_type', '', $sjpta_ctx );
+
+if ( '' === $sjpta_type ) {
+	$sjpta_type = sjpta_enquiry_type_from_route( sjpta_field( 'recipient', 'sjp', $sjpta_ctx ), $sjpta_variant );
+}
+
+/*
+ * The enrolment form offers the other route under the button: a parent who is
+ * not ready to enrol, or has a question first, is pointed at Contact rather
+ * than left to send an enrolment they did not mean.
+ */
+$sjpta_after = array();
+
+if ( 'enrolment' === $sjpta_type ) {
+	$sjpta_after = array(
+		'text'  => __( 'Want to talk to us first?', 'sjptheatrearts' ),
+		'label' => __( 'Contact us', 'sjptheatrearts' ),
+		'url'   => sjpta_link_or_page( '', 'contact' ) . '#contact',
+	);
+}
 
 $sjpta_choices = $sjpta_has_acf ? get_field( 'class_options', $sjpta_ctx ) : array();
 $sjpta_options = array();
@@ -112,10 +133,10 @@ foreach ( is_array( $sjpta_choices ) ? $sjpta_choices : array() as $sjpta_choice
 				<?php
 				sjpta_enquiry_form(
 					array(
-						'variant'   => sjpta_field( 'variant', 'stack', $sjpta_ctx ),
-						'recipient' => $sjpta_recipient,
-						'route'     => $sjpta_route,
+						'variant'   => $sjpta_variant,
+						'type'      => $sjpta_type,
 						'subject'   => $sjpta_heading,
+						'after'     => $sjpta_after,
 						'classes'   => $sjpta_options,
 						'heading'   => $sjpta_form_head,
 						'intro'     => $sjpta_form_text,

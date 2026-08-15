@@ -182,6 +182,77 @@ textarea.sjpta-form__input {
 	font-size: var(--wp--preset--font-size--body);
 }
 
+/*
+ * Sending. The script adds `is-submitting` to the form for as long as the
+ * request is in flight; the button dims, stops taking clicks, and shows a
+ * ring beside "Sending…". The ring is a bordered circle turning, nothing more,
+ * and under reduced motion it stops turning and simply sits there: the label
+ * change is what carries the meaning.
+ */
+.sjpta-form__spinner {
+	display: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	border: 2.5px solid rgba(255, 255, 255, 0.4);
+	border-top-color: currentColor;
+	animation: sjpta-form-spin 0.8s linear infinite;
+	flex: none;
+}
+
+.sjpta-form.is-submitting .sjpta-form__spinner {
+	display: inline-block;
+}
+
+.sjpta-form.is-submitting .sjpta-form__submit {
+	opacity: 0.85;
+	cursor: progress;
+	pointer-events: none;
+}
+
+.sjpta-form.is-submitting .sjpta-form__input,
+.sjpta-form.is-submitting .sjpta-form__pill,
+.sjpta-form.is-submitting .sjpta-form__check {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+@keyframes sjpta-form-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-form__spinner {
+		animation: none;
+	}
+}
+
+/*
+ * The other route, under the button: "Ready to enrol?" beneath an enquiry
+ * form, "Want to talk to us first?" beneath the enrolment form. Quieter than
+ * the primary action, but a real button rather than a text link, because it
+ * is the answer to the confusion between the two forms.
+ */
+.sjpta-form__after {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px 16px;
+	margin: 18px 0 0;
+	padding-top: 18px;
+	border-top: 1px solid var(--wp--custom--color--inner-divider);
+	font-size: var(--wp--preset--font-size--card-body);
+	color: var(--wp--preset--color--text-secondary);
+	text-align: center;
+}
+
+.sjpta-form__afterlink {
+	gap: 8px;
+}
+
 .sjpta-form__consent {
 	margin: 14px 0 0;
 	font-size: var(--wp--preset--font-size--meta);

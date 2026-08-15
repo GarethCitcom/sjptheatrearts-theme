@@ -1,0 +1,558 @@
+/* The 404 page. */
+
+/*
+ * Underlaps the floating nav like every other hero (marker class in the markup,
+ * nav band added back as padding here, both or neither, see CLAUDE.md). The
+ * 84px fallback covers a load order where the header has not set the variable.
+ */
+.sjpta-404 {
+	position: relative;
+	overflow: hidden;
+	padding: calc(var(--sjpta-nav-band, 84px) + var(--wp--preset--spacing--70)) 0 var(--wp--preset--spacing--80);
+	text-align: center;
+}
+
+/* ---------- Decoration ---------- */
+
+/*
+ * The same dot grid and glows as the page hero, restated here because that
+ * block's stylesheet does not load on this route. Purely decorative and out of
+ * the way of pointer events.
+ */
+.sjpta-404__decor {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background-image: radial-gradient(rgba(56, 16, 100, 0.08) 1px, transparent 1.4px);
+	background-size: 24px 24px;
+}
+
+.sjpta-404__decor::before,
+.sjpta-404__decor::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+}
+
+.sjpta-404__decor::before {
+	left: -180px;
+	top: -140px;
+	width: 520px;
+	height: 520px;
+	background: radial-gradient(circle, rgb(var(--sjpta-accent-rgb) / 14%) 0%, rgb(var(--sjpta-accent-rgb) / 0%) 70%);
+}
+
+.sjpta-404__decor::after {
+	right: -200px;
+	top: -40px;
+	width: 560px;
+	height: 560px;
+	background: radial-gradient(circle, color-mix(in srgb, var(--wp--preset--color--magenta) 16%, transparent) 0%, transparent 70%);
+}
+
+/*
+ * The wash that dissolves the decoration into the page rather than clipping it.
+ * A painted gradient, not a mask, for the reason recorded on the page hero: a
+ * mask forces an offscreen compositing pass on every paint.
+ */
+.sjpta-404::after {
+	content: "";
+	position: absolute;
+	inset: auto 0 0;
+	height: 40%;
+	pointer-events: none;
+	background: linear-gradient(to bottom, transparent, var(--wp--preset--color--page-background));
+}
+
+/*
+ * Six slow sparkles: four dots and two stars, in the three brand colours at low
+ * opacity. Transform-only animation, so they cost nothing to composite.
+ */
+.sjpta-404__spark {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	opacity: 0.55;
+	animation: sjpta-404-float 7s ease-in-out infinite alternate;
+}
+
+.sjpta-404__spark--1 {
+	left: 12%;
+	top: 22%;
+	background: var(--wp--preset--color--brand-orange);
+	animation-duration: 6.4s;
+}
+
+.sjpta-404__spark--2 {
+	left: 22%;
+	top: 64%;
+	width: 7px;
+	height: 7px;
+	background: var(--wp--preset--color--magenta);
+	animation-duration: 8.2s;
+	animation-delay: -2s;
+}
+
+.sjpta-404__spark--3 {
+	right: 16%;
+	top: 30%;
+	width: 8px;
+	height: 8px;
+	background: var(--wp--custom--color--badge-purple-fg);
+	animation-duration: 7.6s;
+	animation-delay: -4s;
+}
+
+.sjpta-404__spark--4 {
+	right: 9%;
+	top: 68%;
+	background: var(--wp--custom--color--orange-light);
+	animation-duration: 9s;
+	animation-delay: -1s;
+}
+
+/* The two stars: a five point clip on a square. */
+.sjpta-404__spark--5,
+.sjpta-404__spark--6 {
+	width: 18px;
+	height: 18px;
+	border-radius: 0;
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.sjpta-404__spark--5 {
+	left: 30%;
+	top: 16%;
+	background: var(--wp--preset--color--magenta);
+	animation-duration: 8.8s;
+	animation-delay: -3s;
+}
+
+.sjpta-404__spark--6 {
+	right: 27%;
+	top: 74%;
+	background: var(--wp--preset--color--brand-orange);
+	animation-duration: 7.2s;
+	animation-delay: -5s;
+}
+
+@keyframes sjpta-404-float {
+	from {
+		transform: translateY(-10px) rotate(0deg);
+	}
+
+	to {
+		transform: translateY(12px) rotate(25deg);
+	}
+}
+
+/* ---------- Layout ---------- */
+
+/* z-index 1 lifts the content above the ::after wash. */
+.sjpta-404__inner {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* ---------- The numerals ---------- */
+
+.sjpta-404__figure {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: clamp(10px, 2.4vw, 22px);
+	margin-bottom: var(--wp--preset--spacing--60);
+}
+
+/*
+ * Three tiles, each tilted a touch, in the orange, purple and magenta of the
+ * age badges so the page reads as the same family as the class cards. They drop
+ * onto the stage one after another when the page loads, and hop when the group
+ * is hovered.
+ */
+.sjpta-404__digit {
+	--tile: clamp(84px, 17vw, 168px);
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--tile);
+	height: var(--tile);
+	border-radius: calc(var(--tile) * 0.22);
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: calc(var(--tile) * 0.6);
+	line-height: 1;
+	letter-spacing: -0.03em;
+	box-shadow: var(--wp--preset--shadow--frame);
+	transform: rotate(var(--tilt, 0deg));
+	animation: sjpta-404-drop 0.9s var(--wp--custom--motion--easing) both;
+	transition: transform var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+.sjpta-404__digit--left {
+	--tilt: -7deg;
+	background: var(--wp--custom--color--badge-orange-bg);
+	color: var(--wp--preset--color--brand-orange);
+	animation-delay: 0.05s;
+}
+
+.sjpta-404__digit--zero {
+	--tilt: 0deg;
+	background: var(--wp--preset--color--brand-purple);
+	color: var(--wp--preset--color--surface);
+	border-radius: 50%;
+	animation-delay: 0.2s;
+}
+
+.sjpta-404__digit--right {
+	--tilt: 6deg;
+	background: var(--wp--custom--color--badge-magenta-bg);
+	color: var(--wp--preset--color--magenta);
+	animation-delay: 0.35s;
+}
+
+.sjpta-404__glyph {
+	position: relative;
+	z-index: 1;
+}
+
+/* A dashed spotlight ring turning slowly around the zero. */
+.sjpta-404__ring {
+	position: absolute;
+	inset: -12px;
+	border-radius: 50%;
+	border: 3px dashed color-mix(in srgb, var(--wp--custom--color--orange-light) 80%, transparent);
+	animation: sjpta-404-spin 16s linear infinite;
+}
+
+/* And a small star that winks at the top right. */
+.sjpta-404__star {
+	position: absolute;
+	top: -8%;
+	right: -6%;
+	width: calc(var(--tile) * 0.22);
+	height: calc(var(--tile) * 0.22);
+	background: var(--wp--preset--color--brand-orange);
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+	transform-origin: 50% 50%;
+	animation: sjpta-404-twinkle 2.6s ease-in-out infinite;
+}
+
+@keyframes sjpta-404-drop {
+	0% {
+		opacity: 0;
+		transform: translateY(-46px) rotate(var(--tilt, 0deg)) scale(0.86);
+	}
+
+	62% {
+		opacity: 1;
+		transform: translateY(8px) rotate(var(--tilt, 0deg)) scale(1.02);
+	}
+
+	82% {
+		transform: translateY(-4px) rotate(var(--tilt, 0deg));
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0) rotate(var(--tilt, 0deg));
+	}
+}
+
+@keyframes sjpta-404-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes sjpta-404-twinkle {
+	0%,
+	100% {
+		transform: scale(0.85) rotate(0deg);
+		opacity: 0.85;
+	}
+
+	50% {
+		transform: scale(1.15) rotate(20deg);
+		opacity: 1;
+	}
+}
+
+/* The hop, mouse only: a touch device has no hover to trigger it. */
+@media (hover: hover) and (pointer: fine) {
+	.sjpta-404__figure:hover .sjpta-404__digit {
+		transform: translateY(-10px) rotate(var(--tilt, 0deg));
+	}
+
+	.sjpta-404__figure:hover .sjpta-404__digit--zero {
+		transition-delay: 0.06s;
+	}
+
+	.sjpta-404__figure:hover .sjpta-404__digit--right {
+		transition-delay: 0.12s;
+	}
+}
+
+/* ---------- Copy ---------- */
+
+.sjpta-404__copy {
+	max-width: 640px;
+}
+
+.sjpta-404__heading {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--page-title);
+	font-weight: 700;
+	line-height: 1.05;
+	letter-spacing: -0.025em;
+	color: var(--wp--preset--color--brand-purple);
+	text-wrap: balance;
+}
+
+.sjpta-404__text {
+	margin: 0 0 var(--wp--preset--spacing--50);
+	font-size: var(--wp--preset--font-size--intro);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+.sjpta-404__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+/* Hero-height buttons, per the control scale. */
+.sjpta-404__btn {
+	min-height: var(--wp--custom--control--hero);
+	padding: 0 26px;
+	font-size: var(--wp--preset--font-size--body);
+}
+
+/* ---------- Search ---------- */
+
+/*
+ * A pill with the field and the button inside it. Plain GET to the homepage, so
+ * it works with nothing but HTML.
+ */
+.sjpta-404__search {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	max-width: 520px;
+	margin: 0 auto var(--wp--preset--spacing--40);
+	padding: 6px;
+	background: var(--wp--preset--color--surface);
+	border: var(--wp--custom--border--card);
+	border-radius: var(--wp--custom--radius--pill);
+	box-shadow: var(--wp--preset--shadow--header-rest);
+	text-align: left;
+}
+
+.sjpta-404__search:focus-within {
+	border-color: var(--wp--custom--color--badge-purple-fg);
+}
+
+.sjpta-404__input {
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: var(--wp--custom--control--min);
+	padding: 0 18px;
+	border: 0;
+	background: transparent;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--body);
+	color: var(--wp--preset--color--text-body);
+	border-radius: var(--wp--custom--radius--pill);
+}
+
+.sjpta-404__input::placeholder {
+	color: var(--wp--custom--color--text-muted);
+}
+
+/*
+ * The pill's own border shows focus; the browser ring inside a rounded pill
+ * draws a rectangle that clips through the corners.
+ */
+.sjpta-404__input:focus-visible {
+	outline: none;
+}
+
+.sjpta-404__search:focus-within {
+	outline: var(--wp--custom--focus--width) solid var(--wp--custom--focus--color);
+	outline-offset: var(--wp--custom--focus--offset);
+}
+
+.sjpta-404__submit {
+	flex: none;
+	padding: 0 20px;
+}
+
+.sjpta-404__aside {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.6;
+	color: var(--wp--custom--color--text-muted);
+}
+
+/* ---------- Routes ---------- */
+
+.sjpta-404__routes {
+	max-width: 900px;
+	margin-top: var(--wp--preset--spacing--70);
+}
+
+.sjpta-404__routes-label {
+	display: block;
+	margin-bottom: 14px;
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--wp--custom--color--text-muted);
+}
+
+.sjpta-404__pills {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/*
+ * The age routes wear the same tints as the route cards on Classes, so a parent
+ * lands somewhere they recognise. The page links sit on plain white.
+ */
+.sjpta-404__pill {
+	--pill-bg: var(--wp--preset--color--surface);
+	--pill-fg: var(--wp--preset--color--brand-purple);
+	--pill-dot: var(--wp--custom--color--badge-purple-bg);
+	--pill-icon: var(--wp--preset--color--brand-purple);
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	min-height: var(--wp--custom--control--min);
+	padding: 0 16px 0 9px;
+	border-radius: var(--wp--custom--radius--pill);
+	border: 1px solid transparent;
+	background: var(--pill-bg);
+	color: var(--pill-fg);
+	font-size: var(--wp--preset--font-size--card-body);
+	font-weight: 600;
+	text-decoration: none;
+	transition: transform var(--wp--custom--motion--lift) var(--wp--custom--motion--easing), box-shadow var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+.sjpta-404__pill:hover {
+	color: var(--pill-fg);
+	transform: translateY(-3px);
+	box-shadow: var(--wp--preset--shadow--header-rest);
+}
+
+.sjpta-404__pill--plain {
+	border-color: var(--wp--custom--color--card-border);
+}
+
+.sjpta-404__pill--orange {
+	--pill-bg: var(--wp--custom--color--badge-orange-bg);
+	--pill-fg: var(--wp--custom--color--badge-orange-fg);
+	--pill-dot: var(--wp--preset--color--brand-orange);
+	--pill-icon: var(--wp--preset--color--surface);
+}
+
+.sjpta-404__pill--magenta {
+	--pill-bg: var(--wp--custom--color--badge-magenta-bg);
+	--pill-fg: var(--wp--custom--color--badge-magenta-fg);
+	--pill-dot: var(--wp--preset--color--magenta);
+	--pill-icon: var(--wp--preset--color--surface);
+}
+
+.sjpta-404__pill--purple {
+	--pill-bg: var(--wp--custom--color--badge-purple-bg);
+	--pill-fg: var(--wp--custom--color--badge-purple-fg);
+	--pill-dot: var(--wp--preset--color--brand-purple);
+	--pill-icon: var(--wp--preset--color--surface);
+}
+
+.sjpta-404__pill--green {
+	--pill-bg: var(--wp--custom--color--badge-green-bg);
+	--pill-fg: var(--wp--custom--color--badge-green-fg);
+	--pill-dot: var(--wp--custom--color--badge-green-fg);
+	--pill-icon: var(--wp--preset--color--surface);
+}
+
+.sjpta-404__pill-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: var(--pill-dot);
+	color: var(--pill-icon);
+	flex: none;
+}
+
+/* ---------- Small screens ---------- */
+
+/*
+ * On a narrow screen the copy fills the width, so the lower sparkles would sit
+ * on top of the words. Keep the ones that float around the numerals.
+ */
+@media (max-width: 767px) {
+	.sjpta-404__spark--2,
+	.sjpta-404__spark--3,
+	.sjpta-404__spark--4,
+	.sjpta-404__spark--6 {
+		display: none;
+	}
+}
+
+@media (max-width: 599px) {
+	.sjpta-404__search {
+		flex-direction: column;
+		align-items: stretch;
+		border-radius: var(--wp--custom--radius--card);
+	}
+
+	.sjpta-404__input {
+		text-align: center;
+	}
+
+	.sjpta-404__actions .sjpta-404__btn {
+		flex: 1 1 100%;
+	}
+}
+
+/* ---------- Reduced motion ---------- */
+
+/*
+ * Everything settles instantly. The digits are already in their final state
+ * (the drop keyframe is removed rather than paused, so nothing sits invisible),
+ * the ring and star hold still, and the sparkles stop drifting.
+ */
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-404__digit,
+	.sjpta-404__ring,
+	.sjpta-404__star,
+	.sjpta-404__spark {
+		animation: none;
+	}
+
+	.sjpta-404__digit,
+	.sjpta-404__pill {
+		transition: none;
+	}
+}

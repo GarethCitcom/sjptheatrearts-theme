@@ -556,6 +556,36 @@ function sjpta_enqueue_motion(): void {
 add_action( 'wp_enqueue_scripts', 'sjpta_enqueue_motion' );
 
 /**
+ * Enqueue the form enhancement.
+ *
+ * Sends the enquiry forms and the footer sign-up without a page load. On every
+ * page, because the footer's sign-up box is on every page; small and deferred,
+ * with no dependencies. Every form it touches works as a plain POST without
+ * it, so nothing waits on this script.
+ *
+ * @return void
+ */
+function sjpta_enqueue_enquiry_form(): void {
+	$relative = 'assets/js/enquiry-form.js';
+
+	if ( ! file_exists( SJPTA_DIR . '/' . $relative ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'sjpta-enquiry-form',
+		SJPTA_URI . '/' . $relative,
+		array(),
+		SJPTA_VERSION,
+		array(
+			'strategy'  => 'defer',
+			'in_footer' => true,
+		)
+	);
+}
+add_action( 'wp_enqueue_scripts', 'sjpta_enqueue_enquiry_form' );
+
+/**
  * Enqueue the hero ribbon's animated upgrade.
  *
  * Front page only — it is the only template with a hero. The still SVG is

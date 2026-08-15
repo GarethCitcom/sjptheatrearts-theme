@@ -123,6 +123,7 @@ $sjpta_facts = array(
 			sjpta_enquiry_form(
 				array(
 					'variant'   => 'contact',
+					'type'      => 'contact',
 					'subject'   => __( 'Message from the contact page', 'sjptheatrearts' ),
 					'submit'    => $sjpta_submit,
 					'anchor'    => ( isset( $block['anchor'] ) && is_string( $block['anchor'] ) ) ? $block['anchor'] : 'contact',

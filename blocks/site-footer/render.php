@@ -124,24 +124,46 @@ $sjpta_legal = is_array( $sjpta_legal ) ? $sjpta_legal : array();
 
 		<?php
 		/*
-		 * Sign-up band. The form posts straight to the mailing tool, which is how
-		 * those tools are meant to be embedded: they own the list, the double
-		 * opt-in and the unsubscribe, none of which this site should be pretending
-		 * to handle. No JavaScript involved, so it works with scripting off.
+		 * Sign-up band. The address goes to this site first, which stores it
+		 * under Enquiries and passes it to the mailing tool from the server
+		 * (inc/newsletter.php). The tool still owns the list, the double opt-in
+		 * and the unsubscribe; the visitor just stays on the page. With
+		 * JavaScript on the script posts it and swaps in the thank-you; with it
+		 * off the form posts back to this page and lands on the same message.
 		 *
 		 * With no address configured there is no field at all, only a way to get
 		 * in touch. A box that swallowed a parent's email address and did nothing
 		 * with it would be worse than not asking.
 		 */
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- reading a redirect flag, not acting on it.
+		$sjpta_signup_sent = isset( $_GET['newsletter'] ) && 'sent' === $_GET['newsletter'];
+
+		$sjpta_signup_errors = isset( $GLOBALS['sjpta_newsletter_errors'] ) && is_array( $GLOBALS['sjpta_newsletter_errors'] ) ? $GLOBALS['sjpta_newsletter_errors'] : array();
+		$sjpta_signup_values = isset( $GLOBALS['sjpta_newsletter_values'] ) && is_array( $GLOBALS['sjpta_newsletter_values'] ) ? $GLOBALS['sjpta_newsletter_values'] : array();
+		$sjpta_signup_error  = isset( $sjpta_signup_errors['email'] ) ? (string) $sjpta_signup_errors['email'] : '';
+		$sjpta_signup_stamp  = (string) time();
 		?>
-		<div class="sjpta-footer__signup">
+		<div class="sjpta-footer__signup" id="signup">
 			<div class="sjpta-footer__signuptext">
 				<h2 class="sjpta-footer__signuphead"><?php esc_html_e( 'Get the term dates and news', 'sjptheatrearts' ); ?></h2>
 				<p class="sjpta-footer__signupnote"><?php esc_html_e( 'Occasional emails about term dates, shows and workshop places. Nothing else.', 'sjptheatrearts' ); ?></p>
 			</div>
 
-			<?php if ( '' !== $sjpta_signup ) : ?>
-				<form class="sjpta-footer__signupform" action="<?php echo esc_url( $sjpta_signup ); ?>" method="post" target="_blank">
+			<?php if ( '' !== $sjpta_signup && $sjpta_signup_sent ) : ?>
+				<p class="sjpta-footer__signupsent" role="status" tabindex="-1">
+					<span class="sjpta-footer__signuptick" aria-hidden="true"><?php echo sjpta_icon( 'check', 16, 'var(--sjpta-accent)' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?></span>
+					<?php esc_html_e( 'Thank you. Please check your inbox to confirm.', 'sjptheatrearts' ); ?>
+				</p>
+			<?php elseif ( '' !== $sjpta_signup ) : ?>
+				<form
+					class="sjpta-footer__signupform<?php echo '' !== $sjpta_signup_error ? ' has-error' : ''; ?>"
+					action="<?php echo esc_url( get_permalink() ? get_permalink() . '#signup' : home_url( '/#signup' ) ); ?>"
+					method="post"
+					novalidate
+					data-sjpta-form="newsletter"
+					data-endpoint="<?php echo esc_url( rest_url( SJPTA_ENQUIRY_REST_NS . '/newsletter' ) ); ?>"
+					data-sending="<?php esc_attr_e( 'Sending', 'sjptheatrearts' ); ?>"
+				>
 					<label class="screen-reader-text" for="sjpta-signup-email">
 						<?php esc_html_e( 'Your email address', 'sjptheatrearts' ); ?>
 					</label>
@@ -150,13 +172,37 @@ $sjpta_legal = is_array( $sjpta_legal ) ? $sjpta_legal : array();
 						id="sjpta-signup-email"
 						type="email"
 						name="<?php echo esc_attr( '' !== $sjpta_field ? $sjpta_field : 'EMAIL' ); ?>"
+						data-field="email"
+						value="<?php echo esc_attr( (string) ( $sjpta_signup_values['email'] ?? '' ) ); ?>"
 						placeholder="<?php esc_attr_e( 'Your email address', 'sjptheatrearts' ); ?>"
 						autocomplete="email"
 						required
+						<?php echo '' !== $sjpta_signup_error ? 'aria-invalid="true" aria-describedby="sjpta-signup-email-error"' : ''; ?>
 					>
 					<button class="sjpta-btn sjpta-btn--primary sjpta-footer__signupbtn" type="submit">
 						<?php esc_html_e( 'Subscribe', 'sjptheatrearts' ); ?>
 					</button>
+
+					<div class="sjpta-footer__hp" aria-hidden="true">
+						<label for="sjpta-signup-website"><?php esc_html_e( 'Leave this field empty', 'sjptheatrearts' ); ?></label>
+						<input type="text" id="sjpta-signup-website" name="sjpta_website" tabindex="-1" autocomplete="off" value="">
+					</div>
+					<input type="hidden" name="sjpta_newsletter" value="1">
+					<input type="hidden" name="sjpta_type" value="newsletter">
+					<input type="hidden" name="sjpta_source" value="<?php echo esc_url( (string) get_permalink() ); ?>">
+					<input type="hidden" name="sjpta_t" value="<?php echo esc_attr( $sjpta_signup_stamp ); ?>">
+					<input type="hidden" name="sjpta_s" value="<?php echo esc_attr( sjpta_enquiry_signature( $sjpta_signup_stamp ) ); ?>">
+
+					<?php if ( '' !== $sjpta_signup_error ) : ?>
+						<span class="sjpta-footer__signuperror" id="sjpta-signup-email-error" role="alert"><?php echo esc_html( $sjpta_signup_error ); ?></span>
+					<?php endif; ?>
+
+					<template data-sjpta-sent>
+						<p class="sjpta-footer__signupsent" role="status" tabindex="-1">
+							<span class="sjpta-footer__signuptick" aria-hidden="true"><?php echo sjpta_icon( 'check', 16, 'var(--sjpta-accent)' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup from sjpta_icon(). ?></span>
+							<?php esc_html_e( 'Thank you. Please check your inbox to confirm.', 'sjptheatrearts' ); ?>
+						</p>
+					</template>
 				</form>
 			<?php else : ?>
 				<p class="sjpta-footer__signupsoon">

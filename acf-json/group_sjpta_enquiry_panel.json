@@ -79,11 +79,30 @@
             ]
         },
         {
+            "key": "field_sjpta_ep_form_type",
+            "label": "What kind of form is this?",
+            "name": "form_type",
+            "type": "select",
+            "instructions": "Decides who is emailed: the addresses for each kind are set under Enquiries → Settings. Every submission is saved under Enquiries as well as emailed. \"Enrolment\" also adds a \"Want to talk to us first?\" link to the Contact page under the form.",
+            "required": 0,
+            "choices": {
+                "": "Same as before (decided by the old \"Send enquiries to\" setting)",
+                "enrolment": "Enrolment",
+                "enquiry": "Class enquiry",
+                "born-to-be": "Born To Be enquiry",
+                "contact": "Contact message"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "ui": 0
+        },
+        {
             "key": "field_sjpta_ep_recipient",
-            "label": "Send enquiries to",
+            "label": "Send enquiries to (older setting)",
             "name": "recipient",
             "type": "select",
-            "instructions": "The addresses themselves are set under SJP settings, so they are in one place. Enquiries are always saved on the site as well as emailed.",
+            "instructions": "Only used when the kind of form above is left as \"Same as before\". Kept so pages saved earlier keep routing as they did.",
             "required": 0,
             "choices": {
                 "sjp": "SJP (the general contact email)",
@@ -93,7 +112,15 @@
             "default_value": "sjp",
             "return_format": "value",
             "allow_null": 0,
-            "ui": 0
+            "ui": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sjpta_ep_form_type",
+                        "operator": "==empty"
+                    }
+                ]
+            ]
         },
         {
             "key": "field_sjpta_ep_form_heading",

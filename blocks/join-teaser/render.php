@@ -120,9 +120,14 @@ $sjpta_tones = array( 'orange', 'magenta', 'green' );
 				<?php
 				/*
 				 * The real form, not a link to it. A visitor who simply scrolls the
-				 * homepage can enrol without navigating anywhere, which is the whole
-				 * point of the panel; the nav's "Enrol now" still goes to the Join
-				 * page, so there are two routes to the same action, deliberately.
+				 * homepage can ask without navigating anywhere, which is the whole
+				 * point of the panel.
+				 *
+				 * This is an *enquiry*, and says so. Enrolling is the Join page's
+				 * longer form; the nav's "Enrol now" goes there, and so does the
+				 * "Ready to enrol?" button under this form, carrying across whatever
+				 * has been typed. Two forms with two names, so nobody sends an
+				 * enquiry believing they have enrolled, or the other way round.
 				 *
 				 * The short shape, not Join's long one. This is an aside on a
 				 * homepage, and a parent who wants to answer nine questions is on
@@ -130,12 +135,17 @@ $sjpta_tones = array( 'orange', 'magenta', 'green' );
 				 */
 				sjpta_enquiry_form(
 					array(
-						'variant'   => 'class',
-						'recipient' => sjpta_enquiry_recipient( 'lottie' ),
-						'route'     => 'lottie',
-						'subject'   => __( 'Enrolment enquiry from the homepage', 'sjptheatrearts' ),
-						'submit'    => '' !== $sjpta_panel_label ? $sjpta_panel_label : __( 'Send my enquiry', 'sjptheatrearts' ),
-						'anchor'    => 'enrol',
+						'variant' => 'class',
+						'type'    => 'enquiry',
+						'subject' => __( 'Enquiry from the homepage', 'sjptheatrearts' ),
+						'submit'  => '' !== $sjpta_panel_label ? $sjpta_panel_label : __( 'Send my enquiry', 'sjptheatrearts' ),
+						'anchor'  => 'join',
+						'after'   => array(
+							'text'    => __( 'Ready to enrol?', 'sjptheatrearts' ),
+							'label'   => __( 'Enrol now', 'sjptheatrearts' ),
+							'url'     => $sjpta_panel_url . '#enquire',
+							'prefill' => true,
+						),
 					)
 				);
 				?>
