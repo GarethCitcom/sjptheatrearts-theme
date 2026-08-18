@@ -695,8 +695,10 @@ Every link resolves to something real:
   could filter by tag.
 - The About column's anchors (`#teachers`, `#safeguarding`, `#exams`, `#gallery`)
   need those sections to carry matching ids when phase 6 builds those pages.
-- Legal links are an editable repeater, **hidden while empty**, because none of
-  those documents exist yet.
+- Legal links are an editable repeater and render nothing while empty, because
+  none of those documents exist yet. The small-print list itself always renders,
+  because "Cookie preferences" sits in it: a static `<a data-cc="c-settings">`
+  the consent script hooks by that attribute, not an ACF row.
 - Facebook and TikTok render only when their setting is filled. Never invent a
   social account.
 

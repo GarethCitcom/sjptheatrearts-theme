@@ -346,24 +346,36 @@ $sjpta_legal = is_array( $sjpta_legal ) ? $sjpta_legal : array();
 				<?php echo esc_html( $sjpta_note ); ?>
 			</span>
 
-			<?php if ( ! empty( $sjpta_legal ) ) : ?>
-				<ul class="sjpta-footer__small">
-					<?php foreach ( $sjpta_legal as $sjpta_link ) : ?>
-						<?php
-						$sjpta_label = trim( (string) ( $sjpta_link['label'] ?? '' ) );
-						$sjpta_href  = trim( (string) ( $sjpta_link['url'] ?? '' ) );
-						?>
-						<?php if ( '' !== $sjpta_label && '' !== $sjpta_href ) : ?>
-							<li>
-								<a href="<?php echo esc_url( $sjpta_href ); ?>"<?php echo sjpta_external_attr( $sjpta_href ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attributes from sjpta_external_attr(). ?>>
-									<?php echo esc_html( $sjpta_label ); ?>
-									<?php echo sjpta_new_tab_note( $sjpta_href ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_new_tab_note(). ?>
-								</a>
-							</li>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
+			<ul class="sjpta-footer__small">
+				<?php foreach ( $sjpta_legal as $sjpta_link ) : ?>
+					<?php
+					$sjpta_label = trim( (string) ( $sjpta_link['label'] ?? '' ) );
+					$sjpta_href  = trim( (string) ( $sjpta_link['url'] ?? '' ) );
+					?>
+					<?php if ( '' !== $sjpta_label && '' !== $sjpta_href ) : ?>
+						<li>
+							<a href="<?php echo esc_url( $sjpta_href ); ?>"<?php echo sjpta_external_attr( $sjpta_href ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed attributes from sjpta_external_attr(). ?>>
+								<?php echo esc_html( $sjpta_label ); ?>
+								<?php echo sjpta_new_tab_note( $sjpta_href ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_new_tab_note(). ?>
+							</a>
+						</li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+
+				<?php
+				/*
+				 * Cookie preferences. The consent script owns the dialog and hooks
+				 * this by its data-cc attribute, so the link is not an ACF legal row
+				 * and always renders: a visitor who accepted once has to be able to
+				 * change their mind, whether or not anyone has filled the options in.
+				 */
+				?>
+				<li>
+					<a href="#" data-cc="c-settings" aria-haspopup="dialog">
+						<?php esc_html_e( 'Cookie preferences', 'sjptheatrearts' ); ?>
+					</a>
+				</li>
+			</ul>
 
 			<a class="sjpta-footer__top-link" href="#sjpta-top">
 				<?php esc_html_e( 'Back to top', 'sjptheatrearts' ); ?>

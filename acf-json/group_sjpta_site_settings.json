@@ -219,7 +219,7 @@
             "label": "Legal links",
             "name": "legal_links",
             "type": "repeater",
-            "instructions": "The small print row at the very bottom. Add these once the pages exist; the row is hidden while this is empty rather than showing links that go nowhere.",
+            "instructions": "The small print row at the very bottom, next to the Cookie preferences link. Add these once the pages exist; leaving this empty shows no links rather than links that go nowhere.",
             "required": 0,
             "min": 0,
             "max": 6,
