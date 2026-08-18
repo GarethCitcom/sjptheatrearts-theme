@@ -548,7 +548,8 @@ twice.
 ## The enquiry form
 
 One implementation: `inc/enquiry.php` (types, settings, processing, storage,
-email, retention), `inc/enquiry-admin.php` (the Enquiries screens),
+email, retention), `inc/enquiry-spam.php` (every spam check and the
+quarantine), `inc/enquiry-admin.php` (the Enquiries screens),
 `inc/enquiry-form.php` (rendering), `inc/newsletter.php` (the footer sign-up,
 same plumbing) and `assets/js/enquiry-form.js` (sending without a page load).
 Any block calls `sjpta_enquiry_form()` with its own **type**, class list, copy
@@ -585,7 +586,7 @@ renders them. **The script never validates on its own**; the server's answer is
 the only source of truth, so the two paths cannot disagree.
 
 **Storage and the Enquiries screen.** Every submission is a private
-`sjpta-enquiry` post with `_sjpta_type`, `_sjpta_status` (`new` / `done`),
+`sjpta-enquiry` post with `_sjpta_type`, `_sjpta_status` (`new` / `done` / `spam`),
 `_sjpta_sent_to`, `_sjpta_source` (the page it came from) and one `_sjpta_<field>`
 per value. The list filters by form and by status, has "Mark as dealt with"
 row and bulk actions, and the menu shows a count of new ones. **Retention** is a
@@ -659,9 +660,49 @@ fails quietly; the stored copy means a parent's message is never simply gone.
 
 **No WordPress nonce, deliberately.** A nonce printed into a page a host caches
 goes stale, and the failure lands on a parent who typed everything correctly.
-There is no authenticated action to protect. Spam is handled by a honeypot and a
-signed timestamp with a **minimum** age only, never a maximum, because on a cached
-page the timestamp is as old as the cache entry.
+There is no authenticated action to protect. Spam is handled by the layers in
+`inc/enquiry-spam.php`, and the timestamp check is a **minimum** age only, never
+a maximum, because on a cached page the timestamp is as old as the cache entry.
+
+**Spam is quarantined, never dropped** (Gaz, 2026-08-18, after Russian spam
+arrived the day after launch). `sjpta_enquiry_spam_reason()` runs on every
+form, the footer sign-up included, and answers with a reason or nothing. A
+submission with a reason is stored under Enquiries with status `spam` and
+`_sjpta_spam_reason`, emailed to nobody, told "sent", and pruned after 30 days
+(`SJPTA_ENQUIRY_SPAM_DAYS`). "Not spam" on the list, the detail screen or the
+bulk menu calls `sjpta_enquiry_release()`, which sends the held email; the
+`new` filter, the menu bubble and the default list all exclude spam. The
+layers, cheapest first, `local` before validation and `remote` after it:
+
+1. Honeypot `sjpta_website` and the signed timestamp `sjpta_t`/`sjpta_s`.
+2. Interaction token `sjpta_h`: the script copies the form's `data-h` into it
+   on the first key press, pointer down or focus. Present and wrong is spam;
+   absent (scripting off, or a bot that sets values without events) raises the
+   minimum age from 3 s to 8 s. Never required, because JS is not load-bearing.
+3. Rate limit, 5 per 10 minutes per address (transient keyed on the IP,
+   `CF-Connecting-IP` first). Counted before any verdict.
+4. Content rules: non-Latin script anywhere (Cyrillic, CJK, Arabic and so on;
+   accented Latin is fine), a link or bare domain outside the email field
+   (email addresses are stripped first, since a parent may type theirs into
+   the message), BBCode (HTML is already stripped by the sanitiser), a name
+   with a run of digits or over 60 characters, name identical to message, a
+   message that is one unbroken token, and `.ru`/`.su`/`.by`/`.kz`/`.top`/
+   `.xyz`/`.click`/`.link` email domains.
+5. Cloudflare Turnstile, on only when both keys are set under Enquiries →
+   Settings. The script loads `challenges.cloudflare.com` **on first
+   interaction, never on page load** (Lighthouse), renders an
+   `interaction-only` widget into the form's `[data-turnstile-mount]`, waits
+   up to 8 s for a token on submit, and calls `turnstile.reset()` after a
+   validation error because tokens are single-use, which is also why the
+   remote checks run after validation. A missing or failed token is
+   quarantined; a Cloudflare outage or a key error fails **open**.
+   Cloudflare's test keys (`1x000…AA` site, `1x000…AA` / `2x000…AA` secret)
+   exercise the pass and fail paths without a real widget.
+6. Akismet, when the plugin is active, has a key, and the setting is ticked.
+   Sent as `contact-form` (`signup` for the newsletter); fails open.
+
+Every layer can be wrong about a real parent once in a while; the point of
+quarantine is that a wrong verdict costs one click, not a message.
 
 **From stays on this domain**, with the visitor's address in `Reply-To`. Sending
 as the visitor fails SPF and DMARC at most hosts.

@@ -27,6 +27,7 @@ function sjpta_enquiry_statuses(): array {
 	return array(
 		'new'  => __( 'New', 'sjptheatrearts' ),
 		'done' => __( 'Dealt with', 'sjptheatrearts' ),
+		'spam' => __( 'Spam', 'sjptheatrearts' ),
 	);
 }
 
@@ -135,6 +136,27 @@ function sjpta_enquiry_sanitize_settings( $input ): array {
 		$out['retention_days'] = max( 0, min( 3650, (int) $input['retention_days'] ) );
 	}
 
+	/*
+	 * Turnstile keys are opaque strings from Cloudflare; only whitespace and
+	 * anything that is not a key character is stripped. Both or neither: one
+	 * on its own is a misconfiguration, and saying so beats a widget that
+	 * checks nothing.
+	 */
+	$site_key = isset( $input['turnstile_site_key'] ) ? preg_replace( '/[^A-Za-z0-9_\-]/', '', (string) $input['turnstile_site_key'] ) : '';
+	$secret   = isset( $input['turnstile_secret'] ) ? preg_replace( '/[^A-Za-z0-9_\-]/', '', (string) $input['turnstile_secret'] ) : '';
+
+	if ( ( '' === $site_key ) !== ( '' === $secret ) ) {
+		add_settings_error(
+			SJPTA_ENQUIRY_OPTION,
+			'sjpta-turnstile-keys',
+			__( 'Turnstile needs both the site key and the secret key. It stays off until both are filled in.', 'sjptheatrearts' )
+		);
+	}
+
+	$out['turnstile_site_key'] = (string) $site_key;
+	$out['turnstile_secret']   = (string) $secret;
+	$out['akismet']            = ! empty( $input['akismet'] );
+
 	return $out;
 }
 
@@ -149,6 +171,7 @@ function sjpta_enquiry_render_settings(): void {
 	}
 
 	$settings = sjpta_enquiry_settings();
+	$spam     = sjpta_enquiry_spam_settings();
 	$types    = sjpta_enquiry_types();
 	$expired  = count( sjpta_enquiry_expired_ids( 1000 ) );
 	$next     = wp_next_scheduled( SJPTA_ENQUIRY_CRON );
@@ -250,6 +273,86 @@ function sjpta_enquiry_render_settings(): void {
 			<p class="description" style="max-width:960px">
 				<?php esc_html_e( '"Who replies" is the name used in the thank-you message ("Lottie answers every enquiry herself"). Leave it empty to say "we". "Send test" emails a short test message to the addresses shown, so you can confirm the site can actually deliver mail before relying on it.', 'sjptheatrearts' ); ?>
 			</p>
+
+			<h2><?php esc_html_e( 'Spam protection', 'sjptheatrearts' ); ?></h2>
+
+			<p class="description" style="max-width:960px">
+				<?php
+				printf(
+					/* translators: 1: number of days, 2: link to the spam list. */
+					esc_html__( 'Every form is already checked with a hidden field, a timing test, a rate limit and content rules (non-Latin text, links, markup). Anything caught is kept for %1$s days under %2$s rather than deleted, emailed to nobody, and can be released with "Not spam". The two services below add stronger checks.', 'sjptheatrearts' ),
+					esc_html( (string) SJPTA_ENQUIRY_SPAM_DAYS ),
+					'<a href="' . esc_url( sjpta_enquiry_list_url( array( 'sjpta_status' => 'spam' ) ) ) . '">' . esc_html__( 'Enquiries, filtered to Spam', 'sjptheatrearts' ) . '</a>'
+				);
+				?>
+			</p>
+
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><label for="sjpta-turnstile-site"><?php esc_html_e( 'Cloudflare Turnstile site key', 'sjptheatrearts' ); ?></label></th>
+					<td>
+						<input
+							type="text"
+							class="regular-text code"
+							id="sjpta-turnstile-site"
+							name="<?php echo esc_attr( SJPTA_ENQUIRY_OPTION . '[turnstile_site_key]' ); ?>"
+							value="<?php echo esc_attr( $spam['turnstile_site_key'] ); ?>"
+							autocomplete="off"
+							spellcheck="false"
+						>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="sjpta-turnstile-secret"><?php esc_html_e( 'Cloudflare Turnstile secret key', 'sjptheatrearts' ); ?></label></th>
+					<td>
+						<input
+							type="password"
+							class="regular-text code"
+							id="sjpta-turnstile-secret"
+							name="<?php echo esc_attr( SJPTA_ENQUIRY_OPTION . '[turnstile_secret]' ); ?>"
+							value="<?php echo esc_attr( $spam['turnstile_secret'] ); ?>"
+							autocomplete="new-password"
+							spellcheck="false"
+						>
+						<p class="description">
+							<?php
+							printf(
+								/* translators: %s: link to the Cloudflare dashboard. */
+								esc_html__( 'Free from %s: add a widget for this domain, choose "Managed", and paste the two keys here. Once both are set, every form is checked by Turnstile and a submission it does not verify is quarantined. Visitors are not shown a puzzle unless Cloudflare is unsure about them.', 'sjptheatrearts' ),
+								'<a href="https://dash.cloudflare.com/?to=/:account/turnstile" target="_blank" rel="noopener">' . esc_html__( 'the Cloudflare dashboard', 'sjptheatrearts' ) . '</a>'
+							);
+							?>
+							<?php if ( sjpta_enquiry_turnstile_enabled() ) : ?>
+								<strong><?php esc_html_e( 'Turnstile is on.', 'sjptheatrearts' ); ?></strong>
+							<?php else : ?>
+								<strong><?php esc_html_e( 'Turnstile is off.', 'sjptheatrearts' ); ?></strong>
+							<?php endif; ?>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Akismet', 'sjptheatrearts' ); ?></th>
+					<td>
+						<label for="sjpta-akismet">
+							<input
+								type="checkbox"
+								id="sjpta-akismet"
+								name="<?php echo esc_attr( SJPTA_ENQUIRY_OPTION . '[akismet]' ); ?>"
+								value="1"
+								<?php checked( $spam['akismet'] ); ?>
+							>
+							<?php esc_html_e( 'Also check submissions with Akismet', 'sjptheatrearts' ); ?>
+						</label>
+						<p class="description">
+							<?php if ( sjpta_enquiry_akismet_available() ) : ?>
+								<?php esc_html_e( 'The Akismet plugin is active and has a key, so this works as soon as it is ticked.', 'sjptheatrearts' ); ?>
+							<?php else : ?>
+								<?php esc_html_e( 'The Akismet plugin is not active or has no API key yet. Ticking this does nothing until it is; activate it under Plugins and add a key there.', 'sjptheatrearts' ); ?>
+							<?php endif; ?>
+						</p>
+					</td>
+				</tr>
+			</table>
 
 			<h2><?php esc_html_e( 'How long to keep them', 'sjptheatrearts' ); ?></h2>
 
@@ -421,8 +524,20 @@ function sjpta_render_enquiry_meta_box( WP_Post $post ): void {
 				),
 			)
 		),
-		esc_html__( 'Choose "Dealt with" and press Update once you have replied.', 'sjptheatrearts' )
+		esc_html__( 'Choose "Dealt with" and press Update once you have replied. Choosing "New" for a spam entry releases it: the email is sent as it would have been.', 'sjptheatrearts' )
 	);
+
+	$reason = (string) get_post_meta( $post->ID, '_sjpta_spam_reason', true );
+
+	if ( 'spam' === $status && '' !== $reason ) {
+		printf(
+			'<tr><th scope="row">%1$s</th><td>%2$s<br><a class="button" href="%3$s">%4$s</a></td></tr>',
+			esc_html__( 'Held as spam because', 'sjptheatrearts' ),
+			esc_html( $reason ),
+			esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=sjpta_enquiry_status&id=' . $post->ID . '&status=new' ), 'sjpta_enquiry_status_' . $post->ID ) ),
+			esc_html__( 'Not spam: release and send', 'sjptheatrearts' )
+		);
+	}
 
 	printf(
 		'<tr><th scope="row">%1$s</th><td>%2$s</td></tr>',
@@ -468,6 +583,16 @@ function sjpta_render_enquiry_meta_box( WP_Post $post ): void {
 		);
 	}
 
+	$ip = (string) get_post_meta( $post->ID, '_sjpta_ip', true );
+
+	if ( '' !== $ip ) {
+		printf(
+			'<tr><th scope="row">%1$s</th><td>%2$s</td></tr>',
+			esc_html__( 'Sender address', 'sjptheatrearts' ),
+			esc_html( $ip )
+		);
+	}
+
 	$forwarded = (string) get_post_meta( $post->ID, '_sjpta_forwarded', true );
 
 	if ( '' !== $forwarded ) {
@@ -485,6 +610,31 @@ function sjpta_render_enquiry_meta_box( WP_Post $post ): void {
 	);
 
 	echo '</tbody></table>';
+}
+
+/**
+ * Move an enquiry to a status, releasing it if it was held as spam.
+ *
+ * The one place a status changes from the admin, so leaving "spam" always
+ * sends the email that was held back, whichever screen the click came from.
+ *
+ * @param int    $post_id Enquiry id.
+ * @param string $status  New status key.
+ *
+ * @return void
+ */
+function sjpta_enquiry_set_status( int $post_id, string $status ): void {
+	if ( ! isset( sjpta_enquiry_statuses()[ $status ] ) ) {
+		return;
+	}
+
+	$was = (string) get_post_meta( $post_id, '_sjpta_status', true );
+
+	if ( 'spam' === $was && 'spam' !== $status ) {
+		sjpta_enquiry_release( $post_id );
+	}
+
+	update_post_meta( $post_id, '_sjpta_status', $status );
 }
 
 /**
@@ -507,11 +657,7 @@ function sjpta_enquiry_save_status( int $post_id ): void {
 		return;
 	}
 
-	$status = sanitize_key( (string) wp_unslash( $_POST['sjpta_status'] ) );
-
-	if ( isset( sjpta_enquiry_statuses()[ $status ] ) ) {
-		update_post_meta( $post_id, '_sjpta_status', $status );
-	}
+	sjpta_enquiry_set_status( $post_id, sanitize_key( (string) wp_unslash( $_POST['sjpta_status'] ) ) );
 }
 add_action( 'save_post_' . SJPTA_ENQUIRY_POST_TYPE, 'sjpta_enquiry_save_status' );
 
@@ -560,19 +706,38 @@ function sjpta_enquiry_column( $column, $post_id ): void {
 
 	if ( 'sjpta_status' === $column ) {
 		$status = (string) get_post_meta( $post_id, '_sjpta_status', true );
-		$label  = sjpta_enquiry_statuses()[ $status ] ?? sjpta_enquiry_statuses()['new'];
-		$flip   = 'done' === $status ? 'new' : 'done';
-		$url    = wp_nonce_url(
-			admin_url( 'admin-post.php?action=sjpta_enquiry_status&id=' . $post_id . '&status=' . $flip ),
-			'sjpta_enquiry_status_' . $post_id
-		);
+		$status = isset( sjpta_enquiry_statuses()[ $status ] ) ? $status : 'new';
+		$label  = sjpta_enquiry_statuses()[ $status ];
+
+		$link = static function ( string $to, string $text ) use ( $post_id ): string {
+			return sprintf(
+				'<a href="%1$s">%2$s</a>',
+				esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=sjpta_enquiry_status&id=' . $post_id . '&status=' . $to ), 'sjpta_enquiry_status_' . $post_id ) ),
+				esc_html( $text )
+			);
+		};
+
+		if ( 'spam' === $status ) {
+			$reason  = (string) get_post_meta( $post_id, '_sjpta_spam_reason', true );
+			$actions = $link( 'new', __( 'Not spam', 'sjptheatrearts' ) );
+			$label  .= '' !== $reason ? '<br><span class="description">' . esc_html( $reason ) . '</span>' : '';
+		} elseif ( 'done' === $status ) {
+			$actions = $link( 'new', __( 'Reopen', 'sjptheatrearts' ) );
+		} else {
+			$actions = $link( 'done', __( 'Mark as dealt with', 'sjptheatrearts' ) ) . ' | ' . $link( 'spam', __( 'Spam', 'sjptheatrearts' ) );
+		}
 
 		printf(
-			'<span class="sjpta-status sjpta-status--%1$s">%2$s</span><br><a href="%3$s">%4$s</a>',
-			esc_attr( 'done' === $status ? 'done' : 'new' ),
-			esc_html( $label ),
-			esc_url( $url ),
-			'done' === $status ? esc_html__( 'Reopen', 'sjptheatrearts' ) : esc_html__( 'Mark as dealt with', 'sjptheatrearts' )
+			'<span class="sjpta-status sjpta-status--%1$s">%2$s</span><br>%3$s',
+			esc_attr( $status ),
+			wp_kses(
+				$label,
+				array(
+					'br'   => array(),
+					'span' => array( 'class' => true ),
+				)
+			),
+			wp_kses( $actions, array( 'a' => array( 'href' => true ) ) )
 		);
 		return;
 	}
@@ -601,7 +766,7 @@ function sjpta_enquiry_list_styles(): void {
 		return;
 	}
 
-	echo '<style>.sjpta-status--new{font-weight:700;color:#a34a00}.sjpta-status--done{color:#0f7350}</style>';
+	echo '<style>.sjpta-status--new{font-weight:700;color:#a34a00}.sjpta-status--done{color:#0f7350}.sjpta-status--spam{color:#8a1f11}</style>';
 }
 add_action( 'admin_head', 'sjpta_enquiry_list_styles' );
 
@@ -620,7 +785,7 @@ function sjpta_enquiry_flip_status(): void {
 		wp_die( esc_html__( 'You are not allowed to do that.', 'sjptheatrearts' ) );
 	}
 
-	update_post_meta( $id, '_sjpta_status', $status );
+	sjpta_enquiry_set_status( $id, $status );
 
 	$back = wp_get_referer();
 	wp_safe_redirect( $back ? $back : sjpta_enquiry_list_url() );
@@ -640,7 +805,8 @@ function sjpta_enquiry_bulk_actions( $actions ): array {
 	unset( $actions['edit'] );
 
 	$actions['sjpta_done'] = __( 'Mark as dealt with', 'sjptheatrearts' );
-	$actions['sjpta_new']  = __( 'Mark as new', 'sjptheatrearts' );
+	$actions['sjpta_new']  = __( 'Mark as new (releases spam)', 'sjptheatrearts' );
+	$actions['sjpta_spam'] = __( 'Mark as spam', 'sjptheatrearts' );
 
 	return $actions;
 }
@@ -656,7 +822,12 @@ add_filter( 'bulk_actions-edit-' . SJPTA_ENQUIRY_POST_TYPE, 'sjpta_enquiry_bulk_
  * @return string
  */
 function sjpta_enquiry_handle_bulk( $redirect, $action, $ids ): string {
-	$status = 'sjpta_done' === $action ? 'done' : ( 'sjpta_new' === $action ? 'new' : '' );
+	$map    = array(
+		'sjpta_done' => 'done',
+		'sjpta_new'  => 'new',
+		'sjpta_spam' => 'spam',
+	);
+	$status = $map[ $action ] ?? '';
 
 	if ( '' === $status ) {
 		return (string) $redirect;
@@ -664,7 +835,7 @@ function sjpta_enquiry_handle_bulk( $redirect, $action, $ids ): string {
 
 	foreach ( (array) $ids as $id ) {
 		if ( current_user_can( 'edit_post', (int) $id ) ) {
-			update_post_meta( (int) $id, '_sjpta_status', $status );
+			sjpta_enquiry_set_status( (int) $id, $status );
 		}
 	}
 
@@ -702,10 +873,42 @@ function sjpta_enquiry_filters( $post_type ): void {
 	echo '<select id="sjpta-filter-status" name="sjpta_status"><option value="">' . esc_html__( 'Any status', 'sjptheatrearts' ) . '</option>';
 
 	foreach ( sjpta_enquiry_statuses() as $key => $label ) {
+		if ( 'spam' === $key ) {
+			/* translators: %d: number of quarantined submissions. */
+			$label = sprintf( __( 'Spam (%d)', 'sjptheatrearts' ), sjpta_enquiry_count_status( 'spam' ) );
+		}
+
 		printf( '<option value="%1$s"%3$s>%2$s</option>', esc_attr( $key ), esc_html( $label ), selected( $status, $key, false ) );
 	}
 
 	echo '</select>';
+}
+
+/**
+ * How many enquiries hold a status.
+ *
+ * @param string $status Status key.
+ *
+ * @return int
+ */
+function sjpta_enquiry_count_status( string $status ): int {
+	$query = new WP_Query(
+		array(
+			'post_type'        => SJPTA_ENQUIRY_POST_TYPE,
+			'post_status'      => 'any',
+			'posts_per_page'   => 1,
+			'fields'           => 'ids',
+			'suppress_filters' => true,
+			'meta_query'       => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- one small admin count.
+				array(
+					'key'   => '_sjpta_status',
+					'value' => $status,
+				),
+			),
+		)
+	);
+
+	return (int) $query->found_posts;
 }
 add_action( 'restrict_manage_posts', 'sjpta_enquiry_filters' );
 
@@ -735,10 +938,10 @@ function sjpta_enquiry_filter_query( WP_Query $query ): void {
 		);
 	}
 
-	if ( 'done' === $status ) {
+	if ( 'done' === $status || 'spam' === $status ) {
 		$meta[] = array(
 			'key'   => '_sjpta_status',
-			'value' => 'done',
+			'value' => $status,
 		);
 	} elseif ( 'new' === $status ) {
 		// Enquiries stored before statuses existed have no meta and count as new.
@@ -750,7 +953,21 @@ function sjpta_enquiry_filter_query( WP_Query $query ): void {
 			),
 			array(
 				'key'     => '_sjpta_status',
-				'value'   => 'done',
+				'value'   => array( 'done', 'spam' ),
+				'compare' => 'NOT IN',
+			),
+		);
+	} else {
+		// "Any status" means any real one: spam stays out of the way until asked for.
+		$meta[] = array(
+			'relation' => 'OR',
+			array(
+				'key'     => '_sjpta_status',
+				'compare' => 'NOT EXISTS',
+			),
+			array(
+				'key'     => '_sjpta_status',
+				'value'   => 'spam',
 				'compare' => '!=',
 			),
 		);
@@ -789,8 +1006,8 @@ function sjpta_enquiry_menu_bubble(): void {
 				),
 				array(
 					'key'     => '_sjpta_status',
-					'value'   => 'done',
-					'compare' => '!=',
+					'value'   => array( 'done', 'spam' ),
+					'compare' => 'NOT IN',
 				),
 			),
 		)

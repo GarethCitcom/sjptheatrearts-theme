@@ -11,11 +11,131 @@
  *
  * Also carries typed values across the "Ready to enrol?" link, so a parent
  * who starts an enquiry and decides to enrol does not type their name twice.
+ *
+ * Two spam layers live here as well, both invisible to a person. On the
+ * first real key press or click inside a form its `data-h` token is copied
+ * into the hidden `sjpta_h` field: a script that sets values without touching
+ * the page never gets it, and the server then asks more of the timing check.
+ * And when the form carries a Turnstile site key (`data-turnstile`),
+ * Cloudflare's widget is loaded at that same first interaction, never on page
+ * load, and rendered into the form's mount; the token it produces travels
+ * with the post. Both fail safe: with scripting off, neither field is filled
+ * and the server falls back to its other checks (and, with Turnstile on,
+ * quarantines the submission for a person to release).
  */
 ( function () {
 	'use strict';
 
 	var SELECTOR = 'form[data-sjpta-form][data-endpoint]';
+	var TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+	var TURNSTILE_FIELD = 'sjpta_ts';
+	var turnstileLoading = null;
+
+	/* ---------- Interaction token ---------- */
+
+	function markInteracted( form ) {
+		var token = form.getAttribute( 'data-h' );
+		var field = form.querySelector( 'input[name="sjpta_h"]' );
+		if ( token && field && ! field.value ) {
+			field.value = token;
+		}
+		if ( form.getAttribute( 'data-turnstile' ) ) {
+			mountTurnstile( form );
+		}
+	}
+
+	/* ---------- Turnstile ---------- */
+
+	function loadTurnstile() {
+		if ( window.turnstile ) {
+			return Promise.resolve( window.turnstile );
+		}
+		if ( turnstileLoading ) {
+			return turnstileLoading;
+		}
+		turnstileLoading = new Promise( function ( resolve, reject ) {
+			var script = document.createElement( 'script' );
+			script.src = TURNSTILE_SRC;
+			script.async = true;
+			script.defer = true;
+			script.onload = function () {
+				if ( window.turnstile ) {
+					resolve( window.turnstile );
+				} else {
+					reject( new Error( 'turnstile missing' ) );
+				}
+			};
+			script.onerror = function () {
+				turnstileLoading = null;
+				reject( new Error( 'turnstile failed to load' ) );
+			};
+			document.head.appendChild( script );
+		} );
+		return turnstileLoading;
+	}
+
+	function mountTurnstile( form ) {
+		var mount = form.querySelector( '[data-turnstile-mount]' );
+		var key = form.getAttribute( 'data-turnstile' );
+		if ( ! mount || ! key || mount.getAttribute( 'data-turnstile-id' ) ) {
+			return;
+		}
+		mount.setAttribute( 'data-turnstile-id', 'pending' );
+		loadTurnstile()
+			.then( function ( turnstile ) {
+				var id = turnstile.render( mount, {
+					sitekey: key,
+					appearance: 'interaction-only',
+					'response-field-name': TURNSTILE_FIELD,
+					'refresh-expired': 'auto',
+					retry: 'auto',
+					size: 'flexible'
+				} );
+				mount.setAttribute( 'data-turnstile-id', id || 'pending' );
+			} )
+			.catch( function () {
+				/* Blocked or unreachable: the form still posts, and the server decides. */
+				mount.removeAttribute( 'data-turnstile-id' );
+			} );
+	}
+
+	function turnstileToken( form ) {
+		var field = form.querySelector( 'input[name="' + TURNSTILE_FIELD + '"]' );
+		return field && field.value ? field.value : '';
+	}
+
+	/* Wait briefly for a token that is on its way; never block a person for long. */
+	function awaitTurnstile( form ) {
+		if ( ! form.getAttribute( 'data-turnstile' ) ) {
+			return Promise.resolve();
+		}
+		mountTurnstile( form );
+		return new Promise( function ( resolve ) {
+			var waited = 0;
+			var tick = function () {
+				if ( turnstileToken( form ) || waited >= 8000 ) {
+					resolve();
+					return;
+				}
+				waited += 200;
+				window.setTimeout( tick, 200 );
+			};
+			tick();
+		} );
+	}
+
+	/* A token is single-use: after a rejected post, ask for a fresh one. */
+	function resetTurnstile( form ) {
+		var mount = form.querySelector( '[data-turnstile-mount]' );
+		var id = mount && mount.getAttribute( 'data-turnstile-id' );
+		if ( window.turnstile && id && id !== 'pending' ) {
+			try {
+				window.turnstile.reset( id );
+			} catch ( e ) {
+				/* Nothing to do: the next submit simply goes without a token. */
+			}
+		}
+	}
 
 	function fieldFor( form, name ) {
 		return (
@@ -164,12 +284,15 @@
 		event.preventDefault();
 		setBusy( form, true );
 
-		fetch( form.getAttribute( 'data-endpoint' ), {
-			method: 'POST',
-			body: new FormData( form ),
-			headers: { Accept: 'application/json' },
-			credentials: 'same-origin'
-		} )
+		awaitTurnstile( form )
+			.then( function () {
+				return fetch( form.getAttribute( 'data-endpoint' ), {
+					method: 'POST',
+					body: new FormData( form ),
+					headers: { Accept: 'application/json' },
+					credentials: 'same-origin'
+				} );
+			} )
 			.then( function ( response ) {
 				if ( ! response.ok ) {
 					throw new Error( 'HTTP ' + response.status );
@@ -182,6 +305,7 @@
 					return;
 				}
 				setBusy( form, false );
+				resetTurnstile( form );
 				showErrors( form, ( data && data.errors ) || {}, data && data.summary );
 			} )
 			.catch( function () {
@@ -216,6 +340,16 @@
 
 	function init() {
 		document.querySelectorAll( SELECTOR ).forEach( function ( form ) {
+			var once = function () {
+				markInteracted( form );
+				[ 'keydown', 'pointerdown', 'touchstart', 'focusin' ].forEach( function ( type ) {
+					form.removeEventListener( type, once, true );
+				} );
+			};
+			[ 'keydown', 'pointerdown', 'touchstart', 'focusin' ].forEach( function ( type ) {
+				form.addEventListener( type, once, true );
+			} );
+
 			form.addEventListener( 'submit', onSubmit );
 			form.querySelectorAll( 'a[data-prefill]' ).forEach( function ( link ) {
 				link.addEventListener( 'click', onPrefill );

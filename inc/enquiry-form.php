@@ -393,6 +393,7 @@ function sjpta_enquiry_form( array $args = array() ): void {
 		data-endpoint="<?php echo esc_url( rest_url( SJPTA_ENQUIRY_REST_NS . '/enquiry' ) ); ?>"
 		data-sending="<?php esc_attr_e( 'Sending', 'sjptheatrearts' ); ?>"
 		data-summary="<?php esc_attr_e( 'We could not send that. Please check:', 'sjptheatrearts' ); ?>"
+		<?php echo sjpta_enquiry_form_spam_attrs( $stamp ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_enquiry_form_spam_attrs(). ?>
 	>
 
 		<?php if ( '' !== $args['heading'] ) : ?>
@@ -654,6 +655,7 @@ function sjpta_enquiry_form( array $args = array() ): void {
 		<input type="hidden" name="sjpta_source" value="<?php echo esc_url( (string) get_permalink() ); ?>">
 		<input type="hidden" name="sjpta_t" value="<?php echo esc_attr( $stamp ); ?>">
 		<input type="hidden" name="sjpta_s" value="<?php echo esc_attr( sjpta_enquiry_signature( $stamp ) ); ?>">
+		<?php sjpta_enquiry_spam_fields(); ?>
 
 		<?php if ( 'check' === $layout['consent'] ) : ?>
 			<input type="hidden" name="sjpta_asked_consent_contact" value="1">

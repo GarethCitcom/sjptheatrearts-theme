@@ -16,7 +16,7 @@
  * Two ways in, one path through. A form posts to the REST endpoint from
  * JavaScript, or to its own page when scripting is off; both call
  * sjpta_enquiry_process(), so validation, spam checks, storage and email
- * cannot drift apart.
+ * cannot drift apart. The spam checks themselves live in enquiry-spam.php.
  *
  * @package SJPTheatreArts
  */
@@ -537,35 +537,6 @@ function sjpta_enquiry_signature( string $value ): string {
 }
 
 /**
- * Does a submission look like it came from a person?
- *
- * Deliberately no WordPress nonce. A nonce printed into a page that a host
- * caches goes stale, and the failure lands on a parent who typed everything
- * correctly. There is no authenticated action here to protect: the risk is
- * spam, which the honeypot and the timing check cover, and neither expires
- * with the cache. Only a minimum age is checked, never a maximum, because on a
- * cached page the timestamp is as old as the cache entry.
- *
- * @param array<string,mixed> $posted Unslashed request body.
- *
- * @return bool
- */
-function sjpta_enquiry_looks_human( array $posted ): bool {
-	if ( ! empty( $posted['sjpta_website'] ) ) {
-		return false;
-	}
-
-	$stamp     = isset( $posted['sjpta_t'] ) ? (string) $posted['sjpta_t'] : '';
-	$signature = isset( $posted['sjpta_s'] ) ? (string) $posted['sjpta_s'] : '';
-
-	if ( '' === $stamp || ! hash_equals( sjpta_enquiry_signature( $stamp ), $signature ) ) {
-		return false;
-	}
-
-	return ( time() - (int) $stamp ) >= SJPTA_ENQUIRY_MIN_SECONDS;
-}
-
-/**
  * The page a submission came from, if it is one of ours.
  *
  * @param array<string,mixed> $posted Unslashed request body.
@@ -600,8 +571,9 @@ function sjpta_enquiry_source( array $posted ): string {
  * plain POST. Returns a verdict rather than acting on it, so the two callers
  * can answer in their own way: JSON for one, a redirect for the other.
  *
- * A bot gets `spam => true` and `ok => true`. It is told it succeeded, and
- * nothing is stored or sent, so it learns nothing.
+ * A bot gets `spam => true` and `ok => true`. It is told it succeeded, but
+ * nothing is sent: the submission is quarantined under Enquiries with the
+ * status "Spam" and the reason, so a wrong verdict can be put right.
  *
  * @param array<string,mixed> $posted Unslashed request body.
  *
@@ -615,13 +587,6 @@ function sjpta_enquiry_process( array $posted ): array {
 		'values' => array(),
 		'id'     => 0,
 	);
-
-	if ( ! sjpta_enquiry_looks_human( $posted ) ) {
-		$result['ok']   = true;
-		$result['spam'] = true;
-
-		return $result;
-	}
 
 	$fields = sjpta_enquiry_fields();
 	$values = array();
@@ -722,12 +687,6 @@ function sjpta_enquiry_process( array $posted ): array {
 
 	$result['values'] = $values;
 
-	if ( ! empty( $errors ) ) {
-		$result['errors'] = $errors;
-
-		return $result;
-	}
-
 	$type = isset( $posted['sjpta_type'] ) ? sanitize_key( (string) $posted['sjpta_type'] ) : '';
 
 	if ( ! isset( sjpta_enquiry_types()[ $type ] ) || 'newsletter' === $type ) {
@@ -736,8 +695,41 @@ function sjpta_enquiry_process( array $posted ): array {
 
 	$subject = isset( $posted['sjpta_subject'] ) ? sanitize_text_field( (string) $posted['sjpta_subject'] ) : '';
 	$source  = sjpta_enquiry_source( $posted );
-	$to      = sjpta_enquiry_recipients( $type );
 
+	/*
+	 * The free checks run before validation: a bot that left a required field
+	 * empty is still a bot, and it is told "sent" rather than handed a list of
+	 * the fields to fill in next time. The checks that call out (Turnstile,
+	 * Akismet) wait until the submission is complete, so a parent who missed
+	 * a field does not spend a Turnstile token on the attempt.
+	 */
+	$reason = sjpta_enquiry_spam_reason( $posted, $values, $type, 'local' );
+
+	if ( '' !== $reason ) {
+		$result['ok']   = true;
+		$result['spam'] = true;
+		$result['id']   = sjpta_enquiry_quarantine( $values, $type, $subject, $source, $reason );
+
+		return $result;
+	}
+
+	if ( ! empty( $errors ) ) {
+		$result['errors'] = $errors;
+
+		return $result;
+	}
+
+	$reason = sjpta_enquiry_spam_reason( $posted, $values, $type, 'remote' );
+
+	if ( '' !== $reason ) {
+		$result['ok']   = true;
+		$result['spam'] = true;
+		$result['id']   = sjpta_enquiry_quarantine( $values, $type, $subject, $source, $reason );
+
+		return $result;
+	}
+
+	$to = sjpta_enquiry_recipients( $type );
 	$id = sjpta_store_enquiry( $values, $type, $to, $subject, $source );
 	sjpta_send_enquiry( $values, $type, $to, $subject, $id, $source );
 
@@ -757,7 +749,7 @@ function sjpta_enquiry_process( array $posted ): array {
  * @return void
  */
 function sjpta_handle_enquiry(): void {
-	// phpcs:disable WordPress.Security.NonceVerification.Missing -- an unauthenticated public form, protected by a honeypot and a signed timestamp; see sjpta_enquiry_looks_human().
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- an unauthenticated public form, protected by the checks in enquiry-spam.php; see sjpta_enquiry_spam_reason().
 	if ( empty( $_POST['sjpta_enquiry'] ) ) {
 		return;
 	}
@@ -805,7 +797,7 @@ function sjpta_enquiry_redirect( string $anchor = 'enquire', string $flag = 'enq
  * The endpoint the script posts to.
  *
  * Public on purpose, like the form it serves: a nonce here would break on a
- * cached page for no gain, and the same honeypot and signed timestamp apply.
+ * cached page for no gain, and the same spam checks apply.
  *
  * @return void
  */

@@ -163,6 +163,7 @@ $sjpta_legal = is_array( $sjpta_legal ) ? $sjpta_legal : array();
 					data-sjpta-form="newsletter"
 					data-endpoint="<?php echo esc_url( rest_url( SJPTA_ENQUIRY_REST_NS . '/newsletter' ) ); ?>"
 					data-sending="<?php esc_attr_e( 'Sending', 'sjptheatrearts' ); ?>"
+					<?php echo sjpta_enquiry_form_spam_attrs( $sjpta_signup_stamp ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sjpta_enquiry_form_spam_attrs(). ?>
 				>
 					<label class="screen-reader-text" for="sjpta-signup-email">
 						<?php esc_html_e( 'Your email address', 'sjptheatrearts' ); ?>
@@ -192,6 +193,7 @@ $sjpta_legal = is_array( $sjpta_legal ) ? $sjpta_legal : array();
 					<input type="hidden" name="sjpta_source" value="<?php echo esc_url( (string) get_permalink() ); ?>">
 					<input type="hidden" name="sjpta_t" value="<?php echo esc_attr( $sjpta_signup_stamp ); ?>">
 					<input type="hidden" name="sjpta_s" value="<?php echo esc_attr( sjpta_enquiry_signature( $sjpta_signup_stamp ) ); ?>">
+					<?php sjpta_enquiry_spam_fields( 'sjpta-footer__turnstile' ); ?>
 
 					<?php if ( '' !== $sjpta_signup_error ) : ?>
 						<span class="sjpta-footer__signuperror" id="sjpta-signup-email-error" role="alert"><?php echo esc_html( $sjpta_signup_error ); ?></span>
