@@ -174,6 +174,19 @@ textarea.sjpta-form__input {
 	overflow: hidden;
 }
 
+/*
+ * Where Turnstile draws, if it draws at all. Empty until the script mounts
+ * the widget, and the widget itself is invisible unless Cloudflare needs to
+ * show something, so the mount takes no room until it has content.
+ */
+.sjpta-form__turnstile:empty {
+	display: none;
+}
+
+.sjpta-form__turnstile {
+	margin-bottom: var(--sjpta-form-gap);
+}
+
 /* ---------- Submit and small print ---------- */
 
 .sjpta-form__submit {

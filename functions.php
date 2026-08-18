@@ -43,6 +43,7 @@ require_once SJPTA_DIR . '/inc/tempo/cache.php';
 require_once SJPTA_DIR . '/inc/tempo/match.php';
 require_once SJPTA_DIR . '/inc/tempo/cli.php';
 require_once SJPTA_DIR . '/inc/enquiry.php';
+require_once SJPTA_DIR . '/inc/enquiry-spam.php';
 require_once SJPTA_DIR . '/inc/enquiry-admin.php';
 require_once SJPTA_DIR . '/inc/enquiry-form.php';
 require_once SJPTA_DIR . '/inc/newsletter.php';

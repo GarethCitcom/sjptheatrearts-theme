@@ -57,18 +57,22 @@ function sjpta_newsletter_process( array $posted ): array {
 		'id'     => 0,
 	);
 
-	if ( ! sjpta_enquiry_looks_human( $posted ) ) {
-		$result['ok']   = true;
-		$result['spam'] = true;
-
-		return $result;
-	}
-
 	$field = sjpta_newsletter_field();
 	$raw   = trim( isset( $posted[ $field ] ) ? (string) $posted[ $field ] : (string) ( $posted['email'] ?? '' ) );
 	$email = sanitize_email( $raw );
 
 	$result['values'] = array( 'email' => $email );
+
+	$judged = array( 'email' => '' !== $email ? $email : sanitize_text_field( $raw ) );
+	$reason = sjpta_enquiry_spam_reason( $posted, $judged, 'newsletter', 'local' );
+
+	if ( '' !== $reason ) {
+		$result['ok']   = true;
+		$result['spam'] = true;
+		$result['id']   = sjpta_enquiry_quarantine( $judged, 'newsletter', __( 'Footer sign-up', 'sjptheatrearts' ), sjpta_enquiry_source( $posted ), $reason );
+
+		return $result;
+	}
 
 	if ( '' === $raw ) {
 		$result['errors']['email'] = __( 'Please type your email address.', 'sjptheatrearts' );
@@ -78,6 +82,16 @@ function sjpta_newsletter_process( array $posted ): array {
 
 	if ( '' === $email || ! is_email( $email ) ) {
 		$result['errors']['email'] = __( 'That email address does not look right. Please check it.', 'sjptheatrearts' );
+
+		return $result;
+	}
+
+	$reason = sjpta_enquiry_spam_reason( $posted, $judged, 'newsletter', 'remote' );
+
+	if ( '' !== $reason ) {
+		$result['ok']   = true;
+		$result['spam'] = true;
+		$result['id']   = sjpta_enquiry_quarantine( $judged, 'newsletter', __( 'Footer sign-up', 'sjptheatrearts' ), sjpta_enquiry_source( $posted ), $reason );
 
 		return $result;
 	}
@@ -152,7 +166,7 @@ function sjpta_newsletter_forward( string $email ): string {
  * @return void
  */
 function sjpta_handle_newsletter(): void {
-	// phpcs:disable WordPress.Security.NonceVerification.Missing -- an unauthenticated public form, protected by a honeypot and a signed timestamp; see sjpta_enquiry_looks_human().
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- an unauthenticated public form, protected by the checks in enquiry-spam.php; see sjpta_enquiry_spam_reason().
 	if ( empty( $_POST['sjpta_newsletter'] ) ) {
 		return;
 	}
