@@ -1,0 +1,12 @@
+{
+    "key": "group_sjpta_video_feature",
+    "title": "Video",
+    "fields": [
+        { "key": "field_sjpta_vf_poster", "label": "Poster image", "name": "poster", "type": "image", "return_format": "id", "preview_size": "medium", "instructions": "Shown before anything plays, and on its own until a video is added. Required: without it the block renders nothing.", "required": 0 },
+        { "key": "field_sjpta_vf_video", "label": "Video file", "name": "video", "type": "file", "return_format": "id", "mime_types": "mp4,webm", "instructions": "Leave empty until the film is edited. The poster then shows on its own, with a note saying so, rather than a play button that does nothing.", "required": 0 },
+        { "key": "field_sjpta_vf_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+        { "key": "field_sjpta_vf_text", "label": "Text", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/video-feature" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

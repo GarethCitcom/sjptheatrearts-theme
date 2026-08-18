@@ -1,0 +1,21 @@
+/*
+ * Born To Be accent.
+ *
+ * Six declarations, loaded only on pages that opt in via
+ * templates/page-born-to-be.html. Every block already reads these role tokens,
+ * so nothing here targets a block: the whole page changes accent from one rule.
+ *
+ * #F63631 is kept for text and buttons despite failing WCAG AA at 3.82:1. That
+ * is a signed-off exception matching the white-on-orange decision, recorded in
+ * CLAUDE.md and reported as WAIVED by `npm run contrast`. The design's own
+ * #d92b26 would have passed at 4.86:1 if the waiver is ever revisited.
+ */
+.sjpta-theme-btb {
+	--sjpta-accent: var(--wp--custom--color--bt-red);
+	--sjpta-accent-rgb: 246 54 49;
+	--sjpta-accent-hover: var(--wp--custom--color--bt-red-hover);
+	--sjpta-accent-text: var(--wp--custom--color--bt-red);
+	--sjpta-accent-light: var(--wp--custom--color--bt-red-light);
+	--sjpta-accent-2: var(--wp--custom--color--bt-violet);
+	--sjpta-accent-3: var(--wp--custom--color--bt-lilac);
+}

@@ -1,0 +1,40 @@
+{
+    "key": "group_sjpta_join_teaser",
+    "title": "Join teaser",
+    "fields": [
+        { "key": "field_sjpta_jt_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0, "default_value": "Join SJP" },
+        { "key": "field_sjpta_jt_heading", "label": "Heading", "name": "heading", "type": "text", "required": 0, "default_value": "Joining is three steps" },
+        { "key": "field_sjpta_jt_highlight", "label": "Accented phrase", "name": "highlight", "type": "text", "instructions": "Part of the heading shown in orange. Leave empty for none.", "required": 0, "default_value": "" },
+        { "key": "field_sjpta_jt_intro", "label": "Intro", "name": "intro", "type": "textarea", "rows": 2, "new_lines": "", "required": 0 },
+        {
+            "key": "field_sjpta_jt_steps",
+            "label": "Steps",
+            "name": "steps",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add step",
+            "instructions": "Numbered automatically. The numeral colour cycles orange, magenta, green.",
+            "max": 6,
+            "required": 0,
+            "sub_fields": [
+                { "key": "field_sjpta_jt_step_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+                { "key": "field_sjpta_jt_step_text", "label": "Text", "name": "text", "type": "textarea", "rows": 2, "new_lines": "", "required": 0 }
+            ]
+        },
+        { "key": "field_sjpta_jt_foot_strong", "label": "Footnote heading", "name": "footnote_strong", "type": "text", "required": 0, "default_value": "What to wear for a first class:" },
+        { "key": "field_sjpta_jt_foot_text", "label": "Footnote", "name": "footnote_text", "type": "textarea", "rows": 2, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_jt_panel_title", "label": "Panel title", "name": "panel_title", "type": "text", "required": 0, "default_value": "Enquire now" },
+        { "key": "field_sjpta_jt_panel_text", "label": "Panel text", "name": "panel_text", "type": "textarea", "rows": 3, "new_lines": "", "instructions": "Do not promise a response time until one is agreed.", "required": 0 },
+        { "key": "field_sjpta_jt_panel_label", "label": "Panel button label", "name": "panel_label", "type": "text", "required": 0, "default_value": "Start your enquiry" },
+        { "key": "field_sjpta_jt_panel_url", "label": "Panel button link", "name": "panel_url", "type": "url", "instructions": "Leave empty to link to the Join page.", "required": 0, "default_value": "" }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/join-teaser" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

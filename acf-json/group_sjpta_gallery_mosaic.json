@@ -1,0 +1,144 @@
+{
+    "key": "group_sjpta_gallery_mosaic",
+    "title": "Gallery mosaic",
+    "fields": [
+        {
+            "key": "field_sjpta_gm_layout",
+            "label": "Layout",
+            "name": "layout",
+            "type": "select",
+            "instructions": "Eyebrow and heading, or a section bar with category filters.",
+            "required": 0,
+            "default_value": "heading",
+            "choices": {
+                "heading": "Eyebrow and heading",
+                "bar": "Section bar with filters"
+            }
+        },
+        {
+            "key": "field_sjpta_gm_eyebrow",
+            "label": "Eyebrow",
+            "name": "eyebrow",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_gm_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "text",
+            "required": 1
+        },
+        {
+            "key": "field_sjpta_gm_link_label",
+            "label": "Link label",
+            "name": "link_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_gm_link_url",
+            "label": "Link",
+            "name": "link_url",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_gm_filters",
+            "label": "Categories",
+            "name": "filters",
+            "type": "repeater",
+            "instructions": "The filter buttons, in order. A photograph with no category shows in every view.",
+            "required": 0,
+            "min": 0,
+            "max": 8,
+            "layout": "table",
+            "button_label": "Add category",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_gm_filter_label",
+                    "label": "Label",
+                    "name": "label",
+                    "type": "text",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_gm_photos",
+            "label": "Photographs",
+            "name": "photos",
+            "type": "repeater",
+            "instructions": "Set alt text on each photograph in the media library. Only publish photographs a family has agreed to.",
+            "required": 0,
+            "min": 0,
+            "max": 24,
+            "layout": "table",
+            "button_label": "Add photograph",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_gm_photo",
+                    "label": "Photograph",
+                    "name": "photo",
+                    "type": "image",
+                    "return_format": "id",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_gm_span",
+                    "label": "Size",
+                    "name": "span",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "normal": "One tile",
+                        "wide": "Two wide",
+                        "tall": "Two tall",
+                        "large": "Two wide and two tall"
+                    },
+                    "default_value": "normal",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                },
+                {
+                    "key": "field_sjpta_gm_photo_tag",
+                    "label": "Category",
+                    "name": "tag",
+                    "type": "text",
+                    "instructions": "Must match a category label above. Leave empty to show in every view.",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_gm_note",
+            "label": "Note",
+            "name": "note",
+            "type": "textarea",
+            "instructions": "The small line under the grid, for example the photography consent note.",
+            "rows": 2,
+            "new_lines": "",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/gallery-mosaic"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

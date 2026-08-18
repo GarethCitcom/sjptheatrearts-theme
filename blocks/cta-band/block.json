@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sjptheatrearts/cta-band",
+	"title": "SJP closing CTA band",
+	"category": "theme",
+	"icon": "megaphone",
+	"description": "The purple call-to-action panel that closes every page. Copy differs per page.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"html": false,
+		"reusable": false,
+		"align": false,
+		"customClassName": false
+	},
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": "Ready when you are"
+		},
+		"text": {
+			"type": "string",
+			"default": "Enrol now and we will confirm your class time, teacher and what to bring."
+		},
+		"primaryLabel": {
+			"type": "string",
+			"default": "Enrol now"
+		},
+		"primaryUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"secondaryLabel": {
+			"type": "string",
+			"default": "Timetable & fees"
+		},
+		"secondaryUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"roomy": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	],
+	"render": "file:./render.php"
+}

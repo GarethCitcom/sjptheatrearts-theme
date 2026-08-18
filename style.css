@@ -1,0 +1,23 @@
+/*
+Theme Name: SJP Theatre Arts
+Theme URI: https://sjptheatrearts.co.uk/
+Author: Citcom
+Author URI: https://citcom.co.uk/
+Description: Custom WordPress block theme for SJP Theatre Arts, a dance and theatre school in Bromsgrove, Worcestershire. Full-site-editing theme with locked patterns, ACF-driven class content and a server-rendered timetable fed from the Tempo Book It member portal.
+Requires at least: 6.8
+Tested up to: 7.0
+Requires PHP: 8.1
+Version: 0.1.0
+License: Proprietary
+License URI: https://citcom.co.uk/
+Text Domain: sjptheatrearts
+Tags: full-site-editing, block-patterns, accessibility-ready, custom-colors, custom-menu
+*/
+
+/*
+ * Design tokens, layout and element styling live in theme.json.
+ * Per-block CSS lives in blocks/<block>/style.css and is registered with
+ * wp_enqueue_block_style() so it only loads on pages using that block.
+ *
+ * This file is the theme header. Do not add styles here.
+ */

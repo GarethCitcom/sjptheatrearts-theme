@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/studio-panel",
+	"title": "SJP studio and message",
+	"category": "theme",
+	"icon": "location",
+	"description": "Where the studio is and what to know before visiting, beside a message form.",
+	"textdomain": "sjptheatrearts",
+	"supports": { "align": false, "anchor": true, "html": false, "customClassName": false, "jsx": false },
+	"acf": { "mode": "preview", "renderTemplate": "render.php" },
+	"style": [ "file:./style.css", "sjpta-primitives", "sjpta-form" ]
+}

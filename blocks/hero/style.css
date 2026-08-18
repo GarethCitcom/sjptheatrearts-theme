@@ -1,0 +1,199 @@
+/* Homepage hero. */
+
+.sjpta-hero {
+	position: relative;
+	padding: 150px 0 56px;
+
+	/*
+	 * Deliberately NO isolation/stacking context here. The decor layer below
+	 * uses z-index: -1, and that must resolve against the ROOT stacking
+	 * context: negative-z content paints behind all in-flow boxes of its
+	 * context, which is what puts the ribbon behind the age cards' white
+	 * backgrounds. With `isolation: isolate` the -1 was trapped inside the
+	 * hero, and the hero's whole stacking context painted over the static
+	 * age-cards section — the ribbon sat ON the cards, until a hover transform
+	 * promoted a card above it and the paint order visibly flipped.
+	 */
+
+	/*
+	 * How far the backdrop continues below the hero. In the design this band
+	 * runs behind the age cards and stops at the ticker.
+	 *
+	 * The age-cards section measures ~524px (a fixed 250px image, plus card body,
+	 * padding and section spacing). This deliberately overshoots into the ticker,
+	 * which is opaque white and hides the remainder — so the band always reaches
+	 * the bottom of the cards even if their copy runs a line longer, without ever
+	 * showing below the ticker.
+	 */
+	--sjpta-hero-bleed: 560px;
+}
+
+/* ---------- Decorative layers ---------- */
+
+.sjpta-hero__decor {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: calc(100% + var(--sjpta-hero-bleed));
+	overflow: hidden;
+	z-index: -1;
+	pointer-events: none;
+}
+
+.sjpta-hero__grid,
+.sjpta-hero__glow,
+.sjpta-hero__ribbon,
+.sjpta-hero__canvas {
+	position: absolute;
+	pointer-events: none;
+}
+
+.sjpta-hero__grid {
+	inset: 0;
+	background-image: radial-gradient(rgba(56, 16, 100, 0.08) 1px, transparent 1.4px);
+	background-size: 24px 24px;
+}
+
+.sjpta-hero__glow {
+	border-radius: 50%;
+}
+
+.sjpta-hero__glow--orange {
+	left: -160px;
+	top: -160px;
+	width: 520px;
+	height: 520px;
+	background: radial-gradient(circle, rgba(254, 115, 0, 0.1) 0%, rgba(254, 115, 0, 0) 70%);
+}
+
+.sjpta-hero__glow--magenta {
+	right: -180px;
+	top: 40px;
+	width: 560px;
+	height: 560px;
+	background: radial-gradient(circle, rgba(197, 41, 155, 0.1) 0%, rgba(197, 41, 155, 0) 70%);
+}
+
+.sjpta-hero__ribbon,
+.sjpta-hero__canvas {
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/*
+ * When the animated canvas is running, the still ribbon steps aside. The class
+ * is only ever added by hero-ribbon.js, so without script the SVG stays.
+ */
+.sjpta-hero.has-canvas .sjpta-hero__ribbon {
+	display: none;
+}
+
+/* ---------- Content ---------- */
+
+.sjpta-hero__inner {
+	position: relative;
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 0 var(--wp--preset--spacing--60);
+}
+
+.sjpta-hero__copy {
+	text-align: center;
+	max-width: 860px;
+	margin: 0 auto 56px;
+}
+
+.sjpta-hero__eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	background: var(--wp--custom--color--badge-purple-bg);
+	color: var(--wp--custom--color--badge-purple-fg);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 8px 16px;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	margin-bottom: 26px;
+}
+
+.sjpta-hero__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--display);
+	line-height: 1.04;
+	letter-spacing: -0.025em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 22px;
+	text-wrap: balance;
+}
+
+.sjpta-hero__intro {
+	font-size: var(--wp--preset--font-size--hero-body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 auto 30px;
+	max-width: 560px;
+	text-wrap: pretty;
+}
+
+.sjpta-hero__actions {
+	display: flex;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--20);
+	flex-wrap: wrap;
+}
+
+.sjpta-hero__btn {
+	min-height: var(--wp--custom--control--hero);
+	font-size: 15px;
+	padding: 0 28px;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-hero {
+		/* No nav overlap below 1024px, so the hero does not compensate for it. */
+		padding: var(--wp--preset--spacing--80) 0 var(--wp--preset--spacing--70);
+
+		/*
+		 * The cards stack below 1024px, so the section becomes far taller than
+		 * the desktop bleed assumes. The mobile designs keep the backdrop to
+		 * the hero itself, so it stops here.
+		 */
+		--sjpta-hero-bleed: 0px;
+	}
+
+	.sjpta-hero__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
+	/*
+	 * The copy is the hero's only content at this width, so the section's own
+	 * bottom padding is the whole gap to the age cards. The desktop margin
+	 * exists for the band the cards overlap into, which does not happen here.
+	 */
+	.sjpta-hero__copy {
+		margin-bottom: 0;
+	}
+}
+
+@media (max-width: 782px) {
+	.sjpta-hero__actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.sjpta-hero__btn {
+		width: 100%;
+	}
+
+	.sjpta-hero__glow--orange,
+	.sjpta-hero__glow--magenta {
+		width: 320px;
+		height: 320px;
+	}
+}
+

@@ -1,0 +1,96 @@
+{
+    "key": "group_sjpta_hero",
+    "title": "Hero",
+    "fields": [
+        {
+            "key": "field_sjpta_hero_eyebrow",
+            "label": "Eyebrow",
+            "name": "eyebrow",
+            "type": "text",
+            "instructions": "The small uppercase pill above the headline.",
+            "required": 0,
+            "default_value": "All ages · all abilities"
+        },
+        {
+            "key": "field_sjpta_hero_heading",
+            "label": "Headline",
+            "name": "heading",
+            "type": "textarea",
+            "instructions": "Line breaks are kept. Keep it short: this is the largest text on the site.",
+            "required": 0,
+            "rows": 2,
+            "new_lines": "",
+            "default_value": "Find their place\nto shine."
+        },
+        {
+            "key": "field_sjpta_hero_highlight",
+            "label": "Accented phrase",
+            "name": "highlight",
+            "type": "text",
+            "instructions": "The part of the headline shown in orange. Must match the headline exactly, including punctuation. Leave empty for no accent.",
+            "required": 0,
+            "default_value": "shine."
+        },
+        {
+            "key": "field_sjpta_hero_intro",
+            "label": "Intro",
+            "name": "intro",
+            "type": "textarea",
+            "required": 0,
+            "rows": 3,
+            "new_lines": "",
+            "default_value": "Dance, sing and perform with welcoming, industry-trained teachers. Classes for babies, children and teens of every ability, plus adult ballet and ballroom."
+        },
+        {
+            "key": "field_sjpta_hero_primary_label",
+            "label": "Primary button label",
+            "name": "primary_label",
+            "type": "text",
+            "required": 0,
+            "default_value": "Enrol now"
+        },
+        {
+            "key": "field_sjpta_hero_primary_url",
+            "label": "Primary button link",
+            "name": "primary_url",
+            "type": "url",
+            "instructions": "Leave empty to link to the Join page.",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_hero_secondary_label",
+            "label": "Secondary button label",
+            "name": "secondary_label",
+            "type": "text",
+            "required": 0,
+            "default_value": "Find the right class"
+        },
+        {
+            "key": "field_sjpta_hero_secondary_url",
+            "label": "Secondary button link",
+            "name": "secondary_url",
+            "type": "url",
+            "instructions": "Leave empty to link to the Classes page.",
+            "required": 0,
+            "default_value": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts\/hero"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

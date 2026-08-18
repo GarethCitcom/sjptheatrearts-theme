@@ -1,0 +1,34 @@
+{
+    "key": "group_sjpta_ticker",
+    "title": "Discipline ticker",
+    "fields": [
+        {
+            "key": "field_sjpta_ticker_items",
+            "label": "Pills",
+            "name": "items",
+            "type": "textarea",
+            "instructions": "One discipline per line. Colours cycle automatically through the four badge pairs, so the order sets the pattern.",
+            "required": 0,
+            "rows": 13,
+            "new_lines": "",
+            "default_value": "Ballet\nTap\nJazz & Commercial\nAcro & Cheer\nMusical Theatre\nDrama\nSinging\nLyrical\nTroupe\nLAMDA\nBallroom & Latin\nAdult Ballet\nWedding Dance"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts\/ticker"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

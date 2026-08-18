@@ -1,0 +1,12 @@
+{
+    "key": "group_sjpta_popular_classes",
+    "title": "Popular classes",
+    "fields": [
+        { "key": "field_sjpta_pc_label", "label": "Section label", "name": "label", "type": "text", "required": 0, "default_value": "Popular classes" },
+        { "key": "field_sjpta_pc_note", "label": "Note", "name": "note", "type": "text", "required": 0 },
+        { "key": "field_sjpta_pc_cta_label", "label": "Button label", "name": "cta_label", "type": "text", "instructions": "The number of classes is added automatically, so write \"All\" and it becomes \"All 15 classes\".", "required": 0, "default_value": "All" },
+        { "key": "field_sjpta_pc_classes", "label": "Classes to feature", "name": "classes", "type": "relationship", "instructions": "Pick the classes to lead with, in order. Leave empty and the first few are shown instead, so the section is never blank.", "required": 0, "post_type": [ "sjp-class" ], "filters": [ "search" ], "return_format": "id", "min": 0, "max": 6 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/popular-classes" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

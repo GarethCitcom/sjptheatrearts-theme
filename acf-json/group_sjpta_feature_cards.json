@@ -1,0 +1,158 @@
+{
+    "key": "group_sjpta_feature_cards",
+    "title": "Feature cards",
+    "fields": [
+        {
+            "key": "field_sjpta_fc_layout",
+            "label": "Layout",
+            "name": "layout",
+            "type": "select",
+            "instructions": "Prose column beside the cards, or a section bar above a full-width row.",
+            "required": 0,
+            "default_value": "split",
+            "choices": {
+                "split": "Prose beside the cards",
+                "bar": "Section bar above"
+            }
+        },
+        {
+            "key": "field_sjpta_fc_eyebrow",
+            "label": "Eyebrow",
+            "name": "eyebrow",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fc_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "text",
+            "required": 1
+        },
+        {
+            "key": "field_sjpta_fc_highlight",
+            "label": "Highlighted words",
+            "name": "heading_highlight",
+            "type": "text",
+            "instructions": "Words from the heading to colour in the accent. Must match exactly.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fc_body",
+            "label": "Body",
+            "name": "body",
+            "type": "textarea",
+            "instructions": "Leave a blank line between paragraphs.",
+            "rows": 8,
+            "new_lines": "wpautop",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fc_note",
+            "label": "Note card",
+            "name": "note",
+            "type": "textarea",
+            "instructions": "The white card under the body. Leave empty to hide it.",
+            "rows": 3,
+            "new_lines": "",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fc_cards",
+            "label": "Cards",
+            "name": "cards",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 8,
+            "layout": "block",
+            "button_label": "Add card",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_fc_card_badge",
+                    "label": "Badge",
+                    "name": "badge",
+                    "type": "text",
+                    "instructions": "A short uppercase label above the title. Optional.",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fc_card_icon",
+                    "label": "Icon",
+                    "name": "icon",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "": "None",
+                        "mic": "Microphone",
+                        "dance": "Dancer",
+                        "script": "Script",
+                        "backstage": "Stage curtains",
+                        "check": "Tick",
+                        "shield-tick": "Shield and tick",
+                        "mail": "Envelope",
+                        "heart": "Heart",
+                        "cap": "Graduation cap",
+                        "trophy": "Trophy",
+                        "people": "People",
+                        "calendar": "Calendar"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                },
+                {
+                    "key": "field_sjpta_fc_card_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fc_card_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "new_lines": "",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fc_card_tone",
+                    "label": "Colour",
+                    "name": "tone",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "red": "Red",
+                        "plum": "Purple",
+                        "amber": "Amber",
+                        "mint": "Mint"
+                    },
+                    "default_value": "red",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/feature-cards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

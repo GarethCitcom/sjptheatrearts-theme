@@ -1,0 +1,32 @@
+{
+    "key": "group_sjpta_class_cards",
+    "title": "Class cards",
+    "fields": [
+        { "key": "field_sjpta_cc_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0 },
+        { "key": "field_sjpta_cc_heading", "label": "Heading", "name": "heading", "type": "text", "required": 1 },
+        { "key": "field_sjpta_cc_highlight", "label": "Highlighted words", "name": "heading_highlight", "type": "text", "instructions": "Words from the heading to colour in the accent. Must match exactly.", "required": 0 },
+        { "key": "field_sjpta_cc_note", "label": "Note", "name": "note", "type": "textarea", "instructions": "The short paragraph beside the heading.", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_cc_cards", "label": "Classes", "name": "cards", "type": "repeater", "required": 0, "min": 0, "max": 6, "layout": "block", "button_label": "Add class", "sub_fields": [
+            { "key": "field_sjpta_cc_card_image", "label": "Photograph", "name": "image", "type": "image", "return_format": "id", "preview_size": "medium", "library": "all", "required": 0 },
+            { "key": "field_sjpta_cc_card_badge", "label": "Badge", "name": "badge", "type": "text", "instructions": "The pill over the photograph, for example Junior.", "required": 0 },
+            { "key": "field_sjpta_cc_card_badge_tone", "label": "Badge colour", "name": "badge_tone", "type": "select", "required": 0, "choices": { "accent": "Accent", "deep": "Deep", "plum": "Purple" }, "default_value": "accent", "return_format": "value", "allow_null": 0, "ui": 0 },
+            { "key": "field_sjpta_cc_card_title", "label": "Class name", "name": "title", "type": "text", "required": 0 },
+            { "key": "field_sjpta_cc_card_text", "label": "Description", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+            { "key": "field_sjpta_cc_card_meta", "label": "Detail pills", "name": "meta", "type": "repeater", "instructions": "Day and time, teacher, anything short. Leave a pill empty to hide it.", "required": 0, "min": 0, "max": 4, "layout": "table", "button_label": "Add pill", "sub_fields": [
+                { "key": "field_sjpta_cc_meta_text", "label": "Text", "name": "text", "type": "text", "required": 0 }
+            ] },
+            { "key": "field_sjpta_cc_card_cta_label", "label": "Button label", "name": "cta_label", "type": "text", "required": 0 },
+            { "key": "field_sjpta_cc_card_cta_url", "label": "Button link", "name": "cta_url", "type": "text", "instructions": "A full URL, or an anchor on this page. Defaults to #enquire.", "required": 0 },
+            { "key": "field_sjpta_cc_card_cta_tone", "label": "Button style", "name": "cta_tone", "type": "select", "required": 0, "choices": { "accent": "Accent", "plum": "Purple" }, "default_value": "accent", "return_format": "value", "allow_null": 0, "ui": 0 }
+        ] }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/class-cards" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

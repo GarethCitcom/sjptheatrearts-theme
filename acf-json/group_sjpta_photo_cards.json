@@ -1,0 +1,17 @@
+{
+    "key": "group_sjpta_photo_cards",
+    "title": "Photo cards",
+    "fields": [
+        { "key": "field_sjpta_pc_label", "label": "Section label", "name": "label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_pc_note", "label": "Section note", "name": "note", "type": "text", "required": 0 },
+        { "key": "field_sjpta_pc_cards", "label": "Cards", "name": "cards", "type": "repeater", "required": 0, "min": 0, "max": 6, "layout": "block", "button_label": "Add card", "sub_fields": [
+            { "key": "field_sjpta_pc_card_photo", "label": "Photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "medium", "required": 0 },
+            { "key": "field_sjpta_pc_card_badge", "label": "Badge", "name": "badge", "type": "text", "required": 0 },
+            { "key": "field_sjpta_pc_card_tone", "label": "Badge tone", "name": "tone", "type": "select", "required": 0, "default_value": "orange", "choices": { "orange": "Orange", "magenta": "Magenta", "purple": "Purple", "green": "Green" } },
+            { "key": "field_sjpta_pc_card_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+            { "key": "field_sjpta_pc_card_text", "label": "Text", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+        ] }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/photo-cards" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

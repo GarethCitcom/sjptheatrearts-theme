@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sjptheatrearts/site-footer",
+	"title": "SJP site footer",
+	"category": "theme",
+	"icon": "align-center",
+	"description": "Shared footer: logo, tagline, navigation, contact line and back-to-top.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"html": false,
+		"reusable": false,
+		"inserter": false,
+		"align": false,
+		"customClassName": false
+	},
+	"attributes": {},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	],
+	"render": "file:./render.php"
+}

@@ -1,0 +1,167 @@
+/* Feature cards: prose beside a grid of tinted cards. */
+
+.sjpta-features {
+	padding: var(--wp--preset--spacing--70) 0 0;
+}
+
+.sjpta-features__inner {
+	display: grid;
+	grid-template-columns: 0.9fr 1.1fr;
+	gap: var(--wp--preset--spacing--70);
+	align-items: start;
+}
+
+.sjpta-features__eyebrow {
+	margin-bottom: 14px;
+}
+
+.sjpta-features__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-md);
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 18px;
+	text-wrap: balance;
+}
+
+.sjpta-features__body p {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.7;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 16px;
+	text-wrap: pretty;
+}
+
+.sjpta-features__body p:last-child {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.sjpta-features__note {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 20px 22px;
+}
+
+.sjpta-features__note p {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+}
+
+/* ---------- Cards ---------- */
+
+.sjpta-features__grid {
+	min-width: 0;
+}
+
+.sjpta-features__cards {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.sjpta-features__card {
+	background: var(--tone-bg);
+	border-radius: 18px;
+	padding: 26px 24px;
+	transition: translate 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.sjpta-features__card:hover {
+	translate: 0 -6px;
+}
+
+.sjpta-features__icon {
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+	background: var(--tone-solid);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+}
+
+.sjpta-features__cardtitle {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 8px;
+}
+
+.sjpta-features__cardtext {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.6;
+	color: var(--tone-fg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-features__card {
+		transition: none;
+	}
+
+	.sjpta-features__card:hover {
+		translate: none;
+	}
+}
+
+@media (max-width: 1023px) {
+	.sjpta-features__inner {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--70);
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-features__cards {
+		grid-template-columns: 1fr;
+	}
+}
+
+/*
+ * Bar layout: heading in a section bar, cards in one full-width row beneath.
+ * The prose column stands down entirely, so the grid takes the whole container.
+ */
+.sjpta-features--bar .sjpta-features__inner {
+	display: block;
+}
+
+.sjpta-features--bar .sjpta-features__cards {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1023px) {
+	.sjpta-features--bar .sjpta-features__cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 560px) {
+	.sjpta-features--bar .sjpta-features__cards {
+		grid-template-columns: 1fr;
+	}
+}
+
+/*
+ * A short uppercase label above the card's title, in the tone's own foreground.
+ * Used by the Join page's "what to wear / bring / nerves / after" cards.
+ */
+.sjpta-features__badge {
+	display: inline-flex;
+	align-items: center;
+	border-radius: var(--wp--custom--radius--pill);
+	background: var(--wp--preset--color--surface);
+	color: var(--tone-fg);
+	padding: 4px 11px;
+	margin-bottom: 12px;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}

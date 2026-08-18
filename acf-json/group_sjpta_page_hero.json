@@ -1,0 +1,34 @@
+{
+    "key": "group_sjpta_page_hero",
+    "title": "Page hero",
+    "fields": [
+        { "key": "field_sjpta_ph_layout", "label": "Layout", "name": "layout", "type": "select", "instructions": "\"Split\" puts the photo collage alongside the copy. \"Centred\" drops the collage and centres the text.", "required": 0, "choices": { "split": "Split, with photographs", "centred": "Centred, text only" }, "default_value": "split", "return_format": "value", "allow_null": 0, "ui": 0 },
+        { "key": "field_sjpta_ph_breadcrumb", "label": "Breadcrumb", "name": "breadcrumb", "type": "text", "instructions": "The name of this page. \"Home\" is added in front automatically. Leave empty to hide the breadcrumb.", "required": 0 },
+        { "key": "field_sjpta_ph_logo", "label": "Brand mark", "name": "logo", "type": "image", "instructions": "Optional. Shown above the heading, in place of the eyebrow.", "return_format": "id", "preview_size": "medium", "library": "all", "required": 0 },
+        { "key": "field_sjpta_ph_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "instructions": "Small uppercase line. Ignored when a brand mark is set.", "required": 0 },
+        { "key": "field_sjpta_ph_heading", "label": "Heading", "name": "heading", "type": "text", "instructions": "The page's only H1.", "required": 1 },
+        { "key": "field_sjpta_ph_highlight", "label": "Highlighted words", "name": "heading_highlight", "type": "text", "instructions": "Words from the heading to colour in the accent. Must match exactly.", "required": 0 },
+        { "key": "field_sjpta_ph_intro", "label": "Intro", "name": "intro", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_ph_cta_label", "label": "Main button label", "name": "cta_label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_ph_cta_url", "label": "Main button link", "name": "cta_url", "type": "text", "instructions": "A full URL, or an anchor on this page such as #enquire.", "required": 0, "default_value": "#enquire" },
+        { "key": "field_sjpta_ph_alt_label", "label": "Second button label", "name": "alt_label", "type": "text", "required": 0 },
+        { "key": "field_sjpta_ph_alt_url", "label": "Second button link", "name": "alt_url", "type": "text", "required": 0 },
+        { "key": "field_sjpta_ph_points", "label": "Reassurance points", "name": "points", "type": "repeater", "instructions": "The short lines with coloured dots under the buttons. Three works best.", "required": 0, "min": 0, "max": 4, "layout": "table", "button_label": "Add point", "sub_fields": [
+            { "key": "field_sjpta_ph_point_text", "label": "Text", "name": "text", "type": "text", "required": 0 },
+            { "key": "field_sjpta_ph_point_tone", "label": "Dot colour", "name": "tone", "type": "select", "required": 0, "choices": { "accent": "Accent", "soft": "Soft", "deep": "Deep" }, "default_value": "accent", "return_format": "value", "allow_null": 0, "ui": 0 }
+        ] },
+        { "key": "field_sjpta_ph_photo_main", "label": "Large photograph", "name": "photo_main", "type": "image", "return_format": "id", "preview_size": "medium", "library": "all", "required": 0 },
+        { "key": "field_sjpta_ph_photo_inset", "label": "Small photograph", "name": "photo_inset", "type": "image", "instructions": "Overlaps the bottom-left corner of the large one.", "return_format": "id", "preview_size": "medium", "library": "all", "required": 0 },
+        { "key": "field_sjpta_ph_card_heading", "label": "Floating card heading", "name": "card_heading", "type": "text", "instructions": "The small white card over the photographs. Leave empty to hide it.", "required": 0 },
+        { "key": "field_sjpta_ph_card_note", "label": "Floating card note", "name": "card_note", "type": "text", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/page-hero" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

@@ -1,0 +1,221 @@
+/* Joining is three steps. */
+
+.sjpta-join {
+	padding: var(--wp--preset--spacing--80) 0 0;
+}
+
+.sjpta-join__inner {
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 0 var(--wp--preset--spacing--60);
+}
+
+.sjpta-join__panel {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 52px;
+	display: grid;
+	grid-template-columns: 0.9fr 1.1fr;
+	gap: 60px;
+
+	/*
+	 * The two columns finish level. The panel used to hold a button and the copy
+	 * was always the taller side; now it holds a form, the form is 145px shorter
+	 * than the steps beside it and stopped short in the middle of the card.
+	 */
+	align-items: stretch;
+	position: relative;
+	overflow: hidden;
+}
+
+.sjpta-join__dots {
+	position: absolute;
+	right: -40px;
+	top: -40px;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-image: radial-gradient(rgba(254, 115, 0, 0.12) 2px, transparent 2.5px);
+	background-size: 16px 16px;
+	pointer-events: none;
+}
+
+.sjpta-join__eyebrow {
+	padding: 6px 14px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	margin-bottom: 18px;
+}
+
+.sjpta-join__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-lg);
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 14px;
+	text-wrap: balance;
+}
+
+.sjpta-join__intro {
+	font-size: 15px;
+	line-height: 1.7;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 30px;
+	text-wrap: pretty;
+}
+
+/* ---------- Steps ---------- */
+
+.sjpta-join__steps {
+	list-style: none;
+	margin: 0 0 28px;
+	padding: 0;
+}
+
+.sjpta-join__step {
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	align-items: flex-start;
+	padding: 18px 0;
+	border-top: 1px solid var(--wp--custom--color--inner-divider);
+}
+
+.sjpta-join__step:last-child {
+	border-bottom: 1px solid var(--wp--custom--color--inner-divider);
+}
+
+.sjpta-join__num {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: 15px;
+	width: 30px;
+	flex: none;
+}
+
+.sjpta-join__num--orange {
+	color: var(--wp--custom--color--orange-text);
+}
+
+.sjpta-join__num--magenta {
+	color: var(--wp--preset--color--magenta);
+}
+
+.sjpta-join__num--green {
+	color: var(--wp--custom--color--badge-green-fg);
+}
+
+.sjpta-join__step-title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--body);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 4px;
+}
+
+.sjpta-join__step-text {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.6;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+.sjpta-join__footnote {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--fine-print);
+	line-height: 1.65;
+	color: var(--wp--custom--color--text-muted);
+	text-wrap: pretty;
+}
+
+.sjpta-join__footnote strong {
+	color: var(--wp--preset--color--brand-purple);
+}
+
+/* ---------- Panel: the inline enrolment form ---------- */
+
+/*
+ * A column, so the form takes the height the steps beside it set and the button
+ * sits at the foot rather than leaving a band of empty card below it. Left
+ * aligned: this held one centred call to action before it held a form.
+ */
+.sjpta-join__cta {
+	background: var(--wp--preset--color--page-background);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 36px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.sjpta-join__cta .sjpta-form {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.sjpta-join__cta .sjpta-form__submit {
+	margin-top: auto;
+}
+
+.sjpta-join__cta-title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: 23px;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 6px;
+}
+
+.sjpta-join__cta-text {
+	margin: 0 0 24px;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.6;
+	color: var(--wp--preset--color--text-secondary);
+	text-wrap: pretty;
+}
+
+.sjpta-join__cta-btn {
+	min-height: var(--wp--custom--control--hero);
+	font-size: 15px;
+	padding: 0 28px;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-join__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
+	.sjpta-join__panel {
+		grid-template-columns: 1fr;
+		gap: 32px;
+		padding: 30px 24px;
+	}
+
+	/*
+	 * The form bleeds to the panel's edges — the margins cancel the panel
+	 * padding above — so it reads as a flush cap on the stacked card. The top
+	 * corners square off where it meets the copy; the bottom ones are clipped
+	 * to the panel's own radius by its overflow: hidden.
+	 */
+	.sjpta-join__cta {
+		margin-left: -24px;
+		margin-right: -24px;
+		margin-bottom: -30px;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-join__cta {
+		padding: 24px 20px;
+	}
+
+	.sjpta-join__cta-btn {
+		width: 100%;
+	}
+}

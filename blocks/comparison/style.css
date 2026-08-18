@@ -1,0 +1,159 @@
+/* Comparison: two cards answering "which one is which?". */
+
+.sjpta-compare {
+	padding: var(--wp--preset--spacing--80) 0 0;
+}
+
+.sjpta-compare__head {
+	text-align: center;
+	margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.sjpta-compare__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-md);
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 auto 12px;
+	max-width: 720px;
+	text-wrap: balance;
+}
+
+.sjpta-compare__intro {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 auto;
+	max-width: 600px;
+	text-wrap: pretty;
+}
+
+/* ---------- Cards ---------- */
+
+.sjpta-compare__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.sjpta-compare__card {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: 20px;
+	padding: 32px 32px 28px;
+}
+
+/*
+ * The ring, not a thicker border: a border would shift the card's box by a
+ * pixel against its neighbour, and these two are read side by side.
+ */
+.sjpta-compare__card.is-emphasised {
+	border-color: var(--wp--custom--color--bt-card-border);
+	box-shadow: 0 0 0 2px var(--sjpta-accent);
+}
+
+.sjpta-compare__mark {
+	display: block;
+	height: 40px;
+	width: auto;
+	margin-bottom: 20px;
+}
+
+/*
+ * A wrapper round an uploaded mark, so it is the <img> that carries the height
+ * and the span only positions it. The base rule's fixed 40px has to be undone
+ * here or the span clips its own taller image and the heading lands on top.
+ */
+.sjpta-compare__mark--tall {
+	display: block;
+	height: auto;
+	margin: -8px 0 14px -4px;
+}
+
+.sjpta-compare__mark--tall img {
+	display: block;
+	height: 64px;
+	width: auto;
+}
+
+.sjpta-compare__cardtitle {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 6px;
+}
+
+.sjpta-compare__cardtext {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 var(--wp--preset--spacing--40);
+}
+
+.sjpta-compare__rows {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sjpta-compare__row {
+	display: flex;
+	gap: 12px;
+	font-size: var(--wp--preset--font-size--card-body);
+	color: var(--wp--preset--color--text-secondary);
+}
+
+.sjpta-compare__row dt {
+	color: var(--wp--custom--color--text-muted);
+	font-weight: 700;
+	min-width: 96px;
+	flex: none;
+}
+
+.sjpta-compare__row dd {
+	margin: 0;
+}
+
+.sjpta-compare__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: var(--wp--custom--control--min);
+	margin-top: 14px;
+	font-size: var(--wp--preset--font-size--card-body);
+	font-weight: 700;
+	color: var(--wp--custom--color--orange-text);
+	text-decoration: none;
+}
+
+.sjpta-compare__card.is-emphasised .sjpta-compare__link {
+	color: var(--sjpta-accent-text);
+}
+
+.sjpta-compare__link:hover {
+	text-decoration: underline;
+}
+
+.sjpta-compare__footnote {
+	text-align: center;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.65;
+	color: var(--wp--custom--color--text-muted);
+	margin: var(--wp--preset--spacing--40) auto 0;
+	max-width: 700px;
+	text-wrap: pretty;
+}
+
+@media (max-width: 782px) {
+	.sjpta-compare__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.sjpta-compare__card {
+		padding: 26px 22px 24px;
+	}
+}

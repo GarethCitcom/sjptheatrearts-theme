@@ -1,0 +1,30 @@
+{
+    "key": "group_sjpta_testimonials",
+    "title": "Testimonials",
+    "fields": [
+        {
+            "key": "field_sjpta_q_quotes",
+            "label": "Quotes",
+            "name": "quotes",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add quote",
+            "instructions": "Publish a quote only once the person has agreed to it appearing on the website. Never edit someone's words into something they did not say. Remove a row to take a quote down; the section disappears entirely when empty.",
+            "required": 0,
+            "sub_fields": [
+                { "key": "field_sjpta_q_quote", "label": "Quote", "name": "quote", "type": "textarea", "rows": 5, "new_lines": "", "required": 0 },
+                { "key": "field_sjpta_q_name", "label": "Attributed to", "name": "name", "type": "text", "instructions": "As they wish to be named — a full name, or something like \"Parent of Caitlin\".", "required": 0 },
+                { "key": "field_sjpta_q_context", "label": "Context", "name": "context", "type": "text", "instructions": "e.g. Parent, or Private lessons, additional needs", "required": 0 }
+            ]
+        }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/testimonials" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

@@ -1,0 +1,152 @@
+{
+    "key": "group_sjpta_fees",
+    "title": "Fees",
+    "fields": [
+        {
+            "key": "field_sjpta_fe_label",
+            "label": "Section label",
+            "name": "label",
+            "type": "text",
+            "required": 0,
+            "default_value": "What it costs"
+        },
+        {
+            "key": "field_sjpta_fe_note",
+            "label": "Section note",
+            "name": "note",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_fe_cards",
+            "label": "Fee cards",
+            "name": "cards",
+            "type": "repeater",
+            "instructions": "Leave a card's amount empty and it shows \"Ask us\" rather than a guessed figure.",
+            "required": 0,
+            "min": 0,
+            "max": 4,
+            "layout": "block",
+            "button_label": "Add card",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_fe_card_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fe_card_value",
+                    "label": "Amount or answer",
+                    "name": "value",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fe_card_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "new_lines": "",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fe_card_tone",
+                    "label": "Tone",
+                    "name": "tone",
+                    "type": "select",
+                    "required": 0,
+                    "default_value": "orange",
+                    "choices": {
+                        "orange": "Orange",
+                        "magenta": "Magenta",
+                        "purple": "Purple",
+                        "green": "Green"
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_fe_included_title",
+            "label": "Included heading",
+            "name": "included_title",
+            "type": "text",
+            "required": 0,
+            "default_value": "Included in the fee"
+        },
+        {
+            "key": "field_sjpta_fe_included",
+            "label": "Included in the fee",
+            "name": "included",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 10,
+            "layout": "table",
+            "button_label": "Add item",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_fe_included_text",
+                    "label": "Item",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_fe_extras_title",
+            "label": "Extras heading",
+            "name": "extras_title",
+            "type": "text",
+            "required": 0,
+            "default_value": "Costs on top, and when"
+        },
+        {
+            "key": "field_sjpta_fe_extras",
+            "label": "Costs on top",
+            "name": "extras",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 10,
+            "layout": "table",
+            "button_label": "Add cost",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_fe_extra_title",
+                    "label": "Name",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_fe_extra_text",
+                    "label": "When",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/fees"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Fees are never read from the member portal; that feed carries no pricing at all.",
+    "show_in_rest": 0
+}

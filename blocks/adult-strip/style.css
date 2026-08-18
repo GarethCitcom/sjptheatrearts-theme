@@ -1,0 +1,138 @@
+/* Adult strip. */
+
+.sjpta-adults {
+	padding: var(--wp--preset--spacing--80) 0 0;
+}
+
+.sjpta-adults__panel {
+	background: var(--wp--custom--color--badge-purple-bg);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 38px 44px;
+	display: flex;
+	align-items: center;
+	gap: 36px;
+	flex-wrap: wrap;
+}
+
+/*
+ * Purple tone. Used where the band is a reassurance rather than an invitation,
+ * so it reads as a statement from the school instead of another offer.
+ */
+.sjpta-adults--purple {
+	padding: 0 0 var(--wp--preset--spacing--20);
+}
+
+.sjpta-adults--purple .sjpta-adults__panel {
+	background: var(--wp--preset--color--brand-purple);
+	padding: 26px 32px;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.sjpta-adults--purple .sjpta-adults__heading {
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	color: var(--wp--preset--color--surface);
+	margin-bottom: 6px;
+}
+
+.sjpta-adults--purple .sjpta-adults__text {
+	font-size: var(--wp--preset--font-size--body);
+	color: var(--wp--custom--color--text-on-purple);
+	max-width: 760px;
+}
+
+.sjpta-adults__icon {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: var(--wp--custom--color--badge-purple-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+}
+
+.sjpta-adults--purple .sjpta-adults__icon {
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.sjpta-adults__media {
+	width: 120px;
+	height: 120px;
+	border-radius: var(--wp--custom--radius--small);
+	overflow: hidden;
+	background: var(--wp--preset--color--surface);
+	flex: none;
+	display: block;
+}
+
+.sjpta-adults__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.sjpta-adults__copy {
+	flex: 1;
+	min-width: 300px;
+}
+
+/* A badge, not the shared section eyebrow: tinted pill, its own colour pair. */
+.sjpta-adults__eyebrow {
+	padding: 5px 12px;
+	font-size: var(--wp--preset--font-size--eyebrow);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.sjpta-adults__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-sm);
+	line-height: 1.2;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 8px;
+	text-wrap: balance;
+}
+
+.sjpta-adults__text {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	max-width: 600px;
+	text-wrap: pretty;
+}
+
+.sjpta-adults__cta {
+	min-height: 50px;
+	padding: 0 26px;
+	flex: none;
+}
+
+@media (max-width: 782px) {
+	.sjpta-adults__panel {
+		padding: 26px 22px;
+		gap: 20px;
+	}
+
+	/*
+	 * One column, both tones (Gaz). Side by side, the copy column is the panel
+	 * minus the media, and the nowrap eyebrow badge overflows it off the
+	 * viewport.
+	 */
+	.sjpta-adults__panel {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.sjpta-adults__copy {
+		min-width: 0;
+	}
+
+	.sjpta-adults__cta {
+		width: 100%;
+	}
+}

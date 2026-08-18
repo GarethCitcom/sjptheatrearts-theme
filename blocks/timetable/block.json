@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/timetable",
+	"title": "SJP weekly timetable",
+	"category": "theme",
+	"icon": "schedule",
+	"description": "The weekly schedule from the member portal, grouped by day, with a day filter.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives"
+	],
+	"viewScript": [
+		"sjpta-timetable-filter"
+	]
+}

@@ -1,0 +1,168 @@
+/* Class cards. */
+
+.sjpta-classcards {
+	padding: var(--wp--preset--spacing--80) 0 0;
+}
+
+.sjpta-classcards__head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--60);
+	margin-bottom: var(--wp--preset--spacing--40);
+	flex-wrap: wrap;
+}
+
+.sjpta-classcards__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-md);
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0;
+	text-wrap: balance;
+}
+
+.sjpta-classcards__note {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0;
+	max-width: 360px;
+	text-wrap: pretty;
+}
+
+.sjpta-classcards__grid {
+	min-width: 0;
+}
+
+.sjpta-classcards__cards {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--50);
+}
+
+/* ---------- One card ---------- */
+
+.sjpta-classcard {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: 20px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: transform var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+/*
+ * The card is not itself a link, so the lift is driven by :hover on the card and
+ * :focus-within on its button. Without the second half a keyboard user tabbing
+ * to "Enquire about Junior" would get no sign that the card is the thing they
+ * are on, which the pointer user gets for free.
+ */
+.sjpta-classcard:hover,
+.sjpta-classcard:focus-within {
+	transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-classcard {
+		transition: none;
+	}
+
+	.sjpta-classcard:hover,
+	.sjpta-classcard:focus-within {
+		transform: none;
+	}
+}
+
+.sjpta-classcard__media {
+	position: relative;
+	height: 250px;
+	background: var(--wp--custom--color--badge-purple-bg);
+}
+
+.sjpta-classcard__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.sjpta-classcard__badge {
+	position: absolute;
+	left: 14px;
+	top: 14px;
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 6px 13px;
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 700;
+	color: var(--wp--preset--color--surface);
+	background: var(--sjpta-accent);
+}
+
+.sjpta-classcard__badge--deep {
+	background: var(--sjpta-accent-2);
+}
+
+.sjpta-classcard__badge--plum {
+	background: var(--wp--preset--color--brand-purple);
+}
+
+.sjpta-classcard__body {
+	padding: 26px 28px 28px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.sjpta-classcard__title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-lg);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 8px;
+}
+
+.sjpta-classcard__text {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.65;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 18px;
+	text-wrap: pretty;
+}
+
+.sjpta-classcard__meta {
+	list-style: none;
+	margin: 0 0 var(--wp--preset--spacing--40);
+	padding: 0;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.sjpta-classcard__meta li {
+	background: var(--wp--custom--color--badge-purple-bg);
+	color: var(--wp--preset--color--brand-purple);
+	border-radius: var(--wp--custom--radius--pill);
+	padding: 7px 13px;
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 700;
+}
+
+.sjpta-classcard__cta {
+	margin-top: auto;
+	min-height: 48px;
+	width: 100%;
+}
+
+@media (max-width: 782px) {
+	.sjpta-classcards__cards {
+		grid-template-columns: 1fr;
+	}
+
+	.sjpta-classcard__body {
+		padding: 22px 20px 24px;
+	}
+}

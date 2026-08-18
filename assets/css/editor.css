@@ -1,0 +1,121 @@
+/*
+ * Editor-canvas styles (loaded via add_editor_style, so WordPress scopes these
+ * to the canvas in both the iframed and non-iframed editors).
+ */
+
+/*
+ * The canvas shows pictures of pages, not pages. No link, button or disclosure
+ * in any rendered preview may be operable — clicking one was navigating the
+ * canvas to the live front end, stranding the editor inside a rendered copy of
+ * the site. With pointer-events: none the click falls through to the block
+ * wrapper and selects the block, which is what a click in an editor should do.
+ *
+ * Two deliberate exceptions:
+ *  1. Links inside active rich text (contenteditable) stay interactive, or the
+ *     caret could not be placed inside link text in core paragraph blocks.
+ *  2. ACF's edit-mode form is a real form, not a preview — everything inside
+ *     it keeps working.
+ */
+a,
+button,
+summary {
+	pointer-events: none;
+}
+
+[contenteditable="true"] a,
+.acf-block-fields a,
+.acf-block-fields button,
+.acf-block-fields summary,
+.acf-block-body .acf-fields a,
+.acf-block-body .acf-fields button {
+	pointer-events: auto;
+}
+
+/* Motion never runs in the editor; make sure reveal states cannot hide content. */
+.sjpta-reveal,
+.sjpta-reveal [data-stagger] > * {
+	opacity: 1;
+	translate: none;
+	transition: none;
+}
+
+/*
+ * The closing CTA band in the editor.
+ *
+ * A preview drawn from the block's own attributes rather than the real panel:
+ * the front end renders it in PHP, and the point here is to show an editor what
+ * they can change, not to reproduce the finished thing.
+ */
+.sjpta-ctaedit {
+	background: var(--wp--preset--color--deep-purple, #2a0b4d);
+	border-radius: 28px;
+	padding: 44px 40px;
+	text-align: center;
+	color: #fff;
+}
+
+.sjpta-ctaedit__heading {
+	font-family: var(--wp--preset--font-family--poppins, sans-serif);
+	font-weight: 700;
+	font-size: 34px;
+	line-height: 1.15;
+	margin: 0 0 10px;
+	color: #fff;
+}
+
+.sjpta-ctaedit__text {
+	margin: 0 auto 20px;
+	max-width: 46ch;
+	font-size: 15px;
+	line-height: 1.65;
+	color: #d9c8ec;
+}
+
+.sjpta-ctaedit__buttons {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	margin: 0;
+}
+
+.sjpta-ctaedit__buttons span {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 22px;
+	border-radius: 999px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.sjpta-ctaedit__buttons span:first-child {
+	background: var(--wp--preset--color--brand-orange, #fe7300);
+	color: #fff;
+}
+
+.sjpta-ctaedit__buttons span:last-child {
+	border: 1px solid rgba(255, 255, 255, 0.32);
+	color: #fff;
+}
+
+/*
+ * A block with nothing to configure, described rather than previewed. Used by
+ * the class filter bar, whose contents are built from the classes at render
+ * time; a live preview would just be a row of buttons an editor cannot change.
+ */
+.sjpta-blockedit {
+	background: var(--wp--preset--color--page-background, #f7f6f9);
+	border: 1px dashed var(--wp--custom--color--card-border, #eae3f0);
+	border-radius: 12px;
+	padding: 18px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-size: 14px;
+	color: var(--wp--preset--color--text-secondary, #5a5265);
+}
+
+.sjpta-blockedit strong {
+	font-size: 15px;
+	color: var(--wp--preset--color--brand-purple, #381064);
+}

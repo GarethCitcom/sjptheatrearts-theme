@@ -1,0 +1,24 @@
+{
+    "key": "group_sjpta_adult_strip",
+    "title": "Reassurance strip",
+    "fields": [
+        { "key": "field_sjpta_ad_tone", "label": "Tone", "name": "tone", "type": "select", "instructions": "Pastel reads as an invitation, purple as a statement.", "required": 0, "choices": { "pastel": "Pastel", "purple": "Purple" }, "default_value": "pastel", "return_format": "value", "allow_null": 0, "ui": 0 },
+        { "key": "field_sjpta_ad_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0, "default_value": "Also for grown-ups" },
+        { "key": "field_sjpta_ad_heading", "label": "Heading", "name": "heading", "type": "text", "required": 0, "default_value": "Adult ballet, ballroom & wedding dance" },
+        { "key": "field_sjpta_ad_text", "label": "Text", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_ad_icon", "label": "Icon", "name": "icon", "type": "select", "instructions": "Shown instead of the image when set.", "required": 0, "choices": { "": "None, use the image", "shield-tick": "Shield and tick", "check": "Tick", "mic": "Microphone", "dance": "Dancer", "script": "Script", "backstage": "Stage curtains", "mail": "Envelope" }, "default_value": "", "return_format": "value", "allow_null": 0, "ui": 0 },
+        { "key": "field_sjpta_ad_image", "label": "Image", "name": "image", "type": "image", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 },
+        { "key": "field_sjpta_ad_link_label", "label": "Button label", "name": "link_label", "type": "text", "required": 0, "default_value": "Adult classes" },
+        { "key": "field_sjpta_ad_link_url", "label": "Button link", "name": "link_url", "type": "text", "instructions": "A full URL, or an anchor on this page such as #difference. Leave empty to link to the Classes page.", "required": 0, "default_value": "" },
+        { "key": "field_sjpta_ad_button_tone", "label": "Button style", "name": "button_tone", "type": "select", "required": 0, "choices": { "plum": "Purple", "white": "White" }, "default_value": "plum", "return_format": "value", "allow_null": 0, "ui": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/adult-strip" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

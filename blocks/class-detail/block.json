@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/class-detail",
+	"title": "SJP class detail",
+	"category": "theme",
+	"icon": "id",
+	"description": "A class page: hero, facts, the class itself, and its enquiry panel.",
+	"textdomain": "sjptheatrearts",
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"html": false,
+		"customClassName": false,
+		"jsx": false
+	},
+	"render": "file:./render.php",
+	"style": [
+		"file:./style.css",
+		"sjpta-primitives",
+		"sjpta-form",
+		"sjpta-class-card"
+	]
+}

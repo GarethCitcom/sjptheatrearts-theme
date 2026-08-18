@@ -1,0 +1,44 @@
+{
+    "key": "group_sjpta_teens_band",
+    "title": "Teens band",
+    "fields": [
+        { "key": "field_sjpta_tb_eyebrow", "label": "Eyebrow", "name": "eyebrow", "type": "text", "required": 0, "default_value": "For teenagers" },
+        { "key": "field_sjpta_tb_heading", "label": "Heading", "name": "heading", "type": "text", "required": 0, "default_value": "Train your way." },
+        { "key": "field_sjpta_tb_highlight", "label": "Accented phrase", "name": "highlight", "type": "text", "instructions": "Shown in light orange. Must match the heading exactly.", "required": 0, "default_value": "way." },
+        { "key": "field_sjpta_tb_text", "label": "Body", "name": "text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 },
+        { "key": "field_sjpta_tb_bg", "label": "Background photo", "name": "background", "type": "image", "return_format": "id", "preview_size": "medium", "library": "all", "instructions": "Sits behind a dark scrim, so choose for mood rather than detail.", "required": 0 },
+        { "key": "field_sjpta_tb_primary_label", "label": "Primary button", "name": "primary_label", "type": "text", "required": 0, "default_value": "Enrol now" },
+        { "key": "field_sjpta_tb_primary_url", "label": "Primary link", "name": "primary_url", "type": "url", "instructions": "Leave empty to link to the Join page.", "required": 0, "default_value": "" },
+        { "key": "field_sjpta_tb_secondary_label", "label": "Secondary button", "name": "secondary_label", "type": "text", "required": 0, "default_value": "Teen classes" },
+        { "key": "field_sjpta_tb_secondary_url", "label": "Secondary link", "name": "secondary_url", "type": "url", "instructions": "Leave empty to link to the Classes page.", "required": 0, "default_value": "" },
+        {
+            "key": "field_sjpta_tb_routes",
+            "label": "Routes",
+            "name": "routes",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add route",
+            "max": 6,
+            "required": 0,
+            "sub_fields": [
+                { "key": "field_sjpta_tb_route_image", "label": "Thumbnail", "name": "image", "type": "image", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 },
+                { "key": "field_sjpta_tb_route_title", "label": "Title", "name": "title", "type": "text", "required": 0 },
+                { "key": "field_sjpta_tb_route_text", "label": "Note", "name": "text", "type": "text", "required": 0 },
+                { "key": "field_sjpta_tb_route_url", "label": "Link", "name": "url", "type": "url", "instructions": "Leave empty to use the secondary link above.", "required": 0 }
+            ]
+        }
+    ],
+    "location": [
+        [
+            { "param": "block", "operator": "==", "value": "sjptheatrearts\/teens-band" }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

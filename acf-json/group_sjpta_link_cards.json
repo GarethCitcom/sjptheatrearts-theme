@@ -1,0 +1,105 @@
+{
+    "key": "group_sjpta_link_cards",
+    "title": "Link cards",
+    "fields": [
+        {
+            "key": "field_sjpta_lc_cards",
+            "label": "Cards",
+            "name": "cards",
+            "type": "repeater",
+            "instructions": "A card without a link is not shown.",
+            "required": 0,
+            "min": 0,
+            "max": 4,
+            "layout": "block",
+            "button_label": "Add card",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_lc_card_icon",
+                    "label": "Icon",
+                    "name": "icon",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "": "None",
+                        "instagram": "Instagram",
+                        "facebook": "Facebook",
+                        "mail": "Envelope",
+                        "mic": "Microphone",
+                        "dance": "Dancer",
+                        "script": "Script",
+                        "backstage": "Stage curtains"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                },
+                {
+                    "key": "field_sjpta_lc_card_tone",
+                    "label": "Icon tile colour",
+                    "name": "tone",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "accent": "Accent",
+                        "plum": "Purple",
+                        "deep": "Deep",
+                        "magenta": "Magenta",
+                        "green": "Green"
+                    },
+                    "default_value": "accent",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                },
+                {
+                    "key": "field_sjpta_lc_card_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_lc_card_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_lc_card_url",
+                    "label": "Link",
+                    "name": "url",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_lc_card_link_label",
+                    "label": "Link text",
+                    "name": "link_label",
+                    "type": "text",
+                    "instructions": "What the link says. Leave the link empty and the card is information only.",
+                    "required": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/link-cards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

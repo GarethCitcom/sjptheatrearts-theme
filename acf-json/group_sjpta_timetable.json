@@ -1,0 +1,19 @@
+{
+    "key": "group_sjpta_timetable",
+    "title": "Weekly timetable",
+    "fields": [
+        { "key": "field_sjpta_tt_label", "label": "Section label", "name": "label", "type": "text", "required": 0, "default_value": "Weekly schedule" },
+        { "key": "field_sjpta_tt_note", "label": "Section note", "name": "note", "type": "text", "required": 0, "default_value": "What runs, and when" },
+        { "key": "field_sjpta_tt_aside_title", "label": "Note heading", "name": "aside_title", "type": "text", "instructions": "The bold opening of the note under the grid. Leave both note fields empty to hide it.", "required": 0, "default_value": "Private lessons are arranged individually." },
+        { "key": "field_sjpta_tt_aside_text", "label": "Note text", "name": "aside_text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0, "default_value": "Drama, Singing, Ballroom & Latin and one-to-one lessons for students with additional needs are booked directly with the teacher, so they do not appear on the weekly grid." }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/timetable" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "The classes themselves come from the member portal and cannot be edited here.",
+    "show_in_rest": 0
+}

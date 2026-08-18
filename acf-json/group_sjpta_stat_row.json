@@ -1,0 +1,14 @@
+{
+    "key": "group_sjpta_stat_row",
+    "title": "Stat row",
+    "fields": [
+        { "key": "field_sjpta_sr_stats", "label": "Stats", "name": "stats", "type": "repeater", "instructions": "Set \"Counted by the site\" where the number can be worked out, so it never goes stale.", "required": 0, "min": 0, "max": 6, "layout": "block", "button_label": "Add stat", "sub_fields": [
+            { "key": "field_sjpta_sr_source", "label": "Where the number comes from", "name": "source", "type": "select", "required": 0, "default_value": "typed", "choices": { "typed": "Typed below", "classes": "Counted: published classes", "logos": "Counted: awarding body logos on this page" } },
+            { "key": "field_sjpta_sr_value", "label": "Value", "name": "value", "type": "text", "instructions": "Used when the number is typed. Text such as \"Baby to adult\" is fine; only digits count up.", "required": 0 },
+            { "key": "field_sjpta_sr_label", "label": "Label", "name": "label", "type": "text", "required": 0 },
+            { "key": "field_sjpta_sr_tone", "label": "Tone", "name": "tone", "type": "select", "required": 0, "default_value": "orange", "choices": { "orange": "Orange", "magenta": "Magenta", "purple": "Purple", "green": "Green" } }
+        ] }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts/stat-row" } ] ],
+    "menu_order": 0, "position": "normal", "style": "default", "label_placement": "top", "instruction_placement": "label", "active": true, "description": "", "show_in_rest": 0
+}

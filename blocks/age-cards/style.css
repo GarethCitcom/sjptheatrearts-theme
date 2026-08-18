@@ -1,0 +1,143 @@
+/* Age route cards, and the shared card/badge primitives they introduce. */
+
+.sjpta-agecards {
+	padding: 0 0 var(--wp--preset--spacing--70);
+}
+
+.sjpta-agecards__inner {
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 0 var(--wp--preset--spacing--60);
+}
+
+.sjpta-agecards__heading:not(.screen-reader-text) {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-sm);
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 var(--wp--preset--spacing--40);
+	text-wrap: balance;
+}
+
+.sjpta-agecards__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--wp--preset--spacing--40);
+}
+
+/* ---------- Card ---------- */
+
+.sjpta-card {
+	display: block;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--card);
+	padding: 10px;
+	color: var(--wp--preset--color--text-body);
+	text-decoration: none;
+	transition: transform var(--wp--custom--motion--lift) var(--wp--custom--motion--easing);
+}
+
+.sjpta-card:hover {
+	transform: translateY(-6px);
+	color: var(--wp--preset--color--text-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sjpta-card {
+		transition: none;
+	}
+
+	.sjpta-card:hover {
+		transform: none;
+	}
+}
+
+.sjpta-card__media {
+	position: relative;
+	height: 250px;
+	border-radius: var(--wp--custom--radius--image);
+	overflow: hidden;
+	background: var(--wp--custom--color--badge-purple-bg);
+}
+
+.sjpta-card__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.sjpta-card__badge {
+	position: absolute;
+	left: 12px;
+	bottom: 12px;
+}
+
+.sjpta-card__body {
+	padding: 18px 12px 12px;
+}
+
+.sjpta-card__title {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--card-title);
+	margin: 0 0 8px;
+	color: var(--wp--preset--color--brand-purple);
+	line-height: 1.3;
+}
+
+.sjpta-card__text {
+	font-size: var(--wp--preset--font-size--card-body);
+	line-height: 1.6;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 16px;
+	text-wrap: pretty;
+}
+
+.sjpta-card__foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	border-top: 1px solid var(--wp--custom--color--inner-divider);
+	padding-top: 12px;
+}
+
+.sjpta-card__meta {
+	font-size: var(--wp--preset--font-size--meta);
+	font-weight: 600;
+	color: var(--wp--custom--color--text-muted);
+}
+
+.sjpta-card__arrow {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--page-background);
+	border: 1px solid var(--wp--custom--color--card-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 34px;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-agecards__inner {
+		padding: 0 var(--wp--preset--spacing--30);
+	}
+
+	.sjpta-agecards__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-agecards__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.sjpta-card__media {
+		height: 210px;
+	}
+}

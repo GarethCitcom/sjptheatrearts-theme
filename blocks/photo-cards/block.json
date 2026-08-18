@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "sjptheatrearts/photo-cards",
+	"title": "SJP photo cards",
+	"category": "theme",
+	"icon": "images-alt2",
+	"description": "A row of photo cards, each with a badge, a heading and a line of text.",
+	"textdomain": "sjptheatrearts",
+	"supports": { "align": false, "anchor": true, "html": false, "customClassName": false, "jsx": false },
+	"acf": { "mode": "preview", "renderTemplate": "render.php" },
+	"style": [ "file:./style.css", "sjpta-primitives" ]
+}

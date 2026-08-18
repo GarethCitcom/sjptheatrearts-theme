@@ -1,0 +1,215 @@
+{
+    "key": "group_sjpta_enquiry_panel",
+    "title": "Enquiry panel",
+    "fields": [
+        {
+            "key": "field_sjpta_ep_variant",
+            "label": "Form shape",
+            "name": "variant",
+            "type": "select",
+            "instructions": "Born To Be picks a class from a menu; Join asks the longer set of questions. Same fields underneath either way.",
+            "required": 0,
+            "default_value": "stack",
+            "choices": {
+                "stack": "Short: class menu and a message box",
+                "join": "Long: interests, experience and days"
+            }
+        },
+        {
+            "key": "field_sjpta_ep_logo",
+            "label": "Brand mark",
+            "name": "logo",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ep_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "text",
+            "instructions": "Also names this form in the email subject and the Enquiries list.",
+            "required": 1
+        },
+        {
+            "key": "field_sjpta_ep_intro",
+            "label": "Intro",
+            "name": "intro",
+            "type": "textarea",
+            "rows": 4,
+            "new_lines": "",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ep_points",
+            "label": "Practical facts",
+            "name": "points",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 5,
+            "layout": "table",
+            "button_label": "Add fact",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_ep_point_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ep_point_tone",
+                    "label": "Dot colour",
+                    "name": "tone",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "accent": "Accent",
+                        "deep": "Deep",
+                        "sjp": "SJP orange"
+                    },
+                    "default_value": "accent",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "ui": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_ep_form_type",
+            "label": "What kind of form is this?",
+            "name": "form_type",
+            "type": "select",
+            "instructions": "Decides who is emailed: the addresses for each kind are set under Enquiries → Settings. Every submission is saved under Enquiries as well as emailed. \"Enrolment\" also adds a \"Want to talk to us first?\" link to the Contact page under the form.",
+            "required": 0,
+            "choices": {
+                "": "Same as before (decided by the old \"Send enquiries to\" setting)",
+                "enrolment": "Enrolment",
+                "enquiry": "Class enquiry",
+                "born-to-be": "Born To Be enquiry",
+                "contact": "Contact message"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "ui": 0
+        },
+        {
+            "key": "field_sjpta_ep_recipient",
+            "label": "Send enquiries to (older setting)",
+            "name": "recipient",
+            "type": "select",
+            "instructions": "Only used when the kind of form above is left as \"Same as before\". Kept so pages saved earlier keep routing as they did.",
+            "required": 0,
+            "choices": {
+                "sjp": "SJP (the general contact email)",
+                "lottie": "Lottie (class and enrolment enquiries)",
+                "madison": "Madison (Born To Be)"
+            },
+            "default_value": "sjp",
+            "return_format": "value",
+            "allow_null": 0,
+            "ui": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sjpta_ep_form_type",
+                        "operator": "==empty"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_sjpta_ep_form_heading",
+            "label": "Form heading",
+            "name": "form_heading",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ep_form_text",
+            "label": "Form intro",
+            "name": "form_text",
+            "type": "textarea",
+            "rows": 3,
+            "new_lines": "",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ep_class_options",
+            "label": "Which class options",
+            "name": "class_options",
+            "type": "repeater",
+            "instructions": "The choices in the \"Which class\" menu. Leave empty to remove that field from the form.",
+            "required": 0,
+            "min": 0,
+            "max": 12,
+            "layout": "table",
+            "button_label": "Add option",
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_ep_class_text",
+                    "label": "Option",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_ep_submit_label",
+            "label": "Button label",
+            "name": "submit_label",
+            "type": "text",
+            "required": 0,
+            "default_value": "Send enquiry"
+        },
+        {
+            "key": "field_sjpta_ep_consent",
+            "label": "Small print",
+            "name": "consent",
+            "type": "textarea",
+            "instructions": "Shown under the button. Says what you do with the details.",
+            "rows": 2,
+            "new_lines": "",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ep_sent_heading",
+            "label": "Thank you heading",
+            "name": "sent_heading",
+            "type": "text",
+            "instructions": "Shown in place of the form once it has been sent.",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ep_sent_text",
+            "label": "Thank you text",
+            "name": "sent_text",
+            "type": "textarea",
+            "rows": 3,
+            "new_lines": "",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/enquiry-panel"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

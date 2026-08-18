@@ -1,0 +1,46 @@
+{
+    "key": "group_sjpta_team",
+    "title": "The team",
+    "fields": [
+        { "key": "field_sjpta_tm_label", "label": "Section label", "name": "label", "type": "text", "required": 0, "default_value": "The team" },
+        { "key": "field_sjpta_tm_note", "label": "Label note", "name": "label_note", "type": "text", "required": 0, "default_value": "The people your child will actually see" },
+        { "key": "field_sjpta_tm_link_label", "label": "Link label", "name": "link_label", "type": "text", "required": 0, "default_value": "Meet everyone" },
+        { "key": "field_sjpta_tm_link_url", "label": "Link", "name": "link_url", "type": "url", "instructions": "Leave empty to link to the About page.", "required": 0, "default_value": "" },
+        {
+            "key": "field_sjpta_tm_people",
+            "label": "Teachers",
+            "name": "people",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add teacher",
+            "required": 0,
+            "sub_fields": [
+                { "key": "field_sjpta_tm_name", "label": "Name", "name": "name", "type": "text", "required": 0 },
+                { "key": "field_sjpta_tm_role", "label": "Role", "name": "role", "type": "text", "instructions": "e.g. Founder & principal · Acro, Ballroom", "required": 0 },
+                {
+                    "key": "field_sjpta_tm_photo",
+                    "label": "Photograph",
+                    "name": "photo",
+                    "type": "image",
+                    "return_format": "id",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "instructions": "Optional. With no photograph the card shows a coloured tile with the teacher's initial — never a stand-in photo of someone else.",
+                    "required": 0
+                },
+                { "key": "field_sjpta_tm_tone", "label": "Tile colour", "name": "tone", "type": "select", "choices": { "orange": "Orange", "magenta": "Magenta", "purple": "Purple", "green": "Green" }, "default_value": "purple", "return_format": "value", "instructions": "Only used when there is no photograph.", "required": 0 }
+            ]
+        },
+        { "key": "field_sjpta_tm_safe_strong", "label": "Safeguarding heading", "name": "safeguarding_strong", "type": "text", "required": 0, "default_value": "Safeguarding." },
+        { "key": "field_sjpta_tm_safe_text", "label": "Safeguarding note", "name": "safeguarding_text", "type": "textarea", "rows": 3, "new_lines": "", "required": 0 }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/team" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

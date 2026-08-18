@@ -1,0 +1,29 @@
+{
+    "key": "group_sjpta_photo_strip",
+    "title": "Photo strip",
+    "fields": [
+        {
+            "key": "field_sjpta_ps_photos",
+            "label": "Photographs",
+            "name": "photos",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add photograph",
+            "instructions": "Decorative, so these need no alt text — but every person shown must have consented to appearing on the website.",
+            "required": 0,
+            "sub_fields": [
+                { "key": "field_sjpta_ps_photo", "label": "Photograph", "name": "photo", "type": "image", "return_format": "id", "preview_size": "thumbnail", "library": "all", "required": 0 }
+            ]
+        },
+        { "key": "field_sjpta_ps_handle", "label": "Handle badge", "name": "handle", "type": "text", "instructions": "Shown on the first tile, e.g. @sjptheatrearts. Leave empty for none.", "required": 0, "default_value": "@sjptheatrearts" }
+    ],
+    "location": [ [ { "param": "block", "operator": "==", "value": "sjptheatrearts\/photo-strip" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

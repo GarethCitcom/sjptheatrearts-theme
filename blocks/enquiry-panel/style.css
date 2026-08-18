@@ -1,0 +1,123 @@
+/* Enquiry panel. */
+
+.sjpta-enquiry {
+	padding: var(--wp--preset--spacing--80) 0 0;
+}
+
+.sjpta-enquiry__panel {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--custom--color--card-border);
+	border-radius: var(--wp--custom--radius--band);
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: 1fr 1.1fr;
+}
+
+/* ---------- Invitation ---------- */
+
+.sjpta-enquiry__invite {
+	background: var(--wp--custom--color--tint-red);
+	padding: 48px 44px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.sjpta-enquiry__logo {
+	display: block;
+	align-self: flex-start;
+	flex: none;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.sjpta-enquiry__logo img {
+	height: 96px;
+	width: auto;
+	display: block;
+}
+
+.sjpta-enquiry__heading {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--section-sm);
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: var(--wp--preset--color--brand-purple);
+	margin: 0 0 14px;
+	text-wrap: balance;
+}
+
+.sjpta-enquiry__intro {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 1.7;
+	color: var(--wp--preset--color--text-secondary);
+	margin: 0 0 var(--wp--preset--spacing--50);
+	text-wrap: pretty;
+}
+
+.sjpta-enquiry__points {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--20);
+	font-size: var(--wp--preset--font-size--card-body);
+	color: var(--wp--preset--color--text-secondary);
+}
+
+.sjpta-enquiry__point {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.sjpta-enquiry__dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--sjpta-accent);
+	flex: none;
+}
+
+.sjpta-enquiry__point--deep .sjpta-enquiry__dot {
+	background: var(--sjpta-accent-2);
+}
+
+.sjpta-enquiry__point--sjp .sjpta-enquiry__dot {
+	background: var(--wp--preset--color--brand-orange);
+}
+
+/* ---------- Form column ---------- */
+
+.sjpta-enquiry__form {
+	padding: 48px 44px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+@media (max-width: 1023px) {
+	.sjpta-enquiry__panel {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	.sjpta-enquiry__invite,
+	.sjpta-enquiry__form {
+		padding: 28px 22px;
+	}
+
+	.sjpta-enquiry__logo img {
+		height: 72px;
+	}
+
+	/*
+	 * One field per row. Two 150px columns is not enough for "Anything you would
+	 * like us to know" or a real email address to be readable while typing.
+	 */
+	.sjpta-form__grid {
+		grid-template-columns: 1fr;
+	}
+}

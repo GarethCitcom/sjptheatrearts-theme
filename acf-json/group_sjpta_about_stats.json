@@ -1,0 +1,185 @@
+{
+    "key": "group_sjpta_about_stats",
+    "title": "About and stats",
+    "fields": [
+        {
+            "key": "field_sjpta_ab_label",
+            "label": "Section label",
+            "name": "label",
+            "type": "text",
+            "required": 0,
+            "default_value": "About SJP"
+        },
+        {
+            "key": "field_sjpta_ab_note",
+            "label": "Label note",
+            "name": "label_note",
+            "type": "text",
+            "required": 0,
+            "default_value": "Professional training, family-school warmth"
+        },
+        {
+            "key": "field_sjpta_ab_link_label",
+            "label": "Link label",
+            "name": "link_label",
+            "type": "text",
+            "required": 0,
+            "default_value": "Our story"
+        },
+        {
+            "key": "field_sjpta_ab_link_url",
+            "label": "Link",
+            "name": "link_url",
+            "type": "url",
+            "instructions": "Leave empty to link to the About page.",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_ab_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "textarea",
+            "rows": 2,
+            "new_lines": "",
+            "required": 0,
+            "default_value": "A school where every child is known by name"
+        },
+        {
+            "key": "field_sjpta_ab_highlight",
+            "label": "Accented phrase",
+            "name": "highlight",
+            "type": "text",
+            "instructions": "Part of the heading shown in orange. Leave empty for none.",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_ab_body",
+            "label": "Body",
+            "name": "body",
+            "type": "textarea",
+            "instructions": "Separate paragraphs with a blank line.",
+            "rows": 8,
+            "new_lines": "",
+            "required": 0,
+            "default_value": ""
+        },
+        {
+            "key": "field_sjpta_ab_stats",
+            "label": "Headline numbers",
+            "name": "stats",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add number",
+            "max": 3,
+            "required": 0,
+            "sub_fields": [
+                {
+                    "key": "field_sjpta_ab_stat_source",
+                    "label": "Where the number comes from",
+                    "name": "source",
+                    "type": "select",
+                    "instructions": "Set \"Counted by the site\" where the number can be worked out, so it never goes stale.",
+                    "required": 0,
+                    "default_value": "typed",
+                    "choices": {
+                        "typed": "Typed below",
+                        "classes": "Counted: published classes",
+                        "logos": "Counted: awarding body logos on this page"
+                    }
+                },
+                {
+                    "key": "field_sjpta_ab_stat_value",
+                    "label": "Value",
+                    "name": "value",
+                    "type": "text",
+                    "instructions": "A whole number counts up on scroll. Anything else (a range like 2–18+) is shown as typed.",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ab_stat_label",
+                    "label": "Label",
+                    "name": "label",
+                    "type": "text",
+                    "required": 0
+                },
+                {
+                    "key": "field_sjpta_ab_stat_tone",
+                    "label": "Colour",
+                    "name": "tone",
+                    "type": "select",
+                    "choices": {
+                        "orange": "Orange",
+                        "magenta": "Magenta",
+                        "purple": "Purple"
+                    },
+                    "default_value": "orange",
+                    "return_format": "value",
+                    "required": 0
+                }
+            ]
+        },
+        {
+            "key": "field_sjpta_ab_image",
+            "label": "Studio photo",
+            "name": "image",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ab_caption",
+            "label": "Photo caption",
+            "name": "image_caption",
+            "type": "text",
+            "required": 0,
+            "default_value": "Inside the studio"
+        },
+        {
+            "key": "field_sjpta_ab_by_image",
+            "label": "Byline photo",
+            "name": "byline_image",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "required": 0
+        },
+        {
+            "key": "field_sjpta_ab_by_strong",
+            "label": "Byline name",
+            "name": "byline_strong",
+            "type": "text",
+            "required": 0,
+            "default_value": "SJ, founder and principal."
+        },
+        {
+            "key": "field_sjpta_ab_by_text",
+            "label": "Byline note",
+            "name": "byline_text",
+            "type": "text",
+            "required": 0,
+            "default_value": "Laine Theatre Arts trained; teaching in Bromsgrove ever since."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "sjptheatrearts/about-stats"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}
